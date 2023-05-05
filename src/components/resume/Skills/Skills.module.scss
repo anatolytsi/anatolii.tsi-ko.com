@@ -1,0 +1,94 @@
+@import 'src/styles/common/variables';
+@import 'src/components/resume/common/common.module.scss';
+
+$skill-margin-right: 1rem;
+
+@mixin skills($name) {
+    
+    .#{$name}sList {
+        margin: 1rem $padding-experience;
+    
+        .#{$name} {
+            display: inline-block;
+            flex-direction: row;
+            padding-right: 1rem;
+            margin-bottom: 0.5rem;
+            margin-right: $skill-margin-right;
+            border-right: 1px solid black;
+            @content;
+    
+            &.last {
+                border: none;
+            }
+    
+            &.hidden {
+                color: lightgray !important;
+            }
+            
+            .title {
+                display: inline-block;
+            }
+    
+            .controls {
+                display: inline-block;
+    
+                .visibilityButton,
+                .editButton,
+                .deleteButton {
+                    padding: 0;
+                    background-color: transparent;
+                    border: 0;
+                }
+
+                .visibilityButton {
+                    color: orange;
+
+                    &:hover {
+                      color: rgb(173, 115, 7);
+                    }
+                }
+
+                .editButton {
+                    color: #4caf50;
+
+                    &:hover {
+                      color: #3e8e41;
+                    }
+
+                    &.isEditing {
+                      color: red;
+                  
+                      &:hover {
+                        color: orange;
+                      }
+                    }
+                }
+
+                .deleteButton {
+                    color: red;
+
+                    &:hover {
+                      color: crimson;
+                    }
+                }
+    
+                svg {
+                    padding: 0 0.3rem;
+                }
+            }
+        }
+    }
+
+    .#{$name}Add {
+        display: inline-block;
+        color: #4caf50;
+        background: transparent;
+        border: none;
+
+        &:hover {
+            color: #3e8e41;
+        }
+    }
+}
+
+@include skills(skill){};

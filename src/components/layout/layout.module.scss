@@ -1,0 +1,121 @@
+@import 'src/styles/common/variables';
+
+.header {
+    position: sticky;
+    z-index: 30;
+    top: 0;
+    .nav {
+        display: flex;
+        padding: 0 $page-padding;
+        // justify-content: space-between;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: white;
+        box-shadow: 0 0.125rem 0.25rem 0 rgb(0 0 0 / 11%);
+        // border-bottom: 1px solid black;
+
+        .bar {
+            display: flex;
+            padding: 1rem 0;
+            flex-direction: column;
+            row-gap: 6px;
+            cursor: pointer;
+            
+            // Displays 3 bars, can use font awesome
+            div{
+                width: 40px;
+                height: 4px;
+                background-color: black;
+                border-radius: 2px;
+            }
+        }
+        
+        .list {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 56px;
+            width: 144px;
+            row-gap: 24px;
+            right: -288px;
+            padding: 24px 16px;
+            transition: all 0.2s;
+            min-height: calc(100vh - 60px);
+            background-color: white;
+            box-shadow: -0.125rem 0 0 0 rgb(0 0 0 / 11%);
+
+            &.active {
+                right: 0;
+            }
+
+            .item {
+                color: black;
+                text-decoration: none;
+                font-size: 18px; 
+                position: relative;
+                transition: all 0.2s;
+                cursor: pointer;
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        @media (min-width: $tablet-size) {
+            &{
+                padding: 0;
+                justify-content: center;
+
+                .bar {
+                    display: none;
+                }
+
+                .list {
+                    position: unset;
+                    flex-direction: row;
+                    min-height: fit-content;
+                    width: fit-content;
+                    align-items: center;
+                    box-shadow: none;
+
+                    .item {
+                        min-height: fit-content;
+                        padding: 0 1rem;
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            width: 0%;
+                            height: 2px;
+                            bottom: calc(-#{$page-padding} - 0.55rem);
+                            left: 0;
+                            background-color: black;
+                            // transition: all 0.2s;
+                            transform: scaleX(0);
+                            transition: transform 150ms ease-in-out;
+                        }
+
+                        &:hover:before{
+                            width: 100%;
+                            transform: scaleX(1);
+                        }
+
+                        &.active {
+                            &::before{
+                                content: '';
+                                position: absolute;
+                                width: 100%;
+                                height: 2px;
+                                bottom: calc(-#{$page-padding} - 0.55rem);
+                                left: 0;
+                                background-color: black;
+                                transform: scaleX(1);
+                                // transition: all 0.2s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

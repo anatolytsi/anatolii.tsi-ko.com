@@ -1,0 +1,24 @@
+@import 'src/components/resume/Experience/Experience.module.scss';
+@import 'src/components/resume/common/common.module.scss';
+
+.eduExperienceList {
+  @include experienceList(edu);
+}
+
+.editExperience {
+  @include editExperience(3.5rem);
+}
+
+.eduExperience {
+  @include experience(institute);
+
+  .addInfo {
+    margin-top: 0.5rem;
+
+    .finalGrade,
+    .thesisTopic {
+      margin-left: 0.3rem;
+      min-width: 50px;
+    }
+  }
+}

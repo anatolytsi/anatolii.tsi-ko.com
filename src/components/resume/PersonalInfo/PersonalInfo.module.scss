@@ -1,0 +1,260 @@
+@import 'src/styles/common/variables';
+
+$fullNameSize: 32px;
+
+.personalInfoEdit {
+  border: none;
+  padding: 0 0 1rem 0;
+  margin-bottom: 1rem;
+
+  @media (min-width: $tablet-size) {
+    &{
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  .personalInfo {
+    // display: -webkit-box;
+    display: block;
+    // -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: -webkit-flex-start;
+
+    .left {
+      display: -webkit-flex;
+      align-items: center;
+      margin: 0;
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #bbb;
+        margin-right: 20px;
+      }
+
+      .contact {
+        display: -webkit-flex;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+
+        h1 {
+          align-items: center;
+          margin: 0;
+          font-size: $fullNameSize;
+        }
+
+        .contactItem {
+          display: -webkit-flex;
+          align-items: center;
+          margin-bottom: 5px;
+          font-size: 16px;
+          color: #666;
+          
+          .years {
+            margin-left: 0.2rem;
+          }
+
+          .birthday {
+            display: inline-block;
+            position: relative;
+            width: 5rem;
+            padding: 0;
+            margin: 0;
+    
+            div {
+              display: inline-block;
+              padding: 0;
+              margin: 0;
+    
+              input {
+                color: #666;
+                font-style: normal;
+                display: inline-block;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                padding: 0;
+                margin: 0;
+                border-radius: 0;
+                border: none;
+                margin: auto;
+                width: 5rem;
+                pointer-events: none;
+    
+                &.editingBirthday {
+                  pointer-events: all;
+                }
+              }
+            }
+          }
+
+          .name {
+            margin: 0;
+            font-size: 32px;
+          }
+
+          svg {
+            margin-right: 0.5rem;
+            width: 20px;
+          }
+        }
+      }
+    }
+
+    .right {
+      flex: 1;
+      -webkit-flex: 1;
+
+      h2 {
+        margin: 0;
+        margin-top: calc(#{$fullNameSize} / 5);
+        font-size: 24px;
+      }
+
+      .summary {
+        margin: 0 $padding-experience;
+        font-size: 16px;
+        line-height: $description-line-height;
+        text-align: justify;
+
+        .clamp {
+          -webkit-line-clamp: 10;
+          -webkit-box-orient: vertical;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          overflow-wrap: break-word;
+          background: -webkit-linear-gradient(#000, #fff);
+          background-clip: text;
+          -webkit-background-clip: text;
+    
+          @media (min-width: $tablet-size) {
+            &{
+              -webkit-line-clamp: 5;
+            }
+          }
+        }
+
+        .clampButton {
+          padding: 5px 20px;
+          background-color: white;
+          box-shadow: 0 -25px 0 rgb(white, .7);
+          border: 0;
+          width: 100%;
+          margin-top: -1rem;
+          transition: all 0.3s ease-in-out;
+    
+          &:hover {
+            background-color: #fafafa;
+          }
+    
+          svg {
+            margin-left: 0.5rem;
+          }
+    
+          &.expanded {
+            box-shadow: none;
+            margin-top: 0rem;
+          }
+        }
+      }
+    }
+
+    @media (min-width: $tablet-size) {
+      &{
+        display: -webkit-flex;
+        .left {
+          margin-right: 2rem;
+        }
+  
+        .right .summary {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .controls {
+    .editButton {
+      background-color: transparent;
+      color: #4caf50;
+      border: 0;
+      transition: 0.3s;
+      padding: 0;
+
+      &:hover {
+        color: #3e8e41;
+      }
+  
+      &.isEditing {
+        background-color: transparent;
+        margin-top: 1rem;
+        color: red;
+    
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+  }
+
+  &.forExport {
+    font-size: 14px;
+    .personalInfo {
+      font-size: 14px;
+      .left {
+        font-size: 14px;
+        .avatar {
+          font-size: 14px;
+        }
+
+        .contact {
+          font-size: 14px;
+          h1 {
+            font-size: 14px;
+          }
+
+          .contactItem {
+            font-size: 14px;
+            .years {
+              font-size: 14px;
+            }
+
+            .birthday {
+              font-size: 14px;
+              div {
+                font-size: 14px;
+                input {
+                  font-size: 14px;
+                  &.editingBirthday {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+
+            .name {
+              font-size: 14px;
+            }
+
+            svg {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .right {
+        // h2 {
+        //   font-size: 14px;
+        // }
+
+        .summary {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+

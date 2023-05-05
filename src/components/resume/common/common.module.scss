@@ -1,0 +1,45 @@
+// .sectionHidden {
+//   color: gray !important;
+
+// }
+
+.controlHeader {
+    display: flex;
+    justify-content: space-between;
+
+    .controls {
+      display: inline-block;
+
+      .visibilityButton,
+      .editButton,
+      .deleteButton {
+          padding: 0 0.2rem;
+          background-color: transparent;
+          border: 0;
+      }
+
+      .visibilityButton {
+          color: orange;
+
+          &:hover {
+            color: rgb(173, 115, 7);
+          }
+      }
+
+      .editButton {
+          color: #4caf50;
+
+          &:hover {
+            color: #3e8e41;
+          }
+
+          &.isEditing {
+            color: red;
+        
+            &:hover {
+              color: orange;
+            }
+          }
+      }
+    }
+}

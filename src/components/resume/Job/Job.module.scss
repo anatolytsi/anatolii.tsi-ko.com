@@ -1,0 +1,14 @@
+@import 'src/components/resume/Experience/Experience.module.scss';
+@import 'src/components/resume/common/common.module.scss';
+
+.jobExperienceList {
+  @include experienceList(job);
+
+  .editExperience {
+    @include editExperience(3.5rem);
+  
+    .jobExperience {
+      @include experience(company);
+    }
+  }
+}

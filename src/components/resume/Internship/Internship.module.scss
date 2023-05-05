@@ -1,0 +1,24 @@
+@import 'src/components/resume/Experience/Experience.module.scss';
+@import 'src/components/resume/common/common.module.scss';
+
+.internshipList {
+  @include experienceList(internship);
+}
+
+.editExperience {
+  @include editExperience(3.5rem);
+}
+
+.internship {
+  @include experience(place);
+
+  .addInfo {
+    margin-top: 0.5rem;
+
+    .topic {
+      display: inline-block;
+      margin-left: 0.3rem;
+      min-width: 50px;
+    }
+  }
+}

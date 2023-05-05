@@ -1,0 +1,332 @@
+@import 'src/styles/common/variables';
+
+$control-buttons-margin-right: calc(#{$padding-experience} / 2);
+$control-buttons-width: calc(#{$padding-experience} / 2);
+
+@mixin experienceList($expType) {
+  .addExperience {
+    margin: 0 $padding-experience 1rem $padding-experience;
+    // background-color: #4caf50;
+    background-color: transparent;
+    border: 2px #35e73b dashed;
+    font-weight: bold;
+    color: #35e73b;
+    width: 82%;
+    // border: 0;
+    height: 2rem;
+    padding: 0 2rem;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #aef3b09f;
+    }
+
+    @media (min-width: $tablet-size) {
+      &{
+        width: 94.7%;
+      }
+    }
+  }
+}
+
+@mixin editExperience($height) {
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+
+  .controls {
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    .visibilityButton {
+      margin-top: 1rem;
+      margin-bottom: 0.2rem;
+      background-color: transparent;
+      border: 0;
+      margin-right: $control-buttons-margin-right;
+      height: calc(#{$height} / 4);
+      width: $control-buttons-width;
+      transition: 0.3s;
+      padding: 0;
+      color: orange;
+
+      &:hover {
+        color: rgb(173, 115, 7);
+      }
+
+      svg {
+        height: calc(#{$height} / 4);
+        width: $control-buttons-margin-right;
+      }
+    }
+
+    .editButton {
+        background-color: transparent;
+        color: #4caf50;
+        border: 0;
+        margin: 0.3rem $control-buttons-margin-right 0.3rem 0;
+        // margin-right: $control-buttons-margin-right;
+        height: calc(#{$height} / 4);
+        width: $control-buttons-width;
+        transition: 0.3s;
+        padding: 0;
+  
+        &:hover {
+          color: #3e8e41;
+        }
+  
+      &.isEditing {
+        background-color: transparent;
+        margin-top: 1rem;
+        color: red;
+    
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+
+    .deleteButton {
+      background-color: transparent;
+      color: red;
+      border: 0;
+      margin-top: 0.1rem;
+      margin-right: $control-buttons-margin-right;
+      height: calc(#{$height} / 2);
+      width: $control-buttons-width;
+      transition: 0.3s;
+      padding: 0;
+
+      &:hover {
+        color: crimson;
+      }
+    }
+  }
+}
+
+@mixin experience($expType) {
+  margin: 1rem $padding-experience 0rem $padding-experience;
+  // margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+  
+
+  width: 100%;
+
+  &.last {
+    border: 0;
+  }
+
+  &.admin {
+    // margin: 0rem $padding-experience 0rem 0;
+    margin-left: 0;
+  }
+
+  .titleDate {
+    display: contents;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @media (min-width: $tablet-size) {
+      &{
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+      }
+    }
+
+    .date,
+    .dates {
+      .datePicker {
+        display: inline-block;
+        position: relative;
+        width: 5rem;
+        padding: 0;
+        margin: 0;
+
+        div {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+
+          input {
+            font-style: italic;
+            display: inline-block;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            border: none;
+            margin: auto;
+            width: 5rem;
+            pointer-events: none;
+
+            &.editingStartDate,
+            &.editingEndDate,
+            &.editingDate {
+              pointer-events: all;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .header {
+    margin-bottom: 10px;
+  }
+
+  .title {
+    h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+  
+  .#{$expType} {
+    margin: 0;
+    color: #666 !important;
+
+    @media (min-width: $tablet-size) {
+      &{
+        margin: 0 50rem 0 0;
+      }
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    h4 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .#{$expType}Link {
+      font-size: 1.1rem;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+  }
+
+  .#{$expType}Location {
+    color: #666 !important;
+  }
+
+  .dates {
+    font-style: italic;
+    color: black !important;
+
+    ::placeholder {
+      color: black !important;
+      opacity: 1;
+    }
+
+    .datesDash {
+      padding: 0 0.5rem;
+    }
+
+    .setCurrent {
+      display: block;
+      font-weight: bold;
+      margin-left: 6.1rem;
+      border: none;
+      background-color: transparent;
+      color: #4caf50;
+
+      &:hover {
+        color: #3e8e41;
+      }
+    }
+  }
+
+  .description {
+    line-height: $description-line-height;
+    margin-bottom: 1rem;
+
+    .clamp {
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: break-word;
+      background: -webkit-linear-gradient(#000, #fff);
+      background-clip: text;
+      -webkit-background-clip: text;
+
+      @media (min-width: $tablet-size) {
+        &{
+          -webkit-line-clamp: 3;
+        }
+      }
+    }
+
+    .clampButton {
+      padding: 10px 20px;
+      background-color: white;
+      box-shadow: 0 -30px 0 rgb(white, .7);
+      border: 0;
+      width: 100%;
+      margin-top: -1rem;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #fafafa;
+      }
+
+      svg {
+        margin-left: 0.5rem;
+      }
+
+      &.expanded {
+        box-shadow: none;
+        margin-top: 0rem;
+      }
+    }
+
+    p {
+      margin: 0;
+      padding: 0.1rem 0 0 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0.1rem 0 0 1.5rem;
+    }
+  }
+
+  &.hidden {
+    color: lightgray !important;
+    
+    .#{$expType} {
+      color: lightgray !important;
+    }
+    
+    .#{$expType}Location {
+      color: lightgray !important;
+    }
+  }
+}

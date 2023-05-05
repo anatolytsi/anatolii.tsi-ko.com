@@ -1,0 +1,76 @@
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
+
+import NavItem from "./NavItem";
+import styles from './layout.module.scss';
+import Link from "next/link";
+
+const MENU_LIST = [
+  { text: "Home", href: "/" },
+  { text: "Resume", href: "/resume" },
+];
+
+const Navbar = () => {
+  const { data: session } = useSession();
+  const [navActive, setNavActive] = useState(false);
+  const [clickCounter, setClickCounter] = useState(0);
+  const showLogin = useRef(false);
+  const router = useRouter();
+  
+  useEffect(() => {
+    console.log(clickCounter)
+    if (clickCounter > 5) {
+      showLogin.current = true;
+    }
+  }, [clickCounter])
+
+  const renderAuthButtons = () => {
+    if (session) {
+      return (
+        <div
+          className={styles.item}
+          onClick={() => {signOut()}}
+        >
+          Logout
+        </div>
+      );
+    } else {
+      if (showLogin.current) {
+        return (
+          <Link 
+            href='/api/auth/signin'
+            className={styles.item}
+          >
+            Login
+          </Link>
+        );
+      } else {
+        return (<></>);
+      }
+    }
+  }
+
+  return (
+    <header className={styles.header} onClick={() => {setClickCounter(clickCounter + 1)}}>
+      <nav className={styles.nav}>
+        <div
+          onClick={() => setNavActive(!navActive)}
+          className={styles.bar}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div className={`${navActive ? styles.active : ""} ${styles.list}`}>
+          {MENU_LIST.map((menu, idx) => (
+            <NavItem active={menu.href === router.pathname} {...menu} key={idx}/>
+          ))}
+          {renderAuthButtons()}
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Navbar;

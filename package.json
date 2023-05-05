@@ -1,0 +1,49 @@
+{
+  "name": "anatolii.tsi-ko.com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@netlify/next": "^1.4.5",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.33",
+    "@types/react-dom": "18.0.11",
+    "axios": "^1.3.5",
+    "classnames": "^2.3.2",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "html-pdf": "^3.0.1",
+    "lodash": "^4.17.21",
+    "markdown-to-jsx": "^7.2.0",
+    "mongodb": "^5.2.0",
+    "next": "13.3.0",
+    "next-auth": "^4.22.0",
+    "next-connect": "^0.13.0",
+    "react": "18.2.0",
+    "react-datepicker": "^4.11.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "18.2.0",
+    "react-simplemde-editor": "^5.2.0",
+    "sass": "^1.61.0",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/html-pdf": "^3.0.0",
+    "@types/lodash": "^4.14.194",
+    "@types/react-datepicker": "^4.10.0"
+  },
+  "browser": {
+    "html-pdf": false
+  },
+  "browserslist": [
+    "Safari >=4"
+  ]
+}
