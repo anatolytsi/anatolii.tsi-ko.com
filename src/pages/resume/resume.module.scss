@@ -1,5 +1,10 @@
 @import 'src/styles/common/variables';
 
+$button-width: 70px;
+$button-height: calc($button-width / 2);
+$download-button-margin: 15px;
+$edit-button-margin: 15px;
+
 .editResume {
   cursor: pointer;
   z-index: 10;
@@ -67,15 +72,11 @@
   }
 }
 
-$button-width: 70px;
-$button-height: calc($button-width / 2);
-$button-margin: 15px;
-
 .downloadButton {
   z-index: 20;
   position: sticky;
-  top: calc(100% - $button-width - $button-margin);
-  left: calc(100% - $button-width - $button-margin);
+  top: calc(100% - $button-width - $download-button-margin);
+  left: calc(100% - $button-width - $download-button-margin);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +87,7 @@ $button-margin: 15px;
   height: $button-height;
   text-decoration: none;
   transition: .3s;
-  color: green;
+  color: #4caf50;
   background-color: white;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
 
@@ -95,7 +96,7 @@ $button-margin: 15px;
   }
 
   @media (min-width: $desktop-size) {
-    top: calc(100% - $button-width - 2 * $button-margin);
+    top: calc(100% - $button-width - 2 * $download-button-margin);
     left: calc(100% - 2 * $page-padding - $page-padding-sides / 2);
   }
 }
