@@ -15,9 +15,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
-RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom
-
 RUN npm install -g html-pdf
 
 # Rebuild the source code only when needed
@@ -25,6 +22,9 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
+RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
