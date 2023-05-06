@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faPencil, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faPencil, faSave } from '@fortawesome/free-solid-svg-icons';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -113,7 +113,7 @@ export default function Resume( props: IResumeProps ) {
           rel="noopener noreferrer"
           className={styles.downloadButton}
         >
-            <FontAwesomeIcon icon={faDownload} size='xl' />
+            <FontAwesomeIcon icon={faFilePdf} size='xl' />
         </a>
       </>
     )}
