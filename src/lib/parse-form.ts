@@ -10,6 +10,10 @@ export const convertToRelativePath = (filePath: string) => {
   return filePath.replace(process.env.ROOT_DIR || process.cwd(), '').replaceAll('\\', '/').replace('/public', '');
 }
 
+export const convertToAbsolutePath = (filePath: string) => {
+  return `${process.env.ROOT_DIR || process.cwd()}/public${filePath}`;
+}
+
 export const parseForm = async (
   req: NextApiRequest, uploadPath: string
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {

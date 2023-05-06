@@ -1,6 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { parseForm, FormidableError, convertToRelativePath } from "@/lib/parse-form";
 
+export const IMAGES_URL = '/image/resume';
+export const IMAGES_PATH = `/public${IMAGES_URL}`;
+
+const API_URL = '/api/resume/file'
+
+const convertToApiPath = (filePath: string) => {
+  return `${API_URL}${convertToRelativePath(filePath)}`;
+}
+
 const handler = async (
     req: NextApiRequest,
     res: NextApiResponse<{
@@ -20,10 +29,10 @@ const handler = async (
     }
     // Just after the "Method Not Allowed" code
     try {
-      const { fields, files } = await parseForm(req, `/public/image/resume`);
+      const { fields, files } = await parseForm(req, IMAGES_PATH);
   
       const file = files.media;
-      let url = Array.isArray(file) ? file.map((f) => convertToRelativePath(f.filepath)) : convertToRelativePath(file.filepath);
+      let url = Array.isArray(file) ? file.map((f) => convertToApiPath(f.filepath)) : convertToApiPath(file.filepath);
   
       res.status(200).json({
         data: {

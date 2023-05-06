@@ -147,7 +147,7 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
       <div className={styles.personalInfo}>
         <div className={styles.left}>
           <PhotoUpload>
-            <Image 
+            <img 
               className={styles.avatar}
               width={100}
               height={100}
