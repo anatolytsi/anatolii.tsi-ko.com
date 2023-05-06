@@ -231,6 +231,20 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const isAdmin = session?.user?.role === 'admin';
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB);
+    const collections = await db.listCollections().toArray();
+    const collectionNames = collections.map(c => c.name);
+    if (!collectionNames.length) {
+      console.log('Filling the database initially');
+      await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
+      await db.collection('jobs').insertMany(require('@/fixtures/jobs.json'));
+      await db.collection('education').insertMany(require('@/fixtures/education.json'));
+      await db.collection('internship').insertMany(require('@/fixtures/internship.json'));
+      await db.collection('skills').insertMany(require('@/fixtures/skills.json'));    
+      await db.collection('languages').insertMany(require('@/fixtures/languages.json'));
+      await db.collection('certifications').insertMany(require('@/fixtures/certifications.json'));
+      await db.collection('hobbies').insertMany(require('@/fixtures/hobbies.json'));
+    }
+
     const personalInfo = await db.collection('personalInfo').findOne();
     
     const jobExperienceCur = db.collection('jobs').find({});
