@@ -15,6 +15,7 @@ services:
       - mongo
     networks:
       - nginx_proxy
+      - db_network
   mongo:
     container_name: anatolii_tsiko_mongo
     image: mongo
@@ -23,7 +24,11 @@ services:
       - ./data:/data/db
     ports:
       - "27015:27017"
+    networks:
+      - db_network
 
 networks:
+  db_network:
+    internal: true
   nginx_proxy:
     external: true
