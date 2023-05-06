@@ -231,7 +231,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const collections = await db.listCollections().toArray();
     const collectionNames = collections.map(c => c.name);
     if (!collectionNames.length) {
-      console.log('Filling the database initially');
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
       await db.collection('jobs').insertMany(require('@/fixtures/jobs.json'));
       await db.collection('education').insertMany(require('@/fixtures/education.json'));
@@ -295,21 +294,23 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const isServer = !!context.req;
 
     if (isServer && exportPDF) {
-        const buffer = await pdfHelper.componentToPDFBuffer(
-            <PDFLayout>
-                <Resume {...props}/>
-            </PDFLayout>
-        );
+      props.forExport = true;
+      props.isAdmin = false;
+      const buffer = await pdfHelper.componentToPDFBuffer(
+          <PDFLayout>
+              <Resume {...props}/>
+          </PDFLayout>
+      );
 
-        // with this header, your browser will prompt you to download the file
-        // without this header, your browse will open the pdf directly
-        context.res!.setHeader('Content-disposition', 'attachment; filename="CV_Tsirkunenko.pdf');
-        
-        // set content type
-        context.res!.setHeader('Content-Type', 'application/pdf');
+      // with this header, your browser will prompt you to download the file
+      // without this header, your browse will open the pdf directly
+      context.res!.setHeader('Content-disposition', 'attachment; filename="CV_Tsirkunenko.pdf');
+      
+      // set content type
+      context.res!.setHeader('Content-Type', 'application/pdf');
 
-        // output the pdf buffer. once res.end is triggered, it won't trigger the render method
-        context.res!.end(buffer);
+      // output the pdf buffer. once res.end is triggered, it won't trigger the render method
+      context.res!.end(buffer);
     }
   
     return {props};
