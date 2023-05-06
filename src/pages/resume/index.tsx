@@ -19,6 +19,8 @@ import { getSession } from 'next-auth/react';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 import clientPromise from '@/lib/mongodb';
+import PDFLayout from '@/components/resume/PdfLayout';
+import pdfHelper from '@/lib/pdfHelper';
 
 interface IResumeSection {
   name: TResumeSectionName
@@ -106,7 +108,7 @@ export default function Resume( props: IResumeProps ) {
     ) : (
       <>
         {renderEditResume()}
-        <a href="/resume-pdf?exportPDF=true"
+        <a href="/resume?exportPDF=true"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.downloadButton}
@@ -275,34 +277,42 @@ export const getServerSideProps = async (context: NextPageContext) => {
       certifications = await certificationsCur.filter({ isVisible: true }).toArray()
       hobbies = await hobbiesCur.filter({ isVisible: true }).toArray()
     }
+
+    const props = {
+      forExport: false,
+      isAdmin,
+      personalInfo: JSON.parse(JSON.stringify(personalInfo)),
+      jobExperience: JSON.parse(JSON.stringify(jobExperience)),
+      education: JSON.parse(JSON.stringify(education)),
+      internships: JSON.parse(JSON.stringify(internships)),
+      skills: JSON.parse(JSON.stringify(skills)),
+      languages: JSON.parse(JSON.stringify(languages)),
+      certifications: JSON.parse(JSON.stringify(certifications)),
+      hobbies: JSON.parse(JSON.stringify(hobbies))
+    }
+    
+    const exportPDF = context.query.exportPDF === 'true';
+    const isServer = !!context.req;
+
+    if (isServer && exportPDF) {
+        const buffer = await pdfHelper.componentToPDFBuffer(
+            <PDFLayout>
+                <Resume {...props}/>
+            </PDFLayout>
+        );
+
+        // with this header, your browser will prompt you to download the file
+        // without this header, your browse will open the pdf directly
+        context.res!.setHeader('Content-disposition', 'attachment; filename="CV_Tsirkunenko.pdf');
+        
+        // set content type
+        context.res!.setHeader('Content-Type', 'application/pdf');
+
+        // output the pdf buffer. once res.end is triggered, it won't trigger the render method
+        context.res!.end(buffer);
+    }
   
-    return {
-      props: {
-        forExport: false,
-        isAdmin,
-        personalInfo: JSON.parse(JSON.stringify(personalInfo)),
-        jobExperience: JSON.parse(JSON.stringify(jobExperience)),
-        education: JSON.parse(JSON.stringify(education)),
-        internships: JSON.parse(JSON.stringify(internships)),
-        skills: JSON.parse(JSON.stringify(skills)),
-        languages: JSON.parse(JSON.stringify(languages)),
-        certifications: JSON.parse(JSON.stringify(certifications)),
-        hobbies: JSON.parse(JSON.stringify(hobbies))
-      }
-      // return {
-      //   props: {
-      //     forExport: false,
-      //     isAdmin,
-      //     personalInfo: require('@/fixtures/personalInfo.json'),
-      //     jobExperience: require('@/fixtures/jobs.json'),
-      //     education: require('@/fixtures/education.json'),
-      //     internships: require('@/fixtures/internship.json'),
-      //     skills: require('@/fixtures/skills.json'),
-      //     languages: require('@/fixtures/languages.json'),
-      //     certifications: require('@/fixtures/certifications.json'),
-      //     hobbies: require('@/fixtures/hobbies.json')
-      //   }
-    };
+    return {props};
   } catch (e) {
     console.error(e);
   }

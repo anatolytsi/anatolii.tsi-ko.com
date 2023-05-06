@@ -14,10 +14,15 @@ const renderPDFFooter = () => (
   </div>
 );
 
+const CSS_PATH = `${process.cwd()}/.next/static/css`;
+
 const PDFLayout = ({ children }: any) => {
   // const styleSheetTemplate = `<link rel="stylesheet" href="${process.env.HOST_URL}/static/css/58f174e583f93e15.css" />`
   // let styleSheets: string[] = [];
-  let styleSheets: string[] = fs.readdirSync(`${process.cwd()}/.next/static/css`);
+  let styleSheets: string[] = [];
+  if (fs.existsSync(CSS_PATH)) {
+    styleSheets = fs.readdirSync(CSS_PATH);
+  }
   // .forEach((file: string) => {
   //   styleSheets.push(file);
   //   // styleSheets += `<link rel="stylesheet" href="${process.env.HOST_URL}/static/css/${file}" />\n`
