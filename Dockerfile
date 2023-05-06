@@ -51,9 +51,11 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+RUN mkdir /app/node_modules/phantomjs-prebuilt-copy
+RUN cp -a /app/node_modules/phantomjs-prebuilt/. /app/node_modules/phantomjs-prebuilt-copy/
 RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
-RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom/bin
-RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom/bin
+RUN cp -a /app/node_modules/phantomjs-prebuilt-copy/. /app/node_modules/phantomjs-prebuilt/lib/phantom/
+RUN rm -r /app/node_modules/phantomjs-prebuilt-copy
 
 USER nextjs
 
