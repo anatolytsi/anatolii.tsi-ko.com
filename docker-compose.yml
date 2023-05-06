@@ -8,7 +8,7 @@ services:
     container_name: anatolii_tsiko
     restart: always
     volumes:
-      - ./:/usr/src/app
+      - ./:/app
     ports:
       - "3010:3000"
     depends_on:
