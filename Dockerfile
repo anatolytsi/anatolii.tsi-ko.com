@@ -50,9 +50,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# RUN chown -R nextjs:nodejs /app/public
-RUN chmod -R 777 /usr/src/app/public
-RUN chmod -R 777 /usr/src/app/public
+RUN chmod -R 777 /app/public
 
 USER nextjs
 
