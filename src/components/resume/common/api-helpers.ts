@@ -54,3 +54,16 @@ export const compDelete = (urlPath: string, compId: any, callback = (response: A
         }
     });
 }
+
+
+export const uploadFile = (urlPath: string, data: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+    axios.post(`/api/resume/${urlPath}`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+    }).then((response) => {
+        if (response.status === 200) {
+            callback(response);
+        }
+    });
+}

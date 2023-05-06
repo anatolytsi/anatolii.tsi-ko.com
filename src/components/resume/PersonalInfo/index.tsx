@@ -18,7 +18,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './PersonalInfo.module.scss';
 import { ExperienceDescriptionClamp } from '../Experience';
 import axios from 'axios';
-import { compUpdate } from '../common/api-helpers';
+import { compUpdate, uploadFile } from '../common/api-helpers';
 
 const SimpleMDEEditor = dynamic(
     () => import('react-simplemde-editor'),
@@ -45,7 +45,7 @@ interface PersonalInfoProps {
 export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoProps) {
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
-  const [file, setFile] = useState(personalInfo.photoSrc);
+  const [file, setFile] = useState(null);
   
   const getYears = (birthdayMilis: any) =>
     Math.round((new Date().getTime() - birthdayMilis) / 31536000000);
@@ -58,6 +58,16 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
   useEffect(() => {
     setAge(getYears(personalInfo.birthday));
   }, [personalInfo.birthday]);
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    }
+    const body = new FormData();
+    body.append('media', file);
+    console.log(`Uploading file ${file}`);
+    uploadFile('file', body, (response) => {console.log(response.data.data.url); setPersonalInfo({...personalInfo, photoSrc: response.data.data.url})});
+  }, [file]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -83,9 +93,14 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
 
   const handlePhotoUpload = (event: any) => {
     if (event.target.files.length > 0) {
-      const file = URL.createObjectURL(event.target.files[0]);
-      setFile(file);
-      setPersonalInfo({...personalInfo, photoSrc: file})
+      const loadedFile = event.target.files[0];
+      if (!loadedFile.type.startsWith("image")) {
+        alert("Please select a valide image");
+        return;
+      }
+      const filePreviewUrl = URL.createObjectURL(loadedFile);
+      setPersonalInfo({...personalInfo, photoSrc: filePreviewUrl});
+      setFile(loadedFile);
     }
   };
 
@@ -136,7 +151,7 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
               className={styles.avatar}
               width={100}
               height={100}
-              src={file}
+              src={personalInfo.photoSrc}
               alt="Avatar"
             />
           </PhotoUpload>
