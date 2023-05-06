@@ -15,13 +15,8 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-RUN apk update && apk add --no-cache fontconfig curl curl-dev && \
-    curl -Ls https://github.com/dustinblackman/phantomized/releases/download/2.1.1/dockerized-phantomjs.tar.gz | tar xz &&\
-    cp -R lib lib64 / &&\
-    cp -R usr/lib/x86_64-linux-gnu /usr/lib &&\
-    curl -k -Ls https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -jxf - &&\
-    cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs &&\
-    rm -rf /tmp/*
+RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
+RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom
 
 RUN npm install -g html-pdf
 
