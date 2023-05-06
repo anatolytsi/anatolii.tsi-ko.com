@@ -6,12 +6,14 @@ import { mkdir, stat } from "fs/promises";
 
 export const FormidableError = formidable.errors.FormidableError;
 
+export const ROOT_UPLOAD_DIR = '/uploads';
+
 export const convertToRelativePath = (filePath: string) => {
-  return filePath.replace(process.env.ROOT_DIR || process.cwd(), '').replaceAll('\\', '/').replace('/public', '');
+  return filePath.replace(process.env.ROOT_DIR || process.cwd(), '').replaceAll('\\', '/').replace(ROOT_UPLOAD_DIR, '');
 }
 
 export const convertToAbsolutePath = (filePath: string) => {
-  return `${process.env.ROOT_DIR || process.cwd()}/public${filePath}`;
+  return `${process.env.ROOT_DIR || process.cwd()}${ROOT_UPLOAD_DIR}${filePath}`;
 }
 
 export const parseForm = async (

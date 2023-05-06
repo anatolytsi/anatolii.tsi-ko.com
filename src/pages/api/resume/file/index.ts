@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { parseForm, FormidableError, convertToRelativePath } from "@/lib/parse-form";
+import { parseForm, FormidableError, convertToRelativePath, ROOT_UPLOAD_DIR } from "@/lib/parse-form";
 
 export const IMAGES_URL = '/image/resume';
-export const IMAGES_PATH = `/public${IMAGES_URL}`;
+export const IMAGES_PATH = `${ROOT_UPLOAD_DIR}${IMAGES_URL}`;
 
 const API_URL = '/api/resume/file'
 
 const convertToApiPath = (filePath: string) => {
-  return `${API_URL}${convertToRelativePath(filePath)}`;
+  return `${API_URL}${convertToRelativePath(filePath).replace(IMAGES_URL, '')}`;
 }
 
 const handler = async (

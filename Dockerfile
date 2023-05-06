@@ -50,7 +50,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN chmod -R 777 /app/public
+RUN chmod -R 777 /app/uploads
 
 USER nextjs
 
