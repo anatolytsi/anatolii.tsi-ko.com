@@ -15,7 +15,13 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-RUN npm install -g phantomjs-prebuilt 
+RUN apk update && apk add --no-cache fontconfig curl curl-dev && \
+    mkdir -p /usr/share && \
+    cd /usr/share \
+    && curl -L https://github.com/Overbryd/docker-phantomjs-alpine/releases/download/2.1.16/phantomjs-alpine-x86_64.tar.bz2 | tar xj \
+    && ln -s /usr/share/phantomjs/phantomjs /usr/bin/phantomjs \
+    && phantomjs --version
+
 RUN npm install -g html-pdf
 
 # Rebuild the source code only when needed
