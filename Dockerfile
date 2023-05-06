@@ -23,9 +23,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
-RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom
-
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
@@ -53,6 +50,9 @@ COPY --from=builder /app/public ./public
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
+RUN cp -r /app/node_modules/phantomjs-prebuilt/bin /app/node_modules/phantomjs-prebuilt/lib/phantom
 
 USER nextjs
 
