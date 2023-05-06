@@ -19,6 +19,7 @@ import styles from './PersonalInfo.module.scss';
 import { ExperienceDescriptionClamp } from '../Experience';
 import axios from 'axios';
 import { compUpdate } from '../common/api-helpers';
+import { WAIT_EFFECT } from '../common';
 
 const SimpleMDEEditor = dynamic(
     () => import('react-simplemde-editor'),
@@ -46,7 +47,7 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState(personalInfo.photoSrc);
-  const firstUpdate = useRef(2);
+  const firstUpdate = useRef(WAIT_EFFECT);
   
   const getYears = (birthdayMilis: any) =>
     Math.round((new Date().getTime() - birthdayMilis) / 31536000000);

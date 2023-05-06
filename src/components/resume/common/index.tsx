@@ -11,6 +11,8 @@ import { ILanguage, LanguagesList } from '@/components/resume/Languages';
 import { CertificationList, ICertification } from '@/components/resume/Certifications';
 import { HobbiesList, IHobby } from '@/components/resume/Hobbies';
 
+export const WAIT_EFFECT = parseInt(process.env.WAIT_EFFECT ?? '2');
+
 export interface IResumeComponentSections {
     forExport?: boolean
     isAdmin?: any

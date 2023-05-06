@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './Languages.module.scss';
 import { GenericSkill, ISkill } from "../Skills";
 import { compUpdate } from "../common/api-helpers";
+import { WAIT_EFFECT } from "../common";
 
 export interface ILanguage extends ISkill {
     level: string
@@ -20,7 +21,7 @@ export interface ILanguageProps {
 export const Language = ({ languageObj, onUpdate, onDelete, isAdmin, isLast }: ILanguageProps) => {
     const [language, setLanguage] = useState(languageObj);
     const [isEditing, setIsEditing] = useState(false);
-    const firstUpdate = useRef(2);
+    const firstUpdate = useRef(WAIT_EFFECT);
   
     useEffect(() => {
       if (firstUpdate.current) {

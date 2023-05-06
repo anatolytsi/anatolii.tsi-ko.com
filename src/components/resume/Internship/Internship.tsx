@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import {GenericExperience, Experience, handleExpKeyDown} from '../Experience';
 import styles from './Internship.module.scss';
 import { compUpdate } from '../common/api-helpers';
+import { WAIT_EFFECT } from '../common';
 
 export interface IInternship extends Experience {
     place: string
@@ -23,7 +24,7 @@ interface InternshipProps {
 export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, forExport=false }: InternshipProps) {
   const [experience, setExperience] = useState(internship);
   const [isEditing, setIsEditing] = useState(false);
-  const firstUpdate = useRef(2);
+  const firstUpdate = useRef(WAIT_EFFECT);
   
   useEffect(() => {
       if (firstUpdate.current) {

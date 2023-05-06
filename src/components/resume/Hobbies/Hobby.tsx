@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './Hobbies.module.scss';
 import { GenericSkill, ISkill } from "../Skills";
 import { compUpdate } from "../common/api-helpers";
+import { WAIT_EFFECT } from "../common";
 
 export interface IHobby extends ISkill {}
 
@@ -17,7 +18,7 @@ export interface IHobbyProps {
 export const Hobby = ({ hobbyObj, onUpdate, onDelete, isAdmin, isLast }: IHobbyProps) => {
     const [hobby, setHobby] = useState(hobbyObj);
     const [isEditing, setIsEditing] = useState(false);
-    const firstUpdate = useRef(2);
+    const firstUpdate = useRef(WAIT_EFFECT);
   
     useEffect(() => {
       if (firstUpdate.current) {

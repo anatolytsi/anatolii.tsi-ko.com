@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Experience, GenericExperience, handleExpKeyDown} from '../Experience';
 import styles from './Job.module.scss';
 import { compUpdate } from '../common/api-helpers';
+import { WAIT_EFFECT } from '../common';
 
 export interface IJobExperience extends Experience {
     company: string
@@ -23,7 +24,7 @@ interface JobExperienceProps {
 export function JobExperience({ jobExperience, onUpdate, onDelete, isAdmin, isLast, forExport=false }: JobExperienceProps) {
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const firstUpdate = useRef(2);
+  const firstUpdate = useRef(WAIT_EFFECT);
   
   useEffect(() => {
     if (firstUpdate.current) {

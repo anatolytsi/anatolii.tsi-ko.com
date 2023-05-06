@@ -4,7 +4,7 @@ import { faEye, faEyeSlash, faEdit, faSave, faTrash, faPlusCircle, faArrowUp, fa
 import axios from 'axios';
 
 import styles from './Skills.module.scss';
-import { IResumeSectionComponent } from "../common";
+import { IResumeSectionComponent, WAIT_EFFECT } from "../common";
 import { compUpdate } from "../common/api-helpers";
 
 export interface ISkill {
@@ -181,7 +181,7 @@ export const GenericSkill = ({ skill,
 export const Skill = ({ skillObj, onUpdate, onDelete, isAdmin, isLast }: ISkillProps) => {
     const [skill, setSkill] = useState(skillObj);
     const [isEditing, setIsEditing] = useState(false);
-    const firstUpdate = useRef(2);
+    const firstUpdate = useRef(WAIT_EFFECT);
   
     useEffect(() => {
       if (firstUpdate.current) {
