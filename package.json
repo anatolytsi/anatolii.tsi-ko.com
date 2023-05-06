@@ -28,6 +28,7 @@
     "next": "^13.2.4",
     "next-auth": "^4.22.0",
     "next-connect": "^0.13.0",
+    "phantomjs-prebuilt": "^2.1.16",
     "react": "18.2.0",
     "react-datepicker": "^4.11.0",
     "react-dnd": "^16.0.1",
