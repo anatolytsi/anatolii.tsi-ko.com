@@ -7,9 +7,9 @@ $edit-button-margin: 15px;
 
 .editResume {
   z-index: 20;
-  position: sticky;
-  top: calc(100% - 2 * ($button-width + $edit-button-margin));
-  left: calc(100% - $button-width - $download-button-margin);
+  position: fixed;
+  bottom: calc(2 * $button-width + $edit-button-margin);
+  right: $download-button-margin;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,8 +25,7 @@ $edit-button-margin: 15px;
   cursor: pointer;
 
   @media (min-width: $desktop-size) {
-    top: calc(100% - 2 * ($button-width + 2 * $edit-button-margin));
-    left: calc(100% - 2 * $page-padding - $page-padding-sides / 2);
+    right: calc($page-padding-sides / 4);
   }
 
   &.edit {
@@ -90,9 +89,9 @@ $edit-button-margin: 15px;
 
 .downloadButton {
   z-index: 20;
-  position: sticky;
-  top: calc(100% - $button-width - $download-button-margin);
-  left: calc(100% - $button-width - $download-button-margin);
+  position: fixed;
+  bottom: $button-width / 2 + $download-button-margin;
+  right: $download-button-margin;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,7 +111,6 @@ $edit-button-margin: 15px;
   }
 
   @media (min-width: $desktop-size) {
-    top: calc(100% - $button-width - 2 * $download-button-margin);
-    left: calc(100% - 2 * $page-padding - $page-padding-sides / 2);
+    right: calc($page-padding-sides / 4);
   }
 }
