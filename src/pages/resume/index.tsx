@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPencil, faSave } from '@fortawesome/free-solid-svg-icons';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -74,19 +74,19 @@ export default function Resume( props: IResumeProps ) {
       if (editMode) {
         return (
           <div 
-            className={styles.stop}
+            className={`${styles.editResume} ${styles.stop}`}
             onClick={() => {setEditMode(false)}}
           >
-            Stop editing
+            <FontAwesomeIcon icon={faSave} size='xl' />
           </div>
         );
       } else {
         return (
           <div 
-            className={styles.edit}
+            className={`${styles.editResume} ${styles.edit}`}
             onClick={() => {setEditMode(true)}}
           >
-            Edit Resume
+            <FontAwesomeIcon icon={faPencil} size='xl' />
           </div>
         );
       }
@@ -105,19 +105,14 @@ export default function Resume( props: IResumeProps ) {
       <></>
     ) : (
       <>
-        <div>
-          {renderEditResume()}
-        </div>
-          {/* <div className={styles.downloadSection}> */}
-            <a href="/resume-pdf?exportPDF=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.downloadButton}
-            >
-                <FontAwesomeIcon icon={faDownload} size='xl' />
-              {/* Download as PDF */}
-            </a>
-          {/* </div> */}
+        {renderEditResume()}
+        <a href="/resume-pdf?exportPDF=true"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.downloadButton}
+        >
+            <FontAwesomeIcon icon={faDownload} size='xl' />
+        </a>
       </>
     )}
     <div className={styles.resume} id={styles.root}>

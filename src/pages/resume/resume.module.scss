@@ -6,24 +6,40 @@ $download-button-margin: 15px;
 $edit-button-margin: 15px;
 
 .editResume {
+  z-index: 20;
+  position: sticky;
+  top: calc(100% - 2 * ($button-width + $edit-button-margin));
+  left: calc(100% - $button-width - $download-button-margin);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $button-width;
+  padding: calc($button-width / 4) 0 calc($button-width / 4) 0;
+  margin: -1.5*$button-height 0;
+  width: $button-width;
+  height: $button-height;
+  text-decoration: none;
+  transition: .3s;
+  background-color: white;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  z-index: 10;
-  margin: calc(#{$page-padding}/2) $page-padding-sides 0 $page-padding-sides;
 
-  .edit {
-    width: 5.5rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    background-color: #4caf50;
+  @media (min-width: $desktop-size) {
+    top: calc(100% - 2 * ($button-width + 2 * $edit-button-margin));
+    left: calc(100% - 2 * $page-padding - $page-padding-sides / 2);
+  }
+
+  &.edit {
+    color: #4caf50;
 
     &:hover {
-      background-color: #3e8e41;
+      background-color: rgb(221, 255, 221);
     }
   }
   
-  .stop {
-    width: 5.5rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    background-color: red;
+  &.stop {
+    color: red;
+
     &:hover {
       background-color: orange;
     }
