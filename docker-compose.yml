@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: web
+    container_name: anatolii_tsiko
     restart: always
     volumes:
       - ./:/usr/src/app
@@ -13,11 +13,17 @@ services:
       - "3010:3000"
     depends_on:
       - mongo
+    networks:
+      - nginx_proxy
   mongo:
-    container_name: mongo
+    container_name: anatolii_tsiko_mongo
     image: mongo
     restart: always
     volumes:
       - ./data:/data/db
     ports:
       - "27015:27017"
+
+networks:
+  nginx_proxy:
+    external: true
