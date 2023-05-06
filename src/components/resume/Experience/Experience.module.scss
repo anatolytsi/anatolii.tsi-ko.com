@@ -143,7 +143,7 @@ $control-buttons-width: calc(#{$padding-experience} / 2);
       .datePicker {
         display: inline-block;
         position: relative;
-        width: 5rem;
+        width: 5.1rem;
         padding: 0;
         margin: 0;
 
@@ -163,7 +163,7 @@ $control-buttons-width: calc(#{$padding-experience} / 2);
             border-radius: 0;
             border: none;
             margin: auto;
-            width: 5rem;
+            width: 5.1rem;
             pointer-events: none;
 
             &.editingStartDate,
