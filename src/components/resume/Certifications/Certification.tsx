@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {GenericExperience, Experience, handleExpKeyDown} from '../Experience';
 import styles from './Certification.module.scss';
 import { compUpdate } from '../common/api-helpers';
-import { WAIT_EFFECT } from '../common';
 
 export interface ICertification extends Experience {
   date: number
@@ -25,13 +24,8 @@ interface CertificationProps {
 export function Certification({ certification, onUpdate, onDelete, isAdmin, isLast, forExport=false }: CertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
-  const firstUpdate = useRef(WAIT_EFFECT);
   
   useEffect(() => {
-      if (firstUpdate.current) {
-        firstUpdate.current--;
-        return;
-      }
       compUpdate('certifications', experience, experience._id, (response) => onUpdate(response.data));
   }, [experience]);
 

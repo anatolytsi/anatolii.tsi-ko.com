@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import Markdown from 'markdown-to-jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,7 +19,6 @@ import styles from './PersonalInfo.module.scss';
 import { ExperienceDescriptionClamp } from '../Experience';
 import axios from 'axios';
 import { compUpdate } from '../common/api-helpers';
-import { WAIT_EFFECT } from '../common';
 
 const SimpleMDEEditor = dynamic(
     () => import('react-simplemde-editor'),
@@ -47,24 +46,16 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState(personalInfo.photoSrc);
-  const firstUpdate = useRef(WAIT_EFFECT);
   
   const getYears = (birthdayMilis: any) =>
     Math.round((new Date().getTime() - birthdayMilis) / 31536000000);
   const [age, setAge] = useState(getYears(personalInfo.birthday))
 
   useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current--;
-      return;
-    }
     compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => {console.log(response.data); setPersonalInfo(personalInfo)});
   }, [personalInfo]);
 
   useEffect(() => {
-    if (firstUpdate.current) {
-      return;
-    }
     setAge(getYears(personalInfo.birthday));
   }, [personalInfo.birthday]);
 
