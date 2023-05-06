@@ -15,6 +15,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+RUN npm install -g phantomjs-prebuilt 
 RUN npm install -g html-pdf
 
 # Rebuild the source code only when needed
