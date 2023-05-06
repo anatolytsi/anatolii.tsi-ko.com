@@ -3,7 +3,6 @@
 /data
 .env
 /.vscode
-/src/fixtures
 
 # dependencies
 /node_modules

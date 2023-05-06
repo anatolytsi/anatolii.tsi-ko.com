@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Photography (Past Professional)",
+        "order": 4,
+        "isVisible": true
+    },
+    {
+        "title": "Programming",
+        "order": 3,
+        "isVisible": true
+    },
+    {
+        "title": "Tinkering Devices",
+        "order": 2,
+        "isVisible": true
+    },
+    {
+        "title": "Table Tennis",
+        "order": 1,
+        "isVisible": true
+    }
+]

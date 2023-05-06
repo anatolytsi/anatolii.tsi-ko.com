@@ -1,0 +1,20 @@
+[
+    {
+        "title": "English",
+        "level": "C1",
+        "order": 2,
+        "isVisible": true
+    },
+    {
+        "title": "German",
+        "level": "B2",
+        "order": 1,
+        "isVisible": true
+    },
+    {
+        "title": "Russian",
+        "level": "Native",
+        "order": 0,
+        "isVisible": true
+    }
+]

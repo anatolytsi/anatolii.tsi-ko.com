@@ -1,0 +1,32 @@
+[
+    {
+      "company": "LION Smart GmbH",
+      "companyLink": "http://lionsmart.com",
+      "companyLocation": "Garching bei München, Germany",
+      "title": "Embedded Software Developer BMS",
+      "startDate": 1650240000000,
+      "endDate": 0,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincunt lectus eleifend. Nullam auctor justo quis consectetur convallis.",
+      "isVisible": true
+    },
+    {
+      "company": "LION Smart GmbH",
+      "companyLink": "http://lionsmart.com",
+      "companyLocation": "Garching bei München, Germany",
+      "title": "Embedded Software Werkstudent",
+      "startDate": 1583020800000,
+      "endDate": 1650240000000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincunt lectus eleifend. Nullam auctor justo quis consectetur convallis.",
+      "isVisible": true
+    },
+    {
+      "company": "Modern Steel Chelyabinsk Factory",
+      "companyLink": "http://modernsteel.ru",
+      "companyLocation": "Chelyabinsk, Russia",
+      "title": "Electronic Design Engineer",
+      "startDate": 1498867200000,
+      "endDate": 1514764800000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincunt lectus eleifend. Nullam auctor justo quis consectetur convallis.",
+      "isVisible": true
+    }
+]
