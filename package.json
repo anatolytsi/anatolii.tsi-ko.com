@@ -37,6 +37,7 @@
     "react-simplemde-editor": "^5.2.0",
     "sass": "^1.61.0",
     "sharp": "^0.32.1",
+    "styled-components": "^5.3.1",
     "typescript": "5.0.4"
   },
   "devDependencies": {
@@ -44,7 +45,8 @@
     "@types/html-pdf": "^3.0.0",
     "@types/lodash": "^4.14.194",
     "@types/mime": "^3.0.1",
-    "@types/react-datepicker": "^4.10.0"
+    "@types/react-datepicker": "^4.10.0",
+    "@types/styled-components": "^5.1.26"
   },
   "browser": {
     "html-pdf": false
