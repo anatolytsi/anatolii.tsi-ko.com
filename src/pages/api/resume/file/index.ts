@@ -4,7 +4,7 @@ import { parseForm, FormidableError, convertToRelativePath, ROOT_UPLOAD_DIR } fr
 export const IMAGES_URL = '/image/resume';
 export const IMAGES_PATH = `${ROOT_UPLOAD_DIR}${IMAGES_URL}`;
 
-const API_URL = '/api/resume/file'
+export const API_URL = '/api/resume/file'
 
 const convertToApiPath = (filePath: string) => {
   return `${API_URL}${convertToRelativePath(filePath).replace(IMAGES_URL, '')}`;
