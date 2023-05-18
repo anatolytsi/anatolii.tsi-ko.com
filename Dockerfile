@@ -6,6 +6,13 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+RUN apk add --no-cache chromium --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/main
+
+# Install puppeteer
+ENV CHROME_BIN="/usr/bin/chromium-browser" \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true" \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -14,8 +21,6 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-RUN npm install -g html-pdf
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -51,12 +56,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN mkdir /app/node_modules/phantomjs-prebuilt-copy
-RUN cp -a /app/node_modules/phantomjs-prebuilt/. /app/node_modules/phantomjs-prebuilt-copy/
-RUN mkdir /app/node_modules/phantomjs-prebuilt/lib/phantom
-RUN cp -a /app/node_modules/phantomjs-prebuilt-copy/. /app/node_modules/phantomjs-prebuilt/lib/phantom/
-RUN rm -r /app/node_modules/phantomjs-prebuilt-copy
-
+RUN apk add chromium
 USER nextjs
 
 ENV PORT 3000
