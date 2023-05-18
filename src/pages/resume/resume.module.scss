@@ -53,15 +53,17 @@ $edit-button-margin: 15px;
 /* Tablet */
 @media (min-width: $tablet-size) {
   #root {
-    padding: $page-padding calc(#{$page-padding-sides} / 2);
+    margin: 0;
+    padding: $page-padding;
   }
 }
 
 /* Desktop */
 @media (min-width: $desktop-size) {
   #root {
-    margin: $page-padding $page-padding-sides;
-    padding: $page-padding $page-padding;
+    max-width: 1200px;
+    margin: $page-padding auto;
+    padding: 3rem 5rem;
     background-color: white;
     box-shadow: 0.1rem 0.125rem 0.25rem 0.1rem rgb(0 0 0 / 11%);
   }
