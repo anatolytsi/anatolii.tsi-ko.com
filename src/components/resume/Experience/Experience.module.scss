@@ -202,12 +202,6 @@ $control-buttons-width: calc(#{$padding-experience} / 2);
     margin: 0;
     color: #666 !important;
 
-    @media (min-width: $tablet-size) {
-      &{
-        margin: 0 50rem 0 0;
-      }
-    }
-
     a,
     a:visited,
     a:hover,
