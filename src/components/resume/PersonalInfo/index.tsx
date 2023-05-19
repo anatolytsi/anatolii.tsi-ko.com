@@ -47,8 +47,11 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
   const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState(null);
   
-  const getYears = (birthdayMilis: any) =>
-    Math.round((new Date().getTime() - birthdayMilis) / 31536000000);
+  const getYears = (birthdayMilis: any) => {
+    let ageDifMs = Date.now() - birthdayMilis;
+    var ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
   const [age, setAge] = useState(getYears(personalInfo.birthday))
 
   useEffect(() => {
