@@ -230,6 +230,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const db = client.db(process.env.MONGODB_DB);
     const collections = await db.listCollections().toArray();
     const collectionNames = collections.map(c => c.name);
+    
+    const exportPDF = context.query.pdf === 'true';
+    const isServer = !!context.req;
+
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
       await db.collection('jobs').insertMany(require('@/fixtures/jobs.json'));
@@ -259,15 +263,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let certifications;
     let hobbies;
 
-    if (isAdmin) {
-      jobExperience = await jobExperienceCur.toArray()
-      education = await educationCur.toArray()
-      internships = await internshipsCur.toArray()
-      skills = await skillsCur.toArray()
-      languages = await languagesCur.toArray()
-      certifications = await certificationsCur.toArray()
-      hobbies = await hobbiesCur.toArray()
-    } else {
+    if (exportPDF || !isAdmin) {
       jobExperience = await jobExperienceCur.filter({ isVisible: true }).toArray()
       education = await educationCur.filter({ isVisible: true }).toArray()
       internships = await internshipsCur.filter({ isVisible: true }).toArray()
@@ -275,6 +271,14 @@ export const getServerSideProps = async (context: NextPageContext) => {
       languages = await languagesCur.filter({ isVisible: true }).toArray()
       certifications = await certificationsCur.filter({ isVisible: true }).toArray()
       hobbies = await hobbiesCur.filter({ isVisible: true }).toArray()
+    } else {
+      jobExperience = await jobExperienceCur.toArray()
+      education = await educationCur.toArray()
+      internships = await internshipsCur.toArray()
+      skills = await skillsCur.toArray()
+      languages = await languagesCur.toArray()
+      certifications = await certificationsCur.toArray()
+      hobbies = await hobbiesCur.toArray()
     }
 
     const props = {
@@ -289,9 +293,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       certifications: JSON.parse(JSON.stringify(certifications)),
       hobbies: JSON.parse(JSON.stringify(hobbies))
     }
-    
-    const exportPDF = context.query.pdf === 'true';
-    const isServer = !!context.req;
 
     if (isServer && exportPDF) {
       props.forExport = true;
