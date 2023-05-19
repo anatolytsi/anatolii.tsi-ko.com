@@ -108,7 +108,7 @@ export default function Resume( props: IResumeProps ) {
     ) : (
       <>
         {renderEditResume()}
-        <a href="/resume?exportPDF=true"
+        <a href="/resume?pdf=true"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.downloadButton}
@@ -290,7 +290,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       hobbies: JSON.parse(JSON.stringify(hobbies))
     }
     
-    const exportPDF = context.query.exportPDF === 'true';
+    const exportPDF = context.query.pdf === 'true';
     const isServer = !!context.req;
 
     if (isServer && exportPDF) {
