@@ -13,6 +13,7 @@ import { SkillsList } from '@/components/resume/Skills';
 import { LanguagesList } from '@/components/resume/Languages';
 import { CertificationList } from '@/components/resume/Certifications';
 import { ProjectsList } from '@/components/resume/Projects';
+import { PublicationsList } from '@/components/resume/Publications';
 import { HobbiesList } from '@/components/resume/Hobbies';
 
 import styles from './resume.module.scss';
@@ -40,6 +41,7 @@ export default function Resume( props: IResumeProps ) {
     languages: LanguagesList,
     certifications: CertificationList,
     projects: ProjectsList,
+    publications: PublicationsList,
     hobbies: HobbiesList,
   }
 
@@ -161,6 +163,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       await db.collection('languages').insertMany(require('@/fixtures/languages.json'));
       await db.collection('certifications').insertMany(require('@/fixtures/certifications.json'));
       await db.collection('projects').insertMany(require('@/fixtures/projects.json'));
+      await db.collection('publications').insertMany(require('@/fixtures/publications.json'));
       await db.collection('hobbies').insertMany(require('@/fixtures/hobbies.json'));
     }
 
@@ -173,6 +176,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const languagesCur = db.collection('languages').find({});
     const certificationsCur = db.collection('certifications').find({});
     const projectsCur = db.collection('projects').find({});
+    const publicationsCur = db.collection('publications').find({});
     const hobbiesCur = db.collection('hobbies').find({});
     
     let jobExperience;
@@ -182,6 +186,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let languages;
     let certifications;
     let projects;
+    let publications;
     let hobbies;
 
     if (exportPDF || !isAdmin) {
@@ -192,6 +197,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       languages = await languagesCur.filter({ isVisible: true }).toArray()
       certifications = await certificationsCur.filter({ isVisible: true }).toArray()
       projects = await projectsCur.filter({ isVisible: true }).toArray()
+      publications = await publicationsCur.filter({ isVisible: true }).toArray()
       hobbies = await hobbiesCur.filter({ isVisible: true }).toArray()
     } else {
       jobExperience = await jobExperienceCur.toArray()
@@ -201,6 +207,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       languages = await languagesCur.toArray()
       certifications = await certificationsCur.toArray()
       projects = await projectsCur.toArray()
+      publications = await publicationsCur.toArray()
       hobbies = await hobbiesCur.toArray()
     }
 
@@ -215,6 +222,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       languages: JSON.parse(JSON.stringify(languages)),
       certifications: JSON.parse(JSON.stringify(certifications)),
       projects: JSON.parse(JSON.stringify(projects)),
+      publications:  JSON.parse(JSON.stringify(publications)),
       hobbies: JSON.parse(JSON.stringify(hobbies))
     }
 
@@ -255,6 +263,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       languages: [],
       certifications: [],
       projects: [],
+      publications: [],
       hobbies: []
     }
   };

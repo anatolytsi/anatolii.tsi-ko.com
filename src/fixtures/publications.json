@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "title": "Article",
+        "conference": "Conference",
+        "conferenceLink": "http://conference.org",
+        "date": 1665588778000,
+        "isVisible": true
+    }
+]

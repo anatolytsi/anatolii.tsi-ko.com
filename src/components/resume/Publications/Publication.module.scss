@@ -1,0 +1,33 @@
+@import 'src/components/resume/Experience/Experience.module.scss';
+@import 'src/components/resume/common/common.module.scss';
+
+.publicationList {
+  @include experienceList(publication);
+}
+
+.editExperience {
+  @include editExperience(3.5rem);
+}
+
+.publication {
+  @include experience(conference);
+  margin-bottom: 1rem;
+
+  .addInfo {
+    margin-top: 0.5rem;
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topic {
+      display: inline-block;
+      margin-left: 0.3rem;
+      min-width: 50px;
+    }
+  }
+}
