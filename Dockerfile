@@ -6,7 +6,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-RUN apk add --no-cache chromium --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/main
+RUN apk add chromium
 
 # Install puppeteer
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
@@ -49,6 +49,8 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+COPY --from=deps /usr /usr
+
 COPY --from=builder /app/public ./public
 
 # Automatically leverage output traces to reduce image size
@@ -56,7 +58,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN apk add chromium
 USER nextjs
 
 ENV PORT 3000
