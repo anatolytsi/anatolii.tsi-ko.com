@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faPencil, faSave } from '@fortawesome/free-solid-svg-icons';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { IResumeComponentSections, IResumeProps, TResumeSectionName, sortByKey } from '@/components/resume/common';
-import { PersonalInfo, IPersonalInfo } from '@/components/resume/PersonalInfo';
-import { IJobExperience, JobExperienceList } from '@/components/resume/Job';
-import { EduExperienceList, IEduExperience } from '@/components/resume/Education';
-import { IInternship, InternshipList } from '@/components/resume/Internship';
-import { ISkill, SkillsList } from '@/components/resume/Skills';
-import { ILanguage, LanguagesList } from '@/components/resume/Languages';
-import { CertificationList, ICertification } from '@/components/resume/Certifications';
-import { HobbiesList, IHobby } from '@/components/resume/Hobbies';
+import { PersonalInfo } from '@/components/resume/PersonalInfo';
+import { JobExperienceList } from '@/components/resume/Job';
+import { EduExperienceList } from '@/components/resume/Education';
+import { InternshipList } from '@/components/resume/Internship';
+import { SkillsList } from '@/components/resume/Skills';
+import { LanguagesList } from '@/components/resume/Languages';
+import { CertificationList } from '@/components/resume/Certifications';
+import { HobbiesList } from '@/components/resume/Hobbies';
 
 import styles from './resume.module.scss';
 import { getSession } from 'next-auth/react';
@@ -70,8 +70,6 @@ export default function Resume( props: IResumeProps ) {
   }
 
   const renderEditResume = () => {
-    // TODO: Extreme vulnerability, change to proper check
-    // if (session?.user?.email === process.env.USER_EMAIL) {
     if (props.isAdmin) {
       if (editMode) {
         return (
@@ -135,88 +133,6 @@ export default function Resume( props: IResumeProps ) {
                                                 handleSectionOrder })}
             </div>
         ))}
-      {/* <JobExperienceList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.jobExperience}
-        sectionName='jobExperience'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <h2>
-        <FontAwesomeIcon icon={faHandHoldingHeart} />
-        Volunteering
-      </h2>
-      <EduExperienceList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.education}
-        sectionName='education'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <InternshipList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.internships}
-        sectionName='internships'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <SkillsList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.skills}
-        sectionName='skills'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <LanguagesList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.languages}
-        sectionName='languages'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <CertificationList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.certifications}
-        sectionName='certifications'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      />
-      <h2>
-        <FontAwesomeIcon icon={faRulerCombined} />
-        Projects
-      </h2>
-      <h2>
-        <FontAwesomeIcon icon={faBookOpen} />
-        Publications
-      </h2>
-      <HobbiesList
-        forExport={props.forExport}
-        isAdmin={editMode}
-        data={props.hobbies}
-        sectionName='hobbies'
-        sectionOrder={0}
-        sectionVisibility={true}
-        handleSectionVisibility={handleSectionVisibility}
-        handleSectionOrder={handleSectionOrder}
-      /> */}
     </div>
     </>
   );
@@ -334,24 +250,3 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
   };
 }
-
-// export async function getStaticProps() {
-//   const session = await getSession(context);
-//   const isAdmin = session?.user?.role === 'admin';
-//     return {
-//       props: {
-//         isAdmin: false,
-//         personalInfo: require('@/fixtures/personalInfo.json'),
-//         jobExperience: require('@/fixtures/jobs.json'),
-//         education: require('@/fixtures/education.json'),
-//         internships: require('@/fixtures/internship.json'),
-//         skills: require('@/fixtures/skills.json'),
-//         languages: require('@/fixtures/languages.json'),
-//         certifications: require('@/fixtures/certifications.json'),
-//         hobbies: require('@/fixtures/hobbies.json')
-//       },
-
-//       revalidate: 10
-//     }
-
-// }
