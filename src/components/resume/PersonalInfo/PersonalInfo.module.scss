@@ -198,5 +198,45 @@ $fullNameSize: 32px;
       }
     }
   }
+
+  &.forExport {
+    .personalInfo {
+      .left {
+        .avatar {
+        }
+
+        .contact {
+          h1 {
+            font-size: 28px;
+          }
+
+          .contactItem {
+            .years {
+            }
+
+            .birthday {
+              div {
+                input {
+                  &.editingBirthday {
+                  }
+                }
+              }
+            }
+
+            .name {
+            }
+
+            svg {
+            }
+          }
+        }
+      }
+
+      .right {
+        .summary {
+        }
+      }
+    }
+  }
 }
 
