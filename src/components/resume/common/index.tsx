@@ -9,6 +9,7 @@ import { IInternship, InternshipList } from '@/components/resume/Internship';
 import { ISkill, SkillsList } from '@/components/resume/Skills';
 import { ILanguage, LanguagesList } from '@/components/resume/Languages';
 import { CertificationList, ICertification } from '@/components/resume/Certifications';
+import { ProjectsList, IProject } from "@/components/resume/Projects";
 import { HobbiesList, IHobby } from '@/components/resume/Hobbies';
 
 export const WAIT_EFFECT = parseInt(process.env.WAIT_EFFECT ?? '2');
@@ -23,6 +24,7 @@ export interface IResumeComponentSections {
     skills: typeof SkillsList;
     languages: typeof LanguagesList;
     certifications: typeof CertificationList;
+    projects: typeof ProjectsList;
     hobbies: typeof HobbiesList;
 };
 
@@ -36,6 +38,7 @@ export interface IResumeProps {
     skills: ISkill[]
     languages: ILanguage[]
     certifications: ICertification[]
+    projects: IProject[]
     hobbies: IHobby[]
 }
   

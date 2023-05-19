@@ -30,6 +30,11 @@
         "order": 0
     },
     {
+        "name": "projects",
+        "isVisible": true,
+        "order": 0
+    },
+    {
         "name": "hobbies",
         "isVisible": true,
         "order": 0
