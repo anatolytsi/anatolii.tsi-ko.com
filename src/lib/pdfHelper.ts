@@ -42,8 +42,8 @@ const componentToPDFBuffer = async (component: any) => {
         margin: {
             top: '40px',
             bottom: '40px',
-            left: '20px',
-            right: '20px',
+            left: '0',
+            right: '0',
         },
         printBackground: true
     });
