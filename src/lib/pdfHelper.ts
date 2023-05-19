@@ -18,9 +18,6 @@ const componentToPDFBuffer = async (component: any) => {
         ignoreHTTPSErrors :true,
         args: [
             '--no-sandbox',
-            '--headless',
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
             '--disable-setuid-sandbox',
             '--allow-file-access-from-files',
             '--enable-local-file-accesses'
