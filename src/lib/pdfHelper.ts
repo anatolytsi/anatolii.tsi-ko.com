@@ -41,8 +41,8 @@ const componentToPDFBuffer = async (component: any) => {
         format: 'A4',
         scale: 0.7,
         margin: {
-            top: '20px',
-            bottom: '20px',
+            top: '40px',
+            bottom: '40px',
             left: '20px',
             right: '20px',
         },
