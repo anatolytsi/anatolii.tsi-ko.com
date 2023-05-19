@@ -21,15 +21,9 @@ const componentToPDFBuffer = async (component: any) => {
     });
 
     const page = await browser.newPage();
-    await page.goto(`data:text/html,${html}`, {
-        waitUntil: [
-            'domcontentloaded', 
-            'networkidle0', 
-            'load'
-        ], 
-        timeout: 30000
-    });
     await page.emulateMediaType('screen');
+    await page.goto(`${process.env.PUPPETEER_URL}/resume`);
+    await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
     const pdf = await page.pdf({
         format: 'A4',
         scale: 0.7,
