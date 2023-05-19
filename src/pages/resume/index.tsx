@@ -278,7 +278,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     const props = {
-      forExport: true,
+      forExport: false,
       isAdmin,
       personalInfo: JSON.parse(JSON.stringify(personalInfo)),
       jobExperience: JSON.parse(JSON.stringify(jobExperience)),
