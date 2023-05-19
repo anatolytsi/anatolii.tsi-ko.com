@@ -48,6 +48,14 @@ $edit-button-margin: 15px;
 /* Mobile */
 #root {
   padding: $page-padding;
+
+  &.forExport {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+  }
 }
 
 /* Tablet */

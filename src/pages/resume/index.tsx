@@ -117,7 +117,7 @@ export default function Resume( props: IResumeProps ) {
         </a>
       </>
     )}
-    <div className={styles.resume} id={styles.root}>
+    <div className={`${styles.resume} ${props.forExport && styles.forExport}`} id={styles.root}>
       <PersonalInfo
         data={props?.personalInfo}
         isAdmin={editMode}
@@ -278,7 +278,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     const props = {
-      forExport: false,
+      forExport: true,
       isAdmin,
       personalInfo: JSON.parse(JSON.stringify(personalInfo)),
       jobExperience: JSON.parse(JSON.stringify(jobExperience)),
