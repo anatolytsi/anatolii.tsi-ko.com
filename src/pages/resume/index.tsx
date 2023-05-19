@@ -305,7 +305,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
       // with this header, your browser will prompt you to download the file
       // without this header, your browse will open the pdf directly
-      context.res!.setHeader('Content-disposition', 'attachment; filename="CV_Tsirkunenko.pdf');
+      context.res!.setHeader('Content-disposition', `attachment; filename="CV_Tsirkunenko_${new Date().toLocaleString()}.pdf`);
       
       // set content type
       context.res!.setHeader('Content-Type', 'application/pdf');
