@@ -1,7 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import puppeteer from 'puppeteer';
+import { getImageFromName } from '@/pages/api/resume/file/[...slug]';
+import { API_URL } from '@/pages/api/resume/file';
 
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
+const EXT_RE = /(?:\.([^.]+))?$/;
 
 const componentToPDFBuffer = async (component: any) => {
     let html = renderToStaticMarkup(component);
@@ -9,12 +12,22 @@ const componentToPDFBuffer = async (component: any) => {
     do {
         match = IMG_RE.exec(html);
         if (match) {
-            html.replace(match[2], `${process.env.PUPPETEER_URL}${match[2]}`);
+            let url = match[2];
+            const imageName = url.replace(`${API_URL}/`, '');
+            const imageBuffer = getImageFromName(imageName);
+            let extension = 'jpeg';
+            if (imageName.includes('.')) {
+                let m = EXT_RE.exec(imageName);
+                extension = m ? m[1] : 'jpeg';
+            }
+            const imageForPdf = `data:image/${extension};charset=utf-8;base64,${imageBuffer.toString('base64')}`;
+            html = html.replace(match[2], imageForPdf);
         }
     } while (match);
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
         ignoreHTTPSErrors :true,
+        headless: 'new',
         args: [
             '--no-sandbox'
         ]
@@ -22,7 +35,6 @@ const componentToPDFBuffer = async (component: any) => {
 
     const page = await browser.newPage();
     await page.emulateMediaType('screen');
-    await page.goto(`${process.env.PUPPETEER_URL}/resume`);
     await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
     const pdf = await page.pdf({
         format: 'A4',
