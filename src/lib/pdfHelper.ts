@@ -26,6 +26,7 @@ const componentToPDFBuffer = async (component: any) => {
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
         headless: 'new',
+        ignoreHTTPSErrors :true,
         args: [
             '--no-sandbox',
             '--headless',
@@ -38,12 +39,11 @@ const componentToPDFBuffer = async (component: any) => {
     });
 
     const page = await browser.newPage();
-    await page.setContent(html, {
+    await page.goto(`data:text/html,${html}`, {
         waitUntil: [
             'domcontentloaded', 
             'networkidle0', 
-            'load', 
-            'networkidle2'
+            'load'
         ], 
         timeout: 30000
     });

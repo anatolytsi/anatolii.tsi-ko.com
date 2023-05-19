@@ -14,7 +14,7 @@ const PDFLayout = ({ children }: any) => {
       <head>
         <meta charSet="utf8" />
         {styleSheets.map((stylesheet: string, idx: number) => 
-          <link key={idx} rel="stylesheet" href={`${process.env.HOST_URL}/_next/static/css/${stylesheet}`} />
+          <link key={idx} rel="stylesheet" href={`${process.env.PUPPETEER_URL}/_next/static/css/${stylesheet}`} />
         )}
       </head>
       <body>
