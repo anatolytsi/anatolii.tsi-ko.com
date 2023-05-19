@@ -14,13 +14,9 @@ const componentToPDFBuffer = async (component: any) => {
     } while (match);
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
-        headless: 'new',
         ignoreHTTPSErrors :true,
         args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--allow-file-access-from-files',
-            '--enable-local-file-accesses'
+            '--no-sandbox'
         ]
     });
 
