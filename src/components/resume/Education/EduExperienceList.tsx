@@ -7,7 +7,7 @@ import { EduExperience, IEduExperience } from './EduExperience';
 import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Education.module.scss';
-import { SectionControls } from '../common';
+import { SectionControls, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 
 interface EduExperienceListProps extends ExperienceListProps {};
@@ -24,7 +24,7 @@ export function EduExperienceList({ data,
                                     handleSectionVisibility=() => {}, 
                                     handleSectionOrder=() => {} }: EduExperienceListProps) {
   let experiences = data;
-  const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(experiences);
+  const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByKey(experiences, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
 
@@ -38,9 +38,9 @@ export function EduExperienceList({ data,
 
   const handleUpdateEduExperience = (updatedExperience: IEduExperience) => {
     setEduExperiences((prevExperiences: IEduExperience[]) =>
-      prevExperiences.map((experience: IEduExperience) =>
+      sortByKey(prevExperiences.map((experience: IEduExperience) =>
         experience._id === updatedExperience._id ? updatedExperience : experience
-      )
+      ), 'startDate', true)
     );
   };
 

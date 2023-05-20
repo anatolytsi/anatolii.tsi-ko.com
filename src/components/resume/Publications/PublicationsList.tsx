@@ -7,7 +7,7 @@ import {Publication, IPublication} from './Publication';
 import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Publication.module.scss';
-import { SectionControls } from '../common';
+import { SectionControls, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 
 interface PublicationListProps extends ExperienceListProps {};
@@ -23,8 +23,7 @@ export function PublicationsList({ data,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
                                     handleSectionOrder=() => {} }: PublicationListProps) {
-  let publicationExps = data;
-  const [publications, setPublications] = useState<IPublication[]>(publicationExps);
+  const [publications, setPublications] = useState<IPublication[]>(sortByKey(data, 'date', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
 
@@ -38,9 +37,9 @@ export function PublicationsList({ data,
 
   const handleUpdatePublication = (updatedPublication: IPublication) => {
     setPublications((prevPublications: IPublication[]) =>
-      prevPublications.map((publication: IPublication) =>
+      sortByKey(prevPublications.map((publication: IPublication) =>
         publication._id === updatedPublication._id ? updatedPublication : publication
-      )
+      ), 'date', true)
     );
   };
 

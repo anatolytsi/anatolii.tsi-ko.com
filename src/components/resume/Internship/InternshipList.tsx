@@ -7,7 +7,7 @@ import {Internship, IInternship} from './Internship';
 import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Internship.module.scss';
-import { SectionControls } from '../common';
+import { SectionControls, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 
 interface InternshipListProps extends ExperienceListProps {};
@@ -23,11 +23,7 @@ export function InternshipList({ data,
                                  sectionVisibility=true,
                                  handleSectionVisibility=() => {}, 
                                  handleSectionOrder=() => {} }: InternshipListProps) {
-  let internshipExps = data;
-  if (!isAdmin) {
-    internshipExps = internshipExps.filter((el: IInternship) => el.isVisible);
-  }
-  const [internships, setInternships] = useState<IInternship[]>(internshipExps);
+  const [internships, setInternships] = useState<IInternship[]>(sortByKey(data, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
 
@@ -41,9 +37,9 @@ export function InternshipList({ data,
 
   const handleUpdateInternship = (updatedInternship: IInternship) => {
     setInternships((prevInternships: IInternship[]) =>
-      prevInternships.map((internship: IInternship) =>
+      sortByKey(prevInternships.map((internship: IInternship) =>
         internship._id === updatedInternship._id ? updatedInternship : internship
-      )
+      ), 'startDate', true)
     );
   };
 

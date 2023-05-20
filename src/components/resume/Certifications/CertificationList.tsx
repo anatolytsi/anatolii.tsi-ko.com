@@ -7,7 +7,7 @@ import {Certification, ICertification} from './Certification';
 import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Certification.module.scss';
-import { SectionControls } from '../common';
+import { SectionControls, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 
 interface CertificationListProps extends ExperienceListProps {};
@@ -23,8 +23,7 @@ export function CertificationList({ data,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
                                     handleSectionOrder=() => {} }: CertificationListProps) {
-  let certificationExps = data;
-  const [certifications, setCertifications] = useState<ICertification[]>(certificationExps);
+  const [certifications, setCertifications] = useState<ICertification[]>(sortByKey(data, 'date', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
 
@@ -38,9 +37,9 @@ export function CertificationList({ data,
 
   const handleUpdateCertification = (updatedCertification: ICertification) => {
     setCertifications((prevCertifications: ICertification[]) =>
-      prevCertifications.map((certification: ICertification) =>
+      sortByKey(prevCertifications.map((certification: ICertification) =>
         certification._id === updatedCertification._id ? updatedCertification : certification
-      )
+      ), 'date', true)
     );
   };
 
