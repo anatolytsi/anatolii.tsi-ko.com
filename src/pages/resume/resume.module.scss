@@ -124,3 +124,31 @@ $edit-button-margin: 15px;
     right: calc($page-padding-sides / 4);
   }
 }
+
+.restButton {
+  z-index: 20;
+  position: fixed;
+  bottom: calc(3 * $button-width + $edit-button-margin);
+  right: $download-button-margin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $button-width;
+  padding: calc($button-width / 4) 0 calc($button-width / 4) 0;
+  margin: -$button-height 0;
+  width: $button-width;
+  height: $button-height;
+  text-decoration: none;
+  transition: .3s;
+  color: #4caf50;
+  background-color: white;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
+
+  &:hover{
+    background-color: rgb(221, 255, 221);
+  }
+
+  @media (min-width: $desktop-size) {
+    right: calc($page-padding-sides / 4);
+  }
+}

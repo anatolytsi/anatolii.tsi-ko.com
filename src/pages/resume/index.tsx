@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faPencil, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faPencil, faSave, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -74,27 +74,48 @@ export default function Resume( props: IResumeProps ) {
   }
 
   const renderEditResume = () => {
-    if (props.isAdmin) {
-      if (editMode) {
-        return (
-          <div 
-            className={`${styles.editResume} ${styles.stop}`}
-            onClick={() => {setEditMode(false)}}
-          >
-            <FontAwesomeIcon icon={faSave} size='xl' />
-          </div>
-        );
-      } else {
-        return (
-          <div 
-            className={`${styles.editResume} ${styles.edit}`}
-            onClick={() => {setEditMode(true)}}
-          >
-            <FontAwesomeIcon icon={faPencil} size='xl' />
-          </div>
-        );
-      }
+    if (editMode) {
+      return (
+        <div 
+          className={`${styles.editResume} ${styles.stop}`}
+          onClick={() => {setEditMode(false)}}
+        >
+          <FontAwesomeIcon icon={faSave} size='xl' />
+        </div>
+      );
+    } else {
+      return (
+        <div 
+          className={`${styles.editResume} ${styles.edit}`}
+          onClick={() => {setEditMode(true)}}
+        >
+          <FontAwesomeIcon icon={faPencil} size='xl' />
+        </div>
+      );
     }
+  }
+
+  const renderRestButton = () => {
+    return (
+      <div 
+        className={`${styles.restButton} ${styles.edit}`}
+        onClick={() => {setEditMode(true)}}
+      >
+        <FontAwesomeIcon icon={faEllipsisV} size='xl' />
+      </div>
+    );
+  }
+
+  const renderAdminButtons = () => {
+    if (props.isAdmin) {
+      return (
+        <>
+          {renderEditResume()}
+          {renderRestButton()}
+        </>
+      )
+    }
+    return <></>;
   }
 
   return (
@@ -109,7 +130,6 @@ export default function Resume( props: IResumeProps ) {
       <></>
     ) : (
       <>
-        {renderEditResume()}
         <a href="/resume?pdf=true"
           target="_blank"
           rel="noopener noreferrer"
@@ -117,6 +137,7 @@ export default function Resume( props: IResumeProps ) {
         >
             <FontAwesomeIcon icon={faFilePdf} size='xl' />
         </a>
+        {renderAdminButtons()}
       </>
     )}
     <div className={`${styles.resume} ${props.forExport && styles.forExport}`} id={styles.root}>
