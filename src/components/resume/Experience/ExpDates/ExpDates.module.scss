@@ -2,7 +2,7 @@
 
 $date-input-width: calc(4.95 * $expHeaderFontSize);
 $dates-dash-padding: 0.5rem;
-$date-input-width-current: calc(0.6 * $date-input-width);
+$date-input-width-current: calc(0.62 * $date-input-width);
 $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDates {
@@ -42,7 +42,6 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         &.current {
             width: $date-input-width-current;
             input {
-                text-align: right;
                 width: $date-input-width-current;
             }
         }
