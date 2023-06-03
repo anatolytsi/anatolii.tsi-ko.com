@@ -55,13 +55,13 @@ $avatarSize: 100px;
           color: #666;
           
           .years {
-            margin-left: 0.4rem;
+            margin-left: 0.2rem;
           }
 
           .birthday {
             display: inline-block;
             position: relative;
-            width: calc(4.9 * $infoAddFontSize);
+            width: calc(5 * $infoAddFontSize);
             padding: 0;
             margin: 0;
     
@@ -82,7 +82,7 @@ $avatarSize: 100px;
                 border-radius: 0;
                 border: none;
                 margin: auto;
-                width: calc(4.9 * $infoAddFontSize);
+                width: calc(5 * $infoAddFontSize);
                 pointer-events: none;
     
                 &.editingBirthday {
