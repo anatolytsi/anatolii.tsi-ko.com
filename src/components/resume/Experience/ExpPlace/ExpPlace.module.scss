@@ -28,6 +28,7 @@
 
 @mixin expPlaceLink {
     font-size: $expAddInfoFontSize;
+    color: $addInfoColor !important;
     font-weight: normal;
     margin: 0;
     padding: 0;
