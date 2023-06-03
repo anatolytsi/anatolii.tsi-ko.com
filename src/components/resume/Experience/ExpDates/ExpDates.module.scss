@@ -2,6 +2,8 @@
 
 $date-input-width: calc(4.95 * $expHeaderFontSize);
 $dates-dash-padding: 0.5rem;
+$date-input-width-current: calc(0.6 * $date-input-width);
+$date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDates {
     font-style: italic;
@@ -37,6 +39,14 @@ $dates-dash-padding: 0.5rem;
         padding: 0;
         margin: 0;
 
+        &.current {
+            width: $date-input-width-current;
+            input {
+                text-align: right;
+                width: $date-input-width-current;
+            }
+        }
+
         div {
         display: inline-block;
         padding: 0;
@@ -68,5 +78,11 @@ $dates-dash-padding: 0.5rem;
 
 @mixin expDate {
     @include expDates;
-    margin-right: calc($date-input-width + 2 * $dates-dash-padding + 0.2rem);
+    width: $date-input-width;
+    input {
+        @media (min-width: $tablet-size) {
+            text-align: right;
+        }
+        width: $date-input-width;
+    }
 }
