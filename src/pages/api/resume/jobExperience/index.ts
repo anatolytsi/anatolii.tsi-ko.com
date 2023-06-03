@@ -6,7 +6,7 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-const COLLECTION = 'internship';
+const COLLECTION = 'jobExperience';
 
 attachGetList(handler, COLLECTION);
 attachPostList(handler, COLLECTION);

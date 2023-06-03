@@ -1,0 +1,80 @@
+@import 'src/styles/common/variables';
+
+$control-buttons-margin-right: calc(#{$padding-experience} / 2);
+$control-buttons-width: calc(#{$padding-experience} / 2);
+
+@mixin editExperience($height) {
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+  
+    .controls {
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+  
+      .visibilityButton {
+        margin-top: 1rem;
+        margin-bottom: 0.2rem;
+        background-color: transparent;
+        border: 0;
+        margin-right: $control-buttons-margin-right;
+        height: calc(#{$height} / 4);
+        width: $control-buttons-width;
+        transition: 0.3s;
+        padding: 0;
+        color: orange;
+  
+        &:hover {
+          color: rgb(173, 115, 7);
+        }
+  
+        svg {
+          height: calc(#{$height} / 4);
+          width: $control-buttons-margin-right;
+        }
+      }
+  
+      .editButton {
+          background-color: transparent;
+          color: #4caf50;
+          border: 0;
+          margin: 0.3rem $control-buttons-margin-right 0.3rem 0;
+          // margin-right: $control-buttons-margin-right;
+          height: calc(#{$height} / 4);
+          width: $control-buttons-width;
+          transition: 0.3s;
+          padding: 0;
+    
+          &:hover {
+            color: #3e8e41;
+          }
+    
+        &.isEditing {
+          background-color: transparent;
+          margin-top: 1rem;
+          color: red;
+      
+          &:hover {
+            color: orange;
+          }
+        }
+      }
+  
+      .deleteButton {
+        background-color: transparent;
+        color: red;
+        border: 0;
+        margin-top: 0.1rem;
+        margin-right: $control-buttons-margin-right;
+        height: calc(#{$height} / 2);
+        width: $control-buttons-width;
+        transition: 0.3s;
+        padding: 0;
+  
+        &:hover {
+          color: crimson;
+        }
+      }
+    }
+}

@@ -1,24 +1,78 @@
 @import 'src/components/resume/Experience/Experience.module.scss';
-@import 'src/components/resume/common/common.module.scss';
 
-.internshipList {
-  @include experienceList(internship);
-}
+// .internshipList {
+//   @include experienceList(internship);
+// }
 
-.editExperience {
-  @include editExperience(3.5rem);
-}
+// .editExperience {
+//   @include editExperience(3.5rem);
+// }
 
-.internship {
-  @include experience(place);
+// .internship {
+//   @include experience(place);
 
-  .addInfo {
-    margin-top: 0.5rem;
+//   .addInfo {
+//     margin-top: 0.5rem;
 
-    .topic {
-      display: inline-block;
-      margin-left: 0.3rem;
-      min-width: 50px;
+//     .topic {
+//       display: inline-block;
+//       margin-left: 0.3rem;
+//       min-width: 50px;
+//     }
+//   }
+// }
+
+.experienceList {
+  @include expList;
+
+  .editExperience {
+    @include editExperience(3.5rem);
+
+    .experience {
+      @include experience;
+
+      .header {
+        @include expHeader;
+
+        .headerLine {
+          @include expHeaderLine;
+
+          .title {
+            @include expTitle;
+          }
+
+          .dates {
+            @include expDates;
+          }
+        }
+
+        .place {
+          @include expPlace;
+        }
+
+        .placeLink {
+          @include expPlaceLink;
+        }
+        
+        .placeLocation {
+          @include expPlaceLocation;
+        }
+
+        .topic {
+          @include expTopic;
+        }
+      }
+
+      .description {
+        @include expDescription;
+      }
+
+      @include experienceHidden;
     }
   }
+
+  .addExperience {
+    @include expAdd;
+  }
 }
+

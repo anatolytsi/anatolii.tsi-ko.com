@@ -1,26 +1,26 @@
 [
 	{
-	  "institute": "Technical University of Munich (TUM)",
-	  "instituteLink": "http://tum.de",
-	  "instituteLocation": "München, Germany",
+	  "place": "Technical University of Munich (TUM)",
+	  "placeLink": "http://tum.de",
+	  "placeLocation": "München, Germany",
 	  "title": "M.Sc. in Power Engineering",
 	  "startDate": 1569888000000,
 	  "endDate": 1648684800000,
 	  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.",
       "isVisible": true,
-	  "finalGrade": "2.1/1.0",
-	  "thesisTopic": "Development and Evaluation of Web of Things Simulation Framework"
+	  "grades": "2.1/1.0",
+	  "topic": "Development and Evaluation of Web of Things Simulation Framework"
 	},
 	{
-	  "institute": "South Ural State University (SUSU)",
-	  "instituteLink": "http://susu.ru",
-	  "instituteLocation": "Chelyabinsk, Russia",
+	  "place": "South Ural State University (SUSU)",
+	  "placeLink": "http://susu.ru",
+	  "placeLocation": "Chelyabinsk, Russia",
 	  "title": "B.Sc. in Electrical Engineering",
 	  "startDate": 1441065600000,
 	  "endDate": 1560988800000,
 	  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor lacinia eros, at lobortis leo posuere eget. Nam non suscipit leo. Duis ullamcorper ipsum non libero vehicula, eget tincidunt lectus eleifend. Nullam auctor justo quis consectetur convallis.",
       "isVisible": true,
-	  "finalGrade": "5/5",
-	  "thesisTopic": "Design of an Electric Drive for the Movement of an Overhead Crane Trolley"
+	  "grades": "5/5",
+	  "topic": "Design of an Electric Drive for the Movement of an Overhead Crane Trolley"
 	}
 ]

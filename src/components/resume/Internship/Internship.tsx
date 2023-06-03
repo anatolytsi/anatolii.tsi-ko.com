@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import {GenericExperience, Experience, handleExpKeyDown} from '../Experience';
+import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Internship.module.scss';
 import { compUpdate } from '../common/api-helpers';
+import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
-export interface IInternship extends Experience {
+export interface IInternship extends IExperience {
     place: string
     placeLink?: string
     placeLocation?: string
     topic?: string
 }
 
-interface InternshipProps {
+interface IInternshipProps {
     internship: IInternship
     onUpdate: any
     onDelete: any
@@ -20,12 +21,12 @@ interface InternshipProps {
     forExport: boolean
 }
 
-export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, forExport=false }: InternshipProps) {
+export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IInternshipProps) {
   const [experience, setExperience] = useState(internship);
   const [isEditing, setIsEditing] = useState(false);
   
   useEffect(() => {
-      compUpdate('internship', experience, experience._id, (response) => onUpdate(response.data));
+      compUpdate('internships', experience, experience._id, (response) => onUpdate(response.data));
   }, [experience]);
 
   const handleSave = () => {
@@ -37,124 +38,33 @@ export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, fo
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)
   };
 
-  const renderPlace = () => {
-    let place: JSX.Element;
-    if (isEditing) {
-      place = (
-        <>
-          <div className={styles.place}>
-            <h4
-              id='place'
-              contentEditable
-              suppressContentEditableWarning
-              onKeyDown={handleKeyDown}
-              onBlur={e =>
-                setExperience({ ...experience, place: e.target.innerText })
-              }
-            >
-              {experience.place}
-            </h4>
-          </div>
-          <div
-            id='placeLink'
-            className={styles.placeLink}
-            contentEditable
-            suppressContentEditableWarning
-            onKeyDown={handleKeyDown}
-            onBlur={e =>
-              setExperience({ ...experience, placeLink: e.target.innerText })
-            }
-          >
-            {experience.placeLink}
-          </div>
-        </>
-      );
-    } else {
-      place = (
-        <div className={styles.place}>
-          {experience.placeLink ? (
-            <a href={experience.placeLink}>
-              <h4>{experience.place}</h4>
-            </a>
-          ) : (
-            <h4>{experience.place}</h4>
-          )}
-        </div>
-      );
-    }
-    return (
-      <>
-        {place}
-        <div
-          id='placeLocation'
-          className={styles.placeLocation}
-          contentEditable={isEditing}
-          onKeyDown={handleKeyDown}
-          onBlur={e =>
-            setExperience({
-              ...experience,
-              placeLocation: e.target.innerText,
-            })
-          }
-          suppressContentEditableWarning
-        >
-          {experience.placeLocation}
-        </div>
-      </>
-    )
-  };
-
-  const renderTopic = () => {
-    if (experience.topic || isEditing) {
-      return (
-        <div className={styles.addInfo}>
-            Topic: 
-            <span
-              id='topic'
-              className={styles.topic}
-              contentEditable={isEditing}
-              onKeyDown={handleKeyDown}
-              onBlur={e =>
-                setExperience({
-                  ...experience,
-                  topic: e.target.innerText,
-                })
-              }
-              suppressContentEditableWarning
-            >
-              {experience.topic}
-            </span>
-        </div>
-      );
-    }
-    return <></>;
-  };
-
-  const renderAddInfo = () => {
-    return (
-      <>
-        {renderPlace()}
-        {renderTopic()}
-      </>
-    );
-  };
+  const expProps: ICommonExperienceProps = {
+    styles: styles,
+    isEditing: isEditing,
+    setter: setExperience,
+    keyDown: () => {},
+    exp: experience,
+    showClamp: !forExport,
+    isLast: isLast,
+    isAdmin: isAdmin,
+    saver: handleSave,
+    editor: () => setIsEditing(true),
+    deleter: onDelete
+  }
 
   return (
-    <GenericExperience
-      experience={experience}
-      setExperience={setExperience}
-      isEditing={isEditing}
-      setIsEditing={setIsEditing}
-      onDelete={onDelete}
-      handleSave={handleSave}
-      isAdmin={isAdmin}
-      isLast={isLast}
-      styles={styles}
-      addInfoRenderer={renderAddInfo}
-      showClamp={!forExport}
-      // showClamp={false}
-      // renderDates={false}
-      mainStyleName='internship'
-    />
+    <EditableContent {...expProps}>
+      <Content {...expProps}>
+        <Header {...expProps}>
+          <HeaderLine {...expProps}>
+            <Title {...expProps}/>
+            <Dates {...expProps}/>
+          </HeaderLine>
+          <Place {...expProps}/>
+          <Topic {...expProps}/>
+        </Header>
+        <Description {...expProps}/>
+      </Content>
+    </EditableContent>
   );
 }

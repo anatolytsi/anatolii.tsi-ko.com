@@ -1,8 +1,8 @@
 [
     {
-      "company": "LION Smart GmbH",
-      "companyLink": "http://lionsmart.com",
-      "companyLocation": "Garching bei München, Germany",
+      "place": "LION Smart GmbH",
+      "placeLink": "http://lionsmart.com",
+      "placeLocation": "Garching bei München, Germany",
       "title": "Embedded Software Developer BMS",
       "startDate": 1650240000000,
       "endDate": 0,
@@ -10,9 +10,9 @@
       "isVisible": true
     },
     {
-      "company": "LION Smart GmbH",
-      "companyLink": "http://lionsmart.com",
-      "companyLocation": "Garching bei München, Germany",
+      "place": "LION Smart GmbH",
+      "placeLink": "http://lionsmart.com",
+      "placeLocation": "Garching bei München, Germany",
       "title": "Embedded Software Werkstudent",
       "startDate": 1583020800000,
       "endDate": 1650240000000,
@@ -20,9 +20,9 @@
       "isVisible": true
     },
     {
-      "company": "Modern Steel Chelyabinsk Factory",
-      "companyLink": "http://modernsteel.ru",
-      "companyLocation": "Chelyabinsk, Russia",
+      "place": "Modern Steel Chelyabinsk Factory",
+      "placeLink": "http://modernsteel.ru",
+      "placeLocation": "Chelyabinsk, Russia",
       "title": "Electronic Design Engineer",
       "startDate": 1498867200000,
       "endDate": 1514764800000,

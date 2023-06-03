@@ -1,6 +1,7 @@
+@import 'src/components/resume/common/common.module.scss';
 @import 'src/styles/common/variables';
 
-$fullNameSize: 32px;
+$avatarSize: 100px;
 
 .personalInfoEdit {
   border: none;
@@ -26,8 +27,10 @@ $fullNameSize: 32px;
       margin: 0;
 
       .avatar {
-        width: 100px;
-        height: 100px;
+        width: $avatarSize;
+        height: $avatarSize;
+        line-height: $avatarSize;
+        text-align: center;
         border-radius: 50%;
         background-color: #bbb;
         margin-right: 20px;
@@ -41,14 +44,14 @@ $fullNameSize: 32px;
         h1 {
           align-items: center;
           margin: 0;
-          font-size: $fullNameSize;
+          font-size: $infoNameFontSize;
         }
 
         .contactItem {
+          font-size: $infoAddFontSize;
           display: -webkit-flex;
           align-items: center;
           margin-bottom: 5px;
-          font-size: 16px;
           color: #666;
           
           .years {
@@ -58,7 +61,7 @@ $fullNameSize: 32px;
           .birthday {
             display: inline-block;
             position: relative;
-            width: 5rem;
+            width: calc(4.9 * $infoAddFontSize);
             padding: 0;
             margin: 0;
     
@@ -79,7 +82,7 @@ $fullNameSize: 32px;
                 border-radius: 0;
                 border: none;
                 margin: auto;
-                width: 5rem;
+                width: calc(4.9 * $infoAddFontSize);
                 pointer-events: none;
     
                 &.editingBirthday {
@@ -108,13 +111,13 @@ $fullNameSize: 32px;
 
       h2 {
         margin: 0;
-        margin-top: calc(#{$fullNameSize} / 5);
+        margin-top: calc(#{$infoNameFontSize} / 5);
         font-size: 24px;
       }
 
       .summary {
         margin: 0 $padding-experience;
-        font-size: 16px;
+        font-size: $infoSumFontSize;
         line-height: $description-line-height;
         text-align: justify;
 

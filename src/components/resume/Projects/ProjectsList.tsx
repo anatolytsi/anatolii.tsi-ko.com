@@ -4,25 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 import {Project, IProject} from './Project';
-import { AddExperience, ExperienceListProps } from '../Experience';
-import { SectionControls, sortByKey } from '../common';
+import { sortByKey } from '../common';
 
 import styles from './Project.module.scss';
 import { compCreate, compDelete } from '../common/api-helpers';
-
-interface ProjectsListProps extends ExperienceListProps {};
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 const URL_PATH = 'projects';
 
 export function ProjectsList({ data,
-                                    isAdmin, 
-                                    key=0,
-                                    forExport=false,
-                                    sectionName='projects',
-                                    sectionOrder=0,
-                                    sectionVisibility=true,
-                                    handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: ProjectsListProps) {
+                               isAdmin, 
+                               key=0,
+                               forExport=false,
+                               sectionName='projects',
+                               sectionOrder=0,
+                               sectionVisibility=true,
+                               handleSectionVisibility=() => {}, 
+                               handleSectionOrder=() => {} }: IExperienceListProps) {
   let experiences = data;
   const [projects, setProjects] = useState<IProject[]>(sortByKey(experiences, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
@@ -64,21 +62,17 @@ export function ProjectsList({ data,
     compCreate(URL_PATH, experience, (response) => setProjects([...projects, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faRulerCombined,
+    sectionTitle: 'Projects'
+  }
+
   return (
-    <div key={key}
-      className={visibilityState[0] ? styles.projectsList : `${styles.projectsList} ${styles.sectionHidden}`}
-    >
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2 className={styles.sectionTitle}>
-          <FontAwesomeIcon icon={faRulerCombined} />
-          Projects
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
 
       {projects.map((experience: IProject, index: number) => (
         <Project
@@ -92,11 +86,11 @@ export function ProjectsList({ data,
         />
       ))}
 
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddProject}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

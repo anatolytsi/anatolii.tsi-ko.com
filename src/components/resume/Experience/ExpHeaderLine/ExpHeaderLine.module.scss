@@ -1,0 +1,18 @@
+@import 'src/styles/common/variables';
+
+@mixin expHeaderLine {
+    display: contents;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  
+    @media (min-width: $tablet-size) {
+      &{
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+      }
+    }
+}

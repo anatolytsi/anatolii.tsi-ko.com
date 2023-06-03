@@ -1,0 +1,72 @@
+@import 'src/components/resume/common/common.module.scss';
+
+$date-input-width: calc(4.95 * $expHeaderFontSize);
+$dates-dash-padding: 0.5rem;
+
+@mixin expDates {
+    font-style: italic;
+    color: black !important;
+    font-size: $expHeaderFontSize;
+
+    ::placeholder {
+        color: black !important;
+        opacity: 1;
+    }
+
+    .datesDash {
+        padding: 0 $dates-dash-padding;
+    }
+
+    .setCurrent {
+        display: block;
+        font-weight: bold;
+        margin-left: 6.1rem;
+        border: none;
+        background-color: transparent;
+        color: #4caf50;
+
+        &:hover {
+        color: #3e8e41;
+        }
+    }
+
+    .datePicker {
+        display: inline-block;
+        position: relative;
+        width: $date-input-width;
+        padding: 0;
+        margin: 0;
+
+        div {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+
+        input {
+            font-style: italic;
+            display: inline-block;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            border: none;
+            margin: auto;
+            width: $date-input-width;
+            pointer-events: none;
+
+            &.editingStartDate,
+            &.editingEndDate,
+            &.editingDate {
+            pointer-events: all;
+            }
+        }
+        }
+    }
+}
+
+@mixin expDate {
+    @include expDates;
+    margin-right: calc($date-input-width + 2 * $dates-dash-padding + 0.2rem);
+}

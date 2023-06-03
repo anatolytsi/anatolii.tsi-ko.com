@@ -4,15 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
 
 import {Internship, IInternship} from './Internship';
-import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Internship.module.scss';
-import { SectionControls, sortByKey } from '../common';
+import { sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
-interface InternshipListProps extends ExperienceListProps {};
-
-const URL_PATH = 'internship';
+const URL_PATH = 'internships';
 
 export function InternshipList({ data,
                                  isAdmin, 
@@ -22,7 +20,7 @@ export function InternshipList({ data,
                                  sectionOrder=0,
                                  sectionVisibility=true,
                                  handleSectionVisibility=() => {}, 
-                                 handleSectionOrder=() => {} }: InternshipListProps) {
+                                 handleSectionOrder=() => {} }: IExperienceListProps) {
   const [internships, setInternships] = useState<IInternship[]>(sortByKey(data, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
@@ -65,19 +63,17 @@ export function InternshipList({ data,
     compCreate(URL_PATH, internship, (response) => setInternships([...internships, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faMicroscope,
+    sectionTitle: 'Internship'
+  }
+
   return (
-    <div key={key} className={visibilityState[0] ? styles.internshipList : `${styles.internshipList} ${styles.sectionHidden}`}>
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2>
-            <FontAwesomeIcon icon={faMicroscope} />
-            Internship
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
       {internships.map((internship: IInternship, index: number) => (
         <Internship
             key={internship._id}
@@ -89,12 +85,11 @@ export function InternshipList({ data,
             forExport={forExport}
         />
       ))}
-
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddInternship}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

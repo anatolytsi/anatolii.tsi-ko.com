@@ -1,14 +1,55 @@
 @import 'src/components/resume/Experience/Experience.module.scss';
-@import 'src/components/resume/common/common.module.scss';
 
-.jobExperienceList {
-  @include experienceList(job);
+.experienceList {
+  @include expList;
 
   .editExperience {
     @include editExperience(3.5rem);
-  
-    .jobExperience {
-      @include experience(company);
+
+    .experience {
+      @include experience;
+
+      .header {
+        @include expHeader;
+
+        .headerLine {
+          @include expHeaderLine;
+
+          .title {
+            @include expTitle;
+          }
+
+          .dates {
+            @include expDates;
+          }
+        }
+
+        .place {
+          @include expPlace;
+        }
+
+        .placeLink {
+          @include expPlaceLink;
+        }
+        
+        .placeLocation {
+          @include expPlaceLocation;
+        }
+
+        .topic {
+          @include expTopic;
+        }
+      }
+
+      .description {
+        @include expDescription;
+      }
+
+      @include experienceHidden;
     }
+  }
+
+  .addExperience {
+    @include expAdd;
   }
 }

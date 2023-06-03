@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 import {Publication, IPublication} from './Publication';
-import { AddExperience, ExperienceListProps } from '../Experience';
+import { sortByKey } from '../common';
 
 import styles from './Publication.module.scss';
-import { SectionControls, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
-
-interface PublicationListProps extends ExperienceListProps {};
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 const URL_PATH = 'publications';
 
@@ -22,7 +20,7 @@ export function PublicationsList({ data,
                                     sectionOrder=0,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: PublicationListProps) {
+                                    handleSectionOrder=() => {} }: IExperienceListProps) {
   const [publications, setPublications] = useState<IPublication[]>(sortByKey(data, 'date', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
@@ -62,21 +60,18 @@ export function PublicationsList({ data,
     compCreate(URL_PATH, publication, (response) => setPublications([...publications, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faBookOpen,
+    sectionTitle: 'Publications'
+  }
+
   return (
-    <div key={key}
-      className={visibilityState[0] ? styles.publicationList : `${styles.publicationList} ${styles.sectionHidden}`}
-    >
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2>
-            <FontAwesomeIcon icon={faBookOpen} />
-            Publications
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
+
       {publications.map((publication: IPublication, index: number) => (
         <Publication
             key={publication._id}
@@ -89,11 +84,11 @@ export function PublicationsList({ data,
         />
       ))}
 
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddPublication}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

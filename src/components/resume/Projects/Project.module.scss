@@ -1,81 +1,44 @@
 @import 'src/components/resume/Experience/Experience.module.scss';
-@import 'src/components/resume/common/common.module.scss';
 
-.projectsList {
-  @include experienceList(project);
+.experienceList {
+  @include expList;
 
   .editExperience {
     @include editExperience(3.5rem);
-  
-    .project {
-      @include experience(websites);
 
-      .websites {
-        .website {
-          display: inline-block;
-          margin: 0;
-          padding-right: 0.3rem;
+    .experience {
+      @include experience;
 
-          a,
-          a:visited,
-          a:hover,
-          a:active {
-            color: inherit;
-            text-decoration: none;
+      .header {
+        @include expHeader;
+
+        .headerLine {
+          @include expHeaderLine;
+
+          .title {
+            @include expTitle;
           }
-        }
-      }
-      .websitesEdit {
 
-        .websiteAdd {
-          display: inline-block;
-          color: #4caf50;
-          background: transparent;
-          border: none;
-  
-          &:hover {
-              color: #3e8e41;
+          .dates {
+            @include expDates;
           }
         }
         
-        .websiteEdit {
-          display: flex;
-
-          .deleteButton {
-              color: red;
-              padding: 0;
-              background-color: transparent;
-              border: 0;
-      
-              svg {
-                  padding: 0 0.3rem;
-              }
-
-              &:hover {
-                color: crimson;
-              }
-          }
-
-          .websiteName {
-            p {
-              display: inline-block;
-              margin: 0 0.3rem 0 0;
-              padding: 0;
-              min-width: 50px;
-            }
-          }
-          
-          .websiteLink {
-            p {
-              display: inline-block;
-              margin: 0 0.3rem 0 0;
-              padding: 0;
-              min-width: 50px;
-            }
-            margin-bottom: 0.5rem;
-          }
+        .websites {
+          @include expWebsites;
         }
       }
+
+      .description {
+        @include expDescription;
+      }
+
+      @include experienceHidden;
     }
   }
+
+  .addExperience {
+    @include expAdd;
+  }
 }
+

@@ -1,0 +1,23 @@
+@import 'src/styles/common/variables';
+
+@mixin expAdd {
+    margin: 0 $padding-experience 1rem $padding-experience;
+    background-color: transparent;
+    border: 2px #35e73b dashed;
+    font-weight: bold;
+    color: #35e73b;
+    width: 82%;
+    height: 2rem;
+    padding: 0 2rem;
+    transition: 0.3s;
+  
+    &:hover {
+      background-color: #aef3b09f;
+    }
+  
+    @media (min-width: $tablet-size) {
+      &{
+        width: 94.7%;
+      }
+    }
+}

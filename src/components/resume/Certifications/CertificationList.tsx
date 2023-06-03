@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 
 import {Certification, ICertification} from './Certification';
-import { AddExperience, ExperienceListProps } from '../Experience';
 
 import styles from './Certification.module.scss';
-import { SectionControls, sortByKey } from '../common';
+import { sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
-
-interface CertificationListProps extends ExperienceListProps {};
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 const URL_PATH = 'certifications';
 
@@ -22,7 +20,7 @@ export function CertificationList({ data,
                                     sectionOrder=0,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: CertificationListProps) {
+                                    handleSectionOrder=() => {} }: IExperienceListProps) {
   const [certifications, setCertifications] = useState<ICertification[]>(sortByKey(data, 'date', true));
   const visibilityState = useState(sectionVisibility);
   const orderingState = useState(sectionOrder);
@@ -64,21 +62,18 @@ export function CertificationList({ data,
     compCreate(URL_PATH, certification, (response) => setCertifications([...certifications, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faAward,
+    sectionTitle: 'Certifications'
+  }
+
   return (
-    <div key={key}
-      className={visibilityState[0] ? styles.certificationList : `${styles.certificationList} ${styles.sectionHidden}`}
-    >
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2>
-            <FontAwesomeIcon icon={faAward} />
-            Certifications
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
+
       {certifications.map((certification: ICertification, index: number) => (
         <Certification
             key={certification._id}
@@ -91,11 +86,11 @@ export function CertificationList({ data,
         />
       ))}
 
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddCertification}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

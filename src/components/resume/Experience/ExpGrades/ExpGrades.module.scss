@@ -1,0 +1,11 @@
+@import 'src/components/resume/common/common.module.scss';
+@import 'src/components/resume/Experience/common.module.scss';
+
+@mixin expGrades {
+    font-size: $expAddInfoFontSize;
+    color: $addInfoColor !important;
+
+    span {
+        @include expBlockEdit;
+    }
+}

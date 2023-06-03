@@ -254,9 +254,9 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
-      await db.collection('jobs').insertMany(require('@/fixtures/jobs.json'));
+      await db.collection('jobExperience').insertMany(require('@/fixtures/jobexperience.json'));
       await db.collection('education').insertMany(require('@/fixtures/education.json'));
-      await db.collection('internship').insertMany(require('@/fixtures/internship.json'));
+      await db.collection('internships').insertMany(require('@/fixtures/internships.json'));
       await db.collection('skills').insertMany(require('@/fixtures/skills.json'));    
       await db.collection('languages').insertMany(require('@/fixtures/languages.json'));
       await db.collection('certifications').insertMany(require('@/fixtures/certifications.json'));
@@ -267,9 +267,9 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
     const personalInfo = await db.collection('personalInfo').findOne();
     
-    const jobExperienceCur = db.collection('jobs').find({});
+    const jobExperienceCur = db.collection('jobExperience').find({});
     const educationCur = db.collection('education').find({});
-    const internshipsCur = db.collection('internship').find({});
+    const internshipsCur = db.collection('internships').find({});
     const skillsCur = db.collection('skills').find({});    
     const languagesCur = db.collection('languages').find({});
     const certificationsCur = db.collection('certifications').find({});
@@ -325,24 +325,24 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     if (isServer && exportPDF) {
-      props.forExport = true;
-      props.isAdmin = false;
-      const buffer = await pdfHelper.componentToPDFBuffer(
-          <PDFLayout>
-              <Resume {...props}/>
-          </PDFLayout>
-      );
-
-      let date = new Date();
-      // with this header, your browser will prompt you to download the file
-      // without this header, your browse will open the pdf directly
-      context.res!.setHeader('Content-disposition', `attachment; filename="CV_Tsirkunenko_${date.getFullYear()}_${date.getMonth()}_${date.getDate()}.pdf`);
-      
-      // set content type
-      context.res!.setHeader('Content-Type', 'application/pdf');
-
-      // output the pdf buffer. once res.end is triggered, it won't trigger the render method
-      context.res!.end(buffer);
+        props.forExport = true;
+        props.isAdmin = false;
+        const buffer = await pdfHelper.componentToPDFBuffer(
+            <PDFLayout>
+                <Resume {...props}/>
+            </PDFLayout>
+        );
+  
+        let date = new Date();
+        // with this header, your browser will prompt you to download the file
+        // without this header, your browse will open the pdf directly
+        context.res!.setHeader('Content-disposition', `attachment; filename="CV_Tsirkunenko_${date.getFullYear()}_${date.getMonth()}_${date.getDate()}.pdf`);
+        
+        // set content type
+        context.res!.setHeader('Content-Type', 'application/pdf');
+  
+        // output the pdf buffer. once res.end is triggered, it won't trigger the render method
+        context.res!.end(buffer);
     }
   
     return {props};

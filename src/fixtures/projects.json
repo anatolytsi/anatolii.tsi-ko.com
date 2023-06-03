@@ -2,8 +2,12 @@
   {
     "websites": [
       {
-        "name": "Project",
-        "link": "project.com"
+        "name": "Project1",
+        "link": "project1.com"
+      },
+      {
+        "name": "Project2",
+        "link": "project2.com"
       }
     ],
     "title": "Project",

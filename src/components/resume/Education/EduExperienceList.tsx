@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 import { EduExperience, IEduExperience } from './EduExperience';
-import { AddExperience, ExperienceListProps } from '../Experience';
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 import styles from './Education.module.scss';
-import { SectionControls, sortByKey } from '../common';
+import { sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
-
-interface EduExperienceListProps extends ExperienceListProps {};
 
 const URL_PATH = 'education';
 
@@ -22,7 +19,7 @@ export function EduExperienceList({ data,
                                     sectionOrder=0,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: EduExperienceListProps) {
+                                    handleSectionOrder=() => {} }: IExperienceListProps) {
   let experiences = data;
   const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByKey(experiences, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
@@ -55,9 +52,9 @@ export function EduExperienceList({ data,
   const handleAddEduExperience = () => {
     let experience: IEduExperience = {
       title: 'Degree',
-      institute: 'Institute',
-      instituteLink: 'http://institute.com',
-      instituteLocation: 'Institute Str. 7, Somewhere',
+      place: 'Place',
+      placeLink: 'http://place.com',
+      placeLocation: 'Place Str. 7, Somewhere',
       description: 'Add your description here',
       isVisible: false,
       startDate: new Date().getTime(),
@@ -66,21 +63,17 @@ export function EduExperienceList({ data,
     compCreate(URL_PATH, experience, (response) => setEduExperiences([...eduExperiences, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faGraduationCap,
+    sectionTitle: 'Education'
+  }
+
   return (
-    <div key={key}
-      className={visibilityState[0] ? styles.eduExperienceList : `${styles.eduExperienceList} ${styles.sectionHidden}`}
-    >
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2>
-            <FontAwesomeIcon icon={faGraduationCap} />
-            Education
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
       {eduExperiences.map((experience: IEduExperience, index: number) => (
         <EduExperience
             key={experience._id}
@@ -92,12 +85,11 @@ export function EduExperienceList({ data,
             forExport={forExport}
         />
       ))}
-
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddEduExperience}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

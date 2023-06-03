@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import {GenericExperience, Experience, handleExpKeyDown} from '../Experience';
+import { Content, Credentials, Date, EditableContent, Header, HeaderLine, Issuer, Title, handleExpKeyDown } from '../Experience';
 import styles from './Certification.module.scss';
 import { compUpdate } from '../common/api-helpers';
+import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
-export interface ICertification extends Experience {
+export interface ICertification extends IExperience {
   date: number
   issuer: string
   issuerLink: string
@@ -12,7 +13,7 @@ export interface ICertification extends Experience {
   credentialLink: string
 }
 
-interface CertificationProps {
+interface ICertificationProps {
     certification: ICertification
     onUpdate: any
     onDelete: any
@@ -21,7 +22,7 @@ interface CertificationProps {
     forExport: boolean
 }
 
-export function Certification({ certification, onUpdate, onDelete, isAdmin, isLast, forExport=false }: CertificationProps) {
+export function Certification({ certification, onUpdate, onDelete, isAdmin, isLast, forExport=false }: ICertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -37,6 +38,20 @@ export function Certification({ certification, onUpdate, onDelete, isAdmin, isLa
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)
   };
+
+  const expProps: ICommonExperienceProps = {
+    styles: styles,
+    isEditing: isEditing,
+    setter: setExperience,
+    keyDown: () => {},
+    exp: experience,
+    showClamp: !forExport,
+    isLast: isLast,
+    isAdmin: isAdmin,
+    saver: handleSave,
+    editor: () => setIsEditing(true),
+    deleter: onDelete
+  }
 
   const renderIssuer = () => {
     if (isEditing) {
@@ -147,20 +162,25 @@ export function Certification({ certification, onUpdate, onDelete, isAdmin, isLa
   };
 
   return (
-    <GenericExperience
-      experience={experience}
-      setExperience={setExperience}
-      isEditing={isEditing}
-      setIsEditing={setIsEditing}
-      onDelete={onDelete}
-      handleSave={handleSave}
-      isAdmin={isAdmin}
-      isLast={isLast}
-      styles={styles}
-      addInfoRenderer={renderAddInfo}
-      mainStyleName='certification'
-      dateFormat='MMM yyyy'
-      showClamp={!forExport}
-    />
+    <EditableContent {...expProps}>
+      <Content {...expProps}>
+        <Header {...expProps}>
+          <HeaderLine {...expProps}>
+            <Title {...expProps}/>
+            <Date {...expProps}/>
+          </HeaderLine>
+          <div className={styles.issuerAndCredentials}>
+            <Issuer {...expProps}/>
+            {
+              !isEditing && experience.credentialId ?
+                <span className={styles.credentialsSeparator}>, Credentials </span>
+              : 
+                <></>
+            }
+            <Credentials {...expProps}/>
+          </div>
+        </Header>
+      </Content>
+    </EditableContent>
   );
 }

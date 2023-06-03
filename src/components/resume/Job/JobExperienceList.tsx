@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 import {JobExperience, IJobExperience} from './JobExperience';
-import { AddExperience, ExperienceListProps } from '../Experience';
-import { SectionControls, sortByKey } from '../common';
+import { sortByKey } from '../common';
 
 import styles from './Job.module.scss';
 import { compCreate, compDelete } from '../common/api-helpers';
+import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
-interface JobExperienceListProps extends ExperienceListProps {};
-
-const URL_PATH = 'jobs';
+const URL_PATH = 'jobExperience';
 
 export function JobExperienceList({ data,
                                     isAdmin, 
@@ -22,7 +19,7 @@ export function JobExperienceList({ data,
                                     sectionOrder=0,
                                     sectionVisibility=true,
                                     handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: JobExperienceListProps) {
+                                    handleSectionOrder=() => {} }: IExperienceListProps) {
   let experiences = data;
   const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortByKey(experiences, 'startDate', true));
   const visibilityState = useState(sectionVisibility);
@@ -55,9 +52,9 @@ export function JobExperienceList({ data,
   const handleAddJobExperience = () => {
     let experience: IJobExperience = {
       title: 'Position',
-      company: 'Company',
-      companyLink: 'http://company.com',
-      companyLocation: 'Company Str. 7, Somewhere',
+      place: 'Place',
+      placeLink: 'http://place.com',
+      placeLocation: 'Place Str. 7, Somewhere',
       description: 'Add your description here',
       isVisible: false,
       startDate: new Date().getTime(),
@@ -66,21 +63,17 @@ export function JobExperienceList({ data,
     compCreate(URL_PATH, experience, (response) => setJobExperiences([...jobExperiences, response.data]));
   };
 
+  const expListProps: IExpListProps = {
+    styles: styles,
+    isAdmin: isAdmin,
+    visibilityState: visibilityState,
+    orderingState: orderingState,
+    faIcon: faSuitcase,
+    sectionTitle: 'Work Experience'
+  }
+
   return (
-    <div key={key}
-      className={visibilityState[0] ? styles.jobExperienceList : `${styles.jobExperienceList} ${styles.sectionHidden}`}
-    >
-      <SectionControls
-        isAdmin={isAdmin}
-        styles={styles}
-        visibilityState={visibilityState}
-        orderingState={orderingState}
-      >
-        <h2 className={styles.sectionTitle}>
-          <FontAwesomeIcon icon={faSuitcase} />
-          Work Experience
-        </h2>
-      </SectionControls>
+    <List key={key} {...expListProps}>
 
       {jobExperiences.map((experience: IJobExperience, index: number) => (
         <JobExperience
@@ -94,11 +87,11 @@ export function JobExperienceList({ data,
         />
       ))}
 
-      <AddExperience
+      <AddNew
         isAdmin={isAdmin}
         handleAddExperience={handleAddJobExperience}
         styles={styles}
       />
-    </div>
+    </List>
   );
 }

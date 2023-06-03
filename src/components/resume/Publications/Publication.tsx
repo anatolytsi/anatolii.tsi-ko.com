@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import {GenericExperience, Experience, handleExpKeyDown} from '../Experience';
+import { Content, Date, EditableContent, Header, HeaderLine, Title, Conference, handleExpKeyDown } from '../Experience';
 import styles from './Publication.module.scss';
 import { compUpdate } from '../common/api-helpers';
+import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
-export interface IPublication extends Experience {
+export interface IPublication extends IExperience {
   date: number
   conference: string
   conferenceLink: string
 }
 
-interface PublicationProps {
+interface IPublicationProps {
     publication: IPublication
     onUpdate: any
     onDelete: any
@@ -19,7 +20,7 @@ interface PublicationProps {
     forExport: boolean
 }
 
-export function Publication({ publication, onUpdate, onDelete, isAdmin, isLast, forExport=false }: PublicationProps) {
+export function Publication({ publication, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IPublicationProps) {
   const [experience, setExperience] = useState(publication);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -36,67 +37,31 @@ export function Publication({ publication, onUpdate, onDelete, isAdmin, isLast, 
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)
   };
 
-  const renderConference = () => {
-    if (isEditing) {
-      return (
-        <>
-          <div className={styles.conference}>
-            <h4
-              id='conference'
-              contentEditable
-              suppressContentEditableWarning
-              onKeyDown={handleKeyDown}
-              onBlur={e =>
-                setExperience({ ...experience, conference: e.target.innerText })
-              }
-            >
-              {experience.conference}
-            </h4>
-          </div>
-          <div
-            id='conferenceLink'
-            className={styles.conferenceLink}
-            contentEditable
-            suppressContentEditableWarning
-            onKeyDown={handleKeyDown}
-            onBlur={e =>
-              setExperience({ ...experience, conferenceLink: e.target.innerText })
-            }
-          >
-            {experience.conferenceLink}
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <div className={styles.conference}>
-          {experience.conferenceLink ? (
-            <a href={experience.conferenceLink}>
-              <h4>{experience.conference}</h4>
-            </a>
-          ) : (
-            <h4>{experience.conference}</h4>
-          )}
-        </div>
-      );
-    }
-  };
+  const expProps: ICommonExperienceProps = {
+    styles: styles,
+    isEditing: isEditing,
+    setter: setExperience,
+    keyDown: () => {},
+    exp: experience,
+    showClamp: !forExport,
+    isLast: isLast,
+    isAdmin: isAdmin,
+    saver: handleSave,
+    editor: () => setIsEditing(true),
+    deleter: onDelete
+  }
 
   return (
-    <GenericExperience
-      experience={experience}
-      setExperience={setExperience}
-      isEditing={isEditing}
-      setIsEditing={setIsEditing}
-      onDelete={onDelete}
-      handleSave={handleSave}
-      isAdmin={isAdmin}
-      isLast={isLast}
-      styles={styles}
-      addInfoRenderer={renderConference}
-      mainStyleName='publication'
-      dateFormat='MMM yyyy'
-      showClamp={!forExport}
-    />
+    <EditableContent {...expProps}>
+      <Content {...expProps}>
+        <Header {...expProps}>
+          <HeaderLine {...expProps}>
+            <Title {...expProps}/>
+            <Date {...expProps}/>
+          </HeaderLine>
+          <Conference {...expProps}/>
+        </Header>
+      </Content>
+    </EditableContent>
   );
 }

@@ -16,7 +16,7 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './PersonalInfo.module.scss';
-import { ExperienceDescriptionClamp } from '../Experience';
+import { DescriptionClamp } from '../common/DescriptionClamp';
 import axios from 'axios';
 import { compUpdate, uploadFile } from '../common/api-helpers';
 
@@ -68,7 +68,6 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
     }
     const body = new FormData();
     body.append('media', file);
-    console.log(`Uploading file ${file}`);
     uploadFile('file', body, (response) => {console.log(response.data.data.url); setPersonalInfo({...personalInfo, photoSrc: response.data.data.url})});
   }, [file]);
 
@@ -98,7 +97,7 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
     if (event.target.files.length > 0) {
       const loadedFile = event.target.files[0];
       if (!loadedFile.type.startsWith("image")) {
-        alert("Please select a valide image");
+        alert("Please select a valid image");
         return;
       }
       const filePreviewUrl = URL.createObjectURL(loadedFile);
@@ -144,16 +143,12 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
   };
 
   return (
-    <div
-      className={`${styles.personalInfoEdit} ${forExport ? styles.forExport : ''}`}
-    >
+    <div className={`${styles.personalInfoEdit} ${forExport ? styles.forExport : ''}`}>
       <div className={styles.personalInfo}>
         <div className={styles.left}>
           <PhotoUpload>
             <img 
               className={styles.avatar}
-              width={100}
-              height={100}
               src={personalInfo.photoSrc}
               alt="Avatar"
             />
@@ -243,9 +238,9 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
                 }
               />
             ) : (
-              <ExperienceDescriptionClamp styles={styles} showClamp={!forExport}>
+              <DescriptionClamp styles={styles} showClamp={!forExport}>
                 <Markdown>{personalInfo.summary}</Markdown>
-              </ExperienceDescriptionClamp>
+              </DescriptionClamp>
             )}
           </div>
         </div>

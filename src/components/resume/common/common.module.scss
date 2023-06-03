@@ -3,9 +3,24 @@
 
 // }
 
+$mainInfoColor: black;
+$addInfoColor: #666;
+
+$controlHeaderFontSize: 1.25rem;
+
+$expHeaderFontSize: 1.15rem;
+$expAddInfoFontSize: 1.1rem;
+$expDescrFontSize: 1rem;
+
+$infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
+$infoAddFontSize: calc($infoNameFontSize / 1.85);
+$infoSumFontSize: $expDescrFontSize;
+
 .controlHeader {
     display: flex;
     justify-content: space-between;
+    font-size: $controlHeaderFontSize;
+    padding-top: 1rem;
 
     .controls {
       display: inline-block;
