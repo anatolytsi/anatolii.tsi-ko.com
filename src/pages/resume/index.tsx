@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faPencil, faSave, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,11 +23,88 @@ import Head from 'next/head';
 import clientPromise from '@/lib/mongodb';
 import PDFLayout from '@/components/resume/PdfLayout';
 import pdfHelper from '@/lib/pdfHelper';
+import axios from 'axios';
+import Router from 'next/router';
 
 interface IResumeSection {
   name: TResumeSectionName
   isVisible: boolean
   order: number
+}
+
+const RestButton = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (isOpen && ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const importJson = (event: any) => {
+    const file = event.target?.files?.[0];
+    if (file) {
+      axios.post('/api/resume', file, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(() => {
+        Router.reload();
+      })
+    }
+  }
+
+  const exportJson = () => {
+    axios.get('/api/resume', {responseType: 'blob'})
+      .then((response) => {
+        // create file link in browser's memory
+        const href = URL.createObjectURL(response.data);
+    
+        // create "a" HTML element with href to file & click
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'exportedResume.json'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+    
+        // clean up "a" element & remove ObjectURL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+        setIsOpen(false);
+      });
+  }
+
+  return (
+    <>
+      <div 
+        className={`${styles.restButton}`}
+        onClick={() => {setIsOpen(!isOpen)}}
+      >
+        <FontAwesomeIcon icon={faEllipsisV} size='xl' />
+      </div>
+      <div className={isOpen ? `${styles.restPanel} ${styles.opened}` : styles.restPanel}
+           ref={ref}>
+        <p className={styles.restEl}>
+          <input type="file" onChange={importJson} id="photoUpload" accept="application/JSON" style={{display: "none"}}/>
+          <label htmlFor="photoUpload">
+            Import JSON
+          </label>
+          </p>
+        <p className={styles.restEl} onClick={exportJson}>
+          Export JSON
+        </p>
+      </div>
+    </>
+  );
 }
 
 export default function Resume( props: IResumeProps ) {
@@ -111,7 +188,7 @@ export default function Resume( props: IResumeProps ) {
       return (
         <>
           {renderEditResume()}
-          {renderRestButton()}
+          <RestButton/>
         </>
       )
     }

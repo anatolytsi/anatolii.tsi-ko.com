@@ -152,3 +152,30 @@ $edit-button-margin: 15px;
     right: calc($page-padding-sides / 4);
   }
 }
+
+.restPanel {
+  z-index: 19;
+  position: fixed;
+  bottom: calc(2.6 * $button-width + $edit-button-margin);
+  right: calc($download-button-margin + $button-width + 0.5rem);
+  width: 8rem;
+  // border: 1px solid black;
+  background-color: white;
+  display: none;
+
+  &.opened {
+    display: initial;
+  }
+
+  .restEl {
+    text-align: center;
+    padding: 0.2rem 1rem 0.2rem 0;
+    margin: 0;
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover{
+      background-color: rgb(221, 255, 221);
+    }
+  }
+}
