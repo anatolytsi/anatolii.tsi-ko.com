@@ -254,7 +254,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
-      await db.collection('jobExperience').insertMany(require('@/fixtures/jobexperience.json'));
+      await db.collection('jobExperience').insertMany(require('@/fixtures/jobExperience.json'));
       await db.collection('education').insertMany(require('@/fixtures/education.json'));
       await db.collection('internships').insertMany(require('@/fixtures/internships.json'));
       await db.collection('skills').insertMany(require('@/fixtures/skills.json'));    
