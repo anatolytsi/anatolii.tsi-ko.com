@@ -1,0 +1,16 @@
+@import 'src/components/resume/common/common.module.scss';
+@import 'src/components/resume/Experience/common.module.scss';
+
+@mixin expWorkType {
+    color: $addInfoColor !important;
+    font-size: $expAddInfoFontSize;
+    
+    @media (min-width: $tablet-size) {
+        margin-left: 0.3rem;
+    }
+
+    span {
+        display: inline-block;
+        min-width: 50px;
+    }
+}

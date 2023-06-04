@@ -16,6 +16,7 @@ import { ExpWebsites as Websites } from './ExpWebsite';
 import { ExpIssuer as Issuer } from './ExpIssuer';
 import { ExpCredentials as Credentials } from './ExpCredentials';
 import { ExpConference as Conference } from './ExpConference';
+import { ExpWorkType as WorkType } from './ExpWorkType';
 
 export type {
     IExperience,
@@ -43,6 +44,7 @@ export {
     Issuer,
     Credentials,
     Conference,
+    WorkType
 }
 
 export const handleExpKeyDown = (event: any, isEditing: boolean, experience: IExperience, experienceSetter: any, handleSave: () => void) => {

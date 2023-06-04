@@ -15,10 +15,28 @@
         .headerLine {
           @include expHeaderLine;
 
-          .title {
-            @include expTitle;
-          }
+          .titleWithType {
+            display: -webkit-flex;
+            flex-direction: column;
+            -webkit-flex-direction: column;
 
+            @media (min-width: $tablet-size) {
+              flex-direction: row;
+              -webkit-flex-direction: row;
+            }
+            
+            flex-direction: column;
+            -webkit-flex-direction: column;
+
+            .title {
+              @include expTitle;
+            }
+  
+            .workType {
+              @include expWorkType;
+            }
+          }
+          
           .dates {
             @include expDates;
           }

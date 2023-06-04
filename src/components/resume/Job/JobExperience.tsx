@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
+import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, WorkType, handleExpKeyDown } from '../Experience';
 import styles from './Job.module.scss';
 import { compUpdate } from '../common/api-helpers';
 import { ICommonExperienceProps, IExperience } from '../Experience/common';
@@ -57,7 +57,10 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, isAdmin, isLa
       <Content {...expProps}>
         <Header {...expProps}>
           <HeaderLine {...expProps}>
-            <Title {...expProps}/>
+            <div className={styles.titleWithType}>
+              <Title {...expProps}/>
+              <WorkType {...expProps}/>
+            </div>
             <Dates {...expProps}/>
           </HeaderLine>
           <Place {...expProps}/>

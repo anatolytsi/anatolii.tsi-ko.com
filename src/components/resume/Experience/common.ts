@@ -25,6 +25,7 @@ export interface IExperience {
     credentialLink?: string
     conference?: string
     conferenceLink?: string
+    workType?: string
 }
 
 export interface IExperienceListProps extends IResumeSectionComponent {
