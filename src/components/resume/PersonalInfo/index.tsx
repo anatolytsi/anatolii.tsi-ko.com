@@ -15,11 +15,11 @@ import { EditButton } from './EditButton';
 
 interface PersonalInfoProps {
   data: IPersonalInfo
-  isAdmin: boolean
+  editModeEnabled: boolean
   forExport?: boolean
 }
 
-export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoProps) {
+export function PersonalInfo({ data, editModeEnabled, forExport=false }: PersonalInfoProps) {
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -56,7 +56,7 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
     styles: styles,
     keyDown: handleKeyDown,
     forExport: forExport,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     setSave: handleSave,
     setEdit: handleEdit
   }

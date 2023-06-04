@@ -12,7 +12,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 const URL_PATH = 'jobExperience';
 
 export function JobExperienceList({ data,
-                                    isAdmin, 
+                                    editModeEnabled, 
                                     key=0,
                                     forExport=false,
                                     sectionName='jobExperience',
@@ -65,7 +65,7 @@ export function JobExperienceList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faSuitcase,
@@ -81,14 +81,14 @@ export function JobExperienceList({ data,
           jobExperience={experience}
           onUpdate={handleUpdateJobExperience}
           onDelete={handleDeleteJobExperience}
-          isAdmin={isAdmin}
+          editModeEnabled={editModeEnabled}
           isLast={index === jobExperiences.length - 1}
           forExport={forExport}
         />
       ))}
 
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddJobExperience}
         styles={styles}
       />

@@ -2,16 +2,16 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IExpAddProps {
-    isAdmin: boolean
+    editModeEnabled: boolean
     handleAddExperience: any
     styles: any
 }
 
-export const ExpAdd = ({isAdmin, handleAddExperience, styles}: IExpAddProps) => {
+export const ExpAdd = ({editModeEnabled, handleAddExperience, styles}: IExpAddProps) => {
 
     return (
         <>
-            {isAdmin ?
+            {editModeEnabled ?
                 <button
                     type='button'
                     onClick={handleAddExperience}

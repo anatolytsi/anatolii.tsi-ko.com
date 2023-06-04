@@ -15,12 +15,12 @@ interface IProjectProps {
     project: IProject
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
 }
 
-export function Project({ project, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IProjectProps) {
+export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IProjectProps) {
   const [experience, setExperience] = useState<IProject>(project);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   
@@ -45,7 +45,7 @@ export function Project({ project, onUpdate, onDelete, isAdmin, isLast, forExpor
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete

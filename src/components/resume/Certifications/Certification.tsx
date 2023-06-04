@@ -17,12 +17,12 @@ interface ICertificationProps {
     certification: ICertification
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
 }
 
-export function Certification({ certification, onUpdate, onDelete, isAdmin, isLast, forExport=false }: ICertificationProps) {
+export function Certification({ certification, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: ICertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -47,7 +47,7 @@ export function Certification({ certification, onUpdate, onDelete, isAdmin, isLa
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete

@@ -18,7 +18,7 @@ export interface ISkillProps {
     skillObj: ISkill
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
 } 
 
@@ -31,7 +31,7 @@ export interface IGenericSkillProps {
     setIsEditing: any
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     styles: any
     mainClsName: string
@@ -39,15 +39,15 @@ export interface IGenericSkillProps {
 }
 
 interface IAddSkillProps {
-    isAdmin: boolean
+    editModeEnabled: boolean
     handleAddSkill: any
 }
 
-export const AddSkill = ({isAdmin, handleAddSkill}: IAddSkillProps) => {
+export const AddSkill = ({editModeEnabled, handleAddSkill}: IAddSkillProps) => {
 
     return (
         <>
-        {isAdmin ?
+        {editModeEnabled ?
             <button
                 type='button'
                 onClick={handleAddSkill}
@@ -66,7 +66,7 @@ export const GenericSkill = ({ skill,
                                setIsEditing, 
                                onUpdate, 
                                onDelete, 
-                               isAdmin, 
+                               editModeEnabled, 
                                isLast, 
                                styles, 
                                mainClsName, 
@@ -93,7 +93,7 @@ export const GenericSkill = ({ skill,
     };
 
     const renderControls = () => {
-        if (isAdmin) {
+        if (editModeEnabled) {
             return (
                 <div
                     className={styles.controls}
@@ -178,7 +178,7 @@ export const GenericSkill = ({ skill,
     );
 }
 
-export const Skill = ({ skillObj, onUpdate, onDelete, isAdmin, isLast }: ISkillProps) => {
+export const Skill = ({ skillObj, onUpdate, onDelete, editModeEnabled, isLast }: ISkillProps) => {
     const [skill, setSkill] = useState(skillObj);
     const [isEditing, setIsEditing] = useState(false);
   
@@ -194,7 +194,7 @@ export const Skill = ({ skillObj, onUpdate, onDelete, isAdmin, isLast }: ISkillP
             setIsEditing={setIsEditing}
             onUpdate={onUpdate}
             onDelete={onDelete}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={isLast}
             styles={styles}
             mainClsName={'skill'}

@@ -5,20 +5,20 @@ const STYLE_NAME = 'experience';
 
 interface ExperienceClassProps {
     isLast: boolean
-    isAdmin: boolean
+    editModeEnabled: boolean
     isVisible: boolean
     styles: any
     experienceStyle: any
 }
 
 const getExperienceClass = ({ isLast, 
-                              isAdmin, 
+                              editModeEnabled, 
                               styles, 
                               isVisible, 
                               experienceStyle }: ExperienceClassProps) => {
     let style = isLast ? `${experienceStyle} ${styles.last}` : experienceStyle;
     style = isVisible ? style : `${style} ${styles.hidden}`
-    style = isAdmin ? `${style} ${styles.admin}` : style;
+    style = editModeEnabled ? `${style} ${styles.admin}` : style;
     return style;
 };
 
@@ -26,9 +26,9 @@ export const ExpContent = ({ styles,
                              exp,
                              children,
                              isLast=false,
-                             isAdmin=false }: ICommonExperienceProps) => {
+                             editModeEnabled=false }: ICommonExperienceProps) => {
     return (
-        <div className={getExperienceClass({isLast, isAdmin, styles, isVisible: exp!.isVisible, experienceStyle: styles[STYLE_NAME]})}>
+        <div className={getExperienceClass({isLast, editModeEnabled, styles, isVisible: exp!.isVisible, experienceStyle: styles[STYLE_NAME]})}>
             {children}
         </div>
     );

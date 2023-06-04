@@ -13,11 +13,11 @@ export interface ILanguageProps {
     languageObj: ILanguage
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
 } 
 
-export const Language = ({ languageObj, onUpdate, onDelete, isAdmin, isLast }: ILanguageProps) => {
+export const Language = ({ languageObj, onUpdate, onDelete, editModeEnabled, isLast }: ILanguageProps) => {
     const [language, setLanguage] = useState(languageObj);
     const [isEditing, setIsEditing] = useState(false);
   
@@ -55,7 +55,7 @@ export const Language = ({ languageObj, onUpdate, onDelete, isAdmin, isLast }: I
             setIsEditing={setIsEditing}
             onUpdate={onUpdate}
             onDelete={onDelete}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={isLast}
             styles={styles}
             mainClsName={'language'}

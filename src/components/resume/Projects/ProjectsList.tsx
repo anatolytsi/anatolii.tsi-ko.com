@@ -13,7 +13,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 const URL_PATH = 'projects';
 
 export function ProjectsList({ data,
-                               isAdmin, 
+                               editModeEnabled, 
                                key=0,
                                forExport=false,
                                sectionName='projects',
@@ -64,7 +64,7 @@ export function ProjectsList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faRulerCombined,
@@ -80,14 +80,14 @@ export function ProjectsList({ data,
           project={experience}
           onUpdate={handleUpdateProject}
           onDelete={handleDeleteProject}
-          isAdmin={isAdmin}
+          editModeEnabled={editModeEnabled}
           isLast={index === projects.length - 1}
           forExport={forExport}
         />
       ))}
 
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddProject}
         styles={styles}
       />

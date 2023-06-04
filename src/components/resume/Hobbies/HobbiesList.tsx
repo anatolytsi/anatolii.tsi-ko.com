@@ -14,7 +14,7 @@ export interface IHobbiesListProps extends ISkillsListProps {}
 const URL_PATH = 'hobbies';
 
 export const HobbiesList = ({ data,
-                              isAdmin, 
+                              editModeEnabled, 
                               key=0,
                               sectionName='hobbies',
                               sectionOrder=0,
@@ -22,7 +22,7 @@ export const HobbiesList = ({ data,
                               handleSectionVisibility=() => {}, 
                               handleSectionOrder=() => {} }: IHobbiesListProps) => {
     let hobbiesObj = data;
-    if (!isAdmin) {
+    if (!editModeEnabled) {
         hobbiesObj = hobbiesObj.filter((el: IHobby) => el.isVisible);
     }
     const [hobbies, setHobbies] = useState<IHobby[]>(sortByKey(hobbiesObj, 'order', true));
@@ -65,7 +65,7 @@ export const HobbiesList = ({ data,
     return (
         <div key={key} className={visibilityState[0] ? styles.hobbys : `${styles.hobbys} ${styles.sectionHidden}`}>
             <SectionControls
-                isAdmin={isAdmin}
+                editModeEnabled={editModeEnabled}
                 styles={styles}
                 visibilityState={visibilityState}
                 orderingState={orderingState}
@@ -84,14 +84,14 @@ export const HobbiesList = ({ data,
                         hobbyObj={hobby}
                         onUpdate={handleUpdateHobby}
                         onDelete={handleDeleteHobby}
-                        isAdmin={isAdmin}
+                        editModeEnabled={editModeEnabled}
                         isLast={index === hobbies.length - 1}
                     />
                 ))}
         
                 <AddSkill 
                     handleAddSkill={handleAddHobby}
-                    isAdmin={isAdmin}
+                    editModeEnabled={editModeEnabled}
                 />
             </div>
         </div>

@@ -10,7 +10,7 @@ import { compCreate, compDelete } from "../common/api-helpers";
 const URL_PATH = 'skills';
 
 export const SkillsList = ({ data,
-                             isAdmin, 
+                             editModeEnabled, 
                              sectionName='skills',
                              sectionOrder=0,
                              sectionVisibility=true,
@@ -57,7 +57,7 @@ export const SkillsList = ({ data,
     return (
         <div className={visibilityState[0] ? styles.skills : `${styles.skills} ${styles.sectionHidden}`}>
             <SectionControls
-                isAdmin={isAdmin}
+                editModeEnabled={editModeEnabled}
                 styles={styles}
                 visibilityState={visibilityState}
                 orderingState={orderingState}
@@ -75,14 +75,14 @@ export const SkillsList = ({ data,
                             skillObj={skill}
                             onUpdate={handleUpdateSkill}
                             onDelete={handleDeleteSkill}
-                            isAdmin={isAdmin}
+                            editModeEnabled={editModeEnabled}
                             isLast={index === skills.length - 1}
                         />
                     ))}
                 </div>
                 <AddSkill 
                     handleAddSkill={handleAddSkill}
-                    isAdmin={isAdmin}
+                    editModeEnabled={editModeEnabled}
                 />
             </div>
         </div>

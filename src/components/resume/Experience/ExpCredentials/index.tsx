@@ -2,10 +2,10 @@ import React from 'react';
 import { ICommonExperienceProps } from '../common';
 
 export const ExpCredentials = ({ styles,
-                           setter,
-                           keyDown,
-                           exp,
-                           isEditing=false }: ICommonExperienceProps) => {
+                                 setter,
+                                 keyDown,
+                                 exp,
+                                 isEditing=false }: ICommonExperienceProps) => {
     let credentials: JSX.Element;
     if (isEditing) {
       credentials = (

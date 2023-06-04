@@ -13,7 +13,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 const URL_PATH = 'internships';
 
 export function InternshipList({ data,
-                                 isAdmin, 
+                                 editModeEnabled, 
                                  key=0,
                                  forExport=false,
                                  sectionName='internships',
@@ -65,7 +65,7 @@ export function InternshipList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faMicroscope,
@@ -80,13 +80,13 @@ export function InternshipList({ data,
             internship={internship}
             onUpdate={handleUpdateInternship}
             onDelete={handleDeleteInternship}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={index === internships.length - 1}
             forExport={forExport}
         />
       ))}
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddInternship}
         styles={styles}
       />

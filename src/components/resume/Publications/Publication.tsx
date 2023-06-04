@@ -15,12 +15,12 @@ interface IPublicationProps {
     publication: IPublication
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
 }
 
-export function Publication({ publication, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IPublicationProps) {
+export function Publication({ publication, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IPublicationProps) {
   const [experience, setExperience] = useState(publication);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -45,7 +45,7 @@ export function Publication({ publication, onUpdate, onDelete, isAdmin, isLast, 
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete

@@ -17,12 +17,12 @@ interface IEduExperienceProps {
     eduExperience: IEduExperience
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
 }
 
-export function EduExperience({ eduExperience, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IEduExperienceProps) {
+export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IEduExperienceProps) {
   const [experience, setExperience] = useState(eduExperience);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -47,7 +47,7 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, isAdmin, isLa
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete

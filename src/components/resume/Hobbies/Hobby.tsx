@@ -10,11 +10,11 @@ export interface IHobbyProps {
     hobbyObj: IHobby
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
 } 
 
-export const Hobby = ({ hobbyObj, onUpdate, onDelete, isAdmin, isLast }: IHobbyProps) => {
+export const Hobby = ({ hobbyObj, onUpdate, onDelete, editModeEnabled, isLast }: IHobbyProps) => {
     const [hobby, setHobby] = useState(hobbyObj);
     const [isEditing, setIsEditing] = useState(false);
   
@@ -30,7 +30,7 @@ export const Hobby = ({ hobbyObj, onUpdate, onDelete, isAdmin, isLast }: IHobbyP
             setIsEditing={setIsEditing}
             onUpdate={onUpdate}
             onDelete={onDelete}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={isLast}
             styles={styles}
             mainClsName={'hobby'}

@@ -128,7 +128,7 @@ export default function Resume( props: IResumeProps ) {
   }
 
   const [resumeSections, setResumeSections] = useState(sortByKey(resumeSectionsObj, 'order', true));
-  const [editMode, setEditMode] = useState(false);
+  const [editModeEnabled, setEditModeEnabled] = useState(false);
 
   const changeResumeSection = (name: TResumeSectionName, parameter: string, value: number | boolean ) => {
     setResumeSections((previousResumeSections: IResumeSection[]) =>
@@ -151,11 +151,11 @@ export default function Resume( props: IResumeProps ) {
   }
 
   const renderEditResume = () => {
-    if (editMode) {
+    if (editModeEnabled) {
       return (
         <div 
           className={`${styles.editResume} ${styles.stop}`}
-          onClick={() => {setEditMode(false)}}
+          onClick={() => {setEditModeEnabled(false)}}
         >
           <FontAwesomeIcon icon={faSave} size='xl' />
         </div>
@@ -164,7 +164,7 @@ export default function Resume( props: IResumeProps ) {
       return (
         <div 
           className={`${styles.editResume} ${styles.edit}`}
-          onClick={() => {setEditMode(true)}}
+          onClick={() => {setEditModeEnabled(true)}}
         >
           <FontAwesomeIcon icon={faPencil} size='xl' />
         </div>
@@ -176,7 +176,7 @@ export default function Resume( props: IResumeProps ) {
     return (
       <div 
         className={`${styles.restButton} ${styles.edit}`}
-        onClick={() => {setEditMode(true)}}
+        onClick={() => {setEditModeEnabled(true)}}
       >
         <FontAwesomeIcon icon={faEllipsisV} size='xl' />
       </div>
@@ -220,7 +220,7 @@ export default function Resume( props: IResumeProps ) {
     <div className={`${styles.resume} ${props.forExport && styles.forExport}`} id={styles.root}>
       <PersonalInfo
         data={props?.personalInfo}
-        isAdmin={editMode}
+        editModeEnabled={editModeEnabled}
         forExport={props.forExport}
       />
         {resumeSections.map((resumeSection: IResumeSection, idx: number) => (
@@ -228,7 +228,7 @@ export default function Resume( props: IResumeProps ) {
             {resumeMapping[resumeSection.name]({ key: idx,
                                                 forExport: props.forExport,
                                                 data: props[resumeSection.name],
-                                                isAdmin: editMode, 
+                                                editModeEnabled: editModeEnabled, 
                                                 sectionOrder: resumeSection.order,
                                                 sectionVisibility: resumeSection.isVisible,
                                                 handleSectionVisibility,

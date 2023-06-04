@@ -13,7 +13,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 const URL_PATH = 'publications';
 
 export function PublicationsList({ data,
-                                    isAdmin, 
+                                    editModeEnabled, 
                                     key=0,
                                     forExport=false,
                                     sectionName='publications',
@@ -62,7 +62,7 @@ export function PublicationsList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faBookOpen,
@@ -78,14 +78,14 @@ export function PublicationsList({ data,
             publication={publication}
             onUpdate={handleUpdatePublication}
             onDelete={handleDeletePublication}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={index === publications.length - 1}
             forExport={forExport}
         />
       ))}
 
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddPublication}
         styles={styles}
       />

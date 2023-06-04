@@ -29,7 +29,7 @@ export interface IExperience {
 }
 
 export interface IExperienceListProps extends IResumeSectionComponent {
-    isAdmin: boolean
+    editModeEnabled: boolean
 }
 
 export interface ICommonExperienceProps {
@@ -41,7 +41,7 @@ export interface ICommonExperienceProps {
     children?: any
     showClamp?: boolean
     isLast?: boolean
-    isAdmin?: boolean
+    editModeEnabled?: boolean
     saver?: any
     editor?: any
     deleter?: any

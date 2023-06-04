@@ -5,7 +5,7 @@ import { SectionControls } from '../../common';
 
 export interface IExpListProps {
     styles: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     visibilityState: any
     orderingState: any
     faIcon: any
@@ -19,11 +19,11 @@ export const ExpList = ({ styles,
                           faIcon,
                           sectionTitle,
                           children,
-                          isAdmin=false}:IExpListProps) => {
+                          editModeEnabled=false}:IExpListProps) => {
     return (
         <div className={visibilityState[0] ? styles.experienceList : `${styles.experienceList} ${styles.sectionHidden}`}>
             <SectionControls
-                isAdmin={isAdmin}
+                editModeEnabled={editModeEnabled}
                 styles={styles}
                 visibilityState={visibilityState}
                 orderingState={orderingState}

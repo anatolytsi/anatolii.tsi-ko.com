@@ -12,7 +12,7 @@ import { compCreate, compDelete } from '../common/api-helpers';
 const URL_PATH = 'education';
 
 export function EduExperienceList({ data,
-                                    isAdmin, 
+                                    editModeEnabled, 
                                     key=0,
                                     forExport=false,
                                     sectionName='education',
@@ -65,7 +65,7 @@ export function EduExperienceList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faGraduationCap,
@@ -80,13 +80,13 @@ export function EduExperienceList({ data,
             eduExperience={experience}
             onUpdate={handleUpdateEduExperience}
             onDelete={handleDeleteEduExperience}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={index === eduExperiences.length - 1}
             forExport={forExport}
         />
       ))}
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddEduExperience}
         styles={styles}
       />

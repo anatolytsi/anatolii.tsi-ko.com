@@ -14,7 +14,7 @@ export interface ILanguagesListProps extends ISkillsListProps {}
 const URL_PATH = 'languages';
 
 export const LanguagesList = ({ data,
-                                isAdmin, 
+                                editModeEnabled, 
                                 key=0,
                                 sectionName='languages',
                                 sectionOrder=0,
@@ -63,7 +63,7 @@ export const LanguagesList = ({ data,
     return (
         <div key={key} className={visibilityState[0] ? styles.languages : `${styles.languages} ${styles.sectionHidden}`}>
             <SectionControls
-                isAdmin={isAdmin}
+                editModeEnabled={editModeEnabled}
                 styles={styles}
                 visibilityState={visibilityState}
                 orderingState={orderingState}
@@ -82,14 +82,14 @@ export const LanguagesList = ({ data,
                         languageObj={language}
                         onUpdate={handleUpdateLanguage}
                         onDelete={handleDeleteLanguage}
-                        isAdmin={isAdmin}
+                        editModeEnabled={editModeEnabled}
                         isLast={index === languages.length - 1}
                     />
                 ))}
         
                 <AddSkill 
                     handleAddSkill={handleAddLanguage}
-                    isAdmin={isAdmin}
+                    editModeEnabled={editModeEnabled}
                 />
             </div>
         </div>

@@ -27,7 +27,7 @@ export interface IPersonalInfoCommonProps {
     isEditing: boolean
     keyDown?: any
     forExport?: boolean
-    isAdmin?: boolean
+    editModeEnabled?: boolean
     setSave?: any
     setEdit?: any
 }

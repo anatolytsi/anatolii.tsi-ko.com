@@ -17,7 +17,8 @@ export const WAIT_EFFECT = parseInt(process.env.WAIT_EFFECT ?? '2');
 
 export interface IResumeComponentSections {
     forExport?: boolean
-    isAdmin?: any
+    isAdmin?: boolean
+    editModeEnabled?: any
     personalInfo?: any
     jobExperience: typeof JobExperienceList;
     education: typeof EduExperienceList;
@@ -33,6 +34,7 @@ export interface IResumeComponentSections {
 export interface IResumeProps {
     forExport?: boolean
     isAdmin?: boolean
+    editModeEnabled?: any
     personalInfo: IPersonalInfo
     jobExperience: IJobExperience[]
     education: IEduExperience[]
@@ -49,7 +51,7 @@ export type TResumeSectionName = keyof IResumeComponentSections | keyof IResumeP
 
 export interface IResumeSectionComponent {
     data: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     forExport?: boolean
     key?: number
     sectionName?: TResumeSectionName
@@ -70,14 +72,14 @@ export const sortByKey = (skills: {[key: string]: any}, key: string, reverse: bo
 
 interface ISectionEditableProps {
     children: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     styles: any
     visibilityState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
     orderingState: [number, React.Dispatch<React.SetStateAction<number>>]
 }
 
 export const SectionControls = ({ children, 
-                                  isAdmin,
+                                  editModeEnabled,
                                   styles, 
                                   visibilityState, 
                                   orderingState }: ISectionEditableProps) => {
@@ -85,7 +87,7 @@ export const SectionControls = ({ children,
     return (
         <div className={styles.controlHeader}>
             {children}
-            {isAdmin ? (
+            {editModeEnabled ? (
                 <div className={styles.controls}>
                     <button 
                         type="button" 

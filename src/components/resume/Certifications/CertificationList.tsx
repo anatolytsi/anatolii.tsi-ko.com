@@ -13,7 +13,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 const URL_PATH = 'certifications';
 
 export function CertificationList({ data,
-                                    isAdmin, 
+                                    editModeEnabled, 
                                     key=0,
                                     forExport=false,
                                     sectionName='certifications',
@@ -64,7 +64,7 @@ export function CertificationList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     visibilityState: visibilityState,
     orderingState: orderingState,
     faIcon: faAward,
@@ -80,14 +80,14 @@ export function CertificationList({ data,
             certification={certification}
             onUpdate={handleUpdateCertification}
             onDelete={handleDeleteCertification}
-            isAdmin={isAdmin}
+            editModeEnabled={editModeEnabled}
             isLast={index === certifications.length - 1}
             forExport={forExport}
         />
       ))}
 
       <AddNew
-        isAdmin={isAdmin}
+        editModeEnabled={editModeEnabled}
         handleAddExperience={handleAddCertification}
         styles={styles}
       />

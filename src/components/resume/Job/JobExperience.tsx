@@ -16,12 +16,12 @@ interface IJobExperienceProps {
   jobExperience: IJobExperience
   onUpdate: any
   onDelete: any
-  isAdmin: boolean
+  editModeEnabled: boolean
   isLast: boolean
   forExport: boolean
 }
 
-export function JobExperience({ jobExperience, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IJobExperienceProps) {
+export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IJobExperienceProps) {
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   
@@ -46,7 +46,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, isAdmin, isLa
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete

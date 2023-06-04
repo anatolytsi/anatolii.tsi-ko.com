@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IPersonalInfoCommonProps } from "./common"
 import { faSave, faEdit } from "@fortawesome/free-solid-svg-icons";
 
-export const EditButton = ({ styles, setSave, setEdit, isEditing, isAdmin }: IPersonalInfoCommonProps) => {
-    if (isAdmin) {
+export const EditButton = ({ styles, setSave, setEdit, isEditing, editModeEnabled }: IPersonalInfoCommonProps) => {
+    if (editModeEnabled) {
       return (
         <div className={styles.controls}>
           <button 

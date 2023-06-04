@@ -5,7 +5,7 @@ import { ICommonExperienceProps, IExperience } from '../common';
 
 
 interface ExperienceEditButtonProps {
-    isAdmin: boolean
+    editModeEnabled: boolean
     isEditing: boolean
     styles: any
     experience: IExperience
@@ -15,7 +15,7 @@ interface ExperienceEditButtonProps {
     onDelete: any
 }
 
-export const ExperienceControlButtons = ({ isAdmin,
+export const ExperienceControlButtons = ({ editModeEnabled,
                                            isEditing,
                                            styles,
                                            experience,
@@ -23,7 +23,7 @@ export const ExperienceControlButtons = ({ isAdmin,
                                            handleSave,
                                            handleEdit,
                                            onDelete }: ExperienceEditButtonProps) => {
-    if (isAdmin) {
+    if (editModeEnabled) {
         return (
           <>
               <div
@@ -85,12 +85,12 @@ export const ExpEditableContent = ({ styles,
                                      editor,
                                      deleter,
                                      children,
-                                     isAdmin=false,
+                                     editModeEnabled=false,
                                      isEditing=false }:ICommonExperienceProps) => {
     return (
         <div className={styles.editExperience}>
             <ExperienceControlButtons
-                isAdmin={isAdmin}
+                editModeEnabled={editModeEnabled}
                 isEditing={isEditing}
                 styles={styles}
                 experience={exp!}

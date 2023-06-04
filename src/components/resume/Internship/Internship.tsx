@@ -16,12 +16,12 @@ interface IInternshipProps {
     internship: IInternship
     onUpdate: any
     onDelete: any
-    isAdmin: boolean
+    editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
 }
 
-export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, forExport=false }: IInternshipProps) {
+export function Internship({ internship, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IInternshipProps) {
   const [experience, setExperience] = useState(internship);
   const [isEditing, setIsEditing] = useState(false);
   
@@ -46,7 +46,7 @@ export function Internship({ internship, onUpdate, onDelete, isAdmin, isLast, fo
     exp: experience,
     showClamp: !forExport,
     isLast: isLast,
-    isAdmin: isAdmin,
+    editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
     deleter: onDelete
