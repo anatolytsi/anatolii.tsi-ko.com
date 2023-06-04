@@ -11,19 +11,32 @@ import {
   faHome,
   faPhone,
   faEnvelope,
-  faListAlt
+  faListAlt,
+  faGlobe,
+  faChain
 } from '@fortawesome/free-solid-svg-icons';
-
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './PersonalInfo.module.scss';
 import { DescriptionClamp } from '../common/DescriptionClamp';
 import axios from 'axios';
 import { compUpdate, uploadFile } from '../common/api-helpers';
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 const SimpleMDEEditor = dynamic(
     () => import('react-simplemde-editor'),
     {ssr: false}
 );
+
+enum EWebsite {
+  github = 'GitHub',
+  website = 'Website',
+  linkedin = 'LinkedIn'
+}
+
+type IWebsite = {
+  [key in EWebsite]: string;
+}
 
 export interface IPersonalInfo {
   _id?: string
@@ -34,12 +47,80 @@ export interface IPersonalInfo {
   phone: string
   email: string
   summary: string
+  websites?: IWebsite;
 }
 
 interface PersonalInfoProps {
   data: IPersonalInfo
   isAdmin: boolean
   forExport?: boolean
+}
+
+interface IExternalLinkProps {
+  isEditing: boolean
+  name: EWebsite
+  link: string | undefined
+  icon: IconProp
+  updater: any
+}
+
+interface IExternalLinksProps {
+  personalInfo: IPersonalInfo
+  setter: any
+  isEditing: boolean
+}
+
+const ExternalLink = ({ isEditing,
+                        name,
+                        link='',
+                        icon,
+                        updater }: IExternalLinkProps) => {
+  if (isEditing) {
+    return (<>
+      <div className={styles.website}>
+        {name}:
+        <span
+          contentEditable={isEditing}
+          suppressContentEditableWarning
+          onBlur={e =>
+            updater(name, e.target.innerText)
+          }
+        >
+          {link}
+        </span>
+      </div>
+    </>);
+  } else {
+    console.log(link)
+    if (link) {
+      console.log(link)
+      return (
+        <a className={styles.extLink} href={link}>
+          <FontAwesomeIcon icon={icon} />
+        </a>
+      );
+    } else {
+      return <></>;
+    }
+  }
+}
+
+const ExternalLinks = ({ personalInfo, isEditing, setter }: IExternalLinksProps) => {
+  const anyWebsites = !!personalInfo?.websites?.[EWebsite.website] || !!personalInfo?.websites?.[EWebsite.github] || !!personalInfo?.websites?.[EWebsite.linkedin];
+  const updateWebsite = ( name: EWebsite, link: string ) => {
+    let websites = {...personalInfo?.websites, [name]: link};
+    setter({...personalInfo, websites });
+  }
+  return (
+    <div className={styles.websites}>
+      {anyWebsites || isEditing ? 
+        <FontAwesomeIcon icon={faChain} />
+      : <></>}
+      <ExternalLink isEditing={isEditing} name={EWebsite.website} link={personalInfo?.websites?.[EWebsite.website]} icon={faGlobe} updater={updateWebsite}/>
+      <ExternalLink isEditing={isEditing} name={EWebsite.github} link={personalInfo?.websites?.[EWebsite.github]} icon={faGithub} updater={updateWebsite}/>
+      <ExternalLink isEditing={isEditing} name={EWebsite.linkedin} link={personalInfo?.websites?.[EWebsite.linkedin]} icon={faLinkedinIn} updater={updateWebsite}/>
+    </div>
+  );
 }
 
 export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoProps) {
@@ -221,6 +302,9 @@ export function PersonalInfo({ data, isAdmin, forExport=false }: PersonalInfoPro
               >
                 {personalInfo.phone}
               </div>
+            </div>
+            <div className={styles.contactItem}>
+              <ExternalLinks isEditing={isEditing} personalInfo={personalInfo} setter={setPersonalInfo}/>
             </div>
           </div>
         </div>
