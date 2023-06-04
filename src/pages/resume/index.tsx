@@ -94,8 +94,8 @@ const RestButton = () => {
       <div className={isOpen ? `${styles.restPanel} ${styles.opened}` : styles.restPanel}
            ref={ref}>
         <p className={styles.restEl}>
-          <input type="file" onChange={importJson} id="photoUpload" accept="application/JSON" style={{display: "none"}}/>
-          <label htmlFor="photoUpload">
+          <input type="file" onChange={importJson} id="resumeUpload" accept="application/JSON" style={{display: "none"}}/>
+          <label htmlFor="resumeUpload">
             Import JSON
           </label>
           </p>
