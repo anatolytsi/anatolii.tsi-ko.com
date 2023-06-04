@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { faArrowDown, faArrowUp, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { IPersonalInfo } from "@/components/resume/PersonalInfo";
+import { IPersonalInfo } from "@/components/resume/PersonalInfo/common";
 import { IJobExperience, JobExperienceList } from '@/components/resume/Job';
 import { EduExperienceList, IEduExperience } from '@/components/resume/Education';
 import { IInternship, InternshipList } from '@/components/resume/Internship';
