@@ -1,37 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 import {JobExperience, IJobExperience} from './JobExperience';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Job.module.scss';
 import { compCreate, compDelete } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
+import { CommonSection } from '../common/Section';
+
+export const JobExperienceSection = ({ editModeEnabled, 
+                                       sectionName,
+                                       order,
+                                       isVisible,
+                                       orderSetter,
+                                       visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faSuitcase}
+                       sectionTitle={'Work Experience'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
 
 const URL_PATH = 'jobExperience';
 
 export function JobExperienceList({ data,
                                     editModeEnabled, 
-                                    key=0,
-                                    forExport=false,
-                                    sectionName='jobExperience',
-                                    sectionOrder=0,
-                                    sectionVisibility=true,
-                                    handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: IExperienceListProps) {
+                                    sectionVisible,
+                                    forExport=false, }: IExperienceListProps) {
   let experiences = data;
   const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortByKey(experiences, 'startDate', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);
 
   const handleUpdateJobExperience = (updatedExperience: IJobExperience) => {
     setJobExperiences((prevExperiences: IJobExperience[]) =>
@@ -65,15 +70,11 @@ export function JobExperienceList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faSuitcase,
-    sectionTitle: 'Work Experience'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
 
       {jobExperiences.map((experience: IJobExperience, index: number) => (
         <JobExperience

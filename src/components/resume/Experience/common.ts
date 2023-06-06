@@ -28,9 +28,7 @@ export interface IExperience {
     workType?: string
 }
 
-export interface IExperienceListProps extends IResumeSectionComponent {
-    editModeEnabled: boolean
-}
+export interface IExperienceListProps extends IResumeSectionComponent {}
 
 export interface ICommonExperienceProps {
     styles: any

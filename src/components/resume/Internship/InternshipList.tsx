@@ -1,37 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
 
 import {Internship, IInternship} from './Internship';
 
 import styles from './Internship.module.scss';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
+import { CommonSection } from '../common/Section';
+
+export const InternshipSection = ({ editModeEnabled, 
+                                    sectionName,
+                                    order,
+                                    isVisible,
+                                    orderSetter,
+                                    visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faMicroscope}
+                       sectionTitle={'Internship'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
 
 const URL_PATH = 'internships';
 
 export function InternshipList({ data,
                                  editModeEnabled, 
-                                 key=0,
-                                 forExport=false,
-                                 sectionName='internships',
-                                 sectionOrder=0,
-                                 sectionVisibility=true,
-                                 handleSectionVisibility=() => {}, 
-                                 handleSectionOrder=() => {} }: IExperienceListProps) {
+                                 sectionVisible,
+                                 forExport=false, }: IExperienceListProps) {
   const [internships, setInternships] = useState<IInternship[]>(sortByKey(data, 'startDate', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);
 
   const handleUpdateInternship = (updatedInternship: IInternship) => {
     setInternships((prevInternships: IInternship[]) =>
@@ -65,15 +69,11 @@ export function InternshipList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faMicroscope,
-    sectionTitle: 'Internship'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
       {internships.map((internship: IInternship, index: number) => (
         <Internship
             key={internship._id}

@@ -1,5 +1,5 @@
 import { Project, IProject } from './Project';
-import { ProjectsList } from './ProjectsList';
+import { ProjectsSection, ProjectsList } from './ProjectsList';
 
 export type {
     IProject,
@@ -8,4 +8,5 @@ export type {
 export {
     Project,
     ProjectsList,
+    ProjectsSection
 }

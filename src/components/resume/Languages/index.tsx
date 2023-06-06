@@ -1,5 +1,5 @@
 import { Language, ILanguage } from './Language';
-import { LanguagesList } from './LanguagesList';
+import { LanguagesSection, LanguagesList } from './LanguagesList';
 
 export type {
     ILanguage,
@@ -8,4 +8,5 @@ export type {
 export {
     Language,
     LanguagesList,
+    LanguagesSection
 }

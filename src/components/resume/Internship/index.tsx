@@ -1,5 +1,5 @@
 import { Internship, IInternship } from './Internship';
-import { InternshipList } from './InternshipList';
+import { InternshipSection, InternshipList } from './InternshipList';
 
 export type {
     IInternship,
@@ -8,4 +8,5 @@ export type {
 export {
     Internship,
     InternshipList,
+    InternshipSection
 }

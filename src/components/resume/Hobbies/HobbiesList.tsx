@@ -1,41 +1,43 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddSkill } from '@/components/resume/Skills';
 import { IHobby, Hobby } from "./Hobby";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagic } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Hobbies.module.scss';
 import { ISkillsListProps } from "../Skills/Skill";
-import { SectionControls, sortByKey } from "../common";
+import { ICommonResumeSectionProps, sortByKey } from "../common";
 import { compCreate, compDelete } from "../common/api-helpers";
+import { CommonSection } from "../common/Section";
 
 export interface IHobbiesListProps extends ISkillsListProps {}
 
 const URL_PATH = 'hobbies';
 
-export const HobbiesList = ({ data,
-                              editModeEnabled, 
-                              key=0,
-                              sectionName='hobbies',
-                              sectionOrder=0,
-                              sectionVisibility=true,
-                              handleSectionVisibility=() => {}, 
-                              handleSectionOrder=() => {} }: IHobbiesListProps) => {
+export const HobbiesSection = ({ editModeEnabled, 
+                                 sectionName,
+                                 order,
+                                 isVisible,
+                                 orderSetter,
+                                 visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faMagic}
+                       sectionTitle={'Hobbies'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
+
+export const HobbiesList = ({ data, editModeEnabled, sectionVisible }: IHobbiesListProps) => {
     let hobbiesObj = data;
     if (!editModeEnabled) {
         hobbiesObj = hobbiesObj.filter((el: IHobby) => el.isVisible);
     }
     const [hobbies, setHobbies] = useState<IHobby[]>(sortByKey(hobbiesObj, 'order', true));
-    const visibilityState = useState(sectionVisibility);
-    const orderingState = useState(sectionOrder);
-  
-    useEffect(() => {
-      handleSectionVisibility(sectionName, visibilityState[0]);
-    }, [visibilityState[0]]);
-  
-    useEffect(() => {
-      handleSectionOrder(sectionName, orderingState[0]);
-    }, [orderingState[0]]);
 
     const handleUpdateHobby = (updatedHobby: IHobby) => {
         setHobbies((prevHobbies: IHobby[]) =>
@@ -45,7 +47,7 @@ export const HobbiesList = ({ data,
         );
     };
 
-    const handleDeleteHobby = (hobbyId: number) => {
+    const handleDeleteHobby = (hobbyId: string) => {
         compDelete(URL_PATH, hobbyId, (_response) => {
             setHobbies((hobbies: IHobby[]) => 
                 hobbies.filter( el => el._id !== hobbyId )
@@ -63,18 +65,7 @@ export const HobbiesList = ({ data,
     };
 
     return (
-        <div key={key} className={visibilityState[0] ? styles.hobbys : `${styles.hobbys} ${styles.sectionHidden}`}>
-            <SectionControls
-                editModeEnabled={editModeEnabled}
-                styles={styles}
-                visibilityState={visibilityState}
-                orderingState={orderingState}
-            >
-                <h2>
-                    <FontAwesomeIcon icon={faMagic} />
-                    Hobbies
-                </h2>
-            </SectionControls>
+        <div className={sectionVisible ? styles.hobbys : `${styles.hobbys} ${styles.sectionHidden}`}>
             <div
                 className={styles.hobbysList}
             >

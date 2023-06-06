@@ -1,5 +1,5 @@
 import { AddSkill, GenericSkill, Skill, ISkill, ISimpleSkills } from './Skill';
-import { SkillsList } from './SkillsList';
+import { SkillsSection, SkillsList } from './SkillsList';
 
 export type {
     ISkill,
@@ -11,4 +11,5 @@ export {
     GenericSkill,
     Skill,
     SkillsList,
+    SkillsSection
 }

@@ -1,38 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 import {Project, IProject} from './Project';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Project.module.scss';
 import { compCreate, compDelete } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
+import { CommonSection } from '../common/Section';
+
+export const ProjectsSection = ({ editModeEnabled, 
+                                  sectionName,
+                                  order,
+                                  isVisible,
+                                  orderSetter,
+                                  visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faRulerCombined}
+                       sectionTitle={'Projects'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
+
 const URL_PATH = 'projects';
 
 export function ProjectsList({ data,
                                editModeEnabled, 
-                               key=0,
-                               forExport=false,
-                               sectionName='projects',
-                               sectionOrder=0,
-                               sectionVisibility=true,
-                               handleSectionVisibility=() => {}, 
-                               handleSectionOrder=() => {} }: IExperienceListProps) {
+                               sectionVisible,
+                               forExport=false, }: IExperienceListProps) {
   let experiences = data;
   const [projects, setProjects] = useState<IProject[]>(sortByKey(experiences, 'startDate', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);
 
   const handleUpdateProject = (updatedExperience: IProject) => {
     setProjects((prevExperiences: IProject[]) =>
@@ -64,15 +69,11 @@ export function ProjectsList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faRulerCombined,
-    sectionTitle: 'Projects'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
 
       {projects.map((experience: IProject, index: number) => (
         <Project

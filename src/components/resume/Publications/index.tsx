@@ -1,5 +1,5 @@
 import { Publication, IPublication } from './Publication';
-import { PublicationsList } from './PublicationsList';
+import { PublicationsSection, PublicationsList } from './PublicationsList';
 
 export type {
     IPublication,
@@ -8,4 +8,5 @@ export type {
 export {
     Publication,
     PublicationsList,
+    PublicationsSection
 }

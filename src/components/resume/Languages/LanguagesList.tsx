@@ -1,38 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddSkill } from '@/components/resume/Skills';
 import { ILanguage, Language } from "./Language";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Languages.module.scss';
 import { ISkillsListProps } from "../Skills/Skill";
-import { SectionControls, sortByKey } from "../common";
+import { ICommonResumeSectionProps, sortByKey } from "../common";
 import { compCreate, compDelete } from "../common/api-helpers";
+import { CommonSection } from '../common/Section';
+
+export const LanguagesSection = ({ editModeEnabled, 
+                                   sectionName,
+                                   order,
+                                   isVisible,
+                                   orderSetter,
+                                   visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faLanguage}
+                       sectionTitle={'Languages'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
 
 export interface ILanguagesListProps extends ISkillsListProps {}
 
 const URL_PATH = 'languages';
 
-export const LanguagesList = ({ data,
-                                editModeEnabled, 
-                                key=0,
-                                sectionName='languages',
-                                sectionOrder=0,
-                                sectionVisibility=true,
-                                handleSectionVisibility=() => {}, 
-                                handleSectionOrder=() => {} }: ILanguagesListProps) => {
+export const LanguagesList = ({ data, editModeEnabled, sectionVisible }: ILanguagesListProps) => {
     let languagesObj = data;
     const [languages, setLanguages] = useState<ILanguage[]>(sortByKey(languagesObj, 'order', true));
-    const visibilityState = useState(sectionVisibility);
-    const orderingState = useState(sectionOrder);
-  
-    useEffect(() => {
-      handleSectionVisibility(sectionName, visibilityState[0]);
-    }, [visibilityState[0]]);
-  
-    useEffect(() => {
-      handleSectionOrder(sectionName, orderingState[0]);
-    }, [orderingState[0]]);
 
     const handleUpdateLanguage = (updatedLanguage: ILanguage) => {
         setLanguages((prevLanguages: ILanguage[]) =>
@@ -42,7 +44,7 @@ export const LanguagesList = ({ data,
         );
     };
 
-    const handleDeleteLanguage = (languageId: number) => {
+    const handleDeleteLanguage = (languageId: string) => {
         compDelete(URL_PATH, languageId, (_response) => {
             setLanguages((languages: ILanguage[]) => 
                 languages.filter( el => el._id !== languageId )
@@ -61,18 +63,7 @@ export const LanguagesList = ({ data,
     };
 
     return (
-        <div key={key} className={visibilityState[0] ? styles.languages : `${styles.languages} ${styles.sectionHidden}`}>
-            <SectionControls
-                editModeEnabled={editModeEnabled}
-                styles={styles}
-                visibilityState={visibilityState}
-                orderingState={orderingState}
-            >
-                <h2>
-                    <FontAwesomeIcon icon={faLanguage} />
-                    Languages
-                </h2>
-            </SectionControls>
+        <div className={sectionVisible ? styles.languages : `${styles.languages} ${styles.sectionHidden}`}>
             <div
                 className={styles.languagesList}
             >

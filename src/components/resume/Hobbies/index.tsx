@@ -1,5 +1,5 @@
 import { Hobby, IHobby } from './Hobby';
-import { HobbiesList } from './HobbiesList';
+import { HobbiesSection, HobbiesList } from './HobbiesList';
 
 export type {
     IHobby,
@@ -8,4 +8,5 @@ export type {
 export {
     Hobby,
     HobbiesList,
+    HobbiesSection
 }

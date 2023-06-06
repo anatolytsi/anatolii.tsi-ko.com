@@ -1,5 +1,5 @@
 import { JobExperience, IJobExperience } from './JobExperience';
-import { JobExperienceList } from './JobExperienceList';
+import { JobExperienceSection, JobExperienceList } from './JobExperienceList';
 
 export type {
     IJobExperience,
@@ -8,4 +8,5 @@ export type {
 export {
     JobExperience,
     JobExperienceList,
+    JobExperienceSection
 }

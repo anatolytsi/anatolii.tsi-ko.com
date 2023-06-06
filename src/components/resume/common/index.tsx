@@ -3,23 +3,24 @@ import { faArrowDown, faArrowUp, faEye, faEyeSlash } from "@fortawesome/free-sol
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { IPersonalInfo } from "@/components/resume/PersonalInfo/common";
-import { IJobExperience, JobExperienceList } from '@/components/resume/Job';
-import { EduExperienceList, IEduExperience } from '@/components/resume/Education';
-import { IInternship, InternshipList } from '@/components/resume/Internship';
-import { ISimpleSkills, SkillsList } from '@/components/resume/Skills';
-import { ILanguage, LanguagesList } from '@/components/resume/Languages';
-import { CertificationList, ICertification } from '@/components/resume/Certifications';
-import { ProjectsList, IProject } from "@/components/resume/Projects";
-import { PublicationsList, IPublication } from "@/components/resume/Publications";
-import { HobbiesList, IHobby } from '@/components/resume/Hobbies';
+import { IJobExperience, JobExperienceList, JobExperienceSection } from '@/components/resume/Job';
+import { EduExperienceList, EduSection, IEduExperience } from '@/components/resume/Education';
+import { IInternship, InternshipList, InternshipSection } from '@/components/resume/Internship';
+import { ISimpleSkills, SkillsList, SkillsSection } from '@/components/resume/Skills';
+import { ILanguage, LanguagesList, LanguagesSection } from '@/components/resume/Languages';
+import { CertificationList, CertificationsSection, ICertification } from '@/components/resume/Certifications';
+import { ProjectsList, IProject, ProjectsSection } from "@/components/resume/Projects";
+import { PublicationsList, IPublication, PublicationsSection } from "@/components/resume/Publications";
+import { HobbiesList, HobbiesSection, IHobby } from '@/components/resume/Hobbies';
 
 export const WAIT_EFFECT = parseInt(process.env.WAIT_EFFECT ?? '2');
 
-export interface IResumeComponentSections {
+export interface IResumeComponentLists {
     forExport?: boolean
     isAdmin?: boolean
     editModeEnabled?: any
     personalInfo?: any
+    resumeSections?: any
     jobExperience: typeof JobExperienceList;
     education: typeof EduExperienceList;
     internships: typeof InternshipList;
@@ -35,6 +36,7 @@ export interface IResumeProps {
     forExport?: boolean
     isAdmin?: boolean
     editModeEnabled?: any
+    resumeSections: any
     personalInfo: IPersonalInfo
     jobExperience: IJobExperience[]
     education: IEduExperience[]
@@ -46,19 +48,43 @@ export interface IResumeProps {
     projects: IProject[]
     hobbies: IHobby[]
 }
-  
-export type TResumeSectionName = keyof IResumeComponentSections | keyof IResumeProps;
 
 export interface IResumeSectionComponent {
     data: any
     editModeEnabled: boolean
+    sectionVisible: boolean
     forExport?: boolean
-    key?: number
-    sectionName?: TResumeSectionName
-    sectionOrder?: number
-    sectionVisibility?: boolean
-    handleSectionVisibility?: any
-    handleSectionOrder?: any
+}
+
+export interface IResumeComponentSections {
+    forExport?: boolean
+    isAdmin?: boolean
+    editModeEnabled?: any
+    personalInfo?: any
+    resumeSections?: any
+    jobExperience: typeof JobExperienceSection;
+    education: typeof EduSection;
+    internships: typeof InternshipSection;
+    skills: typeof SkillsSection;
+    languages: typeof LanguagesSection;
+    certifications: typeof CertificationsSection;
+    publications: typeof PublicationsSection;
+    projects: typeof ProjectsSection;
+    hobbies: typeof HobbiesSection;
+}
+  
+export type TResumeSectionName = keyof IResumeComponentLists | keyof IResumeProps | keyof IResumeComponentSections;
+
+export type TResumeSectionOrder = (section: TResumeSectionName, order: number) => void;
+export type TResumeSectionVisibility = (section: TResumeSectionName, isVisible: boolean) => void;
+
+export interface ICommonResumeSectionProps {
+    editModeEnabled: boolean
+    sectionName: TResumeSectionName
+    order: number
+    isVisible: boolean
+    orderSetter: TResumeSectionOrder
+    visibilitySetter: TResumeSectionVisibility
 }
 
 export const sortByKey = (skills: {[key: string]: any}, key: string, reverse: boolean=false) => {
@@ -70,19 +96,20 @@ export const sortByKey = (skills: {[key: string]: any}, key: string, reverse: bo
     });
 }
 
-interface ISectionEditableProps {
+interface ISectionEditableProps extends ICommonResumeSectionProps {
     children: any
     editModeEnabled: boolean
     styles: any
-    visibilityState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-    orderingState: [number, React.Dispatch<React.SetStateAction<number>>]
 }
 
 export const SectionControls = ({ children, 
                                   editModeEnabled,
                                   styles, 
-                                  visibilityState, 
-                                  orderingState }: ISectionEditableProps) => {
+                                  sectionName,
+                                  order,
+                                  isVisible,
+                                  orderSetter, 
+                                  visibilitySetter }: ISectionEditableProps) => {
 
     return (
         <div className={styles.controlHeader}>
@@ -91,24 +118,24 @@ export const SectionControls = ({ children,
                 <div className={styles.controls}>
                     <button 
                         type="button" 
-                        onClick={() => {orderingState[1](orderingState[0] + 1)}}
+                        onClick={() => orderSetter(sectionName, order + 1)}
                         className={styles.editButton}
                     >
                         <FontAwesomeIcon icon={faArrowUp} size='lg' />
                     </button>
                     <button 
                         type="button" 
-                        onClick={() => {orderingState[1](orderingState[0] - 1)}}
+                        onClick={() => orderSetter(sectionName, order - 1)}
                         className={styles.editButton}
                     >
                         <FontAwesomeIcon icon={faArrowDown} size='lg' />
                     </button>
                     <button
                         type='button'
-                        onClick={() => {visibilityState[1](!visibilityState[0])}}
+                        onClick={() => visibilitySetter(sectionName, !isVisible)}
                         className={styles.visibilityButton}
                     >
-                    {visibilityState[0] ? 
+                    {isVisible ? 
                         (
                         <FontAwesomeIcon icon={faEye} size='lg' />
                         ) : (

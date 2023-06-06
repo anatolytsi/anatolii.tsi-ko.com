@@ -1,37 +1,40 @@
-import { useEffect, useState } from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 
 import {Certification, ICertification} from './Certification';
 
 import styles from './Certification.module.scss';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
+import { CommonSection } from '../common/Section';
+
+export const CertificationsSection = ({ editModeEnabled, 
+                                        sectionName,
+                                        order,
+                                        isVisible,
+                                        orderSetter,
+                                        visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faAward}
+                       sectionTitle={'Certifications'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
 
 const URL_PATH = 'certifications';
 
 export function CertificationList({ data,
                                     editModeEnabled, 
-                                    key=0,
-                                    forExport=false,
-                                    sectionName='certifications',
-                                    sectionOrder=0,
-                                    sectionVisibility=true,
-                                    handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: IExperienceListProps) {
+                                    sectionVisible,
+                                    forExport=false, }: IExperienceListProps) {
   const [certifications, setCertifications] = useState<ICertification[]>(sortByKey(data, 'date', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);
 
   const handleUpdateCertification = (updatedCertification: ICertification) => {
     setCertifications((prevCertifications: ICertification[]) =>
@@ -64,15 +67,11 @@ export function CertificationList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faAward,
-    sectionTitle: 'Certifications'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
 
       {certifications.map((certification: ICertification, index: number) => (
         <Certification

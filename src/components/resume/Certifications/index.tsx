@@ -1,5 +1,5 @@
 import { Certification, ICertification } from './Certification';
-import { CertificationList } from './CertificationList';
+import { CertificationsSection, CertificationList } from './CertificationList';
 
 export type {
     ICertification,
@@ -8,4 +8,5 @@ export type {
 export {
     Certification,
     CertificationList,
+    CertificationsSection,
 }

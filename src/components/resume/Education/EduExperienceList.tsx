@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,32 +6,37 @@ import { EduExperience, IEduExperience } from './EduExperience';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 import styles from './Education.module.scss';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 import { compCreate, compDelete } from '../common/api-helpers';
+import { CommonSection } from '../common/Section';
 
 const URL_PATH = 'education';
 
+export const EducationSection = ({ editModeEnabled, 
+                                   sectionName,
+                                   order,
+                                   isVisible,
+                                   orderSetter,
+                                   visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faGraduationCap}
+                       sectionTitle={'Education'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
+
 export function EduExperienceList({ data,
                                     editModeEnabled, 
-                                    key=0,
-                                    forExport=false,
-                                    sectionName='education',
-                                    sectionOrder=0,
-                                    sectionVisibility=true,
-                                    handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: IExperienceListProps) {
+                                    sectionVisible,
+                                    forExport=false, }: IExperienceListProps) {
   let experiences = data;
   const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByKey(experiences, 'startDate', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);    
 
   const handleUpdateEduExperience = (updatedExperience: IEduExperience) => {
     setEduExperiences((prevExperiences: IEduExperience[]) =>
@@ -65,15 +70,11 @@ export function EduExperienceList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faGraduationCap,
-    sectionTitle: 'Education'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
       {eduExperiences.map((experience: IEduExperience, index: number) => (
         <EduExperience
             key={experience._id}

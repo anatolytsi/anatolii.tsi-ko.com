@@ -1,37 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 import {Publication, IPublication} from './Publication';
-import { sortByKey } from '../common';
+import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Publication.module.scss';
 import { compCreate, compDelete } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
+import { CommonSection } from '../common/Section';
+
+export const PublicationsSection = ({ editModeEnabled, 
+                                      sectionName,
+                                      order,
+                                      isVisible,
+                                      orderSetter,
+                                      visibilitySetter }: ICommonResumeSectionProps) => {
+    return (
+        <CommonSection styles={styles}
+                       sectionName={sectionName}
+                       order={order}
+                       isVisible={isVisible}
+                       orderSetter={orderSetter}
+                       visibilitySetter={visibilitySetter}
+                       faIcon={faBookOpen}
+                       sectionTitle={'Publications'}
+                       editModeEnabled={editModeEnabled}/>
+    );
+}
 
 const URL_PATH = 'publications';
 
 export function PublicationsList({ data,
-                                    editModeEnabled, 
-                                    key=0,
-                                    forExport=false,
-                                    sectionName='publications',
-                                    sectionOrder=0,
-                                    sectionVisibility=true,
-                                    handleSectionVisibility=() => {}, 
-                                    handleSectionOrder=() => {} }: IExperienceListProps) {
+                                   editModeEnabled, 
+                                   sectionVisible,
+                                   forExport=false, }: IExperienceListProps) {
   const [publications, setPublications] = useState<IPublication[]>(sortByKey(data, 'date', true));
-  const visibilityState = useState(sectionVisibility);
-  const orderingState = useState(sectionOrder);
-
-  useEffect(() => {
-    handleSectionVisibility(sectionName, visibilityState[0]);
-  }, [visibilityState[0]]);
-
-  useEffect(() => {
-    handleSectionOrder(sectionName, orderingState[0]);
-  }, [orderingState[0]]);
 
   const handleUpdatePublication = (updatedPublication: IPublication) => {
     setPublications((prevPublications: IPublication[]) =>
@@ -62,15 +66,11 @@ export function PublicationsList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    editModeEnabled: editModeEnabled,
-    visibilityState: visibilityState,
-    orderingState: orderingState,
-    faIcon: faBookOpen,
-    sectionTitle: 'Publications'
+    sectionVisible: sectionVisible
   }
 
   return (
-    <List key={key} {...expListProps}>
+    <List {...expListProps}>
 
       {publications.map((publication: IPublication, index: number) => (
         <Publication

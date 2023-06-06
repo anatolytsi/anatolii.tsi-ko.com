@@ -1,5 +1,5 @@
 import { EduExperience, IEduExperience } from './EduExperience';
-import { EduExperienceList } from './EduExperienceList';
+import { EducationSection as EduSection, EduExperienceList } from './EduExperienceList';
 
 export type {
     IEduExperience,
@@ -8,4 +8,5 @@ export type {
 export {
     EduExperience,
     EduExperienceList,
+    EduSection
 }

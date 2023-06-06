@@ -4,17 +4,17 @@ import { faFilePdf, faPencil, faSave, faEllipsisV } from '@fortawesome/free-soli
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-import { IResumeComponentSections, IResumeProps, TResumeSectionName, sortByKey } from '@/components/resume/common';
+import { IResumeComponentLists, IResumeComponentSections, IResumeProps, TResumeSectionName, TResumeSectionOrder, TResumeSectionVisibility, sortByKey } from '@/components/resume/common';
 import { PersonalInfo } from '@/components/resume/PersonalInfo';
-import { JobExperienceList } from '@/components/resume/Job';
-import { EduExperienceList } from '@/components/resume/Education';
-import { InternshipList } from '@/components/resume/Internship';
-import { SkillsList } from '@/components/resume/Skills';
-import { LanguagesList } from '@/components/resume/Languages';
-import { CertificationList } from '@/components/resume/Certifications';
-import { ProjectsList } from '@/components/resume/Projects';
-import { PublicationsList } from '@/components/resume/Publications';
-import { HobbiesList } from '@/components/resume/Hobbies';
+import { JobExperienceList, JobExperienceSection } from '@/components/resume/Job';
+import { EduExperienceList, EduSection } from '@/components/resume/Education';
+import { InternshipList, InternshipSection } from '@/components/resume/Internship';
+import { SkillsList, SkillsSection } from '@/components/resume/Skills';
+import { LanguagesList, LanguagesSection } from '@/components/resume/Languages';
+import { CertificationList, CertificationsSection } from '@/components/resume/Certifications';
+import { ProjectsList, ProjectsSection } from '@/components/resume/Projects';
+import { PublicationsList, PublicationsSection } from '@/components/resume/Publications';
+import { HobbiesList, HobbiesSection } from '@/components/resume/Hobbies';
 
 import styles from './resume.module.scss';
 import { getSession } from 'next-auth/react';
@@ -25,8 +25,10 @@ import PDFLayout from '@/components/resume/PdfLayout';
 import pdfHelper from '@/lib/pdfHelper';
 import axios from 'axios';
 import Router from 'next/router';
+import { compUpdate } from '@/components/resume/common/api-helpers';
 
 interface IResumeSection {
+  _id?: string
   name: TResumeSectionName
   isVisible: boolean
   order: number
@@ -110,7 +112,7 @@ const RestButton = () => {
 export default function Resume( props: IResumeProps ) {
   let isAdmin = false;
 
-  let resumeMapping: IResumeComponentSections = {
+  let resumeListsMapping: IResumeComponentLists = {
     jobExperience: JobExperienceList,
     education: EduExperienceList,
     internships: InternshipList,
@@ -121,33 +123,48 @@ export default function Resume( props: IResumeProps ) {
     publications: PublicationsList,
     hobbies: HobbiesList,
   }
-
-  let resumeSectionsObj: IResumeSection[] = require('@/fixtures/resumeSections.json');
-  if (!isAdmin) {
-    resumeSectionsObj = resumeSectionsObj.filter((el: IResumeSection) => el.isVisible);
+  
+  let resumeSectionsMapping: IResumeComponentSections = {
+    jobExperience: JobExperienceSection,
+    education: EduSection,
+    internships: InternshipSection,
+    skills: SkillsSection,
+    languages: LanguagesSection,
+    certifications: CertificationsSection,
+    projects: ProjectsSection,
+    publications: PublicationsSection,
+    hobbies: HobbiesSection,
   }
 
-  const [resumeSections, setResumeSections] = useState(sortByKey(resumeSectionsObj, 'order', true));
+  const [resumeSections, setResumeSections] = useState<IResumeSection[]>(sortByKey(props.resumeSections, 'order', true));
   const [editModeEnabled, setEditModeEnabled] = useState(false);
 
   const changeResumeSection = (name: TResumeSectionName, parameter: string, value: number | boolean ) => {
+    let section: IResumeSection | undefined;
     setResumeSections((previousResumeSections: IResumeSection[]) =>
       sortByKey(previousResumeSections.map((resumeSection: IResumeSection, idx: number) => {
         if (resumeSection.name === name) {
-            return {...resumeSection, [parameter]: value};
+            section = {...resumeSection, [parameter]: value};
+            return section;
         } else {
           return resumeSection;
         }
       }), 'order', true)
     );
+    if (section?._id) {
+      compUpdate('resumeSections', section, section._id);
+    }
   };
 
-  const handleSectionVisibility = (name: TResumeSectionName, value: boolean) => {
-    changeResumeSection(name, 'isVisible', value);
+  const handleSectionVisibility: TResumeSectionVisibility = (section, isVisible) => {
+    changeResumeSection(section, 'isVisible', isVisible);
   }
 
-  const handleSectionOrder = (name: TResumeSectionName, value: number) => {
-    changeResumeSection(name, 'order', value);
+  const handleSectionOrder: TResumeSectionOrder = (section, order) => {
+    changeResumeSection(section, 'order', order);
+  }
+
+  const updateResumeSections = () => {
   }
 
   const renderEditResume = () => {
@@ -155,7 +172,10 @@ export default function Resume( props: IResumeProps ) {
       return (
         <div 
           className={`${styles.editResume} ${styles.stop}`}
-          onClick={() => {setEditModeEnabled(false)}}
+          onClick={() => {
+            setEditModeEnabled(false);
+            updateResumeSections();
+          }}
         >
           <FontAwesomeIcon icon={faSave} size='xl' />
         </div>
@@ -225,14 +245,16 @@ export default function Resume( props: IResumeProps ) {
       />
         {resumeSections.map((resumeSection: IResumeSection, idx: number) => (
           <div key={idx}>
-            {resumeMapping[resumeSection.name]({ key: idx,
-                                                forExport: props.forExport,
-                                                data: props[resumeSection.name],
-                                                editModeEnabled: editModeEnabled, 
-                                                sectionOrder: resumeSection.order,
-                                                sectionVisibility: resumeSection.isVisible,
-                                                handleSectionVisibility,
-                                                handleSectionOrder })}
+            {resumeSectionsMapping[resumeSection.name]({ editModeEnabled: editModeEnabled, 
+                                                         sectionName: resumeSection.name,
+                                                         order: resumeSection.order, 
+                                                         isVisible: resumeSection.isVisible,
+                                                         orderSetter: handleSectionOrder,
+                                                         visibilitySetter: handleSectionVisibility })}
+            {resumeListsMapping[resumeSection.name]({ data: props[resumeSection.name],
+                                                      editModeEnabled: editModeEnabled, 
+                                                      sectionVisible: resumeSection.isVisible,
+                                                      forExport: props.forExport })}
             </div>
         ))}
     </div>
@@ -255,6 +277,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
       await db.collection('skills').insertOne(require('@/fixtures/skills.json'));
+      await db.collection('resumeSections').insertMany(require('@/fixtures/resumeSections.json'));
       await db.collection('jobExperience').insertMany(require('@/fixtures/jobExperience.json'));
       await db.collection('education').insertMany(require('@/fixtures/education.json'));
       await db.collection('internships').insertMany(require('@/fixtures/internships.json'));
@@ -268,6 +291,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const personalInfo = await db.collection('personalInfo').findOne();
     const skills = await db.collection('skills').findOne();
     
+    const resumeSectionsCur = db.collection('resumeSections').find({});
     const jobExperienceCur = db.collection('jobExperience').find({});
     const educationCur = db.collection('education').find({});
     const internshipsCur = db.collection('internships').find({});
@@ -277,6 +301,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const publicationsCur = db.collection('publications').find({});
     const hobbiesCur = db.collection('hobbies').find({});
     
+    let resumeSections;
     let jobExperience;
     let education;
     let internships;
@@ -287,6 +312,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let hobbies;
 
     if (exportPDF || !isAdmin) {
+      resumeSections = await resumeSectionsCur.filter({ isVisible: true }).toArray()
       jobExperience = await jobExperienceCur.filter({ isVisible: true }).toArray()
       education = await educationCur.filter({ isVisible: true }).toArray()
       internships = await internshipsCur.filter({ isVisible: true }).toArray()
@@ -296,6 +322,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       publications = await publicationsCur.filter({ isVisible: true }).toArray()
       hobbies = await hobbiesCur.filter({ isVisible: true }).toArray()
     } else {
+      resumeSections = await resumeSectionsCur.toArray()
       jobExperience = await jobExperienceCur.toArray()
       education = await educationCur.toArray()
       internships = await internshipsCur.toArray()
@@ -306,9 +333,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
       hobbies = await hobbiesCur.toArray()
     }
 
-    const props = {
+    const props: IResumeProps = {
       forExport: false,
       isAdmin,
+      resumeSections: JSON.parse(JSON.stringify(resumeSections)),
       personalInfo: JSON.parse(JSON.stringify(personalInfo)),
       jobExperience: JSON.parse(JSON.stringify(jobExperience)),
       education: JSON.parse(JSON.stringify(education)),
@@ -350,6 +378,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     props: {
       forExport: false,
       isAdmin: false,
+      resumeSections: require('@/fixtures/resumeSections.json'),
       personalInfo: {},
       jobExperience: [],
       education: [],
