@@ -194,17 +194,6 @@ export default function Resume( props: IResumeProps ) {
     }
   }
 
-  const renderRestButton = () => {
-    return (
-      <div 
-        className={`${styles.restButton} ${styles.edit}`}
-        onClick={() => {setEditModeEnabled(true)}}
-      >
-        <FontAwesomeIcon icon={faEllipsisV} size='xl' />
-      </div>
-    );
-  }
-
   const renderAdminButtons = () => {
     if (props.isAdmin) {
       return (
