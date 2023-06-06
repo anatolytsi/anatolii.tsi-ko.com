@@ -20,19 +20,21 @@ export const CommonSection = ({ styles,
                                 sectionTitle,
                                 editModeEnabled=false}: ISectionProps) => {
     return (
-        <SectionControls
-            editModeEnabled={editModeEnabled}
-            styles={styles}
-            sectionName={sectionName}
-            order={order}
-            isVisible={isVisible}
-            orderSetter={orderSetter}
-            visibilitySetter={visibilitySetter}
-        >
-            <h2 className={styles.sectionTitle}>
-                <FontAwesomeIcon icon={faIcon} />
-                {sectionTitle}
-            </h2>
-        </SectionControls>
+        <div className={isVisible ? '' : styles.sectionHidden}>
+            <SectionControls
+                editModeEnabled={editModeEnabled}
+                styles={styles}
+                sectionName={sectionName}
+                order={order}
+                isVisible={isVisible}
+                orderSetter={orderSetter}
+                visibilitySetter={visibilitySetter}
+            >
+                <h2 className={styles.sectionTitle}>
+                    <FontAwesomeIcon icon={faIcon} />
+                    {sectionTitle}
+                </h2>
+            </SectionControls>
+        </div>
     );
 }

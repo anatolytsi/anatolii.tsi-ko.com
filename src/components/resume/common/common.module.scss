@@ -1,7 +1,14 @@
-// .sectionHidden {
-//   color: gray !important;
+$hiddenColor: gray !important;
 
-// }
+.sectionHidden {
+  color: $hiddenColor;
+
+  span,
+  input,
+  input::placeholder {
+    color: $hiddenColor;
+  }
+}
 
 $mainInfoColor: black;
 $addInfoColor: #666;

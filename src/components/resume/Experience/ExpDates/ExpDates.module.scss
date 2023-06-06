@@ -7,11 +7,11 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDates {
     font-style: italic;
-    color: black !important;
+    color: black;
     font-size: $expHeaderFontSize;
 
     ::placeholder {
-        color: black !important;
+        color: black;
         opacity: 1;
     }
 
