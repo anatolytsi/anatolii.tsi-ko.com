@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, WorkType, handleExpKeyDown } from '../Experience';
 import styles from './Job.module.scss';
@@ -28,6 +28,12 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
     setIsEditing(false);
     onUpdate(experience);
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Credentials, Date, EditableContent, Header, HeaderLine, Issuer, Title, handleExpKeyDown } from '../Experience';
 import styles from './Certification.module.scss';
@@ -29,6 +29,12 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
     setIsEditing(false);
     onUpdate(experience);
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)

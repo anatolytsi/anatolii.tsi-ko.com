@@ -32,6 +32,12 @@ export function PersonalInfo({ data, editModeEnabled, forExport=false }: Persona
     compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
   };
 
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
+
   const handleKeyDown = (event: any) => {
     if (isEditing) {
       let charCode = String.fromCharCode(event.which).toLowerCase();

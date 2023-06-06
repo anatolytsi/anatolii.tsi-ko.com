@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Grades, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Education.module.scss';
@@ -29,6 +29,12 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
     setIsEditing(false);
     onUpdate(experience);
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Internship.module.scss';
@@ -28,6 +28,12 @@ export function Internship({ internship, onUpdate, onDelete, editModeEnabled, is
     setIsEditing(false);
     onUpdate(experience)
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Title, Website, Websites, handleExpKeyDown } from '../Experience';
 import styles from './Project.module.scss';
@@ -25,6 +25,12 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
     setIsEditing(false);
     onUpdate(experience);
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)

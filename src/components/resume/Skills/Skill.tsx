@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faEdit, faSave, faTrash, faPlusCircle, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -82,6 +82,12 @@ export const GenericSkill = ({ skill,
         setIsEditing(false);
         onUpdate(skill);
     };
+
+    useEffect(() => {
+        if (isEditing) {
+            handleSave();
+        }
+    }, [editModeEnabled]);
 
     const getSkillStyle = () => {
         let className = `${styles[mainClsName]} ${isLast ? styles.last : ''}`;

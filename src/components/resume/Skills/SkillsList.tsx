@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ISkillsListProps,  ISimpleSkills } from "./Skill";
 import { faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 
@@ -40,6 +40,12 @@ export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsLis
         setIsEditing(false);
         compUpdate('skills', skills, skills._id, () => setSkills(skills));
     };
+
+    useEffect(() => {
+        if (isEditing) {
+            handleSave();
+        }
+    }, [editModeEnabled]);
 
     return (
         <div className={sectionVisible ? styles.skillsList : `${styles.skillsList} ${styles.sectionHidden}`}>

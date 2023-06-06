@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Content, Date, EditableContent, Header, HeaderLine, Title, Conference, handleExpKeyDown } from '../Experience';
 import styles from './Publication.module.scss';
@@ -27,6 +27,12 @@ export function Publication({ publication, onUpdate, onDelete, editModeEnabled, 
     setIsEditing(false);
     onUpdate(experience)
   };
+
+  useEffect(() => {
+      if (isEditing) {
+          handleSave();
+      }
+  }, [editModeEnabled]);
 
   const handleKeyDown = (event: any) => {
     handleExpKeyDown(event, isEditing, experience, setExperience, handleSave)
