@@ -110,8 +110,6 @@ const RestButton = () => {
 }
 
 export default function Resume( props: IResumeProps ) {
-  let isAdmin = false;
-
   let resumeListsMapping: IResumeComponentLists = {
     jobExperience: JobExperienceList,
     education: EduExperienceList,
@@ -138,19 +136,19 @@ export default function Resume( props: IResumeProps ) {
 
   const [resumeSections, setResumeSections] = useState<IResumeSection[]>(sortByKey(props.resumeSections, 'order', true));
   const [editModeEnabled, setEditModeEnabled] = useState(false);
+  const [isReloadPending, setIsReloadPending] = useState(false);
 
   const changeResumeSection = (name: TResumeSectionName, parameter: string, value: number | boolean ) => {
     let section: IResumeSection | undefined;
     setResumeSections((previousResumeSections: IResumeSection[]) =>
-      sortByKey(previousResumeSections.map((resumeSection: IResumeSection, idx: number) => {
+      previousResumeSections.map((resumeSection: IResumeSection, idx: number) => {
         if (resumeSection.name === name) {
             section = {...resumeSection, [parameter]: value};
             return section;
         } else {
           return resumeSection;
         }
-      }), 'order', true)
-    );
+      }))
     if (section?._id) {
       compUpdate('resumeSections', section, section._id);
     }
@@ -162,9 +160,13 @@ export default function Resume( props: IResumeProps ) {
 
   const handleSectionOrder: TResumeSectionOrder = (section, order) => {
     changeResumeSection(section, 'order', order);
+    setIsReloadPending(true);
   }
 
   const updateResumeSections = () => {
+    if (isReloadPending) {
+      Router.reload();
+    }
   }
 
   const renderEditResume = () => {
