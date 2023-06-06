@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import styles from './Hobbies.module.scss';
 import { GenericSkill, ISkill } from "../Skills";
-import { compUpdate } from "../common/api-helpers";
 
 export interface IHobby extends ISkill {}
 
@@ -17,10 +16,6 @@ export interface IHobbyProps {
 export const Hobby = ({ hobbyObj, onUpdate, onDelete, editModeEnabled, isLast }: IHobbyProps) => {
     const [hobby, setHobby] = useState(hobbyObj);
     const [isEditing, setIsEditing] = useState(false);
-  
-    useEffect(() => {
-      compUpdate('hobbies', hobby, hobby._id, (response) => onUpdate(response.data));
-    }, [hobby]);
 
     return (
         <GenericSkill

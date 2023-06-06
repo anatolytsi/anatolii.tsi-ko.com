@@ -6,7 +6,7 @@ import {Publication, IPublication} from './Publication';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Publication.module.scss';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
@@ -43,6 +43,7 @@ export function PublicationsList({ data,
         publication._id === updatedPublication._id ? updatedPublication : publication
       ), 'date', true)
     );
+    compUpdate(URL_PATH, updatedPublication, updatedPublication._id);
   };
 
   const handleDeletePublication = (publicationId: number) => {

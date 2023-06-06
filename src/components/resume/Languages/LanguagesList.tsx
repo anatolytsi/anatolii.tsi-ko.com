@@ -6,7 +6,7 @@ import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 import styles from './Languages.module.scss';
 import { ISkillsListProps } from "../Skills/Skill";
 import { ICommonResumeSectionProps, sortByKey } from "../common";
-import { compCreate, compDelete } from "../common/api-helpers";
+import { compCreate, compDelete, compUpdate } from "../common/api-helpers";
 import { CommonSection } from '../common/Section';
 
 export const LanguagesSection = ({ editModeEnabled, 
@@ -42,6 +42,7 @@ export const LanguagesList = ({ data, editModeEnabled, sectionVisible }: ILangua
                 language._id === updatedLanguage._id ? updatedLanguage : language
             ), 'order', true)
         );
+        compUpdate(URL_PATH, updatedLanguage, updatedLanguage._id);
     };
 
     const handleDeleteLanguage = (languageId: string) => {

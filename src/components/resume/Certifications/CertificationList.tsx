@@ -5,7 +5,7 @@ import {Certification, ICertification} from './Certification';
 
 import styles from './Certification.module.scss';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
@@ -42,6 +42,7 @@ export function CertificationList({ data,
         certification._id === updatedCertification._id ? updatedCertification : certification
       ), 'date', true)
     );
+    compUpdate(URL_PATH, updatedCertification, updatedCertification._id);
   };
 
   const handleDeleteCertification = (certificationId: number) => {

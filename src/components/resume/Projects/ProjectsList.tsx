@@ -6,7 +6,7 @@ import {Project, IProject} from './Project';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Project.module.scss';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 import { CommonSection } from '../common/Section';
@@ -45,6 +45,7 @@ export function ProjectsList({ data,
           experience._id === updatedExperience._id ? updatedExperience : experience
         ), 'startDate', true)
     );
+    compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };
 
   const handleDeleteProject = (experienceId: number) => {

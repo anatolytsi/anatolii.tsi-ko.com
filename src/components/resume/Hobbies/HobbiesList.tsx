@@ -6,7 +6,7 @@ import { faMagic } from '@fortawesome/free-solid-svg-icons';
 import styles from './Hobbies.module.scss';
 import { ISkillsListProps } from "../Skills/Skill";
 import { ICommonResumeSectionProps, sortByKey } from "../common";
-import { compCreate, compDelete } from "../common/api-helpers";
+import { compCreate, compDelete, compUpdate } from "../common/api-helpers";
 import { CommonSection } from "../common/Section";
 
 export interface IHobbiesListProps extends ISkillsListProps {}
@@ -33,11 +33,7 @@ export const HobbiesSection = ({ editModeEnabled,
 }
 
 export const HobbiesList = ({ data, editModeEnabled, sectionVisible }: IHobbiesListProps) => {
-    let hobbiesObj = data;
-    if (!editModeEnabled) {
-        hobbiesObj = hobbiesObj.filter((el: IHobby) => el.isVisible);
-    }
-    const [hobbies, setHobbies] = useState<IHobby[]>(sortByKey(hobbiesObj, 'order', true));
+    const [hobbies, setHobbies] = useState<IHobby[]>(sortByKey(data, 'order', true));
 
     const handleUpdateHobby = (updatedHobby: IHobby) => {
         setHobbies((prevHobbies: IHobby[]) =>
@@ -45,6 +41,7 @@ export const HobbiesList = ({ data, editModeEnabled, sectionVisible }: IHobbiesL
                 hobby._id === updatedHobby._id ? updatedHobby : hobby
             ), 'order', true)
         );
+        compUpdate(URL_PATH, updatedHobby, updatedHobby._id);
     };
 
     const handleDeleteHobby = (hobbyId: string) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ISkillsListProps,  ISimpleSkills } from "./Skill";
 import { faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,10 +31,6 @@ export const SkillsSection = ({ editModeEnabled,
 export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsListProps) => {
     const [skills, setSkills] = useState<ISimpleSkills>(data);
     const [isEditing, setIsEditing] = useState(false);
-  
-    useEffect(() => {
-      compUpdate('skills', skills, skills._id, (response) => setSkills(skills));
-    }, [skills]);
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -42,7 +38,7 @@ export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsLis
 
     const handleSave = () => {
         setIsEditing(false);
-        setSkills(skills);
+        compUpdate('skills', skills, skills._id, () => setSkills(skills));
     };
 
     return (

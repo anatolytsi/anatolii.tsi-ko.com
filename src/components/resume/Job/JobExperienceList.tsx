@@ -6,7 +6,7 @@ import {JobExperience, IJobExperience} from './JobExperience';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
 
 import styles from './Job.module.scss';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
@@ -44,6 +44,7 @@ export function JobExperienceList({ data,
           experience._id === updatedExperience._id ? updatedExperience : experience
         ), 'startDate', true)
     );
+    compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };
 
   const handleDeleteJobExperience = (experienceId: number) => {

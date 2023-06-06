@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Content, Date, EditableContent, Header, HeaderLine, Title, Conference, handleExpKeyDown } from '../Experience';
 import styles from './Publication.module.scss';
-import { compUpdate } from '../common/api-helpers';
 import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
 export interface IPublication extends IExperience {
@@ -23,14 +22,10 @@ interface IPublicationProps {
 export function Publication({ publication, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IPublicationProps) {
   const [experience, setExperience] = useState(publication);
   const [isEditing, setIsEditing] = useState(false);
-  
-  useEffect(() => {
-      compUpdate('publications', experience, experience._id, (response) => onUpdate(response.data));
-  }, [experience]);
 
   const handleSave = () => {
     setIsEditing(false);
-    setExperience(experience)
+    onUpdate(experience)
   };
 
   const handleKeyDown = (event: any) => {

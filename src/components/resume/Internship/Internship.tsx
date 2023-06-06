@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Internship.module.scss';
-import { compUpdate } from '../common/api-helpers';
 import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
 export interface IInternship extends IExperience {
@@ -24,14 +23,10 @@ interface IInternshipProps {
 export function Internship({ internship, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IInternshipProps) {
   const [experience, setExperience] = useState(internship);
   const [isEditing, setIsEditing] = useState(false);
-  
-  useEffect(() => {
-      compUpdate('internships', experience, experience._id, (response) => onUpdate(response.data));
-  }, [experience]);
 
   const handleSave = () => {
     setIsEditing(false);
-    setExperience(experience)
+    onUpdate(experience)
   };
 
   const handleKeyDown = (event: any) => {

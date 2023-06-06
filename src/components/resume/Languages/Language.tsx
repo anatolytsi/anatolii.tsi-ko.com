@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useState } from "react";
 
 import styles from './Languages.module.scss';
 import { GenericSkill, ISkill } from "../Skills";
-import { compUpdate } from "../common/api-helpers";
 
 export interface ILanguage extends ISkill {
     level: string
@@ -20,10 +18,6 @@ export interface ILanguageProps {
 export const Language = ({ languageObj, onUpdate, onDelete, editModeEnabled, isLast }: ILanguageProps) => {
     const [language, setLanguage] = useState(languageObj);
     const [isEditing, setIsEditing] = useState(false);
-  
-    useEffect(() => {
-      compUpdate('languages', language, language._id, (response) => onUpdate(response.data));
-    }, [language]);
 
     const renderLevel = () => {
         if (language.level) {

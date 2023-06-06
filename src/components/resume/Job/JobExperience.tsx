@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, WorkType, handleExpKeyDown } from '../Experience';
 import styles from './Job.module.scss';
-import { compUpdate } from '../common/api-helpers';
 import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
 export interface IJobExperience extends IExperience {
@@ -25,13 +24,9 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   
-  useEffect(() => {
-    compUpdate('jobExperience', experience, experience._id, (response) => onUpdate(response.data));
-  }, [experience]);
-
   const handleSave = () => {
     setIsEditing(false);
-    setExperience(experience);
+    onUpdate(experience);
   };
 
   const handleKeyDown = (event: any) => {

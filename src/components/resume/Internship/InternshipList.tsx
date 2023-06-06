@@ -6,7 +6,7 @@ import {Internship, IInternship} from './Internship';
 
 import styles from './Internship.module.scss';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
@@ -43,6 +43,7 @@ export function InternshipList({ data,
         internship._id === updatedInternship._id ? updatedInternship : internship
       ), 'startDate', true)
     );
+    compUpdate(URL_PATH, updatedInternship, updatedInternship._id);
   };
 
   const handleDeleteInternship = (internshipId: number) => {

@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Title, Website, Websites, handleExpKeyDown } from '../Experience';
 import styles from './Project.module.scss';
-import { compUpdate } from '../common/api-helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ICommonExperienceProps, IExpWebsite, IExperience } from '../Experience/common';
 
 export interface IProject extends IExperience {
@@ -23,14 +20,10 @@ interface IProjectProps {
 export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IProjectProps) {
   const [experience, setExperience] = useState<IProject>(project);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  
-  useEffect(() => {
-    compUpdate('projects', experience, experience._id, (response) => onUpdate(response.data));
-  }, [experience]);
 
   const handleSave = () => {
     setIsEditing(false);
-    setExperience(experience);
+    onUpdate(experience);
   };
 
   const handleKeyDown = (event: any) => {

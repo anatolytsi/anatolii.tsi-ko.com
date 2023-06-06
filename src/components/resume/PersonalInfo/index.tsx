@@ -23,17 +23,13 @@ export function PersonalInfo({ data, editModeEnabled, forExport=false }: Persona
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
-  }, [personalInfo]);
-
   const handleEdit = () => {
     setIsEditing(true);
   };
 
   const handleSave = () => {
     setIsEditing(false);
-    setPersonalInfo(personalInfo);
+    compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
   };
 
   const handleKeyDown = (event: any) => {

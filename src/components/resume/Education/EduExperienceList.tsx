@@ -7,7 +7,7 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 
 import styles from './Education.module.scss';
 import { ICommonResumeSectionProps, sortByKey } from '../common';
-import { compCreate, compDelete } from '../common/api-helpers';
+import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { CommonSection } from '../common/Section';
 
 const URL_PATH = 'education';
@@ -44,6 +44,7 @@ export function EduExperienceList({ data,
         experience._id === updatedExperience._id ? updatedExperience : experience
       ), 'startDate', true)
     );
+    compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };
 
   const handleDeleteEduExperience = (experienceId: number) => {

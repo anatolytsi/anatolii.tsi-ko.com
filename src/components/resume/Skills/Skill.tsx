@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faEdit, faSave, faTrash, faPlusCircle, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 
 import styles from './Skills.module.scss';
 import { IResumeSectionComponent } from "../common";
-import { compUpdate } from "../common/api-helpers";
 import { IExperience } from "../Experience";
 
 export interface ISkill {
@@ -186,11 +184,7 @@ export const GenericSkill = ({ skill,
 export const Skill = ({ skillObj, onUpdate, onDelete, editModeEnabled, isLast }: ISkillProps) => {
     const [skill, setSkill] = useState(skillObj);
     const [isEditing, setIsEditing] = useState(false);
-  
-    useEffect(() => {
-      compUpdate('skills', skill, skill._id, (response) => onUpdate(response.data));
-    }, [skill]);
-
+    
     return (
         <GenericSkill
             skill={skill}

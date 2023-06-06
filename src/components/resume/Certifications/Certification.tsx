@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Content, Credentials, Date, EditableContent, Header, HeaderLine, Issuer, Title, handleExpKeyDown } from '../Experience';
 import styles from './Certification.module.scss';
-import { compUpdate } from '../common/api-helpers';
 import { ICommonExperienceProps, IExperience } from '../Experience/common';
 
 export interface ICertification extends IExperience {
@@ -25,14 +24,10 @@ interface ICertificationProps {
 export function Certification({ certification, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: ICertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
-  
-  useEffect(() => {
-      compUpdate('certifications', experience, experience._id, (response) => onUpdate(response.data));
-  }, [experience]);
 
   const handleSave = () => {
     setIsEditing(false);
-    setExperience(experience)
+    onUpdate(experience);
   };
 
   const handleKeyDown = (event: any) => {
