@@ -1,13 +1,13 @@
 @import 'src/components/resume/Skills/Skills.module.scss';
 @import 'src/components/resume/common/common.module.scss';
 
-@include skills(language) {
-
-    .level,
-    .dash {
-        display: inline-block;
-        padding-left: 0.3rem;
+@include skillsList(language) {
+    @include skill(language){
+        .level,
+        .dash {
+            display: inline-block;
+            padding-left: 0.3rem;
+        }
     }
+    @include skillAdd(language);
 }
-
-

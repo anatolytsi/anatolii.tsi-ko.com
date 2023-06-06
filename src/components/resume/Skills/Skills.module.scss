@@ -3,32 +3,14 @@
 
 $skill-margin-right: 1rem;
 
-@mixin skills($name) {
-    
+@mixin skillsList($name) {
     .#{$name}sList {
         margin: 1rem $padding-experience;
-    
-        .#{$name} {
-            display: inline-block;
-            flex-direction: row;
-            padding-right: 1rem;
-            margin-bottom: 0.5rem;
-            margin-right: $skill-margin-right;
-            border-right: 1px solid black;
             @content;
-    
-            &.last {
-                border: none;
             }
-    
-            &.hidden {
-                color: lightgray !important;
             }
             
-            .title {
-                display: inline-block;
-            }
-    
+@mixin skillControls {
             .controls {
                 display: inline-block;
     
@@ -77,8 +59,33 @@ $skill-margin-right: 1rem;
                 }
             }
         }
+
+@mixin skill($name) {
+    .#{$name} {
+        display: inline-block;
+        flex-direction: row;
+        padding-right: 1rem;
+        margin-bottom: 0.5rem;
+        margin-right: $skill-margin-right;
+        border-right: 1px solid black;
+        @content;
+
+        &.last {
+            border: none;
+        }
+
+        &.hidden {
+            color: lightgray !important;
     }
 
+        .title {
+            display: inline-block;
+        }
+        @include skillControls;
+    }
+}
+
+@mixin skillAdd($name) {
     .#{$name}Add {
         display: inline-block;
         color: #4caf50;

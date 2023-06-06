@@ -1,4 +1,7 @@
 @import 'src/components/resume/Skills/Skills.module.scss';
 @import 'src/components/resume/common/common.module.scss';
 
-@include skills(hobby) {}
+@include skillsList(hobby) {
+    @include skill(hobby){}
+    @include skillAdd(hobby);
+}
