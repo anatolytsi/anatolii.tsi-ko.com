@@ -9,12 +9,20 @@ export const getImagePath = (imageName: string) => {
 }
 
 export const getImageFromName = (imageName: string) => {
-  return fs.readFileSync(getImagePath(imageName).replace('..', '.'));
+  try {
+    return fs.readFileSync(getImagePath(imageName).replace('..', '.'));
+  } catch (e) {
+    console.error(e);
+    return '';
+  }
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const imagePath = isArray(req.query.slug) ? req.query.slug.join('/') : req.query.slug!;
   const imageBuffer = getImageFromName(imagePath);
-  res.setHeader("Content-Type", "image");
-  return res.send(imageBuffer);
+  if (imageBuffer) {
+    res.setHeader("Content-Type", "image");
+    return res.status(200).send(imageBuffer);
+  }
+  return res.status(404);
 }
