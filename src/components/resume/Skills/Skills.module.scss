@@ -3,6 +3,7 @@
 @import 'src/components/resume/Experience/Experience.module.scss';
 
 $skill-margin-right: 1rem;
+$controls-width: 1rem;
 
 @mixin skillsList($name) {
     .#{$name}sList {
@@ -99,11 +100,14 @@ $skill-margin-right: 1rem;
     }
 }
 
-.skills {
-    .editing {
+.skillsList {
+    .skills {
         display: flex;
         flex-direction: row;
+
         .controls {
+            width: $controls-width;
+
             .editButton {
                 background-color: transparent;
                 color: #4caf50;
@@ -112,20 +116,24 @@ $skill-margin-right: 1rem;
                 padding: 0;
 
                 &:hover {
-                color: #3e8e41;
+                    color: #3e8e41;
                 }
 
                 &.isEditing {
-                background-color: transparent;
-                margin-top: 1rem;
-                color: red;
+                    background-color: transparent;
+                    color: red;
 
-                &:hover {
-                    color: orange;
+                    &:hover {
+                        color: orange;
+                    }
                 }
+
+                svg {
+                    width: $controls-width;
                 }
             }
         }
+
         .description {
             @include expDescription;
             margin: 0 $padding-experience;
@@ -138,6 +146,12 @@ $skill-margin-right: 1rem;
                     font-size: $expHeaderFontSize;
                 }
             }        
+        }
+
+        &.editing {
+            .description {
+                margin: 0 calc($padding-experience - $controls-width);
+            }
         }
     }
 }
