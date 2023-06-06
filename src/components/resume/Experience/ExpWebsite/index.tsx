@@ -128,12 +128,12 @@ export const ExpWebsites = (props: ICommonExperienceProps) => {
     return (
         <div className={props.styles.websites}>
             {props.exp?.websites?.map((website: IExpWebsite, index: number) => (
-                <>
+                <div className={props.styles.websitesInline} key={index}>
                     <ExpWebsite {...props} website={website} websiteIdx={index}/>
                     {!props.isEditing && (index != (props!.exp!.websites!.length - 1)) ?
                         <span className={props.styles.separator}>, </span>
                     :<></>}
-                </>
+                </div>
             ))}
             {props.isEditing ?
                 <button

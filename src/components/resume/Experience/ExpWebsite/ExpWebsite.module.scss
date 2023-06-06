@@ -50,7 +50,11 @@
             color: #3e8e41;
         }
     }
-          
+
+    .websitesInline {
+        display: inline;
+    }
+    
     .website {
       @include expWebsite;
     }
