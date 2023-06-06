@@ -24,7 +24,7 @@ export function PersonalInfo({ data, editModeEnabled, forExport=false }: Persona
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => {console.log(response.data); setPersonalInfo(personalInfo)});
+    compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
   }, [personalInfo]);
 
   const handleEdit = () => {
