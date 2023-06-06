@@ -21,9 +21,9 @@ export interface IPersonalInfo {
 }
 
 export interface IPersonalInfoCommonProps {
-    personalInfo: IPersonalInfo
+    personalInfo?: IPersonalInfo
     styles: any
-    setter: any
+    setter?: any
     isEditing: boolean
     keyDown?: any
     forExport?: boolean
