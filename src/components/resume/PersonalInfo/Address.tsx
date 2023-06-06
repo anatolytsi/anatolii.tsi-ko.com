@@ -3,7 +3,7 @@ import { IPersonalInfoCommonProps } from "./common"
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 export const Address = ({ personalInfo, styles, setter, keyDown, isEditing }: IPersonalInfoCommonProps) => {
-    const isDisplayed = !!personalInfo.address || isEditing;
+    const isDisplayed = !!personalInfo!.address || isEditing;
     return (
         <div className={isDisplayed ? styles.contactItem : ''}>
             {isDisplayed ? 
@@ -18,7 +18,7 @@ export const Address = ({ personalInfo, styles, setter, keyDown, isEditing }: IP
                     setter({ ...personalInfo, address: e.target.innerText })
                 }
             >
-                {personalInfo.address}
+                {personalInfo!.address}
             </span>
         </div>
     );

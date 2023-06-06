@@ -12,18 +12,18 @@ export const Birthday = ({ personalInfo, styles, setter, keyDown, isEditing }: I
         var ageDate = new Date(ageDifMs);
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
-    const [age, setAge] = useState(getYears(personalInfo.birthday))
+    const [age, setAge] = useState(getYears(personalInfo!.birthday))
   
     useEffect(() => {
-        setAge(getYears(personalInfo.birthday));
-    }, [personalInfo.birthday]);
+        setAge(getYears(personalInfo!.birthday));
+    }, [personalInfo!.birthday]);
 
     return (
       <div className={styles.contactItem}>
         <FontAwesomeIcon icon={faBirthdayCake} />
         <DatePicker
           wrapperClassName={styles.birthday}
-          selected={new Date(personalInfo.birthday)}
+          selected={new Date(personalInfo!.birthday)}
           className={isEditing ? styles.editingBirthday : ''}
           readOnly={!isEditing}
           onChange={(birthday: Date) => setter({ ...personalInfo, birthday: birthday.getTime() })}

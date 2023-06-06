@@ -21,14 +21,14 @@ export const Summary = ({ personalInfo, styles, setter, keyDown, isEditing, forE
             <div className={styles.summary} onKeyDown={keyDown}>
                 {isEditing ? (
                 <SimpleMDEEditor
-                    value={personalInfo.summary}
+                    value={personalInfo!.summary}
                     onChange={value =>
                         setter({ ...personalInfo, summary: value })
                     }
                 />
                 ) : (
                 <DescriptionClamp styles={styles} showClamp={!forExport}>
-                    <Markdown>{personalInfo.summary}</Markdown>
+                    <Markdown>{personalInfo!.summary}</Markdown>
                 </DescriptionClamp>
                 )}
             </div>
