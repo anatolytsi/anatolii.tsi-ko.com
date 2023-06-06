@@ -13,7 +13,7 @@ const SimpleMDEEditor = dynamic(
 
 export const ExpDescription = ({ styles,
                                  isEditing,
-                                 keyDown,
+                                 keyDown=() => {},
                                  showClamp,
                                  setter,
                                  exp }: ICommonExperienceProps) => {
