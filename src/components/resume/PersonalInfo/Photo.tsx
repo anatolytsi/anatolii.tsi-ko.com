@@ -36,6 +36,8 @@ export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IP
     useEffect(() => {
       if (!forExport) {
         checkPhotoExists();
+      } else {
+        setPhotoExist(true);
       }
       
       if (!file) {
