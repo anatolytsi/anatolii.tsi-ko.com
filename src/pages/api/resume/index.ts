@@ -13,11 +13,12 @@ handler.get(async (req: IDbApiRequest, res: NextApiResponse) => {
     if (session?.user?.role === 'admin') {
         try {
             const personalInfo = await req.db.collection('personalInfo').findOne();
+            const skills = await req.db.collection('skills').findOne();
     
+            const resumeSections = await req.db.collection('resumeSections').find({}).toArray();
             const jobExperience = await req.db.collection('jobExperience').find({}).toArray();
             const education = await req.db.collection('education').find({}).toArray();
             const internships = await req.db.collection('internships').find({}).toArray();
-            const skills = await req.db.collection('skills').find({}).toArray();
             const languages = await req.db.collection('languages').find({}).toArray();
             const certifications = await req.db.collection('certifications').find({}).toArray();
             const projects = await req.db.collection('projects').find({}).toArray();
@@ -25,6 +26,7 @@ handler.get(async (req: IDbApiRequest, res: NextApiResponse) => {
             const hobbies = await req.db.collection('hobbies').find({}).toArray();
             
             const resumeData = {
+                resumeSections,
                 personalInfo,
                 jobExperience,
                 education,
