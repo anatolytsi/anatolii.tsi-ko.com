@@ -131,10 +131,11 @@ $skill-margin-right: 1rem;
             margin: 0 $padding-experience;
 
             p {
+                font-size: $expAddInfoFontSize;
                 strong {
                     display: block;
                     padding-top: 1rem;
-                    font-size: calc(1.1 * $expDescrFontSize);
+                    font-size: $expHeaderFontSize;
                 }
             }        
         }
