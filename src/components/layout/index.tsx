@@ -17,6 +17,7 @@ const Navbar = () => {
   const [clickCounter, setClickCounter] = useState(0);
   const showLogin = useRef(false);
   const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     console.log(clickCounter)
@@ -24,6 +25,20 @@ const Navbar = () => {
       showLogin.current = true;
     }
   }, [clickCounter])
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (navActive && ref.current && !ref.current.contains(event.target)) {
+        setNavActive(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navActive]);
 
   const renderAuthButtons = () => {
     if (session) {
@@ -62,7 +77,7 @@ const Navbar = () => {
           <div></div>
           <div></div>
         </div>
-        <div className={`${navActive ? styles.active : ""} ${styles.list}`}>
+        <div className={`${navActive ? styles.active : ""} ${styles.list}`} ref={ref}>
           {MENU_LIST.map((menu, idx) => (
             <NavItem active={menu.href === router.pathname} {...menu} key={idx}/>
           ))}
