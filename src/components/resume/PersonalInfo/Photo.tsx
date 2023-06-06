@@ -20,7 +20,7 @@ const PhotoUpload = ({children, isEditing, uploadPhoto}: any) => {
     }
 }
 
-export const Photo = ({ personalInfo, styles, setter, keyDown, isEditing }: IPersonalInfoCommonProps) => {
+export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IPersonalInfoCommonProps) => {
     const [file, setFile] = useState(null);
     const [photoExist, setPhotoExist] = useState(false);
 
@@ -34,7 +34,9 @@ export const Photo = ({ personalInfo, styles, setter, keyDown, isEditing }: IPer
     }
 
     useEffect(() => {
-      checkPhotoExists();
+      if (!forExport) {
+        checkPhotoExists();
+      }
       
       if (!file) {
         return;
