@@ -6,12 +6,17 @@ import axios from 'axios';
 import styles from './Skills.module.scss';
 import { IResumeSectionComponent } from "../common";
 import { compUpdate } from "../common/api-helpers";
+import { IExperience } from "../Experience";
 
 export interface ISkill {
-    _id?: number
+    _id?: string
     title: string
     order: number
     isVisible: boolean
+}
+
+export interface ISimpleSkills extends IExperience {
+    description: string
 }
 
 export interface ISkillProps {

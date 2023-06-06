@@ -1,64 +1,65 @@
 @import 'src/styles/common/variables';
 @import 'src/components/resume/common/common.module.scss';
+@import 'src/components/resume/Experience/Experience.module.scss';
 
 $skill-margin-right: 1rem;
 
 @mixin skillsList($name) {
     .#{$name}sList {
         margin: 1rem $padding-experience;
-            @content;
-            }
-            }
-            
+        @content;
+    }
+}
+
 @mixin skillControls {
-            .controls {
-                display: inline-block;
-    
-                .visibilityButton,
-                .editButton,
-                .deleteButton {
-                    padding: 0;
-                    background-color: transparent;
-                    border: 0;
-                }
+    .controls {
+        display: inline-block;
 
-                .visibilityButton {
-                    color: orange;
+        .visibilityButton,
+        .editButton,
+        .deleteButton {
+            padding: 0;
+            background-color: transparent;
+            border: 0;
+        }
 
-                    &:hover {
-                      color: rgb(173, 115, 7);
-                    }
-                }
+        .visibilityButton {
+            color: orange;
 
-                .editButton {
-                    color: #4caf50;
-
-                    &:hover {
-                      color: #3e8e41;
-                    }
-
-                    &.isEditing {
-                      color: red;
-                  
-                      &:hover {
-                        color: orange;
-                      }
-                    }
-                }
-
-                .deleteButton {
-                    color: red;
-
-                    &:hover {
-                      color: crimson;
-                    }
-                }
-    
-                svg {
-                    padding: 0 0.3rem;
-                }
+            &:hover {
+              color: rgb(173, 115, 7);
             }
         }
+
+        .editButton {
+            color: #4caf50;
+
+            &:hover {
+              color: #3e8e41;
+            }
+
+            &.isEditing {
+              color: red;
+          
+              &:hover {
+                color: orange;
+              }
+            }
+        }
+
+        .deleteButton {
+            color: red;
+
+            &:hover {
+              color: crimson;
+            }
+        }
+
+        svg {
+            padding: 0 0.3rem;
+        }
+    }
+}
 
 @mixin skill($name) {
     .#{$name} {
@@ -76,8 +77,8 @@ $skill-margin-right: 1rem;
 
         &.hidden {
             color: lightgray !important;
-    }
-
+        }
+        
         .title {
             display: inline-block;
         }
@@ -98,4 +99,45 @@ $skill-margin-right: 1rem;
     }
 }
 
-@include skills(skill){};
+.skills {
+    .editing {
+        display: flex;
+        flex-direction: row;
+        .controls {
+            .editButton {
+                background-color: transparent;
+                color: #4caf50;
+                border: 0;
+                transition: 0.3s;
+                padding: 0;
+
+                &:hover {
+                color: #3e8e41;
+                }
+
+                &.isEditing {
+                background-color: transparent;
+                margin-top: 1rem;
+                color: red;
+
+                &:hover {
+                    color: orange;
+                }
+                }
+            }
+        }
+        .description {
+            @include expDescription;
+            margin: 0 $padding-experience;
+
+            p {
+                strong {
+                    display: block;
+                    padding-top: 1rem;
+                    font-size: calc(1.1 * $expDescrFontSize);
+                }
+            }        
+        }
+    }
+}
+

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { ISkillsListProps, ISkill, Skill, AddSkill } from "./Skill";
+import { ISkillsListProps,  ISimpleSkills } from "./Skill";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Skills.module.scss';
-import { SectionControls, sortByKey } from "../common";
-import { compCreate, compDelete } from "../common/api-helpers";
+import { SectionControls } from "../common";
+import { compUpdate } from "../common/api-helpers";
+import { Description } from "../Experience";
+import { EditButton } from "../PersonalInfo/EditButton";
 
-const URL_PATH = 'skills';
 
 export const SkillsList = ({ data,
                              editModeEnabled, 
@@ -16,8 +17,8 @@ export const SkillsList = ({ data,
                              sectionVisibility=true,
                              handleSectionVisibility=() => {}, 
                              handleSectionOrder=() => {} }: ISkillsListProps) => {
-    let skillsObj = data;
-    const [skills, setSkills] = useState<ISkill[]>(sortByKey(skillsObj, 'order', true));
+    const [skills, setSkills] = useState<ISimpleSkills>(data);
+    const [isEditing, setIsEditing] = useState(false);
     const visibilityState = useState(sectionVisibility);
     const orderingState = useState(sectionOrder);
   
@@ -28,30 +29,18 @@ export const SkillsList = ({ data,
     useEffect(() => {
       handleSectionOrder(sectionName, orderingState[0]);
     }, [orderingState[0]]);
+  
+    useEffect(() => {
+      compUpdate('skills', skills, skills._id, (response) => setSkills(skills));
+    }, [skills]);
 
-    const handleUpdateSkill = (updatedSkill: ISkill) => {
-        setSkills((prevSkills: ISkill[]) =>
-            sortByKey(prevSkills.map((skill: ISkill) =>
-                skill._id === updatedSkill._id ? updatedSkill : skill
-            ), 'order', true)
-        );
+    const handleEdit = () => {
+        setIsEditing(true);
     };
 
-    const handleDeleteSkill = (skillId: number) => {
-        compDelete(URL_PATH, skillId, (_response) => {
-            setSkills((skills: ISkill[]) => 
-                skills.filter( el => el._id !== skillId )
-            );
-        });
-    };
-
-    const handleAddSkill = () => {
-      let skill: ISkill = {
-        title: 'New skill',
-        order: 0,
-        isVisible: false,
-      }
-      compCreate(URL_PATH, skill, (response) => setSkills([...skills, response.data]));
+    const handleSave = () => {
+        setIsEditing(false);
+        setSkills(skills);
     };
 
     return (
@@ -67,23 +56,10 @@ export const SkillsList = ({ data,
                     Skills
                 </h2>
             </SectionControls>
-            <div className={styles.skillsList}>
-                <div>
-                    {skills.map((skill: ISkill, index: number) => (
-                        <Skill
-                            key={skill._id}
-                            skillObj={skill}
-                            onUpdate={handleUpdateSkill}
-                            onDelete={handleDeleteSkill}
-                            editModeEnabled={editModeEnabled}
-                            isLast={index === skills.length - 1}
-                        />
-                    ))}
-                </div>
-                <AddSkill 
-                    handleAddSkill={handleAddSkill}
-                    editModeEnabled={editModeEnabled}
-                />
+            <div className={styles.editing}>
+                <EditButton isEditing={isEditing} styles={styles} setSave={handleSave} setEdit={handleEdit} editModeEnabled={editModeEnabled}/>
+                {/* {skills.description} */}
+                <Description styles={styles} isEditing={isEditing} showClamp={false} exp={skills} setter={setSkills}/>
             </div>
         </div>
     );

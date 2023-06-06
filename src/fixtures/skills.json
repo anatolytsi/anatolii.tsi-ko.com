@@ -1,27 +1,3 @@
-[
-    {
-        "title": "C",
-        "order": 4,
-        "isVisible": true
-    },
-    {
-        "title": "Python",
-        "order": 3,
-        "isVisible": true
-    },
-    {
-        "title": "JavaScript",
-        "order": 2,
-        "isVisible": true
-    },
-    {
-        "title": "TypeScript",
-        "order": 1,
-        "isVisible": true
-    },
-    {
-        "title": "React",
-        "order": 0,
-        "isVisible": false
-    }
-]
+{
+    "description": "**Programming**\nC, Python, JavaScript, TypeScript"
+}

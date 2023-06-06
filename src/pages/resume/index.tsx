@@ -254,10 +254,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
+      await db.collection('skills').insertOne(require('@/fixtures/skills.json'));
       await db.collection('jobExperience').insertMany(require('@/fixtures/jobExperience.json'));
       await db.collection('education').insertMany(require('@/fixtures/education.json'));
       await db.collection('internships').insertMany(require('@/fixtures/internships.json'));
-      await db.collection('skills').insertMany(require('@/fixtures/skills.json'));    
       await db.collection('languages').insertMany(require('@/fixtures/languages.json'));
       await db.collection('certifications').insertMany(require('@/fixtures/certifications.json'));
       await db.collection('projects').insertMany(require('@/fixtures/projects.json'));
@@ -266,11 +266,11 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     const personalInfo = await db.collection('personalInfo').findOne();
+    const skills = await db.collection('skills').findOne();
     
     const jobExperienceCur = db.collection('jobExperience').find({});
     const educationCur = db.collection('education').find({});
     const internshipsCur = db.collection('internships').find({});
-    const skillsCur = db.collection('skills').find({});    
     const languagesCur = db.collection('languages').find({});
     const certificationsCur = db.collection('certifications').find({});
     const projectsCur = db.collection('projects').find({});
@@ -280,7 +280,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let jobExperience;
     let education;
     let internships;
-    let skills;
     let languages;
     let certifications;
     let projects;
@@ -291,7 +290,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       jobExperience = await jobExperienceCur.filter({ isVisible: true }).toArray()
       education = await educationCur.filter({ isVisible: true }).toArray()
       internships = await internshipsCur.filter({ isVisible: true }).toArray()
-      skills = await skillsCur.filter({ isVisible: true }).toArray()
       languages = await languagesCur.filter({ isVisible: true }).toArray()
       certifications = await certificationsCur.filter({ isVisible: true }).toArray()
       projects = await projectsCur.filter({ isVisible: true }).toArray()
@@ -301,7 +299,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       jobExperience = await jobExperienceCur.toArray()
       education = await educationCur.toArray()
       internships = await internshipsCur.toArray()
-      skills = await skillsCur.toArray()
       languages = await languagesCur.toArray()
       certifications = await certificationsCur.toArray()
       projects = await projectsCur.toArray()
@@ -353,11 +350,11 @@ export const getServerSideProps = async (context: NextPageContext) => {
     props: {
       forExport: false,
       isAdmin: false,
-      personalInfo: [],
+      personalInfo: {},
       jobExperience: [],
       education: [],
       internships: [],
-      skills: [],
+      skills: {},
       languages: [],
       certifications: [],
       projects: [],

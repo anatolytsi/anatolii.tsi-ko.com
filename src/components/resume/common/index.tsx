@@ -6,7 +6,7 @@ import { IPersonalInfo } from "@/components/resume/PersonalInfo/common";
 import { IJobExperience, JobExperienceList } from '@/components/resume/Job';
 import { EduExperienceList, IEduExperience } from '@/components/resume/Education';
 import { IInternship, InternshipList } from '@/components/resume/Internship';
-import { ISkill, SkillsList } from '@/components/resume/Skills';
+import { ISimpleSkills, SkillsList } from '@/components/resume/Skills';
 import { ILanguage, LanguagesList } from '@/components/resume/Languages';
 import { CertificationList, ICertification } from '@/components/resume/Certifications';
 import { ProjectsList, IProject } from "@/components/resume/Projects";
@@ -39,7 +39,7 @@ export interface IResumeProps {
     jobExperience: IJobExperience[]
     education: IEduExperience[]
     internships: IInternship[]
-    skills: ISkill[]
+    skills: ISimpleSkills
     languages: ILanguage[]
     certifications: ICertification[]
     publications: IPublication[]
