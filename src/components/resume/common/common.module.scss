@@ -32,6 +32,11 @@ $infoSumFontSize: $expDescrFontSize;
     .controls {
       display: inline-block;
 
+      .order {
+        display: inline-block;
+        margin: 0.3rem 0;
+      }
+
       .visibilityButton,
       .editButton,
       .deleteButton {

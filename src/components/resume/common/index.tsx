@@ -116,6 +116,7 @@ export const SectionControls = ({ children,
             {children}
             {editModeEnabled ? (
                 <div className={styles.controls}>
+                    <p className={styles.order}>{order}</p>
                     <button 
                         type="button" 
                         onClick={() => orderSetter(sectionName, order + 1)}
