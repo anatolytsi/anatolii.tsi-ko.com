@@ -7,12 +7,15 @@ import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 export const Birthday = ({ personalInfo, styles, setter, keyDown, isEditing }: IPersonalInfoCommonProps) => {
-    const getYears = (birthdayMilis: any) => {
-        let ageDifMs = Date.now() - birthdayMilis;
+    if (typeof personalInfo?.birthday === 'number') {
+        setter({ ...personalInfo, birthday: (new Date(personalInfo.birthday)).toString() })
+    }
+    const getYears = (birthdayDate: any) => {
+        let ageDifMs = Date.now() - Date.parse(birthdayDate);
         var ageDate = new Date(ageDifMs);
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
-    const today = new Date();
+    const birthdayUnnormal = new Date(personalInfo?.birthday ? personalInfo.birthday : '');
     const [age, setAge] = useState(getYears(personalInfo?.birthday))
   
     useEffect(() => {
@@ -24,10 +27,10 @@ export const Birthday = ({ personalInfo, styles, setter, keyDown, isEditing }: I
         <FontAwesomeIcon icon={faBirthdayCake} />
         <DatePicker
           wrapperClassName={styles.birthday}
-          selected={new Date(personalInfo?.birthday ?? 0 + Math.abs(today.getTimezoneOffset()*60000))}
+          selected={personalInfo?.birthday ? new Date(birthdayUnnormal.getTime() - birthdayUnnormal.getTimezoneOffset() * -60000) : new Date()}
           className={isEditing ? styles.editingBirthday : ''}
           readOnly={!isEditing}
-          onChange={(birthday: Date) => setter({ ...personalInfo, birthday: birthday.getTime() })}
+          onChange={(birthday: Date) => setter({ ...personalInfo, birthday: birthday.toString() })}
           dateFormat="dd.MM.yyyy"
         />
         <div className={styles.years}>

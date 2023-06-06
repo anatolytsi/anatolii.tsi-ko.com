@@ -11,7 +11,7 @@ export type IWebsite = {
 export interface IPersonalInfo {
     _id?: string
     fullName: string
-    birthday: number
+    birthday: string
     photoSrc: any
     address: string
     phone: string
