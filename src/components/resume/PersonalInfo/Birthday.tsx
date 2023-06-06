@@ -23,7 +23,7 @@ export const Birthday = ({ personalInfo, styles, setter, keyDown, isEditing }: I
         <FontAwesomeIcon icon={faBirthdayCake} />
         <DatePicker
           wrapperClassName={styles.birthday}
-          selected={new Date(personalInfo?.birthday ?? 0)}
+          selected={new Date(personalInfo?.birthday ?? 0 + /* margin to ensure correct date from start */ 1000000 ?? 0)}
           className={isEditing ? styles.editingBirthday : ''}
           readOnly={!isEditing}
           onChange={(birthday: Date) => setter({ ...personalInfo, birthday: birthday.getTime() })}
