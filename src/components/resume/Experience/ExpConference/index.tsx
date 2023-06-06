@@ -21,7 +21,7 @@ export const ExpConference = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.conference}
+                    {exp?.conference}
                 </span>
             </div>
             <div className={styles.conferenceLink}>
@@ -35,7 +35,7 @@ export const ExpConference = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.conferenceLink}
+                    {exp?.conferenceLink}
                 </span>
             </div>
         </>
@@ -44,12 +44,12 @@ export const ExpConference = ({ styles,
         conference = (
             <>
                 <div className={styles.conference}>
-                    {exp!.conferenceLink ? (
-                        <a href={exp!.conferenceLink}>
-                            <h4>{exp!.conference}</h4>
+                    {exp?.conferenceLink ? (
+                        <a href={exp?.conferenceLink}>
+                            <h4>{exp?.conference}</h4>
                         </a>
                     ) : (
-                        <h4>{exp!.conference}</h4>
+                        <h4>{exp?.conference}</h4>
                     )}
                 </div>
             </>

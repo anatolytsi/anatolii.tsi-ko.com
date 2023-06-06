@@ -17,7 +17,7 @@ export const ExpTitle = ({ styles,
                 suppressContentEditableWarning
                 onKeyDown={keyDown}
             >
-                {exp!.title}
+                {exp?.title}
             </h3>
         </div>
     );

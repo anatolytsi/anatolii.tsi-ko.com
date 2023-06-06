@@ -15,7 +15,7 @@ export const ExpDate = ({ isEditing,
         <div className={styles.date}>
             <DatePicker
                 wrapperClassName={styles.datePicker}
-                selected={new Date(exp!.date!)}
+                selected={new Date(exp?.date ?? 0)}
                 className={isEditing ? styles.editingDate : ''}
                 readOnly={!isEditing}
                 onChange={(date: Date) => setter({...exp, date: date.getTime()})}
@@ -32,13 +32,13 @@ export const ExpDates = ({ isEditing,
 
     const updateDate = (datekey: 'startDate' | 'endDate', date: Date) => {
         let dateMs: number = date.getTime();
-        if ((datekey === 'endDate' && exp!.startDate! > dateMs) ||
-            (datekey === 'startDate' && dateMs > exp!.endDate!)) {
+        if ((datekey === 'endDate' && exp?.startDate! > dateMs) ||
+            (datekey === 'startDate' && dateMs > exp?.endDate!)) {
     
             if (datekey === 'startDate') {
                 setter({...exp, endDate: dateMs, startDate: dateMs});
             } else {
-                setter({...exp, endDate: exp!.startDate});
+                setter({...exp, endDate: exp?.startDate});
             }
             return;
         }
@@ -55,7 +55,7 @@ export const ExpDates = ({ isEditing,
         <div className={styles.dates}>
             <DatePicker
                 wrapperClassName={styles.datePicker}
-                selected={new Date(exp!.startDate!)}
+                selected={new Date(exp?.startDate ?? 0)}
                 className={isEditing ? styles.editingStartDate : ''}
                 readOnly={!isEditing}
                 onChange={(date: Date) => updateDate('startDate', date)}
@@ -64,7 +64,7 @@ export const ExpDates = ({ isEditing,
             <span className={styles.datesDash}>-</span>
             <DatePicker
                 wrapperClassName={endDateClass}
-                selected={exp!.endDate ? new Date(exp!.endDate!) : null}
+                selected={new Date(exp?.endDate ?? 0)}
                 className={isEditing ? styles.editingEndDate : ''}
                 readOnly={!isEditing}
                 onChange={(date: Date) => updateDate('endDate', date)}

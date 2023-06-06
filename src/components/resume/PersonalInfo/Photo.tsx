@@ -26,7 +26,7 @@ export const Photo = ({ personalInfo, styles, setter, keyDown, isEditing }: IPer
 
     const checkPhotoExists = async () => {
       try {
-        let response = await axios.get(personalInfo!.photoSrc);
+        let response = await axios.get(personalInfo?.photoSrc);
         setPhotoExist(response.status !== 404);
       } catch(e) {
         setPhotoExist(false);
@@ -58,10 +58,10 @@ export const Photo = ({ personalInfo, styles, setter, keyDown, isEditing }: IPer
     };
     return (
         <PhotoUpload isEditing={isEditing} uploadPhoto={handlePhotoUpload}>
-            { (photoExist && personalInfo!.photoSrc) || isEditing ? 
+            { (photoExist && personalInfo?.photoSrc) || isEditing ? 
                 <img 
                     className={styles.avatar}
-                    src={personalInfo!.photoSrc}
+                    src={personalInfo?.photoSrc}
                     alt="Avatar"
                 />
             :<></>}

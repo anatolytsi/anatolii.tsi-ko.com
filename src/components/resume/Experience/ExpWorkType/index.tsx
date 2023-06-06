@@ -6,7 +6,7 @@ export const ExpWorkType = ({ styles,
                               keyDown,
                               exp,
                               isEditing=false }: ICommonExperienceProps) => {
-    if (exp!.workType || isEditing) {
+    if (exp?.workType || isEditing) {
         return (
             <div className={styles.workType}>
                 (<span
@@ -18,7 +18,7 @@ export const ExpWorkType = ({ styles,
                     }
                     suppressContentEditableWarning
                 >
-                    {exp!.workType}
+                    {exp?.workType}
                 </span>)
             </div>
         );

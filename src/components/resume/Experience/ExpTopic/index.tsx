@@ -6,7 +6,7 @@ export const ExpTopic = ({ styles,
                            keyDown,
                            exp,
                            isEditing=false }: ICommonExperienceProps) => {
-    if (exp!.topic || isEditing) {
+    if (exp?.topic || isEditing) {
         return (
             <div className={styles.topic}>
                 Topic: 
@@ -19,7 +19,7 @@ export const ExpTopic = ({ styles,
                     }
                     suppressContentEditableWarning
                 >
-                    {exp!.topic}
+                    {exp?.topic}
                 </span>
             </div>
         );

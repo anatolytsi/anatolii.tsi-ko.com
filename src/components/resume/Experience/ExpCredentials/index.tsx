@@ -21,7 +21,7 @@ export const ExpCredentials = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.credentialId}
+                    {exp?.credentialId}
                 </span>
             </div>
             <div className={styles.credentialLink}>
@@ -35,7 +35,7 @@ export const ExpCredentials = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.credentialLink}
+                    {exp?.credentialLink}
                 </span>
             </div>
         </>
@@ -44,12 +44,12 @@ export const ExpCredentials = ({ styles,
         credentials = (
             <>
                 <div className={styles.credentialId}>
-                    {exp!.credentialLink ? (
-                        <a href={exp!.credentialLink}>
-                            <h4>{exp!.credentialId}</h4>
+                    {exp?.credentialLink ? (
+                        <a href={exp?.credentialLink}>
+                            <h4>{exp?.credentialId}</h4>
                         </a>
                     ) : (
-                        <h4>{exp!.credentialId}</h4>
+                        <h4>{exp?.credentialId}</h4>
                     )}
                 </div>
             </>

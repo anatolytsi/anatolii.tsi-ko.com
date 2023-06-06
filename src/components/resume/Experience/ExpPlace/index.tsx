@@ -21,7 +21,7 @@ export const ExpPlace = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.place}
+                    {exp?.place}
                 </span>
             </div>
             <div className={styles.placeLink}>
@@ -35,7 +35,7 @@ export const ExpPlace = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.placeLink}
+                    {exp?.placeLink}
                 </span>
             </div>
             <div className={styles.placeLocation}>
@@ -52,7 +52,7 @@ export const ExpPlace = ({ styles,
                     onKeyDown={keyDown}
                     suppressContentEditableWarning
                 >
-                    {exp!.placeLocation}
+                    {exp?.placeLocation}
                 </span>
             </div>
         </>
@@ -61,16 +61,16 @@ export const ExpPlace = ({ styles,
         place = (
             <>
                 <div className={styles.place}>
-                    {exp!.placeLink ? (
-                        <a href={exp!.placeLink}>
-                            <h4>{exp!.place}</h4>
+                    {exp?.placeLink ? (
+                        <a href={exp?.placeLink}>
+                            <h4>{exp?.place}</h4>
                         </a>
                     ) : (
-                        <h4>{exp!.place}</h4>
+                        <h4>{exp?.place}</h4>
                     )}
                 </div>
                 <div id='placeLocation' className={styles.placeLocation}>
-                    {exp!.placeLocation}
+                    {exp?.placeLocation}
                 </div>
             </>
         );

@@ -6,7 +6,7 @@ export const ExpGrades = ({ styles,
                             keyDown,
                             exp,
                             isEditing=false }:ICommonExperienceProps) => {
-    if (exp!.grades || isEditing) {
+    if (exp?.grades || isEditing) {
         return (
             <div className={styles.grades}>
                 Grade: 
@@ -22,7 +22,7 @@ export const ExpGrades = ({ styles,
                     }
                     suppressContentEditableWarning
                 >
-                    {exp!.grades}
+                    {exp?.grades}
                 </span>
             </div>
         );

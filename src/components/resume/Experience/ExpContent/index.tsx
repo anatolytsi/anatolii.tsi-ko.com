@@ -28,7 +28,7 @@ export const ExpContent = ({ styles,
                              isLast=false,
                              editModeEnabled=false }: ICommonExperienceProps) => {
     return (
-        <div className={getExperienceClass({isLast, editModeEnabled, styles, isVisible: exp!.isVisible, experienceStyle: styles[STYLE_NAME]})}>
+        <div className={getExperienceClass({isLast, editModeEnabled, styles, isVisible: !!exp?.isVisible, experienceStyle: styles[STYLE_NAME]})}>
             {children}
         </div>
     );

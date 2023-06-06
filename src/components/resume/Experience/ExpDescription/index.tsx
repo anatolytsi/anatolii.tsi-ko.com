@@ -27,7 +27,7 @@ export const ExpDescription = ({ styles,
         >
             {isEditing ? (
                 <SimpleMDEEditor
-                    value={exp!.description}
+                    value={exp?.description}
                     onChange={value =>
                         setter({ ...exp, description: value })
                     }
@@ -35,7 +35,7 @@ export const ExpDescription = ({ styles,
             ) : (
                 <DescriptionClamp styles={styles} showClamp={showClamp}>
                     <Markdown>
-                        {exp!.description!}
+                        {`${exp?.description}`}
                     </Markdown>
                 </DescriptionClamp>
             )}

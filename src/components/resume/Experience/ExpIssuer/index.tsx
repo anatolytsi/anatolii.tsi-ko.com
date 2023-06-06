@@ -21,7 +21,7 @@ export const ExpIssuer = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.issuer}
+                    {exp?.issuer}
                 </span>
             </div>
             <div className={styles.issuerLink}>
@@ -35,7 +35,7 @@ export const ExpIssuer = ({ styles,
                     }
                     onKeyDown={keyDown}
                 >
-                    {exp!.issuerLink}
+                    {exp?.issuerLink}
                 </span>
             </div>
         </>
@@ -44,12 +44,12 @@ export const ExpIssuer = ({ styles,
         issuer = (
             <>
                 <div className={styles.issuer}>
-                    {exp!.issuerLink ? (
-                        <a href={exp!.issuerLink}>
-                            <h4>{exp!.issuer}</h4>
+                    {exp?.issuerLink ? (
+                        <a href={exp?.issuerLink}>
+                            <h4>{exp?.issuer}</h4>
                         </a>
                     ) : (
-                        <h4>{exp!.issuer}</h4>
+                        <h4>{exp?.issuer}</h4>
                     )}
                 </div>
             </>

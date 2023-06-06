@@ -12,14 +12,13 @@ export const ExpWebsite = ({ styles,
                              isEditing=false }: ICommonExperienceProps) => {
     
     const updateWebsite = (website: IExpWebsite, index: number) => {
-        console.log(exp)
-        let websites = [...exp!.websites!];
+        let websites = [...exp?.websites!];
         websites[index] = {...website};
         setter({...exp, websites});
     }
     
     const deleteWebsite = (index: number) => {
-        let websites = [...exp!.websites!];
+        let websites = [...exp?.websites!];
         websites.splice(index, 1);
         setter({...exp, websites});
     }
@@ -57,51 +56,6 @@ export const ExpWebsite = ({ styles,
                     </div>
                 </div>
             </div>
-
-
-
-            // <div className={styles.websitesEdit}>
-            // {exp?.websites?.map((website: IExpWebsite, index: number) => (
-            //     <div className={styles.websiteEdit} key={index}>
-            //         <button 
-            //             type="button" 
-            //             onClick={() => deleteWebsite(index)}
-            //             className={styles.deleteButton}
-            //         >
-            //             <FontAwesomeIcon icon={faTrash} />
-            //         </button>
-            //         <div>
-            //             <div className={styles.websiteName}>
-            //                 Website Name:
-            //                 <span
-            //                     suppressContentEditableWarning
-            //                     contentEditable
-            //                     onBlur={e => updateWebsite(website, index)}
-            //                 >
-            //                     {website.name}
-            //                 </span>
-            //             </div>
-            //             <div className={styles.websiteLink}>
-            //                 Website Link:
-            //                 <span
-            //                     suppressContentEditableWarning
-            //                     contentEditable
-            //                     onBlur={e => updateWebsite(website, index)}
-            //                 >
-            //                     {website.link}
-            //                 </span>
-            //             </div>
-            //         </div>
-            //     </div>
-            // ))}
-            //     <button
-            //         type='button'
-            //         onClick={addWebsite}
-            //         className={styles.websiteAdd}
-            //     >
-            //         <FontAwesomeIcon icon={faPlusCircle} /> Add website
-            //     </button>
-            // </div>
         );
     } else {
         return (
@@ -120,7 +74,7 @@ export const ExpWebsite = ({ styles,
 
 export const ExpWebsites = (props: ICommonExperienceProps) => {
     const addWebsite = () => {
-        let websites = [...props.exp!.websites!];
+        let websites = [...props.exp?.websites!];
         websites.push({name: 'New website', link: 'newwebsitelink.com'});
         props.setter({...props.exp, websites});
     }
@@ -130,7 +84,7 @@ export const ExpWebsites = (props: ICommonExperienceProps) => {
             {props.exp?.websites?.map((website: IExpWebsite, index: number) => (
                 <div className={props.styles.websitesInline} key={index}>
                     <ExpWebsite {...props} website={website} websiteIdx={index}/>
-                    {!props.isEditing && (index != (props!.exp!.websites!.length - 1)) ?
+                    {!props.isEditing && (index != ((props?.exp?.websites!.length ?? 1) - 1)) ?
                         <span className={props.styles.separator}>, </span>
                     :<></>}
                 </div>

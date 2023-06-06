@@ -12,7 +12,7 @@ export const FullName = ({ personalInfo, styles, setter, keyDown, isEditing }: I
                 setter({ ...personalInfo, fullName: e.target.innerText })
             }
         >
-            {personalInfo!.fullName}
+            {personalInfo?.fullName}
         </h1>
     );
 }
