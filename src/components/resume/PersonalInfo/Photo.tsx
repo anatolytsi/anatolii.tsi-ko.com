@@ -34,11 +34,7 @@ export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IP
     }
 
     useEffect(() => {
-      if (!forExport) {
-        checkPhotoExists();
-      } else {
-        setPhotoExist(true);
-      }
+      checkPhotoExists();
       
       if (!file) {
         return;
@@ -62,7 +58,7 @@ export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IP
     };
     return (
         <PhotoUpload isEditing={isEditing} uploadPhoto={handlePhotoUpload}>
-            { (photoExist && personalInfo?.photoSrc) || isEditing ? 
+            { forExport || (photoExist && personalInfo?.photoSrc) || isEditing ? 
                 <img 
                     className={styles.avatar}
                     src={personalInfo?.photoSrc}
