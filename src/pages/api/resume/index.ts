@@ -62,14 +62,16 @@ handler.post(async (req: IDbApiRequest, res: NextApiResponse) => {
             let db = req.dbClient.db(process.env.MONGODB_DB);
             for (const property in resume) {
                 if (Array.isArray(resume[property])) {
+                    if (!resume[property].length) continue;
                     await db.collection(property).insertMany(resume[property]);
-                } else {
+                } else if (typeof resume[property] === 'object') {
                     await db.collection(property).insertOne(resume[property]);
                 }
             }
             res.status(200);
         } catch (e: any) {
             res.status(500);
+            console.error(e);
             throw new Error(e).message;
         }
     } else {
