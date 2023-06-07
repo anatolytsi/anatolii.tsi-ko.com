@@ -28,7 +28,8 @@ export const ExpDate = ({ isEditing,
 export const ExpDates = ({ isEditing,
                            styles,
                            setter,
-                           exp }: ICommonExperienceProps) => {
+                           exp,
+                           forExport=false }: ICommonExperienceProps) => {
 
     const updateDate = (datekey: 'startDate' | 'endDate', date: Date) => {
         let dateMs: number = date.getTime();
@@ -49,7 +50,8 @@ export const ExpDates = ({ isEditing,
         setter({...exp, endDate: 0});
     }
     
-    let endDateClass = exp?.endDate ? styles.datePicker : `${styles.datePicker} ${styles.current}`
+    let endDateClass = forExport ? `${styles.datePicker} ${styles.export}` : styles.datePicker;
+    endDateClass = exp?.endDate ? endDateClass : `${endDateClass} ${styles.current}`
 
     return (
         <div className={styles.dates}>
