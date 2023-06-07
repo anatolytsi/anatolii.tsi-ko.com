@@ -51,7 +51,7 @@ export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsLis
         <div className={sectionVisible ? styles.skillsList : `${styles.skillsList} ${styles.sectionHidden}`}>
             <div className={editModeEnabled ? `${styles.skills} ${styles.editing}` : styles.skills}>
                 <EditButton isEditing={isEditing} styles={styles} setSave={handleSave} setEdit={handleEdit} editModeEnabled={editModeEnabled}/>
-                <Description styles={styles} isEditing={isEditing} showClamp={false} exp={skills} setter={setSkills}/>
+                <Description styles={styles} isEditing={isEditing} forExport={false} exp={skills} setter={setSkills}/>
             </div>
         </div>
     );

@@ -14,7 +14,7 @@ const SimpleMDEEditor = dynamic(
 export const ExpDescription = ({ styles,
                                  isEditing,
                                  keyDown=() => {},
-                                 showClamp,
+                                 forExport,
                                  setter,
                                  exp }: ICommonExperienceProps) => {
     return (
@@ -33,7 +33,7 @@ export const ExpDescription = ({ styles,
                     }
                 />
             ) : (
-                <DescriptionClamp styles={styles} showClamp={showClamp}>
+                <DescriptionClamp styles={styles} showClamp={!forExport}>
                     <Markdown>
                         {`${exp?.description}`}
                     </Markdown>

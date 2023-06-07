@@ -45,7 +45,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
     setter: setExperience,
     keyDown: () => {},
     exp: experience,
-    showClamp: !forExport,
+    forExport: forExport,
     isLast: isLast,
     editModeEnabled: editModeEnabled,
     saver: handleSave,

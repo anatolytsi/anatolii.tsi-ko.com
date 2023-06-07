@@ -45,7 +45,7 @@ export function Internship({ internship, onUpdate, onDelete, editModeEnabled, is
     setter: setExperience,
     keyDown: () => {},
     exp: experience,
-    showClamp: !forExport,
+    forExport: forExport,
     isLast: isLast,
     editModeEnabled: editModeEnabled,
     saver: handleSave,

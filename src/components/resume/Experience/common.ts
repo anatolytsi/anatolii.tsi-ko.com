@@ -37,7 +37,7 @@ export interface ICommonExperienceProps {
     keyDown?: any
     exp?: IExperience
     children?: any
-    showClamp?: boolean
+    forExport?: boolean
     isLast?: boolean
     editModeEnabled?: boolean
     saver?: any
