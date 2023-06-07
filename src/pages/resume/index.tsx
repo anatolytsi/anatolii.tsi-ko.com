@@ -138,6 +138,23 @@ export default function Resume( props: IResumeProps ) {
   const [editModeEnabled, setEditModeEnabled] = useState(false);
   const [isReloadPending, setIsReloadPending] = useState(false);
 
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      let charCode = String.fromCharCode(e.which).toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && charCode === 's') {
+          e.preventDefault();
+          setEditModeEnabled(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Don't forget to clean up
+    return function cleanup() {
+      document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+
   const changeResumeSection = (name: TResumeSectionName, parameter: string, value: number | boolean ) => {
     let section: IResumeSection | undefined;
     setResumeSections((previousResumeSections: IResumeSection[]) =>
