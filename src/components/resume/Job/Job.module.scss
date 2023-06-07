@@ -17,16 +17,8 @@
 
           .titleWithType {
             display: -webkit-flex;
-            flex-direction: column;
-            -webkit-flex-direction: column;
-
-            @media (min-width: $tablet-size) {
-              flex-direction: row;
-              -webkit-flex-direction: row;
-            }
-            
-            flex-direction: column;
-            -webkit-flex-direction: column;
+            flex-direction: row;
+            -webkit-flex-direction: row;
 
             .title {
               @include expTitle;

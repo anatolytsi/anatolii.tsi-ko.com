@@ -3,11 +3,8 @@
 
 @mixin expWorkType {
     color: $addInfoColor !important;
-    font-size: $expAddInfoFontSize;
-    
-    @media (min-width: $tablet-size) {
-        margin-left: 0.3rem;
-    }
+    font-size: calc(0.8 * $expAddInfoFontSize);
+    margin-left: 0.3rem;
 
     span {
         display: inline-block;
