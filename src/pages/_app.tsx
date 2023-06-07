@@ -15,7 +15,7 @@ export default function App({
       <div className="container">
         {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
         <Script
-          src={`"https://www.googletagmanager.com/gtag/js?id=G-7H48CHEZ6F"`}
+          src="https://www.googletagmanager.com/gtag/js?id=G-7H48CHEZ6F"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
