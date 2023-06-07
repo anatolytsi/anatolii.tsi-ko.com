@@ -15,7 +15,7 @@ export default function App({
       <div className="container">
         {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
         <Script
-          src={`"https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}"`}
+          src={`"https://www.googletagmanager.com/gtag/js?id=G-7H48CHEZ6F"`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -24,7 +24,7 @@ export default function App({
             function gtag(){window.dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '${process.env.GA_MEASUREMENT_ID}');
+            gtag('config', 'G-7H48CHEZ6F');
           `}
         </Script>
       </div>
