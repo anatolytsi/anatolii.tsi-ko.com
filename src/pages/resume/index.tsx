@@ -226,9 +226,11 @@ export default function Resume( props: IResumeProps ) {
   return (
     <>
     <Head>
-      <title>Resume</title>
-      <meta name="description" content="Anatolii Tsirkunenko Resume" />
+      <title>Resume | Anatolii Tsirkunenko</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="author" content="Anatolii Tsirkunenko"/>
+      <meta name="description" content="Software Developer with Embedded and Web experience"/>
+      <meta name="keywords" content="software, developer, embedded, web, bms, c, python, can, iso26262, react, rtos, django"/>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     {props.forExport ? (
