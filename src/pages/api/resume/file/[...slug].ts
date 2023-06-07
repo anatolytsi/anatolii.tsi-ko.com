@@ -21,7 +21,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const imagePath = isArray(req.query.slug) ? req.query.slug.join('/') : req.query.slug!;
   const imageBuffer = getImageFromName(imagePath);
   if (imageBuffer) {
-    res.setHeader("Content-Type", "image");
+    // res.setHeader("Content-Type", "image");
+    res.setHeader("Content-Type", ["text/plain", "charset=x-user-defined"]);
     return res.status(200).send(imageBuffer);
   }
   return res.status(404);
