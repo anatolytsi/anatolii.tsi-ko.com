@@ -9,13 +9,60 @@ interface DescriptionClampProps {
     showClamp?: boolean
 }
 
+type TIterationTypes = NodeListOf<HTMLParagraphElement> | NodeListOf<HTMLOListElement> | NodeListOf<HTMLUListElement> 
+| NodeListOf<HTMLLIElement> | NodeListOf<HTMLAnchorElement> | undefined;
+
 export const DescriptionClamp = ({ children,
                                    styles,
                                    showClamp=true}: DescriptionClampProps) => {
     const [clamped, setClamped] = useState(showClamp);
     const [showClampButton, setShowClampButton] = useState(showClamp);
     const clampContainerRef = useRef<HTMLDivElement>(null);
-    const toggleClamp = () => setClamped(!clamped);
+
+    const setElementsInline = (elements: TIterationTypes) => {
+        if (!elements) return;
+        elements.forEach((el) => el.style.cssText = 'display: inline;');
+    }
+
+    const setElementsNormal = (elements: TIterationTypes) => {
+        if (!elements) return;
+        elements.forEach((el) => el.style.cssText = '');
+    }
+
+    const setAllElementsInline = () => {
+        let parArr = clampContainerRef.current?.querySelectorAll('p');
+        let olArr = clampContainerRef.current?.querySelectorAll('ol');
+        let ulArr = clampContainerRef.current?.querySelectorAll('ul');
+        let liArr = clampContainerRef.current?.querySelectorAll('li');
+        let aArr = clampContainerRef.current?.querySelectorAll('a');
+        setElementsInline(parArr);
+        setElementsInline(olArr);
+        setElementsInline(ulArr);
+        setElementsInline(liArr);
+        setElementsInline(aArr);
+    }
+
+    const setAllElementsNormal = () => {
+        let parArr = clampContainerRef.current?.querySelectorAll('p');
+        let olArr = clampContainerRef.current?.querySelectorAll('ol');
+        let ulArr = clampContainerRef.current?.querySelectorAll('ul');
+        let liArr = clampContainerRef.current?.querySelectorAll('li');
+        let aArr = clampContainerRef.current?.querySelectorAll('a');
+        setElementsNormal(parArr);
+        setElementsNormal(olArr);
+        setElementsNormal(ulArr);
+        setElementsNormal(liArr);
+        setElementsNormal(aArr);
+    }
+
+    const toggleClamp = () => {
+        if (clamped) {
+            setAllElementsNormal();
+        } else {
+            setAllElementsInline();
+        }
+        setClamped(!clamped);
+    };
     
     React.useEffect(() => {
         const hasClamping = (el: any) => {
@@ -39,6 +86,7 @@ export const DescriptionClamp = ({ children,
     
         checkButtonAvailability();
         window.addEventListener("resize", debouncedCheck);
+        setAllElementsInline();
     
         return () => {
             window.removeEventListener("resize", debouncedCheck);
