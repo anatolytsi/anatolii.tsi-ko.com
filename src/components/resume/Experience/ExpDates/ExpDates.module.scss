@@ -41,10 +41,18 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         margin: 0;
 
         &.current {
-            width: $date-input-width-current;
+            width: $date-input-width-current-export;
             input {
-                width: $date-input-width-current;
+                width: $date-input-width-current-export;
             }
+
+            @media (min-width: $tablet-size) {
+                width: $date-input-width-current;
+                input {
+                    width: $date-input-width-current;
+                }
+            }
+            
             &.export {
                 width: $date-input-width-current-export;
                 input {
