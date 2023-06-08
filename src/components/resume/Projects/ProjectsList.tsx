@@ -35,7 +35,8 @@ const URL_PATH = 'projects';
 export function ProjectsList({ data,
                                editModeEnabled, 
                                sectionVisible,
-                               forExport=false, }: IExperienceListProps) {
+                               forExport=false,
+                               shortVersion=false }: IExperienceListProps) {
   let experiences = data;
   const [projects, setProjects] = useState<IProject[]>(sortByKey(experiences, 'startDate', true));
 
@@ -85,6 +86,7 @@ export function ProjectsList({ data,
           editModeEnabled={editModeEnabled}
           isLast={index === projects.length - 1}
           forExport={forExport}
+          shortVersion={shortVersion}
         />
       ))}
 

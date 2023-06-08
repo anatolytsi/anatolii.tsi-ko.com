@@ -264,7 +264,8 @@ export default function Resume( props: IResumeProps ) {
             {resumeListsMapping[resumeSection.name]({ data: props[resumeSection.name],
                                                       editModeEnabled: editModeEnabled, 
                                                       sectionVisible: resumeSection.isVisible,
-                                                      forExport: props.forExport })}
+                                                      forExport: props.forExport,
+                                                      shortVersion: props.shortVersion })}
             </div>
         ))}
     </div>
@@ -282,6 +283,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const collectionNames = collections.map(c => c.name);
     
     const exportPDF = context.query.pdf === 'true';
+    const outline = context.query.outline === 'true';
     const isServer = !!context.req;
 
     if (!collectionNames.length) {
@@ -344,6 +346,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     const props: IResumeProps = {
+      shortVersion: outline,
       forExport: false,
       isAdmin,
       resumeSections: JSON.parse(JSON.stringify(resumeSections)),
@@ -386,6 +389,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   }
   return {
     props: {
+      shortVersion: false,
       forExport: false,
       isAdmin: false,
       resumeSections: require('@/fixtures/resumeSections.json'),

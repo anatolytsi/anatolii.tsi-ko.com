@@ -34,7 +34,8 @@ const URL_PATH = 'jobExperience';
 export function JobExperienceList({ data,
                                     editModeEnabled, 
                                     sectionVisible,
-                                    forExport=false, }: IExperienceListProps) {
+                                    forExport=false,
+                                    shortVersion=false }: IExperienceListProps) {
   let experiences = data;
   const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortByKey(experiences, 'startDate', true));
 
@@ -86,6 +87,7 @@ export function JobExperienceList({ data,
           editModeEnabled={editModeEnabled}
           isLast={index === jobExperiences.length - 1}
           forExport={forExport}
+          shortVersion={shortVersion}
         />
       ))}
 

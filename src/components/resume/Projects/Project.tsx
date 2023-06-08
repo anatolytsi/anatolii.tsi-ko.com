@@ -15,9 +15,10 @@ interface IProjectProps {
     editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
+    shortVersion?: boolean
 }
 
-export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IProjectProps) {
+export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IProjectProps) {
   const [experience, setExperience] = useState<IProject>(project);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
@@ -60,7 +61,9 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
           </HeaderLine>
           <Websites {...expProps}/>
         </Header>
-        <Description {...expProps}/>
+        {shortVersion ? <></> :
+          <Description {...expProps}/>
+        }
       </Content>
     </EditableContent>
   );

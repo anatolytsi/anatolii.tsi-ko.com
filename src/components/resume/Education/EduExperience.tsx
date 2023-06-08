@@ -19,9 +19,10 @@ interface IEduExperienceProps {
     editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
+    shortVersion?: boolean
 }
 
-export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IEduExperienceProps) {
+export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IEduExperienceProps) {
   const [experience, setExperience] = useState(eduExperience);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -66,7 +67,9 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
           <Topic {...expProps}/>
           <Grades {...expProps}/>
         </Header>
-        <Description {...expProps}/>
+        {shortVersion ? <></> :
+          <Description {...expProps}/>
+        }
       </Content>
     </EditableContent>
   );

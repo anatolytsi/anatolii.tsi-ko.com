@@ -16,6 +16,7 @@ import { HobbiesList, HobbiesSection, IHobby } from '@/components/resume/Hobbies
 export const WAIT_EFFECT = parseInt(process.env.WAIT_EFFECT ?? '2');
 
 export interface IResumeComponentLists {
+    shortVersion?: boolean
     forExport?: boolean
     isAdmin?: boolean
     editModeEnabled?: any
@@ -33,6 +34,7 @@ export interface IResumeComponentLists {
 };
 
 export interface IResumeProps {
+    shortVersion?: boolean
     forExport?: boolean
     isAdmin?: boolean
     editModeEnabled?: any
@@ -54,10 +56,12 @@ export interface IResumeSectionComponent {
     editModeEnabled: boolean
     sectionVisible: boolean
     forExport?: boolean
+    shortVersion?: boolean
 }
 
 export interface IResumeComponentSections {
     forExport?: boolean
+    shortVersion?: boolean
     isAdmin?: boolean
     editModeEnabled?: any
     personalInfo?: any

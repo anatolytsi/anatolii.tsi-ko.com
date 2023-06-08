@@ -34,7 +34,8 @@ export const EducationSection = ({ editModeEnabled,
 export function EduExperienceList({ data,
                                     editModeEnabled, 
                                     sectionVisible,
-                                    forExport=false, }: IExperienceListProps) {
+                                    forExport=false,
+                                    shortVersion=false }: IExperienceListProps) {
   let experiences = data;
   const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByKey(experiences, 'startDate', true));
 
@@ -85,6 +86,7 @@ export function EduExperienceList({ data,
             editModeEnabled={editModeEnabled}
             isLast={index === eduExperiences.length - 1}
             forExport={forExport}
+            shortVersion={shortVersion}
         />
       ))}
       <AddNew

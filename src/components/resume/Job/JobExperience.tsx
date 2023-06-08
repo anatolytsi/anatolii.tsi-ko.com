@@ -18,9 +18,10 @@ interface IJobExperienceProps {
   editModeEnabled: boolean
   isLast: boolean
   forExport: boolean
+  shortVersion?: boolean
 }
 
-export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IJobExperienceProps) {
+export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IJobExperienceProps) {
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   
@@ -67,7 +68,9 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
           <Place {...expProps}/>
           <Topic {...expProps}/>
         </Header>
-        <Description {...expProps}/>
+        {shortVersion ? <></> :
+          <Description {...expProps}/>
+        }
       </Content>
     </EditableContent>
   );
