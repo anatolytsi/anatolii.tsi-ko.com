@@ -414,10 +414,11 @@ export const getServerSideProps = async (context: NextPageContext) => {
                 <Resume {...props}/>
             </PDFLayout>
         );
-  
+
+        let prefix = outline ? 'Outline_' : '';
         // with this header, your browser will prompt you to download the file
         // without this header, your browse will open the pdf directly
-        context.res!.setHeader('Content-disposition', `attachment; filename="${DATE_STRING}_Tsirkunenko_CV.pdf"`);
+        context.res!.setHeader('Content-disposition', `attachment; filename="${DATE_STRING}_${prefix}Tsirkunenko_CV.pdf"`);
         
         // set content type
         context.res!.setHeader('Content-Type', 'application/pdf');
