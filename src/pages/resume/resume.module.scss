@@ -160,6 +160,12 @@ $edit-button-margin: 15px;
     .downloadTooltipText {
       visibility: visible;
       opacity: 1;
+
+      &.opened {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
     }
   }
 

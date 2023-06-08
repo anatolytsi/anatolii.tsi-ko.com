@@ -136,7 +136,7 @@ const PdfDownloadButton = () => {
         className={`${styles.downloadButton}`}
         onClick={() => {setIsOpen(!isOpen)}}
       >
-        <span className={styles.downloadTooltipText}>
+        <span className={isOpen ? `${styles.downloadTooltipText} ${styles.opened}` : styles.downloadTooltipText}>
           Download PDF
         </span>
         <FontAwesomeIcon icon={faFilePdf} size='xl' />
