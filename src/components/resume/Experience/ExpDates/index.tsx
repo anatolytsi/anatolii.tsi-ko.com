@@ -71,6 +71,7 @@ export const ExpDates = ({ isEditing,
         setter({...exp, endDate: 0});
     }
     
+    let startDateClass = forExport ? `${styles.datePicker} ${styles.export}` : styles.datePicker;
     let endDateClass = forExport ? `${styles.datePicker} ${styles.export}` : styles.datePicker;
     endDateClass = exp?.endDate ? endDateClass : `${endDateClass} ${styles.current}`
 
@@ -81,7 +82,7 @@ export const ExpDates = ({ isEditing,
             </p>
             <div className={styles.dates}>
                 <DatePicker
-                    wrapperClassName={styles.datePicker}
+                    wrapperClassName={startDateClass}
                     selected={new Date(exp?.startDate ?? 0)}
                     className={isEditing ? styles.editingStartDate : ''}
                     readOnly={!isEditing}

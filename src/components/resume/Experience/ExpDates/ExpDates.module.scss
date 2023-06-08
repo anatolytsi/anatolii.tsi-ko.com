@@ -2,13 +2,13 @@
 
 
 
-$date-input-width: calc(4.95 * $expAddInfoFontSize);
-@media (min-width: $tablet-size) {
-    $date-input-width: calc(4.95 * $expHeaderFontSize) !global;
-}
+$date-input-width-mobile: calc(4.95 * $expAddInfoFontSize);
+$date-input-width: calc(4.95 * $expHeaderFontSize);
+
+$date-input-width-export: calc(5.05 * $expHeaderFontSize);
 $dates-dash-padding: 0.3rem;
 $date-input-width-current: calc(0.58 * $date-input-width);
-$date-input-width-current-export: calc(0.7 * $date-input-width);
+$date-input-width-current-export: calc(0.71 * $date-input-width);
 $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDatesWithTime {
@@ -34,6 +34,16 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 @mixin expDates {
     color: $addInfoColor;
     font-size: $expAddInfoFontSize;
+
+    & {
+        --date-input-width: #{$date-input-width-mobile};
+    }
+
+    @media (min-width: $tablet-size) {
+        & {
+            --date-input-width: #{$date-input-width};
+        }
+    }
 
     @media (min-width: $tablet-size) {
         color: black;
@@ -65,9 +75,16 @@ $date-input-single-width: calc(0.6 * $date-input-width);
     .datePicker {
         display: inline-block;
         position: relative;
-        width: $date-input-width;
+        width: var(--date-input-width);
         padding: 0;
         margin: 0;
+            
+        &.export {
+            width: $date-input-width-export;
+            input {
+                width: $date-input-width-export;
+            }
+        }
 
         &.current {
             width: $date-input-width-current-export;
@@ -102,7 +119,6 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 width: $date-input-width-current-export;
                 input {
                     width: $date-input-width-current-export;
-                    width: $date-input-width-current;
                     color: black;
                     font-size: $expHeaderFontSize;
                 }
@@ -124,7 +140,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 border-radius: 0;
                 border: none;
                 margin: auto;
-                width: $date-input-width;
+                width: var(--date-input-width);
                 pointer-events: none;
                 color: $addInfoColor;
                 font-size: $expAddInfoFontSize;
@@ -146,11 +162,11 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDate {
     @include expDates;
-    width: $date-input-width;
+    width: var(--date-input-width);
     input {
         @media (min-width: $tablet-size) {
             text-align: right;
         }
-        width: $date-input-width;
+        width: var(--date-input-width);
     }
 }
