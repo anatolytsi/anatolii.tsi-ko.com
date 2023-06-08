@@ -1,7 +1,8 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 import { ICommonExperienceProps, IExperience } from '../common';
+import { DatePicker } from '../../common/DatePicker';
 
 const DATE_FORMAT = "MMM yyyy";
 const DATES_FORMAT = "dd.MM.yyyy";
