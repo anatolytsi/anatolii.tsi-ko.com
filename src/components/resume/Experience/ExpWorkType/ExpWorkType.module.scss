@@ -2,12 +2,21 @@
 @import 'src/components/resume/Experience/common.module.scss';
 
 @mixin expWorkType {
+    display: inline;
     color: $addInfoColor !important;
     font-size: calc(0.8 * $expAddInfoFontSize);
     margin-left: 0.3rem;
 
-    span {
+    @media (min-width: $tablet-size) {
         display: inline-block;
-        min-width: 20px;
+    }
+
+    span {
+        display: inline;
+
+        @media (min-width: $tablet-size) {
+            display: inline-block;
+            min-width: 20px;
+        }
     }
 }
