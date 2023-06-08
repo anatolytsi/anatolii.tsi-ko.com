@@ -21,7 +21,7 @@ export const DescriptionClamp = ({ children,
 
     const setElementsInline = (elements: TIterationTypes) => {
         if (!elements) return;
-        elements.forEach((el) => el.style.cssText = 'display: inline;');
+        elements.forEach((el) => el.style.cssText = 'display: inline; padding-right: 0.3rem;');
     }
 
     const setElementsNormal = (elements: TIterationTypes) => {
