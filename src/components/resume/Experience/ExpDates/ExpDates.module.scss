@@ -1,15 +1,44 @@
 @import 'src/components/resume/common/common.module.scss';
 
-$date-input-width: calc(4.95 * $expHeaderFontSize);
-$dates-dash-padding: 0.5rem;
+
+
+$date-input-width: calc(4.95 * $expAddInfoFontSize);
+@media (min-width: $tablet-size) {
+    $date-input-width: calc(4.95 * $expHeaderFontSize) !global;
+}
+$dates-dash-padding: 0.3rem;
 $date-input-width-current: calc(0.58 * $date-input-width);
 $date-input-width-current-export: calc(0.7 * $date-input-width);
 $date-input-single-width: calc(0.6 * $date-input-width);
 
+@mixin expDatesWithTime {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $tablet-size) {
+        flex-direction: row;
+    }
+
+    .time {
+        display: inline-block;
+        margin: 0;
+        margin-right: 0.5rem;
+        color: $addInfoColor;
+        font-size: $expAddInfoFontSize;
+    
+        @media (min-width: $tablet-size) {
+            font-size: $expHeaderFontSize;
+        }
+    }
+}
+
 @mixin expDates {
-    font-style: italic;
-    color: black;
-    font-size: $expHeaderFontSize;
+    color: $addInfoColor;
+    font-size: $expAddInfoFontSize;
+
+    @media (min-width: $tablet-size) {
+        color: black;
+        font-size: $expHeaderFontSize;
+    }
 
     ::placeholder {
         color: black;
@@ -42,14 +71,30 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 
         &.current {
             width: $date-input-width-current-export;
+
             input {
                 width: $date-input-width-current-export;
+                color: $addInfoColor;
+                font-size: $expAddInfoFontSize;
+
+                &::placeholder {
+                    color: $addInfoColor;
+                    font-size: $expAddInfoFontSize;
+                }
             }
 
             @media (min-width: $tablet-size) {
                 width: $date-input-width-current;
+
                 input {
                     width: $date-input-width-current;
+                    color: black;
+                    font-size: $expHeaderFontSize;
+
+                    &::placeholder {
+                        color: black;
+                        font-size: $expHeaderFontSize;
+                    }
                 }
             }
             
@@ -57,35 +102,44 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 width: $date-input-width-current-export;
                 input {
                     width: $date-input-width-current-export;
+                    width: $date-input-width-current;
+                    color: black;
+                    font-size: $expHeaderFontSize;
                 }
             }
         }
 
         div {
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-
-        input {
-            font-style: italic;
             display: inline-block;
-            font-family: inherit;
-            font-size: inherit;
-            line-height: inherit;
             padding: 0;
             margin: 0;
-            border-radius: 0;
-            border: none;
-            margin: auto;
-            width: $date-input-width;
-            pointer-events: none;
 
-            &.editingStartDate,
-            &.editingEndDate,
-            &.editingDate {
-            pointer-events: all;
+            input {
+                display: inline-block;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                padding: 0;
+                margin: 0;
+                border-radius: 0;
+                border: none;
+                margin: auto;
+                width: $date-input-width;
+                pointer-events: none;
+                color: $addInfoColor;
+                font-size: $expAddInfoFontSize;
+
+                &.editingStartDate,
+                &.editingEndDate,
+                &.editingDate {
+                    pointer-events: all;
+                }
+            
+                @media (min-width: $tablet-size) {
+                    color: black;
+                    font-size: $expHeaderFontSize;
+                }
             }
-        }
         }
     }
 }

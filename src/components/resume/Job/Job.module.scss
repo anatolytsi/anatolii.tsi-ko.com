@@ -29,8 +29,12 @@
             }
           }
           
-          .dates {
-            @include expDates;
+          .datesWithTime {
+            @include expDatesWithTime;
+            
+            .dates {
+              @include expDates;
+            }
           }
         }
 

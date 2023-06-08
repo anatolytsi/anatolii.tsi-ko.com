@@ -18,9 +18,13 @@
           .title {
             @include expTitle;
           }
-
-          .dates {
-            @include expDates;
+          
+          .datesWithTime {
+            @include expDatesWithTime;
+            
+            .dates {
+              @include expDates;
+            }
           }
         }
         
