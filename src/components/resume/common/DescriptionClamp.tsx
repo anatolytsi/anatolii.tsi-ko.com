@@ -81,16 +81,18 @@ export const DescriptionClamp = ({ children,
                 if (!hadClampClass) clampContainerRef.current.classList.remove("clamp");
             }
         };
+        
+        if (showClamp) {
+            const debouncedCheck = lodash.debounce(checkButtonAvailability, 50);
+        
+            checkButtonAvailability();
+            window.addEventListener("resize", debouncedCheck);
+            setAllElementsInline();
     
-        const debouncedCheck = lodash.debounce(checkButtonAvailability, 50);
-    
-        checkButtonAvailability();
-        window.addEventListener("resize", debouncedCheck);
-        setAllElementsInline();
-    
-        return () => {
-            window.removeEventListener("resize", debouncedCheck);
-        };
+            return () => {
+                window.removeEventListener("resize", debouncedCheck);
+            };
+        }
     }, [clampContainerRef]);
     
     const renderClampButton = () => {
