@@ -89,7 +89,7 @@ export const ExpDates = ({ isEditing,
                     onChange={(date: Date) => updateDate('startDate', date)}
                     dateFormat={DATES_FORMAT}
                 />
-                <span className={styles.datesDash}>-</span>
+                <span className={styles.datesDash}>—</span>
                 <DatePicker
                     wrapperClassName={endDateClass}
                     selected={exp?.endDate ? new Date(exp.endDate) : null}
