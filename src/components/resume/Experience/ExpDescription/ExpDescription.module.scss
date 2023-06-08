@@ -8,18 +8,29 @@
   
     .clamp {
       -webkit-line-clamp: 5;
+      line-clamp: 5;
       -webkit-box-orient: vertical;
       display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
       overflow: hidden;
       text-overflow: ellipsis;
       overflow-wrap: break-word;
       background: -webkit-linear-gradient(#000, #fff);
-      background-clip: text;
+      background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#000),
+        to(#fff)
+      );
       -webkit-background-clip: text;
+      background-clip: text;
   
       @media (min-width: $tablet-size) {
         &{
           -webkit-line-clamp: 3;
+          line-clamp: 3;
         }
       }
     }
