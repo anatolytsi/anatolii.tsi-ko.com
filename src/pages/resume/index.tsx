@@ -109,6 +109,53 @@ const RestButton = () => {
   );
 }
 
+const PdfDownloadButton = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (isOpen && ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  return (
+    <>
+      <div 
+        className={`${styles.downloadButton}`}
+        onClick={() => {setIsOpen(!isOpen)}}
+      >
+        <FontAwesomeIcon icon={faFilePdf} size='xl' />
+      </div>
+      <div className={isOpen ? `${styles.downloadPanel} ${styles.opened}` : styles.downloadPanel}
+           ref={ref}>
+        <a className={styles.downloadEl}
+           href="/resume?pdf=true"
+           target="_blank"
+           rel="noopener noreferrer"
+        >
+          Download Full
+        </a>
+        <a className={styles.downloadEl}
+           href="/resume?pdf=true?outline=true"
+           target="_blank"
+           rel="noopener noreferrer"
+        >
+          Download Short
+        </a>
+      </div>
+    </>
+  );
+}
+
 export default function Resume( props: IResumeProps ) {
   let resumeListsMapping: IResumeComponentLists = {
     jobExperience: JobExperienceList,
@@ -237,13 +284,7 @@ export default function Resume( props: IResumeProps ) {
       <></>
     ) : (
       <>
-        <a href="/resume?pdf=true"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.downloadButton}
-        >
-            <FontAwesomeIcon icon={faFilePdf} size='xl' />
-        </a>
+        <PdfDownloadButton/>
         {renderAdminButtons()}
       </>
     )}
