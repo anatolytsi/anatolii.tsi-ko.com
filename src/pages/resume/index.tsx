@@ -148,7 +148,7 @@ const PdfDownloadButton = () => {
           Download Full
         </a>
         <a className={styles.downloadEl}
-           href="/resume?pdf=true?outline=true"
+           href="/resume?pdf=true&outline=true"
            target="_blank"
            rel="noopener noreferrer"
         >
