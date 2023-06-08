@@ -126,26 +126,31 @@ $edit-button-margin: 15px;
     border-radius: 6px;
 
     /* Position the tooltip text */
-    position: absolute;
-    z-index: 1;
-    top: 15px;
-    bottom: auto;
-    right: 128%;
+    position: fixed;
+    z-index: 18;
+    bottom: $button-width / 4 + $download-button-margin;
+    right: calc($button-width + $download-button-margin + $button-height);
+    // top: 15px;
+    // bottom: auto;
+    // right: 128%;
     margin-left: -60px;
 
     /* Fade in tooltip */
     opacity: 0;
     transition: opacity 0.3s;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 100%;
-      margin-top: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent transparent transparent #555;
+    
+    @media (min-width: $tablet-size) {
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent #555;
+      }
     }
   }
 
@@ -158,7 +163,7 @@ $edit-button-margin: 15px;
     }
   }
 
-  @media (min-width: $desktop-size) {
+  @media (min-width: $tablet-size) {
     right: calc($page-padding-sides / 4);
   }
 }
@@ -167,10 +172,14 @@ $edit-button-margin: 15px;
   z-index: 19;
   position: fixed;
   bottom: calc($button-width / 12 + $download-button-margin);
-  right: calc($download-button-margin + $button-width + 0.5rem);
+  right: calc($download-button-margin + $button-width - 0.5rem);
   width: 9rem;
   background-color: white;
   display: none;
+
+  @media (min-width: $tablet-size) {
+    right: calc($download-button-margin + $button-width + 0.5rem);
+  }
 
   &.opened {
     display: initial;
@@ -216,7 +225,7 @@ $edit-button-margin: 15px;
     background-color: rgb(221, 255, 221);
   }
 
-  @media (min-width: $desktop-size) {
+  @media (min-width: $tablet-size) {
     right: calc($page-padding-sides / 4);
   }
 }
@@ -225,11 +234,15 @@ $edit-button-margin: 15px;
   z-index: 19;
   position: fixed;
   bottom: calc(2.6 * $button-width + $edit-button-margin);
-  right: calc($download-button-margin + $button-width + 0.5rem);
+  right: calc($download-button-margin + $button-width - 0.5rem);
   width: 8rem;
   // border: 1px solid black;
   background-color: white;
   display: none;
+
+  @media (min-width: $tablet-size) {
+    right: calc($download-button-margin + $button-width + 0.5rem);
+  }
 
   &.opened {
     display: initial;
