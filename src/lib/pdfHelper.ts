@@ -6,10 +6,13 @@ import { API_URL } from '@/pages/api/resume/file';
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
 const FOOTER_TEMPLATE = `
-<div style="text-align: right; width: 297mm; font-size: 8px;">
-    <span style="margin-right: 1cm">
-        <span class="pageNumber"></span> of <span class="totalPages"></span>
-    </span>
+<div style="display: flex; justify-content: space-between; width: 297mm; font-size: 8px;">
+    <div style="margin-left: 1cm"> 
+        Anatolii Tsirkunenko | Resume
+    </div>
+    <div style="margin-right: 1cm"> 
+        Page <span class="pageNumber"></span> of <span class="totalPages"></span>
+    </div>
 </div>`;
 
 const componentToPDFBuffer = async (component: any) => {
