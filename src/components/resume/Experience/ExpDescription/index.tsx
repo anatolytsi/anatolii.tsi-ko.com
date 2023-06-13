@@ -12,6 +12,7 @@ const SimpleMDEEditor = dynamic(
 );
 
 const MAIN_POINTS_PATTERN = /\*\*([^\*]+)\*\*/g;
+const LINKS_PATTERN = /\[([^\[]+)\]/;
 
 export const ExpDescription = ({ styles,
                                  isEditing,
@@ -27,7 +28,8 @@ export const ExpDescription = ({ styles,
             let mainSkills: string[] = [];
             for (let arr of matches) {
                 const [match, g1] = arr;
-                mainSkills.push(g1);
+                const link = g1.match(LINKS_PATTERN)?.[1];
+                mainSkills.push(link || g1);
             }
             return `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
         }
