@@ -5,7 +5,9 @@ export const ExpTopic = ({ styles,
                            setter,
                            keyDown,
                            exp,
-                           isEditing=false }: ICommonExperienceProps) => {
+                           isEditing=false,
+                           shortVersion=false }: ICommonExperienceProps) => {
+    if (shortVersion) return <></>;
     if (exp?.topic || isEditing) {
         return (
             <div className={styles.topic}>

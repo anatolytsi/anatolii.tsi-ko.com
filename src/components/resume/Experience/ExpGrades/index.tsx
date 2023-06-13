@@ -5,7 +5,10 @@ export const ExpGrades = ({ styles,
                             setter,
                             keyDown,
                             exp,
-                            isEditing=false }:ICommonExperienceProps) => {
+                            isEditing=false,
+                            shortVersion=false  }:ICommonExperienceProps) => {
+    if (shortVersion) return <></>;
+    
     if (exp?.grades || isEditing) {
         return (
             <div className={styles.grades}>

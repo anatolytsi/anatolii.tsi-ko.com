@@ -7,7 +7,8 @@ export const ExpPlace = ({ styles,
                            setter,
                            keyDown,
                            exp,
-                           isEditing=false }: ICommonExperienceProps) => {
+                           isEditing=false,
+                           shortVersion=false }: ICommonExperienceProps) => {
     let place: JSX.Element;
     if (isEditing) {
       place = (
@@ -74,9 +75,11 @@ export const ExpPlace = ({ styles,
                         <h4>{exp?.place}</h4>
                     )}
                 </div>
-                <div id='placeLocation' className={styles.placeLocation}>
-                    {exp?.placeLocation}
-                </div>
+                {shortVersion ? <></> :
+                    <div id='placeLocation' className={styles.placeLocation}>
+                        {exp?.placeLocation}
+                    </div>
+                }
             </>
         );
     }
