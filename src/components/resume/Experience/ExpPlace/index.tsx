@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { ICommonExperienceProps } from '../common';
 
@@ -63,7 +65,10 @@ export const ExpPlace = ({ styles,
                 <div className={styles.place}>
                     {exp?.placeLink ? (
                         <a href={exp?.placeLink}>
-                            <h4>{exp?.place}</h4>
+                            <h4>
+                                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size='xs' className={styles.inlineIconLeft} />
+                                {exp?.place}
+                            </h4>
                         </a>
                     ) : (
                         <h4>{exp?.place}</h4>

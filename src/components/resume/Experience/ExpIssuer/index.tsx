@@ -1,5 +1,7 @@
 import React from 'react';
 import { ICommonExperienceProps } from '../common';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const ExpIssuer = ({ styles,
                            setter,
@@ -46,7 +48,10 @@ export const ExpIssuer = ({ styles,
                 <div className={styles.issuer}>
                     {exp?.issuerLink ? (
                         <a href={exp?.issuerLink}>
-                            <h4>{exp?.issuer}</h4>
+                            <h4>
+                                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size='xs' className={styles.inlineIconLeft} />
+                                {exp?.issuer}
+                            </h4>
                         </a>
                     ) : (
                         <h4>{exp?.issuer}</h4>

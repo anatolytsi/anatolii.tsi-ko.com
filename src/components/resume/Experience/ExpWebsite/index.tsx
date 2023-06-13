@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICommonExperienceProps, IExpWebsite } from '../common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const ExpWebsite = ({ styles,
                              setter,
@@ -62,7 +62,10 @@ export const ExpWebsite = ({ styles,
             <div className={styles.website}>
                 {website!.link ? (
                     <a href={website!.link}>
-                        <h4>{website!.name}</h4>
+                        <h4>
+                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} size='xs' className={styles.inlineIconLeft} />
+                            {website!.name}
+                        </h4>
                     </a>
                 ) : (
                     <h4>{website!.name}</h4>

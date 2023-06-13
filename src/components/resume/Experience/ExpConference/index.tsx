@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChain, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { ICommonExperienceProps } from '../common';
 
@@ -46,7 +48,10 @@ export const ExpConference = ({ styles,
                 <div className={styles.conference}>
                     {exp?.conferenceLink ? (
                         <a href={exp?.conferenceLink}>
-                            <h4>{exp?.conference}</h4>
+                            <h4>
+                                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size='xs' className={styles.inlineIconLeft} />
+                                {exp?.conference}
+                            </h4>
                         </a>
                     ) : (
                         <h4>{exp?.conference}</h4>
