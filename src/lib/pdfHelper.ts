@@ -7,10 +7,10 @@ const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
 const FOOTER_TEMPLATE = `
 <div style="display: flex; justify-content: space-between; width: 297mm; font-size: 8px;">
-    <div style="margin-left: 1cm"> 
+    <div style="margin-left: 1cm; color: #969696;"> 
         Anatolii Tsirkunenko | Resume
     </div>
-    <div style="margin-right: 1cm"> 
+    <div style="margin-right: 1cm; color: #969696;"> 
         Page <span class="pageNumber"></span> of <span class="totalPages"></span>
     </div>
 </div>`;
