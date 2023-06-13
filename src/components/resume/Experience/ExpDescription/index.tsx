@@ -19,37 +19,19 @@ export const ExpDescription = ({ styles,
                                  forExport,
                                  setter,
                                  exp,
-                                 shortVersion=false }: ICommonExperienceProps) => {       
-    let description = exp?.description;
-    if (description && shortVersion) {
-        let matches = [...description.matchAll(MAIN_POINTS_PATTERN)];
-        let mainSkills: string[] = [];
-        for (let arr of matches) {
-            const [match, g1] = arr;
-            mainSkills.push(g1);
-        }
-        description = `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
-    }
-
-    const Description = () => {
-        if (isEditing) {
-            return <SimpleMDEEditor
-                        value={exp?.description}
-                        onChange={value =>
-                            setter({ ...exp, description: value })
-                        }
-                    />
-        } else {
-            if (exp?.description) {
-                return <DescriptionClamp styles={styles} showClamp={!(forExport || shortVersion)}>
-                            <Markdown>
-                                {`${description}`}
-                            </Markdown>
-                        </DescriptionClamp>
-            } else {
-                return <></>
+                                 shortVersion=false }: ICommonExperienceProps) => {
+    
+    const getDescription = () => {
+        if (exp?.description && shortVersion) {
+            let matches = [...exp?.description.matchAll(MAIN_POINTS_PATTERN)];
+            let mainSkills: string[] = [];
+            for (let arr of matches) {
+                const [match, g1] = arr;
+                mainSkills.push(g1);
             }
+            return `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
         }
+        return exp?.description;
     }
 
     return (
@@ -60,7 +42,20 @@ export const ExpDescription = ({ styles,
             suppressContentEditableWarning
             onKeyDown={keyDown}
         >
-            <Description />
+            {isEditing ? 
+                <SimpleMDEEditor
+                    value={getDescription()}
+                    onChange={value =>
+                        setter({ ...exp, description: value })
+                    }
+                />
+            :
+                <DescriptionClamp styles={styles} showClamp={!(forExport || shortVersion)}>
+                    <Markdown>
+                        {`${getDescription()}`}
+                    </Markdown>
+                </DescriptionClamp>
+            }
         </div>
     );
 }
