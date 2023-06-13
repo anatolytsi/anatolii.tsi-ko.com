@@ -22,13 +22,13 @@ export const ExpDescription = ({ styles,
                                  shortVersion=false }: ICommonExperienceProps) => {       
     let description = exp?.description;
     if (description && shortVersion) {
-        let matches = [...new Set(description.matchAll(MAIN_POINTS_PATTERN))];
+        let matches = [...description.matchAll(MAIN_POINTS_PATTERN)];
         let mainSkills: string[] = [];
         for (let arr of matches) {
             const [match, g1] = arr;
             mainSkills.push(g1);
         }
-        description = `${matches.length ? 'Keywords: ': ''}${mainSkills.join(', ')}`;
+        description = `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
     }
 
     const Description = () => {
