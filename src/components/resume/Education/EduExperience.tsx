@@ -52,7 +52,8 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
     editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
-    deleter: onDelete
+    deleter: onDelete,
+    shortVersion: shortVersion
   }
 
   return (
@@ -67,9 +68,7 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
           <Topic {...expProps}/>
           <Grades {...expProps}/>
         </Header>
-        {shortVersion ? <></> :
-          <Description {...expProps}/>
-        }
+        <Description {...expProps}/>
       </Content>
     </EditableContent>
   );

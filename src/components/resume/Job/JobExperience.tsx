@@ -51,7 +51,8 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
     editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
-    deleter: onDelete
+    deleter: onDelete,
+    shortVersion: shortVersion
   }
 
   return (
@@ -68,9 +69,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
           <Place {...expProps}/>
           <Topic {...expProps}/>
         </Header>
-        {shortVersion ? <></> :
-          <Description {...expProps}/>
-        }
+        <Description {...expProps}/>
       </Content>
     </EditableContent>
   );

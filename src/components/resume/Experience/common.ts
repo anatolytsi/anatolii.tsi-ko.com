@@ -45,4 +45,5 @@ export interface ICommonExperienceProps {
     deleter?: any
     website? : IExpWebsite
     websiteIdx?: number
+    shortVersion?: boolean
 }

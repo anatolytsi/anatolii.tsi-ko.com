@@ -48,7 +48,8 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
     editModeEnabled: editModeEnabled,
     saver: handleSave,
     editor: () => setIsEditing(true),
-    deleter: onDelete
+    deleter: onDelete,
+    shortVersion: shortVersion
   }
 
   return (
@@ -61,9 +62,7 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
           </HeaderLine>
           <Websites {...expProps}/>
         </Header>
-        {shortVersion ? <></> :
-          <Description {...expProps}/>
-        }
+        <Description {...expProps}/>
       </Content>
     </EditableContent>
   );
