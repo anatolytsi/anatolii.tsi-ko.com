@@ -45,6 +45,8 @@ const componentToPDFBuffer = async (component: any) => {
             left: '0',
             right: '0',
         },
+        displayHeaderFooter: true,
+        footerTemplate: "<div><div class='pageNumber'></div> <div>/</div><div class='totalPages'></div></div>",
         printBackground: true
     });
     await browser.close();
