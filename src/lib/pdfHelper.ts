@@ -5,6 +5,12 @@ import { API_URL } from '@/pages/api/resume/file';
 
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
+const FOOTER_TEMPLATE = `
+<div style="text-align: right; width: 297mm; font-size: 8px;">
+    <span style="margin-right: 1cm">
+        <span class="pageNumber"></span> of <span class="totalPages"></span>
+    </span>
+</div>`;
 
 const componentToPDFBuffer = async (component: any) => {
     let html = renderToStaticMarkup(component);
@@ -46,7 +52,8 @@ const componentToPDFBuffer = async (component: any) => {
             right: '0',
         },
         displayHeaderFooter: true,
-        footerTemplate: "<div><div class='pageNumber'></div> <div>/</div><div class='totalPages'></div></div>",
+        headerTemplate: "<div/>",
+        footerTemplate: FOOTER_TEMPLATE,
         printBackground: true
     });
     await browser.close();
