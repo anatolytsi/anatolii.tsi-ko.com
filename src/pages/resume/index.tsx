@@ -392,6 +392,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
       hobbies = await hobbiesCur.toArray()
     }
 
+    if (outline) {
+      resumeSections = resumeSections.filter((el: any) => el.name !== 'certifications');
+    }
+
     const props: IResumeProps = {
       shortVersion: outline,
       forExport: false,
