@@ -3,7 +3,7 @@
 
 @mixin expDescription {
     line-height: $description-line-height;
-    margin-bottom: 1rem;
+    margin-bottom: $margin-experience;
     font-size: $expDescrFontSize;
   
     .clamp {
