@@ -37,25 +37,29 @@ export function JobExperienceList({ data,
                                     forExport=false,
                                     shortVersion=false }: IExperienceListProps) {
   let currentTime = (new Date()).getTime();
-  let experiences = data.map((exp: IJobExperience) => {
-    if (!exp.endDate) {
-      exp.endDate = currentTime;
-    }
-    return exp;
-  });
-  let sortedExperiences = sortByKey(experiences, 'endDate', true).map((exp: IJobExperience) => {
-    if (exp.endDate === currentTime) {
-      exp.endDate = 0;
-    }
-    return exp;
-  });
-  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortedExperiences);
+
+  const sortJobs = (data: IJobExperience[]) => {
+    let experiences = data.map((exp: IJobExperience) => {
+      if (!exp.endDate) {
+        exp.endDate = currentTime;
+      }
+      return exp;
+    });
+    
+    return sortByKey(experiences, 'endDate', true).map((exp: IJobExperience) => {
+      if (exp.endDate === currentTime) {
+        exp.endDate = 0;
+      }
+      return exp;
+    });
+  }
+  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortJobs(data));
 
   const handleUpdateJobExperience = (updatedExperience: IJobExperience) => {
     setJobExperiences((prevExperiences: IJobExperience[]) =>
-      sortByKey(prevExperiences.map((experience: IJobExperience) =>
+      sortJobs(prevExperiences.map((experience: IJobExperience) =>
           experience._id === updatedExperience._id ? updatedExperience : experience
-        ), 'startDate', true)
+        ))
     );
     compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };
