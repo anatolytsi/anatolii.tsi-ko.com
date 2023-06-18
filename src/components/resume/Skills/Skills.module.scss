@@ -140,8 +140,9 @@ $controls-width: 1rem;
 
             p {
                 font-size: $expAddInfoFontSize;
+                margin-bottom: 0.1rem;
                 strong {
-                    display: block;
+                    // display: block;
                     font-size: $expHeaderFontSize;
                 }
             }        
