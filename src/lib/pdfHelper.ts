@@ -47,7 +47,7 @@ const componentToPDFBuffer = async (component: any) => {
     await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
     const pdf = await page.pdf({
         format: 'A4',
-        scale: 0.6,
+        scale: 0.65,
         margin: {
             top: '40px',
             bottom: '48px',
