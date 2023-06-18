@@ -7,14 +7,14 @@
     font-size: calc(0.8 * $expAddInfoFontSize);
     margin-left: 0.3rem;
 
-    @media (min-width: $tablet-size) {
+    @media (min-width: $desktop-size) {
         display: inline-block;
     }
 
     span {
         display: inline;
 
-        @media (min-width: $tablet-size) {
+        @media (min-width: $desktop-size) {
             display: inline-block;
             min-width: 20px;
         }

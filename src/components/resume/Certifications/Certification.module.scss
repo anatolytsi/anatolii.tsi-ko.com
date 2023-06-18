@@ -50,7 +50,7 @@
             display: flex;
             flex-direction: column;
         
-            @media (min-width: $tablet-size) {
+            @media (min-width: $desktop-size) {
                 &{
                     flex-direction: row;
                 }
@@ -64,7 +64,7 @@
               @include expTitle;
               font-size: calc(0.9 * $expHeaderFontSize);
         
-              @media (min-width: $tablet-size) {
+              @media (min-width: $desktop-size) {
                   &{
                       margin-right: 0.3rem;
                   }
@@ -76,12 +76,12 @@
               font-size: calc(0.9 * $expAddInfoFontSize);
 
               span {
-                @media (min-width: $tablet-size) {
+                @media (min-width: $desktop-size) {
                   margin-right: 0.3rem;
                 }
               }
         
-              @media (min-width: $tablet-size) {
+              @media (min-width: $desktop-size) {
                   &{
                     display: flex;
                     justify-content: center;

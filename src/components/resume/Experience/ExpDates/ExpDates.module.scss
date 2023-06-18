@@ -14,7 +14,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 @mixin expDatesWithTime {
     display: flex;
     flex-direction: column;
-    @media (min-width: $tablet-size) {
+    @media (min-width: $desktop-size) {
         flex-direction: row;
     }
 
@@ -25,7 +25,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         color: $addInfoColor;
         font-size: $expAddInfoFontSize;
     
-        @media (min-width: $tablet-size) {
+        @media (min-width: $desktop-size) {
             font-size: $expHeaderFontSize;
         }
     }
@@ -39,13 +39,13 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         --date-input-width: #{$date-input-width-mobile};
     }
 
-    @media (min-width: $tablet-size) {
+    @media (min-width: $desktop-size) {
         & {
             --date-input-width: #{$date-input-width};
         }
     }
 
-    @media (min-width: $tablet-size) {
+    @media (min-width: $desktop-size) {
         color: black;
         font-size: $expHeaderFontSize;
     }
@@ -100,7 +100,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 }
             }
 
-            @media (min-width: $tablet-size) {
+            @media (min-width: $desktop-size) {
                 width: $date-input-width-current;
 
                 input {
@@ -151,7 +151,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                     pointer-events: all;
                 }
             
-                @media (min-width: $tablet-size) {
+                @media (min-width: $desktop-size) {
                     color: black;
                     font-size: $expHeaderFontSize;
                 }
@@ -164,7 +164,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
     @include expDates;
     width: var(--date-input-width);
     input {
-        @media (min-width: $tablet-size) {
+        @media (min-width: $desktop-size) {
             text-align: right;
         }
         width: var(--date-input-width);

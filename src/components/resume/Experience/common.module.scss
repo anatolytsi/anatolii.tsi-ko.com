@@ -5,7 +5,7 @@ $margin-experience: 0.2rem;
     margin-left: 0.3rem;
     min-width: 50px;
 
-    @media (min-width: $tablet-size) {
+    @media (min-width: $desktop-size) {
         display: inline-block;
     }
 }

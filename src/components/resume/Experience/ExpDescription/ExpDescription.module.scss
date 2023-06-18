@@ -27,7 +27,7 @@
       -webkit-background-clip: text;
       background-clip: text;
   
-      @media (min-width: $tablet-size) {
+      @media (min-width: $desktop-size) {
         &{
           -webkit-line-clamp: 3;
           line-clamp: 3;
