@@ -20,7 +20,6 @@ const Navbar = () => {
   const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    console.log(clickCounter)
     if (clickCounter > 5) {
       showLogin.current = true;
     }
