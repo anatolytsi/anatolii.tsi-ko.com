@@ -233,14 +233,16 @@ $avatarSize: 100px;
 
   &.forExport {
     .personalInfo {
+      display: -webkit-flex;
       .left {
+        margin-right: 2rem;
         .avatar {
         }
 
         .contact {
-          h1 {
-            font-size: 24px;
-          }
+            h1 {
+              font-size: $infoNameFontSize;
+            }
 
           .contactItem {
             .years {
