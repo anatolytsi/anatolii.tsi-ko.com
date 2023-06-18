@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faPencil, faSave, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { event as gaEvent } from "nextjs-google-analytics";
 
 import { IResumeComponentLists, IResumeComponentSections, IResumeProps, TResumeSectionName, TResumeSectionOrder, TResumeSectionVisibility, sortByKey } from '@/components/resume/common';
 import { PersonalInfo } from '@/components/resume/PersonalInfo';
@@ -170,6 +170,7 @@ const PdfDownloadButtonSingle = () => {
       href="/resume?pdf=true"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => {gaEvent('click', {category: 'resume', label: 'pdfDownloaded'})}}
     >
       <div className={`${styles.downloadButton}`}>
         <span className={styles.downloadTooltipText}>
