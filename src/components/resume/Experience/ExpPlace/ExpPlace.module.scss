@@ -63,4 +63,15 @@
             }
         }
     }
+
+    @at-root .exportPdf#{&} {
+        flex-direction: row;
+
+        .place::after {
+            content: "\00a0(";
+        }
+        .placeLocation::after {
+            content: ")";
+        }
+    }
 }

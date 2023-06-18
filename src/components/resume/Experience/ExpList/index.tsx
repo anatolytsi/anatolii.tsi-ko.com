@@ -4,13 +4,15 @@ export interface IExpListProps {
     styles: any
     children?: any
     sectionVisible: boolean
+    forExport?: boolean
 }
 
 export const ExpList = ({ styles,
                           sectionVisible,
-                          children }:IExpListProps) => {
+                          children,
+                          forExport=false }:IExpListProps) => {
     return (
-        <div className={sectionVisible ? styles.experienceList : `${styles.experienceList} ${styles.sectionHidden}`}>
+        <div className={`${styles.experienceList} ${!sectionVisible && styles.sectionHidden} ${forExport && styles.exportPdf}`}>
             {children}
         </div>
     );

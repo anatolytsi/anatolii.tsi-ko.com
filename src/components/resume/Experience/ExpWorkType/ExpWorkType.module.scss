@@ -11,10 +11,19 @@
         display: inline-block;
     }
 
+    @at-root .exportPdf#{&} {
+        display: inline-block;
+    }
+
     span {
         display: inline;
 
         @media (min-width: $desktop-size) {
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        @at-root .exportPdf#{&} {
             display: inline-block;
             min-width: 20px;
         }

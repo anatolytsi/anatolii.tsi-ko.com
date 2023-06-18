@@ -56,6 +56,10 @@
                 }
             }
 
+            @at-root .exportPdf#{&} {
+              flex-direction: row;
+            }
+
             &.editing {
               flex-direction: column;
             }
@@ -69,6 +73,10 @@
                       margin-right: 0.3rem;
                   }
               }
+            
+              @at-root .exportPdf#{&} {
+                margin-right: 0.3rem;
+              }
             }
           
             .issuerAndCredentials {
@@ -77,6 +85,10 @@
 
               span {
                 @media (min-width: $desktop-size) {
+                  margin-right: 0.3rem;
+                }
+            
+                @at-root .exportPdf#{&} {
                   margin-right: 0.3rem;
                 }
               }
@@ -90,6 +102,15 @@
                   span {
                     margin-right: 0.3rem;
                   }
+              }
+            
+              @at-root .exportPdf#{&} {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                span {
+                  margin-right: 0.3rem;
+                }
               }
 
               &.editing {

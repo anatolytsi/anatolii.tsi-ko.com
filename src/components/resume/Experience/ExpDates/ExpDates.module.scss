@@ -18,6 +18,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         flex-direction: row;
     }
 
+    @at-root .exportPdf#{&} {
+        flex-direction: row;
+    }
+
     .time {
         display: inline-block;
         margin: 0;
@@ -26,6 +30,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         font-size: $expAddInfoFontSize;
     
         @media (min-width: $desktop-size) {
+            font-size: $expHeaderFontSize;
+        }
+
+        @at-root .exportPdf#{&} {
             font-size: $expHeaderFontSize;
         }
     }
@@ -46,6 +54,12 @@ $date-input-single-width: calc(0.6 * $date-input-width);
     }
 
     @media (min-width: $desktop-size) {
+        color: black;
+        font-size: $expHeaderFontSize;
+    }
+
+    @at-root .exportPdf#{&} {
+        --date-input-width: #{$date-input-width};
         color: black;
         font-size: $expHeaderFontSize;
     }
@@ -79,7 +93,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         padding: 0;
         margin: 0;
             
-        &.export {
+        @at-root .exportPdf#{&} {
             width: $date-input-width-export;
             input {
                 width: $date-input-width-export;
@@ -115,12 +129,17 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 }
             }
             
-            &.export {
+            @at-root .exportPdf#{&} {
                 width: $date-input-width-current-export;
                 input {
-                    width: $date-input-width-current-export;
+                    width: $date-input-width-current;
                     color: black;
                     font-size: $expHeaderFontSize;
+
+                    &::placeholder {
+                        color: black;
+                        font-size: $expHeaderFontSize;
+                    }
                 }
             }
         }
@@ -150,6 +169,11 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 &.editingDate {
                     pointer-events: all;
                 }
+                
+                @at-root .exportPdf#{&} {
+                    color: black;
+                    font-size: $expHeaderFontSize;
+                }
             
                 @media (min-width: $desktop-size) {
                     color: black;
@@ -164,6 +188,9 @@ $date-input-single-width: calc(0.6 * $date-input-width);
     @include expDates;
     width: var(--date-input-width);
     input {
+        @at-root .exportPdf#{&} {
+            text-align: right;
+        }
         @media (min-width: $desktop-size) {
             text-align: right;
         }

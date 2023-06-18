@@ -25,6 +25,10 @@
                 }
             }
 
+            @at-root .exportPdf#{&} {
+              flex-direction: row;
+            }
+
             &.editing {
               display: unset;
             }
@@ -36,6 +40,10 @@
                   &{
                       margin-right: 0.3rem;
                   }
+              }
+
+              @at-root .exportPdf#{&} {
+                margin-right: 0.3rem;
               }
             }
 
@@ -51,6 +59,15 @@
                   .separator {
                     margin-right: 0.3rem;
                   }
+              }
+
+              @at-root .exportPdf#{&} {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .separator {
+                  margin-right: 0.3rem;
+                }
               }
             }
           }

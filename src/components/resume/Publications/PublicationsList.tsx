@@ -67,7 +67,8 @@ export function PublicationsList({ data,
 
   const expListProps: IExpListProps = {
     styles: styles,
-    sectionVisible: sectionVisible
+    sectionVisible: sectionVisible,
+    forExport: forExport
   }
 
   return (

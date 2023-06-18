@@ -76,6 +76,10 @@
               }
           }
 
+          @at-root .exportPdf#{&} {
+            flex-direction: row;
+          }
+
           &.editing {
             flex-direction: column;
           }
@@ -84,6 +88,12 @@
             @include expGrades;
 
             @media (min-width: $desktop-size) {
+              &::after {
+                  content: ",\00a0";
+              }
+            }
+
+            @at-root .exportPdf#{&} {
               &::after {
                   content: ",\00a0";
               }

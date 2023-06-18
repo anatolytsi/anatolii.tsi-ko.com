@@ -15,4 +15,10 @@
         -webkit-flex-direction: row;
       }
     }
+
+    @at-root .exportPdf#{&} {
+      display: -webkit-flex;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+    }
 }
