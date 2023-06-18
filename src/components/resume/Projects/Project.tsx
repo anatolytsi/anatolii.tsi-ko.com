@@ -57,10 +57,12 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
       <Content {...expProps}>
         <Header {...expProps}>
           <HeaderLine {...expProps}>
-            <Title {...expProps}/>
+            <div className={editModeEnabled ? `${styles.titleAndWebsites} ${styles.editing}` : styles.titleAndWebsites}>
+              <Title {...expProps}/>
+              <Websites {...expProps}/>
+            </div>
             <Dates {...expProps}/>
           </HeaderLine>
-          <Websites {...expProps}/>
         </Header>
         <Description {...expProps}/>
       </Content>

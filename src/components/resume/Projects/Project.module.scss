@@ -15,8 +15,44 @@
         .headerLine {
           @include expHeaderLine;
 
-          .title {
-            @include expTitle;
+          .titleAndWebsites {
+            display: flex;
+            flex-direction: column;
+        
+            @media (min-width: $tablet-size) {
+                &{
+                    flex-direction: row;
+                }
+            }
+
+            &.editing {
+              display: unset;
+            }
+
+            .title {
+              @include expTitle;
+        
+              @media (min-width: $tablet-size) {
+                  &{
+                      margin-right: 0.3rem;
+                  }
+              }
+            }
+
+            .websites {
+              @include expWebsites;
+        
+              @media (min-width: $tablet-size) {
+                  &{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  .separator {
+                    margin-right: 0.3rem;
+                  }
+              }
+            }
           }
           
           .datesWithTime {
@@ -26,10 +62,6 @@
               @include expDates;
             }
           }
-        }
-        
-        .websites {
-          @include expWebsites;
         }
       }
 

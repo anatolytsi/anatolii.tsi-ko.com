@@ -83,7 +83,7 @@ export const ExpWebsites = (props: ICommonExperienceProps) => {
     }
 
     return (
-        <div className={props.styles.websites}>
+        <div className={props.editModeEnabled ? `${props.styles.websites} ${props.styles.editing}` : props.styles.websites}>
             {props.exp?.websites?.map((website: IExpWebsite, index: number) => (
                 <div className={props.styles.websitesInline} key={index}>
                     <ExpWebsite {...props} website={website} websiteIdx={index}/>
