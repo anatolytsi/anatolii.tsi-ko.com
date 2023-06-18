@@ -8,7 +8,7 @@ $date-input-width: calc(4.95 * $expHeaderFontSize);
 $date-input-width-export: calc(5.05 * $expHeaderFontSize);
 $dates-dash-padding: 0.3rem;
 $date-input-width-current: calc(0.58 * $date-input-width);
-$date-input-width-current-export: calc(0.71 * $date-input-width);
+$date-input-width-current-export: calc(0.75 * $date-input-width);
 $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDatesWithTime {
@@ -132,7 +132,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
             @at-root .exportPdf#{&} {
                 width: $date-input-width-current-export;
                 input {
-                    width: $date-input-width-current;
+                    width: $date-input-width-current-export;
                     color: black;
                     font-size: $expHeaderFontSize;
 
