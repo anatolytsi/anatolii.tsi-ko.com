@@ -7,7 +7,7 @@ $controls-width: 1rem;
 
 @mixin skillsList($name) {
     .#{$name}sList {
-        margin: 1rem $padding-experience;
+        margin: $margin-experience $padding-experience;
         @content;
     }
 }
