@@ -1,4 +1,4 @@
-import { IResumeSectionComponent } from "../common"
+import { IResumeSectionComponent, sortByKey } from "../common"
 
 export interface IExpWebsite {
     name: string
@@ -46,4 +46,21 @@ export interface ICommonExperienceProps {
     website? : IExpWebsite
     websiteIdx?: number
     shortVersion?: boolean
+}
+
+export const sortByEndDate = (data: IExperience[]) => {
+  let currentTime = (new Date()).getTime();  
+  let experiences = data.map((exp: IExperience) => {
+    if (!exp.endDate) {
+      exp.endDate = currentTime;
+    }
+    return exp;
+  });
+  
+  return sortByKey(experiences, 'endDate', true).map((exp: IExperience) => {
+    if (exp.endDate === currentTime) {
+      exp.endDate = 0;
+    }
+    return exp;
+  });
 }

@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 import {JobExperience, IJobExperience} from './JobExperience';
-import { ICommonResumeSectionProps, sortByKey } from '../common';
+import { ICommonResumeSectionProps } from '../common';
 
 import styles from './Job.module.scss';
 import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
+import { sortByEndDate } from '../Experience/common';
 
 export const JobExperienceSection = ({ editModeEnabled, 
                                        sectionName,
@@ -36,28 +37,11 @@ export function JobExperienceList({ data,
                                     sectionVisible,
                                     forExport=false,
                                     shortVersion=false }: IExperienceListProps) {
-  let currentTime = (new Date()).getTime();
-
-  const sortJobs = (data: IJobExperience[]) => {
-    let experiences = data.map((exp: IJobExperience) => {
-      if (!exp.endDate) {
-        exp.endDate = currentTime;
-      }
-      return exp;
-    });
-    
-    return sortByKey(experiences, 'endDate', true).map((exp: IJobExperience) => {
-      if (exp.endDate === currentTime) {
-        exp.endDate = 0;
-      }
-      return exp;
-    });
-  }
-  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortJobs(data));
+  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortByEndDate(data));
 
   const handleUpdateJobExperience = (updatedExperience: IJobExperience) => {
     setJobExperiences((prevExperiences: IJobExperience[]) =>
-      sortJobs(prevExperiences.map((experience: IJobExperience) =>
+      sortByEndDate(prevExperiences.map((experience: IJobExperience) =>
           experience._id === updatedExperience._id ? updatedExperience : experience
         ))
     );
