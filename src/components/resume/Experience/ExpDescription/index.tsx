@@ -52,11 +52,11 @@ export const ExpDescription = ({ styles,
                     }
                 />
             :
-                <DescriptionClamp styles={styles} showClamp={!(forExport || shortVersion)}>
+                // <DescriptionClamp styles={styles} showClamp={!(forExport || shortVersion)}>
                     <Markdown>
                         {`${getDescription()}`}
                     </Markdown>
-                </DescriptionClamp>
+                // </DescriptionClamp>
             }
         </div>
     );

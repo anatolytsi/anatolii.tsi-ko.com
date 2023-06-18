@@ -27,9 +27,9 @@ export const Summary = ({ personalInfo, styles, setter, keyDown, isEditing, forE
                     }
                 />
                 ) : (
-                <DescriptionClamp styles={styles} showClamp={!forExport}>
+                // <DescriptionClamp styles={styles} showClamp={!forExport}>
                     <Markdown>{`${personalInfo?.summary}`}</Markdown>
-                </DescriptionClamp>
+                // </DescriptionClamp>
                 )}
             </div>
         </>
