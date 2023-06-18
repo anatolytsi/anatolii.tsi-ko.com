@@ -49,18 +49,20 @@ export interface ICommonExperienceProps {
 }
 
 export const sortByEndDate = (data: IExperience[]) => {
-  let currentTime = (new Date()).getTime();  
-  let experiences = data.map((exp: IExperience) => {
+  let currentTime = (new Date()).getTime();
+  let currentDateExps: IExperience[] = [];
+  let experiences = data.filter((exp: IExperience) => {
     if (!exp.endDate) {
-      exp.endDate = currentTime;
+      currentDateExps.push({...exp});
     }
-    return exp;
+    return exp.endDate;
   });
   
-  return sortByKey(experiences, 'endDate', true).map((exp: IExperience) => {
-    if (exp.endDate === currentTime) {
-      exp.endDate = 0;
-    }
-    return exp;
-  });
+  if (currentDateExps.length > 1) {
+    currentDateExps = sortByKey(currentDateExps, 'startDate', true);
+  }
+
+  let sortedExp = sortByKey(experiences, 'endDate', true);
+
+  return [...currentDateExps, ...sortedExp];
 }
