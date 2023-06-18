@@ -62,7 +62,7 @@ export const ExpPlace = ({ styles,
       );
     } else {
         place = (
-            <>
+            <div className={styles.placeAndLocation}>
                 <div className={styles.place}>
                     {exp?.placeLink ? (
                         <a href={exp?.placeLink}>
@@ -80,7 +80,7 @@ export const ExpPlace = ({ styles,
                         {exp?.placeLocation}
                     </div>
                 }
-            </>
+            </div>
         );
     }
     return place;

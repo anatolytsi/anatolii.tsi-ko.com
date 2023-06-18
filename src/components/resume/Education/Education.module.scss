@@ -50,16 +50,20 @@
           }
         }
 
-        .place {
-          @include expPlace;
-        }
+        .placeAndLocation {
+          @include expPlaceAndLocation;
 
-        .placeLink {
-          @include expPlaceLink;
-        }
-        
-        .placeLocation {
-          @include expPlaceLocation;
+          .place {
+            @include expPlace;
+          }
+
+          .placeLink {
+            @include expPlaceLink;
+          }
+          
+          .placeLocation {
+            @include expPlaceLocation;
+          }
         }
 
         .topic {

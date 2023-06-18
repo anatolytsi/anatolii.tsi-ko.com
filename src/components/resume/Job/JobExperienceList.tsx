@@ -36,8 +36,20 @@ export function JobExperienceList({ data,
                                     sectionVisible,
                                     forExport=false,
                                     shortVersion=false }: IExperienceListProps) {
-  let experiences = data;
-  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortByKey(experiences, 'startDate', true));
+  let currentTime = (new Date()).getTime();
+  let experiences = data.map((exp: IJobExperience) => {
+    if (!exp.endDate) {
+      exp.endDate = currentTime;
+    }
+    return exp;
+  });
+  let sortedExperiences = sortByKey(experiences, 'endDate', true).map((exp: IJobExperience) => {
+    if (exp.endDate === currentTime) {
+      exp.endDate = 0;
+    }
+    return exp;
+  });
+  const [jobExperiences, setJobExperiences] = useState<IJobExperience[]>(sortedExperiences);
 
   const handleUpdateJobExperience = (updatedExperience: IJobExperience) => {
     setJobExperiences((prevExperiences: IJobExperience[]) =>

@@ -46,3 +46,21 @@
         @include expBlockEdit;
     }
 }
+
+@mixin expPlaceAndLocation {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: $tablet-size) {
+        &{
+            flex-direction: row;
+
+            .place::after {
+                content: "\00a0(";
+            }
+            .placeLocation::after {
+                content: ")";
+            }
+        }
+    }
+}
