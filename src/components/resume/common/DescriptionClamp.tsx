@@ -76,7 +76,9 @@ export const DescriptionClamp = ({ children,
                 // Make sure that CSS clamping is applied if aplicable.
                 if (!hadClampClass) clampContainerRef.current.classList.add("clamp");
                 // Check for clamping and show or hide button accordingly.
-                setShowClampButton(hasClamping(clampContainerRef.current));
+                let clamping = hasClamping(clampContainerRef.current);
+                setShowClampButton(clamping);
+                setClamped(clamping);
                 // Sync clamping with local state.
                 if (!hadClampClass) clampContainerRef.current.classList.remove("clamp");
             }
@@ -87,7 +89,11 @@ export const DescriptionClamp = ({ children,
         
             checkButtonAvailability();
             window.addEventListener("resize", debouncedCheck);
-            setAllElementsInline();
+            if (clamped) {
+                setAllElementsNormal();
+            } else {
+                setAllElementsInline();
+            }
     
             return () => {
                 window.removeEventListener("resize", debouncedCheck);
