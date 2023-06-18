@@ -65,8 +65,10 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
             <Dates {...expProps}/>
           </HeaderLine>
           <Place {...expProps}/>
-          <Topic {...expProps}/>
-          <Grades {...expProps}/>
+          <div className={editModeEnabled ? `${styles.gradesAndTopic} ${styles.editing}` : styles.gradesAndTopic}>
+            <Grades {...expProps}/>
+            <Topic {...expProps}/>
+          </div>
         </Header>
         <Description {...expProps}/>
       </Content>

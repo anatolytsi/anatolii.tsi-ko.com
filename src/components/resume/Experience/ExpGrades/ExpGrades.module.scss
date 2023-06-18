@@ -6,6 +6,13 @@
     color: $addInfoColor !important;
 
     span {
-        @include expBlockEdit;
+        font-size: $expAddInfoFontSize;
+        margin-left: 0.3rem;
+    }
+
+    &.editing {
+        span {
+            @include expBlockEdit;
+        }
     }
 }

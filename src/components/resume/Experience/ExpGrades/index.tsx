@@ -6,12 +6,13 @@ export const ExpGrades = ({ styles,
                             keyDown,
                             exp,
                             isEditing=false,
-                            shortVersion=false  }:ICommonExperienceProps) => {
+                            shortVersion=false,
+                            editModeEnabled=false  }:ICommonExperienceProps) => {
     if (shortVersion) return <></>;
     
     if (exp?.grades || isEditing) {
         return (
-            <div className={styles.grades}>
+            <div className={editModeEnabled ? `${styles.grades} ${styles.editing}` : styles.grades}>
                 Grade: 
                 <span
                     id='grades'

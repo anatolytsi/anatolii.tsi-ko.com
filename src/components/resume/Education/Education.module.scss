@@ -66,12 +66,33 @@
           }
         }
 
-        .topic {
-          @include expTopic;
-        }
+        .gradesAndTopic {
+          display: flex;
+          flex-direction: column;
+      
+          @media (min-width: $tablet-size) {
+              &{
+                  flex-direction: row;
+              }
+          }
 
-        .grades {
-          @include expGrades;
+          &.editing {
+            flex-direction: column;
+          }
+
+          .grades {
+            @include expGrades;
+
+            @media (min-width: $tablet-size) {
+              &::after {
+                  content: ",\00a0";
+              }
+            }
+          }
+
+          .topic {
+            @include expTopic;
+          }
         }
       }
 
