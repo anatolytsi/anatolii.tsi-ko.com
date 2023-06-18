@@ -232,6 +232,7 @@ $avatarSize: 100px;
   }
 
   &.forExport {
+    border-bottom: 1px solid #ccc;
     .personalInfo {
       display: -webkit-flex;
       .left {
