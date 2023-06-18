@@ -59,19 +59,21 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
       <Content {...expProps}>
         <Header {...expProps}>
           <HeaderLine {...expProps}>
-            <Title {...expProps}/>
+            <div className={editModeEnabled ? `${styles.titleAndCredits} ${styles.editing}` : styles.titleAndCredits}>
+              <Title {...expProps}/>
+              <div className={editModeEnabled ? `${styles.issuerAndCredentials} ${styles.editing}` : styles.issuerAndCredentials}>
+                <Issuer {...expProps}/>
+                {
+                  !isEditing && experience.credentialId ?
+                    <span className={styles.credentialsSeparator}>, Credentials </span>
+                  : 
+                    <></>
+                }
+                <Credentials {...expProps}/>
+              </div>
+            </div>
             <Date {...expProps}/>
           </HeaderLine>
-          <div className={styles.issuerAndCredentials}>
-            <Issuer {...expProps}/>
-            {
-              !isEditing && experience.credentialId ?
-                <span className={styles.credentialsSeparator}>, Credentials </span>
-              : 
-                <></>
-            }
-            <Credentials {...expProps}/>
-          </div>
         </Header>
       </Content>
     </EditableContent>

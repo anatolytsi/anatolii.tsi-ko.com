@@ -45,35 +45,79 @@
 
         .headerLine {
           @include expHeaderLine;
+          
+          .titleAndCredits {
+            display: flex;
+            flex-direction: column;
+        
+            @media (min-width: $tablet-size) {
+                &{
+                    flex-direction: row;
+                }
+            }
 
-          .title {
-            @include expTitle;
+            &.editing {
+              flex-direction: column;
+            }
+
+            .title {
+              @include expTitle;
+        
+              @media (min-width: $tablet-size) {
+                  &{
+                      margin-right: 0.3rem;
+                  }
+              }
+            }
+          
+            .issuerAndCredentials {
+              color: $addInfoColor !important;
+              font-size: $expAddInfoFontSize;
+
+              span {
+                @media (min-width: $tablet-size) {
+                  margin-right: 0.3rem;
+                }
+              }
+        
+              @media (min-width: $tablet-size) {
+                  &{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  span {
+                    margin-right: 0.3rem;
+                  }
+              }
+
+              &.editing {
+                display: unset;
+              }
+
+              .issuer {
+                @include expIssuer;
+                display: inline;
+              }
+      
+              .credentialId {
+                @include expCredentialId;
+                display: inline;
+              }
+            }
+    
+            .issuerLink {
+              @include expIssuerLink;
+            }
+    
+            .credentialLink {
+              @include expCredentialLink;
+            }
           }
 
           .date {
             @include expDate;
           }
-        }
-        
-        .issuerAndCredentials {
-          color: $addInfoColor !important;
-          .issuer {
-            @include expIssuer;
-            display: inline;
-          }
-  
-          .credentialId {
-            @include expCredentialId;
-            display: inline;
-          }
-        }
-
-        .issuerLink {
-          @include expIssuerLink;
-        }
-
-        .credentialLink {
-          @include expCredentialLink;
         }
       }
 
