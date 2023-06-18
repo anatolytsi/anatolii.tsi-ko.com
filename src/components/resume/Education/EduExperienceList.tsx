@@ -6,9 +6,10 @@ import { EduExperience, IEduExperience } from './EduExperience';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 import styles from './Education.module.scss';
-import { ICommonResumeSectionProps, sortByKey } from '../common';
+import { ICommonResumeSectionProps } from '../common';
 import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { CommonSection } from '../common/Section';
+import { sortByEndDate } from '../Experience/common';
 
 const URL_PATH = 'education';
 
@@ -37,13 +38,13 @@ export function EduExperienceList({ data,
                                     forExport=false,
                                     shortVersion=false }: IExperienceListProps) {
   let experiences = data;
-  const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByKey(experiences, 'startDate', true));
+  const [eduExperiences, setEduExperiences] = useState<IEduExperience[]>(sortByEndDate(experiences));
 
   const handleUpdateEduExperience = (updatedExperience: IEduExperience) => {
     setEduExperiences((prevExperiences: IEduExperience[]) =>
-      sortByKey(prevExperiences.map((experience: IEduExperience) =>
+      sortByEndDate(prevExperiences.map((experience: IEduExperience) =>
         experience._id === updatedExperience._id ? updatedExperience : experience
-      ), 'startDate', true)
+      ))
     );
     compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };

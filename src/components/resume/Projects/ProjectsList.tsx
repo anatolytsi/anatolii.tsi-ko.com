@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 import {Project, IProject} from './Project';
-import { ICommonResumeSectionProps, sortByKey } from '../common';
+import { ICommonResumeSectionProps } from '../common';
 
 import styles from './Project.module.scss';
 import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 
 import { CommonSection } from '../common/Section';
+import { sortByEndDate } from '../Experience/common';
 
 export const ProjectsSection = ({ editModeEnabled, 
                                   sectionName,
@@ -38,13 +39,13 @@ export function ProjectsList({ data,
                                forExport=false,
                                shortVersion=false }: IExperienceListProps) {
   let experiences = data;
-  const [projects, setProjects] = useState<IProject[]>(sortByKey(experiences, 'startDate', true));
+  const [projects, setProjects] = useState<IProject[]>(sortByEndDate(experiences));
 
   const handleUpdateProject = (updatedExperience: IProject) => {
     setProjects((prevExperiences: IProject[]) =>
-      sortByKey(prevExperiences.map((experience: IProject) =>
+      sortByEndDate(prevExperiences.map((experience: IProject) =>
           experience._id === updatedExperience._id ? updatedExperience : experience
-        ), 'startDate', true)
+        ))
     );
     compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
   };
