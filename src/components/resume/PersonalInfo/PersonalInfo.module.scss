@@ -42,10 +42,11 @@ $avatarSize: 100px;
         -webkit-flex-direction: column;
         margin: 0 auto 0 0;
 
-        h1 {
+        .name {
           align-items: center;
           margin: 0;
-          font-size: $infoNameFontSize;
+          min-width: 5rem;
+          font-size: calc(0.9 * $infoNameFontSize);
         }
 
         .websites {
@@ -117,12 +118,6 @@ $avatarSize: 100px;
                 }
               }
             }
-          }
-
-          .name {
-            margin: 0;
-            font-size: 32px;
-            min-width: 5rem;
           }
 
           svg {
@@ -197,6 +192,12 @@ $avatarSize: 100px;
         display: -webkit-flex;
         .left {
           margin-right: 2rem;
+
+          .contact {
+            h1 {
+              font-size: $infoNameFontSize;
+            }
+          }
         }
   
         .right .summary {
