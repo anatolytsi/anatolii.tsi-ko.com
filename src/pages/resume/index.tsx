@@ -162,6 +162,25 @@ const PdfDownloadButton = () => {
   );
 }
 
+const PdfDownloadButtonSingle = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <a
+      href="/resume?pdf=true"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className={`${styles.downloadButton}`}>
+        <span className={styles.downloadTooltipText}>
+          Download PDF
+        </span>
+          <FontAwesomeIcon icon={faFilePdf} size='xl' />
+      </div>
+    </a>
+  );
+}
+
 export default function Resume( props: IResumeProps ) {
   let resumeListsMapping: IResumeComponentLists = {
     jobExperience: JobExperienceList,
@@ -290,7 +309,7 @@ export default function Resume( props: IResumeProps ) {
       <></>
     ) : (
       <>
-        <PdfDownloadButton/>
+        <PdfDownloadButtonSingle/>
         {renderAdminButtons()}
       </>
     )}
