@@ -8,6 +8,11 @@ $controls-width: 1rem;
 @mixin skillsList($name) {
     .#{$name}sList {
         margin: $margin-experience $padding-experience;
+            
+        @at-root .singlePage#{&} {
+            margin: 0;
+        }
+
         @content;
     }
 }
@@ -137,6 +142,10 @@ $controls-width: 1rem;
         .description {
             @include expDescription;
             margin: 0 $padding-experience;
+            
+            @at-root .singlePage#{&} {
+                margin: 0;
+            }
 
             p {
                 font-size: $expAddInfoFontSize;
@@ -144,6 +153,10 @@ $controls-width: 1rem;
                 strong {
                     // display: block;
                     font-size: $expHeaderFontSize;
+            
+                    @at-root .singlePage#{&} {
+                        display: block;
+                    }
                 }
             }        
         }

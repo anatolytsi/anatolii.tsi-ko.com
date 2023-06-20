@@ -51,7 +51,14 @@ export interface IResumeProps {
     hobbies: IHobby[]
 }
 
-export interface IResumeSectionComponent {
+export interface IResumeReqSectionComponent {
+    editModeEnabled: boolean
+    sectionVisible: boolean
+    forExport?: boolean
+    shortVersion?: boolean
+}
+
+export interface IResumeSectionComponent extends IResumeReqSectionComponent {
     data: any
     editModeEnabled: boolean
     sectionVisible: boolean
@@ -82,13 +89,23 @@ export type TResumeSectionName = keyof IResumeComponentLists | keyof IResumeProp
 export type TResumeSectionOrder = (section: TResumeSectionName, order: number) => void;
 export type TResumeSectionVisibility = (section: TResumeSectionName, isVisible: boolean) => void;
 
-export interface ICommonResumeSectionProps {
+export interface ICommonReqResumeSectionProps {
+    editModeEnabled: boolean
+    order: number
+    isVisible: boolean
+    orderSetter: TResumeSectionOrder
+    visibilitySetter: TResumeSectionVisibility
+    shortVersion?: boolean
+}
+
+export interface ICommonResumeSectionProps extends ICommonReqResumeSectionProps {
     editModeEnabled: boolean
     sectionName: TResumeSectionName
     order: number
     isVisible: boolean
     orderSetter: TResumeSectionOrder
     visibilitySetter: TResumeSectionVisibility
+    shortVersion?: boolean
 }
 
 export const sortByKey = (skills: {[key: string]: any}, key: string, reverse: boolean=false) => {
@@ -113,10 +130,11 @@ export const SectionControls = ({ children,
                                   order,
                                   isVisible,
                                   orderSetter, 
-                                  visibilitySetter }: ISectionEditableProps) => {
+                                  visibilitySetter,
+                                  shortVersion=false }: ISectionEditableProps) => {
 
     return (
-        <div className={styles.controlHeader}>
+        <div className={`${styles.controlHeader} ${shortVersion ? styles.singlePage : ''}`}>
             {children}
             {editModeEnabled ? (
                 <div className={styles.controls}>

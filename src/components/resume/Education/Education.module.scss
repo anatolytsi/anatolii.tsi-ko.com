@@ -47,6 +47,12 @@
             .dates {
               @include expDates;
             }
+
+            .time {
+              @at-root .singlePage#{&} {
+                display: none;
+              }
+            }
           }
         }
 

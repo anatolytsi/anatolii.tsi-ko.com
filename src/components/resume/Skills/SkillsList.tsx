@@ -9,26 +9,13 @@ import { Description } from "../Experience";
 import { EditButton } from "../PersonalInfo/EditButton";
 import { CommonSection } from "../common/Section";
 
-export const SkillsSection = ({ editModeEnabled, 
-                                sectionName,
-                                order,
-                                isVisible,
-                                orderSetter,
-                                visibilitySetter }: ICommonResumeSectionProps) => {
+export const SkillsSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faLaptopCode}
-                       sectionTitle={'Skills'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faLaptopCode} sectionTitle={'Skills'}/>
     );
 }
 
-export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsListProps) => {
+export const SkillsList = ({ data, editModeEnabled, sectionVisible, shortVersion=false }: ISkillsListProps) => {
     const [skills, setSkills] = useState<ISimpleSkills>(data);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -48,7 +35,7 @@ export const SkillsList = ({ data, editModeEnabled, sectionVisible }: ISkillsLis
     }, [editModeEnabled]);
 
     return (
-        <div className={sectionVisible ? styles.skillsList : `${styles.skillsList} ${styles.sectionHidden}`}>
+        <div className={`${styles.skillsList} ${sectionVisible ? '' : styles.sectionHidden} ${shortVersion ? styles.singlePage : ''}`}>
             <div className={editModeEnabled ? `${styles.skills} ${styles.editing}` : styles.skills}>
                 <EditButton isEditing={isEditing} styles={styles} setSave={handleSave} setEdit={handleEdit} editModeEnabled={editModeEnabled}/>
                 <Description styles={styles} isEditing={isEditing} forExport={true} exp={skills} setter={setSkills}/>

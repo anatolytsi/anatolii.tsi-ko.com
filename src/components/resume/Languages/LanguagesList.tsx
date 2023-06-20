@@ -9,22 +9,9 @@ import { ICommonResumeSectionProps, sortByKey } from "../common";
 import { compCreate, compDelete, compUpdate } from "../common/api-helpers";
 import { CommonSection } from '../common/Section';
 
-export const LanguagesSection = ({ editModeEnabled, 
-                                   sectionName,
-                                   order,
-                                   isVisible,
-                                   orderSetter,
-                                   visibilitySetter }: ICommonResumeSectionProps) => {
+export const LanguagesSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faLanguage}
-                       sectionTitle={'Languages'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faLanguage} sectionTitle={'Languages'}/>
     );
 }
 

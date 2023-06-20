@@ -19,9 +19,10 @@ interface ICertificationProps {
     editModeEnabled: boolean
     isLast: boolean
     forExport: boolean
+    shortVersion?: boolean
 }
 
-export function Certification({ certification, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: ICertificationProps) {
+export function Certification({ certification, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: ICertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -61,16 +62,18 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
           <HeaderLine {...expProps}>
             <div className={editModeEnabled ? `${styles.titleAndCredits} ${styles.editing}` : styles.titleAndCredits}>
               <Title {...expProps}/>
-              <div className={editModeEnabled ? `${styles.issuerAndCredentials} ${styles.editing}` : styles.issuerAndCredentials}>
-                <Issuer {...expProps}/>
-                {
-                  !isEditing && experience.credentialId ?
-                    <span className={styles.credentialsSeparator}>, Credentials </span>
-                  : 
-                    <></>
-                }
-                <Credentials {...expProps}/>
-              </div>
+              {shortVersion ? '' :
+                <div className={editModeEnabled ? `${styles.issuerAndCredentials} ${styles.editing}` : styles.issuerAndCredentials}>
+                  <Issuer {...expProps}/>
+                  {
+                    !isEditing && experience.credentialId ?
+                      <span className={styles.credentialsSeparator}>, Credentials </span>
+                    : 
+                      <></>
+                  }
+                  <Credentials {...expProps}/>
+                </div>
+              }
             </div>
             <Date {...expProps}/>
           </HeaderLine>

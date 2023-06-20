@@ -13,22 +13,9 @@ import { sortByEndDate } from '../Experience/common';
 
 const URL_PATH = 'education';
 
-export const EducationSection = ({ editModeEnabled, 
-                                   sectionName,
-                                   order,
-                                   isVisible,
-                                   orderSetter,
-                                   visibilitySetter }: ICommonResumeSectionProps) => {
+export const EducationSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faGraduationCap}
-                       sectionTitle={'Education'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faGraduationCap} sectionTitle={'Education'}/>
     );
 }
 
@@ -74,7 +61,8 @@ export function EduExperienceList({ data,
   const expListProps: IExpListProps = {
     styles: styles,
     sectionVisible: sectionVisible,
-    forExport: forExport
+    forExport: forExport,
+    singlePage: shortVersion
   }
 
   return (

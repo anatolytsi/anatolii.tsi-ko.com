@@ -4,7 +4,7 @@ import { faFilePdf, faPencil, faSave, faEllipsisV } from '@fortawesome/free-soli
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { event as gaEvent } from "nextjs-google-analytics";
 
-import { IResumeComponentLists, IResumeComponentSections, IResumeProps, TResumeSectionName, TResumeSectionOrder, TResumeSectionVisibility, sortByKey } from '@/components/resume/common';
+import { ICommonReqResumeSectionProps, IResumeComponentLists, IResumeComponentSections, IResumeProps, IResumeReqSectionComponent, TResumeSectionName, TResumeSectionOrder, TResumeSectionVisibility, sortByKey } from '@/components/resume/common';
 import { PersonalInfo } from '@/components/resume/PersonalInfo';
 import { JobExperienceList, JobExperienceSection } from '@/components/resume/Job';
 import { EduExperienceList, EduSection } from '@/components/resume/Education';
@@ -298,6 +298,22 @@ export default function Resume( props: IResumeProps ) {
     return <></>;
   }
 
+  const commonSectionProps: ICommonReqResumeSectionProps = {
+    editModeEnabled: editModeEnabled,
+    order: 0, 
+    isVisible: true,
+    orderSetter: handleSectionOrder,
+    visibilitySetter: handleSectionVisibility,
+    shortVersion: props.shortVersion
+  }
+
+  const commonSectionCompProps: IResumeReqSectionComponent = {
+    editModeEnabled: editModeEnabled, 
+    sectionVisible: true,
+    forExport: props.forExport,
+    shortVersion: props.shortVersion
+  }
+
   return (
     <>
     <Head>
@@ -317,26 +333,59 @@ export default function Resume( props: IResumeProps ) {
       </>
     )}
     <div className={`${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
-      <PersonalInfo
-        data={props?.personalInfo}
-        editModeEnabled={editModeEnabled}
-        forExport={props.forExport}
-      />
-        {resumeSections.map((resumeSection: IResumeSection, idx: number) => (
-          <div key={idx}>
-            {resumeSectionsMapping[resumeSection.name]({ editModeEnabled: editModeEnabled, 
-                                                         sectionName: resumeSection.name,
-                                                         order: resumeSection.order, 
-                                                         isVisible: resumeSection.isVisible,
-                                                         orderSetter: handleSectionOrder,
-                                                         visibilitySetter: handleSectionVisibility })}
-            {resumeListsMapping[resumeSection.name]({ data: props[resumeSection.name],
-                                                      editModeEnabled: editModeEnabled, 
-                                                      sectionVisible: resumeSection.isVisible,
-                                                      forExport: props.forExport,
-                                                      shortVersion: props.shortVersion })}
+      {props.shortVersion ? 
+        <div className={styles.onePage}>
+          <PersonalInfo
+            data={props?.personalInfo}
+            editModeEnabled={editModeEnabled}
+            forExport={props.forExport}
+            singlePage={props.shortVersion}
+          />
+          <div className={styles.container}>
+            <div className={styles.left}>
+              {resumeSectionsMapping['jobExperience']({ ...commonSectionProps, sectionName: 'jobExperience' })}
+              {resumeListsMapping['jobExperience']({ ...commonSectionCompProps, data: props['jobExperience'] })}
+              {resumeSectionsMapping['projects']({ ...commonSectionProps, sectionName: 'projects' })}
+              {resumeListsMapping['projects']({ ...commonSectionCompProps, data: props['projects'] })}
+              {resumeSectionsMapping['education']({ ...commonSectionProps, sectionName: 'education' })}
+              {resumeListsMapping['education']({ ...commonSectionCompProps, data: props['education'] })}
             </div>
-        ))}
+            <div className={styles.right}>
+              {resumeSectionsMapping['skills']({ ...commonSectionProps, sectionName: 'skills' })}
+              {resumeListsMapping['skills']({ ...commonSectionCompProps, data: props['skills'] })}
+              {resumeSectionsMapping['certifications']({ ...commonSectionProps, sectionName: 'certifications' })}
+              {resumeListsMapping['certifications']({ ...commonSectionCompProps, data: props['certifications'] })}
+              {resumeSectionsMapping['publications']({ ...commonSectionProps, sectionName: 'publications' })}
+              {resumeListsMapping['publications']({ ...commonSectionCompProps, data: props['publications'] })}
+              {resumeSectionsMapping['hobbies']({ ...commonSectionProps, sectionName: 'hobbies' })}
+              {resumeListsMapping['hobbies']({ ...commonSectionCompProps, data: props['hobbies'] })}
+            </div>
+          </div>
+        </div>
+      :
+        <>
+          <PersonalInfo
+            data={props?.personalInfo}
+            editModeEnabled={editModeEnabled}
+            forExport={props.forExport}
+          />
+          {resumeSections.map((resumeSection: IResumeSection, idx: number) => (
+            <div key={idx}>
+              {resumeSectionsMapping[resumeSection.name]({ editModeEnabled: editModeEnabled, 
+                                                          sectionName: resumeSection.name,
+                                                          order: resumeSection.order, 
+                                                          isVisible: resumeSection.isVisible,
+                                                          orderSetter: handleSectionOrder,
+                                                          visibilitySetter: handleSectionVisibility })}
+              {resumeListsMapping[resumeSection.name]({ data: props[resumeSection.name],
+                                                        editModeEnabled: editModeEnabled, 
+                                                        sectionVisible: resumeSection.isVisible,
+                                                        forExport: props.forExport,
+                                                        shortVersion: props.shortVersion })}
+              </div>
+          ))}
+        </>
+      }
     </div>
     </>
   );
@@ -352,7 +401,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const collectionNames = collections.map(c => c.name);
     
     const exportPDF = context.query.pdf === 'true';
-    const outline = context.query.outline === 'true';
+    const singlePage = context.query.singlePage === 'true';
     const isServer = !!context.req;
 
     if (!collectionNames.length) {
@@ -414,12 +463,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
       hobbies = await hobbiesCur.toArray()
     }
 
-    if (outline) {
-      resumeSections = resumeSections.filter((el: any) => el.name !== 'certifications');
-    }
+    // if (singlePage) {
+    //   resumeSections = resumeSections.filter((el: any) => el.name !== 'certifications');
+    // }
 
     const props: IResumeProps = {
-      shortVersion: outline,
+      shortVersion: singlePage,
       forExport: false,
       isAdmin,
       resumeSections: JSON.parse(JSON.stringify(resumeSections)),
@@ -444,7 +493,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
             </PDFLayout>
         );
 
-        let prefix = outline ? 'Outline_' : '';
+        let prefix = singlePage ? 'SinglePage_' : '';
         // with this header, your browser will prompt you to download the file
         // without this header, your browse will open the pdf directly
         context.res!.setHeader('Content-disposition', `attachment; filename="${DATE_STRING}_${prefix}Tsirkunenko_CV.pdf"`);

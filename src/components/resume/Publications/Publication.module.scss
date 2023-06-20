@@ -39,6 +39,10 @@
 
     .experience {
       @include experience;
+  
+      @at-root .singlePage#{&} {
+          margin: 0;
+      }
 
       .header {
         @include expHeader;
@@ -48,6 +52,13 @@
 
           .title {
             @include expTitle;
+
+            @at-root .singlePage#{&} {
+              h3 {
+                font-size: $expHeaderFontSize;
+                font-weight: 100;
+              }
+            }
           }
 
           .date {
@@ -57,6 +68,10 @@
 
         .conference {
           @include expConference;
+
+          @at-root .singlePage#{&} {
+            font-size: $expHeaderFontSize;
+          }
         }
 
         .conferenceLink {

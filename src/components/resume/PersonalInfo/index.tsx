@@ -17,9 +17,10 @@ interface PersonalInfoProps {
   data: IPersonalInfo
   editModeEnabled: boolean
   forExport?: boolean
+  singlePage?: boolean
 }
 
-export function PersonalInfo({ data, editModeEnabled, forExport=false }: PersonalInfoProps) {
+export function PersonalInfo({ data, editModeEnabled, forExport=false, singlePage=false }: PersonalInfoProps) {
   const [personalInfo, setPersonalInfo] = React.useState<IPersonalInfo>(data);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -64,7 +65,7 @@ export function PersonalInfo({ data, editModeEnabled, forExport=false }: Persona
   }
 
   return (
-    <div className={`${styles.personalInfoEdit} ${forExport ? styles.forExport : ''}`}>
+    <div className={`${styles.personalInfoEdit} ${forExport ? styles.forExport : ''} ${singlePage ? styles.singlePage : ''}`}>
       <div className={styles.personalInfo}>
         <div className={styles.left}>
           <Photo {...commonProps}/>

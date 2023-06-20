@@ -13,26 +13,13 @@ export interface IHobbiesListProps extends ISkillsListProps {}
 
 const URL_PATH = 'hobbies';
 
-export const HobbiesSection = ({ editModeEnabled, 
-                                 sectionName,
-                                 order,
-                                 isVisible,
-                                 orderSetter,
-                                 visibilitySetter }: ICommonResumeSectionProps) => {
+export const HobbiesSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faMagic}
-                       sectionTitle={'Hobbies'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faMagic} sectionTitle={'Hobbies'}/>
     );
 }
 
-export const HobbiesList = ({ data, editModeEnabled, sectionVisible }: IHobbiesListProps) => {
+export const HobbiesList = ({ data, editModeEnabled, sectionVisible, shortVersion=false }: IHobbiesListProps) => {
     const [hobbies, setHobbies] = useState<IHobby[]>(sortByKey(data, 'order', true));
 
     const handleUpdateHobby = (updatedHobby: IHobby) => {
@@ -62,26 +49,24 @@ export const HobbiesList = ({ data, editModeEnabled, sectionVisible }: IHobbiesL
     };
 
     return (
-        <div className={sectionVisible ? styles.hobbys : `${styles.hobbys} ${styles.sectionHidden}`}>
-            <div
-                className={styles.hobbysList}
-            >
-                {hobbies.map((hobby: IHobby, index: number) => (
-                    <Hobby
-                        key={hobby._id}
-                        hobbyObj={hobby}
-                        onUpdate={handleUpdateHobby}
-                        onDelete={handleDeleteHobby}
-                        editModeEnabled={editModeEnabled}
-                        isLast={index === hobbies.length - 1}
-                    />
-                ))}
-        
-                <AddSkill 
-                    handleAddSkill={handleAddHobby}
+        <div
+            className={`${styles.hobbysList} ${sectionVisible ? '' : styles.sectionHidden} ${shortVersion ? styles.singlePage : ''}`}
+        >
+            {hobbies.map((hobby: IHobby, index: number) => (
+                <Hobby
+                    key={hobby._id}
+                    hobbyObj={hobby}
+                    onUpdate={handleUpdateHobby}
+                    onDelete={handleDeleteHobby}
                     editModeEnabled={editModeEnabled}
+                    isLast={index === hobbies.length - 1}
                 />
-            </div>
+            ))}
+    
+            <AddSkill 
+                handleAddSkill={handleAddHobby}
+                editModeEnabled={editModeEnabled}
+            />
         </div>
     );
 };

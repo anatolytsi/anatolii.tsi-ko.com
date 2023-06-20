@@ -10,22 +10,9 @@ import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
-export const PublicationsSection = ({ editModeEnabled, 
-                                      sectionName,
-                                      order,
-                                      isVisible,
-                                      orderSetter,
-                                      visibilitySetter }: ICommonResumeSectionProps) => {
+export const PublicationsSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faBookOpen}
-                       sectionTitle={'Publications'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faBookOpen} sectionTitle={'Publications'}/>
     );
 }
 
@@ -34,7 +21,8 @@ const URL_PATH = 'publications';
 export function PublicationsList({ data,
                                    editModeEnabled, 
                                    sectionVisible,
-                                   forExport=false, }: IExperienceListProps) {
+                                   forExport=false,
+                                   shortVersion=false }: IExperienceListProps) {
   const [publications, setPublications] = useState<IPublication[]>(sortByKey(data, 'date', true));
 
   const handleUpdatePublication = (updatedPublication: IPublication) => {
@@ -68,7 +56,8 @@ export function PublicationsList({ data,
   const expListProps: IExpListProps = {
     styles: styles,
     sectionVisible: sectionVisible,
-    forExport: forExport
+    forExport: forExport,
+    singlePage: shortVersion
   }
 
   return (

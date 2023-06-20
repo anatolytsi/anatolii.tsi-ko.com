@@ -29,6 +29,10 @@
               flex-direction: row;
             }
 
+            @at-root .singlePage#{&} {
+              flex-direction: column;
+            }
+
             &.editing {
               display: unset;
             }
@@ -69,6 +73,11 @@
                   margin-right: 0.3rem;
                 }
               }
+
+              @at-root .singlePage#{&} {
+                justify-content: unset;
+                align-items: unset;
+              }
             }
           }
           
@@ -77,6 +86,12 @@
             
             .dates {
               @include expDates;
+            }
+
+            .time {
+              @at-root .singlePage#{&} {
+                display: none;
+              }
             }
           }
         }

@@ -39,6 +39,10 @@
 
     .experience {
       @include experience;
+  
+      @at-root .singlePage#{&} {
+          margin: 0;
+      }
 
       .header {
         @include expHeader;
@@ -66,7 +70,14 @@
 
             .title {
               @include expTitle;
-              font-size: calc(0.9 * $expHeaderFontSize);
+
+              h3 {
+                font-size: $expHeaderFontSize;
+
+                @at-root .singlePage#{&} {
+                  font-weight: 100;
+                }
+              }
         
               @media (min-width: $desktop-size) {
                   &{

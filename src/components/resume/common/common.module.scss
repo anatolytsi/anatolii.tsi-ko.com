@@ -1,3 +1,5 @@
+@import 'src/styles/common/variables';
+
 $hiddenColor: gray !important;
 
 .sectionHidden {
@@ -10,9 +12,10 @@ $hiddenColor: gray !important;
   }
 }
 
+$controlHeaderColor: black;
 $mainInfoColor: black;
 $addInfoColor: #666;
-$addInfoLinkColor: #1f4d8e;
+$addInfoLinkColor: #666;
 
 $controlHeaderFontSize: 1.25rem;
 
@@ -24,11 +27,36 @@ $infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
 $infoAddFontSize: calc($infoNameFontSize / 1.85);
 $infoSumFontSize: $expDescrFontSize;
 
+@mixin section {
+  h2 {
+    margin: 0;
+  }
+
+  svg {
+    margin: 0;
+    margin-right: calc(#{$padding-experience} / 3);
+    width: calc(2 * #{$padding-experience} / 3);
+  }
+}
+
 .controlHeader {
     display: flex;
     justify-content: space-between;
     font-size: $controlHeaderFontSize;
+    color: $controlHeaderColor;
     padding-top: 0.1rem;
+
+    &.singlePage {
+      // border-bottom: 2px solid $controlHeaderColor;
+      // border-bottom: 2px solid transparent;
+      // border-image: linear-gradient(0.25turn, $controlHeaderColor, rgba(255, 255, 255, 0));
+      // border-image-slice: 1;
+      border-bottom: 2px solid $controlHeaderColor;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
+    }
+    
+    @include section;
 
     .controls {
       display: inline-block;

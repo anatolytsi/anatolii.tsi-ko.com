@@ -11,22 +11,9 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 import { CommonSection } from '../common/Section';
 import { sortByEndDate } from '../Experience/common';
 
-export const JobExperienceSection = ({ editModeEnabled, 
-                                       sectionName,
-                                       order,
-                                       isVisible,
-                                       orderSetter,
-                                       visibilitySetter }: ICommonResumeSectionProps) => {
+export const JobExperienceSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faSuitcase}
-                       sectionTitle={'Work Experience'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection  {...props} styles={styles} faIcon={faSuitcase} sectionTitle={'Work Experience'}/>
     );
 }
 
@@ -73,7 +60,8 @@ export function JobExperienceList({ data,
   const expListProps: IExpListProps = {
     styles: styles,
     sectionVisible: sectionVisible,
-    forExport: forExport
+    forExport: forExport,
+    singlePage: shortVersion
   }
 
   return (

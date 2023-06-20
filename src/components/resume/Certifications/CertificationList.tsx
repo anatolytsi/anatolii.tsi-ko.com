@@ -9,22 +9,9 @@ import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
-export const CertificationsSection = ({ editModeEnabled, 
-                                        sectionName,
-                                        order,
-                                        isVisible,
-                                        orderSetter,
-                                        visibilitySetter }: ICommonResumeSectionProps) => {
+export const CertificationsSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faAward}
-                       sectionTitle={'Certifications'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faAward} sectionTitle={'Certifications'}/>
     );
 }
 
@@ -33,7 +20,8 @@ const URL_PATH = 'certifications';
 export function CertificationList({ data,
                                     editModeEnabled, 
                                     sectionVisible,
-                                    forExport=false, }: IExperienceListProps) {
+                                    forExport=false,
+                                    shortVersion=false }: IExperienceListProps) {
   const [certifications, setCertifications] = useState<ICertification[]>(sortByKey(data, 'date', true));
 
   const handleUpdateCertification = (updatedCertification: ICertification) => {
@@ -69,7 +57,8 @@ export function CertificationList({ data,
   const expListProps: IExpListProps = {
     styles: styles,
     sectionVisible: sectionVisible,
-    forExport: forExport
+    forExport: forExport,
+    singlePage: shortVersion
   }
 
   return (
@@ -84,6 +73,7 @@ export function CertificationList({ data,
             editModeEnabled={editModeEnabled}
             isLast={index === certifications.length - 1}
             forExport={forExport}
+            shortVersion={shortVersion}
         />
       ))}
 

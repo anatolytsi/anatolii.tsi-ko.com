@@ -10,22 +10,9 @@ import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience';
 import { CommonSection } from '../common/Section';
 
-export const InternshipSection = ({ editModeEnabled, 
-                                    sectionName,
-                                    order,
-                                    isVisible,
-                                    orderSetter,
-                                    visibilitySetter }: ICommonResumeSectionProps) => {
+export const InternshipSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faMicroscope}
-                       sectionTitle={'Internship'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faMicroscope} sectionTitle={'Internship'}/>
     );
 }
 

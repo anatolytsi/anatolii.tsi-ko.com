@@ -64,7 +64,9 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
             <Dates {...expProps}/>
           </HeaderLine>
         </Header>
-        <Description {...expProps}/>
+        {shortVersion ? '':
+          <Description {...expProps}/>
+        }
       </Content>
     </EditableContent>
   );

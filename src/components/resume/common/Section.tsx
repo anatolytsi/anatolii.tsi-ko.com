@@ -18,9 +18,10 @@ export const CommonSection = ({ styles,
                                 visibilitySetter,
                                 faIcon,
                                 sectionTitle,
-                                editModeEnabled=false}: ISectionProps) => {
+                                editModeEnabled=false,
+                                shortVersion=false }: ISectionProps) => {
     return (
-        <div className={isVisible ? '' : styles.sectionHidden}>
+        <div className={`${isVisible ? '' : styles.sectionHidden}`}>
             <SectionControls
                 editModeEnabled={editModeEnabled}
                 styles={styles}
@@ -29,6 +30,7 @@ export const CommonSection = ({ styles,
                 isVisible={isVisible}
                 orderSetter={orderSetter}
                 visibilitySetter={visibilitySetter}
+                shortVersion={shortVersion}
             >
                 <h2 className={styles.sectionTitle}>
                     <FontAwesomeIcon icon={faIcon} />

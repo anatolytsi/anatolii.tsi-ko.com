@@ -4,6 +4,10 @@
     margin: $margin-experience $padding-experience 0rem $padding-experience;
     border-bottom: 1px solid #ccc;
 
+    @at-root .singlePage#{&} {
+        margin: $margin-experience 0 0 0;
+    }
+
 
     width: 100%;
 

@@ -69,7 +69,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
           <Place {...expProps}/>
           <Topic {...expProps}/>
         </Header>
-        <Description {...expProps}/>
+        <Description {...expProps} shortVersion={false}/>
       </Content>
     </EditableContent>
   );

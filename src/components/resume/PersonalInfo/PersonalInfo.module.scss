@@ -46,7 +46,7 @@ $avatarSize: 100px;
           align-items: center;
           margin: 0;
           min-width: 5rem;
-          font-size: calc(0.8 * $infoNameFontSize);
+          font-size: $infoNameFontSize;
         }
 
         .websites {
@@ -131,6 +131,8 @@ $avatarSize: 100px;
     .right {
       flex: 1;
       -webkit-flex: 1;
+    
+      @include section;
 
       h2 {
         margin: 0;
@@ -273,6 +275,11 @@ $avatarSize: 100px;
         }
       }
     }
+  }
+
+  &.singlePage {
+    border: none;
+    margin-bottom: 0.3rem;
   }
 }
 

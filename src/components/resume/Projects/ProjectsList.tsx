@@ -12,22 +12,9 @@ import { AddNew, IExpListProps, IExperienceListProps, List } from '../Experience
 import { CommonSection } from '../common/Section';
 import { sortByEndDate } from '../Experience/common';
 
-export const ProjectsSection = ({ editModeEnabled, 
-                                  sectionName,
-                                  order,
-                                  isVisible,
-                                  orderSetter,
-                                  visibilitySetter }: ICommonResumeSectionProps) => {
+export const ProjectsSection = (props: ICommonResumeSectionProps) => {
     return (
-        <CommonSection styles={styles}
-                       sectionName={sectionName}
-                       order={order}
-                       isVisible={isVisible}
-                       orderSetter={orderSetter}
-                       visibilitySetter={visibilitySetter}
-                       faIcon={faRulerCombined}
-                       sectionTitle={'Projects'}
-                       editModeEnabled={editModeEnabled}/>
+        <CommonSection {...props} styles={styles} faIcon={faRulerCombined} sectionTitle={'Projects'}/>
     );
 }
 
@@ -73,7 +60,8 @@ export function ProjectsList({ data,
   const expListProps: IExpListProps = {
     styles: styles,
     sectionVisible: sectionVisible,
-    forExport: forExport
+    forExport: forExport,
+    singlePage: shortVersion
   }
 
   return (
