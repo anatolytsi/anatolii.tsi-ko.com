@@ -20,6 +20,12 @@
         font-weight: normal;
         margin: 0;
         padding: 0;
+
+        @at-root .exportPdf#{&} {
+            @at-root .singlePage#{&} {
+            font-size: calc(0.8 * $expAddInfoFontSize);
+            }
+        }
     }
 
     & span {
