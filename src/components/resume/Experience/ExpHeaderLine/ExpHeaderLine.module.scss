@@ -5,7 +5,7 @@
     flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: initial;
+    align-items: flex-start;
     width: 100%;
   
     @media (min-width: $desktop-size) {
