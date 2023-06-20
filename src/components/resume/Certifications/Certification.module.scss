@@ -150,6 +150,10 @@
 
           .date {
             @include expDate;
+
+            @at-root .singlePage#{&} {
+              display: none;
+            }
           }
         }
       }
