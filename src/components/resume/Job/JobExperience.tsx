@@ -60,14 +60,16 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
       <Content {...expProps}>
         <Header {...expProps}>
           <HeaderLine {...expProps}>
-            <div className={styles.titleWithType}>
-              <Title {...expProps}/>
-              <WorkType {...expProps}/>
+            <div>
+              <div className={styles.titleWithType}>
+                <Title {...expProps}/>
+                <WorkType {...expProps}/>
+              </div>
+              <Place {...expProps}/>
+              <Topic {...expProps}/>
             </div>
             <Dates {...expProps}/>
           </HeaderLine>
-          <Place {...expProps}/>
-          <Topic {...expProps}/>
         </Header>
         <Description {...expProps} shortVersion={false}/>
       </Content>

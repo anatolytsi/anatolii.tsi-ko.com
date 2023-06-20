@@ -15,6 +15,7 @@
         .headerLine {
           @include expHeaderLine;
 
+          
           .titleWithType {
             display: -webkit-flex;
             flex-direction: row;
@@ -28,6 +29,26 @@
               @include expWorkType;
             }
           }
+
+          .placeAndLocation {
+            @include expPlaceAndLocation;
+  
+            .place {
+              @include expPlace;
+            }
+  
+            .placeLink {
+              @include expPlaceLink;
+            }
+            
+            .placeLocation {
+              @include expPlaceLocation;
+            }
+          }
+  
+          .topic {
+            @include expTopic;
+          }
           
           .datesWithTime {
             @include expDatesWithTime;
@@ -36,26 +57,6 @@
               @include expDates;
             }
           }
-        }
-
-        .placeAndLocation {
-          @include expPlaceAndLocation;
-
-          .place {
-            @include expPlace;
-          }
-
-          .placeLink {
-            @include expPlaceLink;
-          }
-          
-          .placeLocation {
-            @include expPlaceLocation;
-          }
-        }
-
-        .topic {
-          @include expTopic;
         }
       }
 
