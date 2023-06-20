@@ -316,7 +316,7 @@ export default function Resume( props: IResumeProps ) {
         {renderAdminButtons()}
       </>
     )}
-    <div className={`${styles.resume} ${props.forExport && styles.forExport}`} id={styles.root}>
+    <div className={`${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
       <PersonalInfo
         data={props?.personalInfo}
         editModeEnabled={editModeEnabled}
