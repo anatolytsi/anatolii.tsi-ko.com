@@ -46,6 +46,13 @@
                   }
               }
 
+              h3 {
+                @at-root .singlePage#{&} {
+                  font-size: $expHeaderFontSize;
+                  font-weight: 400;
+                }
+              }
+
               @at-root .exportPdf#{&} {
                 margin-right: 0.3rem;
               }
