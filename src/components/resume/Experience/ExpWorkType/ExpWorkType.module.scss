@@ -4,10 +4,11 @@
 @mixin expWorkType {
     display: inline;
     color: $addInfoColor !important;
-    font-size: calc(0.8 * $expAddInfoFontSize);
+    font-size: calc(0.75 * $expAddInfoFontSize);
     margin-left: 0.3rem;
 
     @media (min-width: $desktop-size) {
+        font-size: calc(0.8 * $expAddInfoFontSize);
         display: inline-block;
     }
 
