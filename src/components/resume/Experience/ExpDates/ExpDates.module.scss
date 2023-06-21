@@ -13,7 +13,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 
 @mixin expDatesWithTime {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     @media (min-width: $desktop-size) {
         flex-direction: row;
     }
