@@ -24,6 +24,12 @@ interface IJobExperienceProps {
 export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IJobExperienceProps) {
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [compUpdated, setcompUpdated] = useState<boolean>(false);
+
+  const handleSetExperience = (exp: IJobExperience) => {
+    setExperience(exp);
+    setcompUpdated(true);
+  }
   
   const handleSave = () => {
     setIsEditing(false);
@@ -31,7 +37,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
   };
 
   useEffect(() => {
-      if (isEditing) {
+      if (isEditing || compUpdated) {
           handleSave();
       }
   }, [editModeEnabled]);
@@ -43,7 +49,7 @@ export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabl
   const expProps: ICommonExperienceProps = {
     styles: styles,
     isEditing: isEditing,
-    setter: setExperience,
+    setter: handleSetExperience,
     keyDown: () => {},
     exp: experience,
     forExport: forExport,

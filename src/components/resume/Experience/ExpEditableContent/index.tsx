@@ -9,7 +9,7 @@ interface ExperienceEditButtonProps {
     isEditing: boolean
     styles: any
     experience: IExperience
-    setExperience: React.Dispatch<React.SetStateAction<any>>
+    setExperience: any
     handleSave: any
     handleEdit: any
     onDelete: any

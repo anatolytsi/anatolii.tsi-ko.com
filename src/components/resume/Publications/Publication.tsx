@@ -22,6 +22,12 @@ interface IPublicationProps {
 export function Publication({ publication, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IPublicationProps) {
   const [experience, setExperience] = useState(publication);
   const [isEditing, setIsEditing] = useState(false);
+  const [compUpdated, setcompUpdated] = useState<boolean>(false);
+
+  const handleSetExperience = (exp: IPublication) => {
+    setExperience(exp);
+    setcompUpdated(true);
+  }
 
   const handleSave = () => {
     setIsEditing(false);
@@ -29,7 +35,7 @@ export function Publication({ publication, onUpdate, onDelete, editModeEnabled, 
   };
 
   useEffect(() => {
-      if (isEditing) {
+      if (isEditing || compUpdated) {
           handleSave();
       }
   }, [editModeEnabled]);
@@ -41,7 +47,7 @@ export function Publication({ publication, onUpdate, onDelete, editModeEnabled, 
   const expProps: ICommonExperienceProps = {
     styles: styles,
     isEditing: isEditing,
-    setter: setExperience,
+    setter: handleSetExperience,
     keyDown: () => {},
     exp: experience,
     forExport: forExport,

@@ -25,6 +25,12 @@ interface IEduExperienceProps {
 export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IEduExperienceProps) {
   const [experience, setExperience] = useState(eduExperience);
   const [isEditing, setIsEditing] = useState(false);
+  const [compUpdated, setcompUpdated] = useState<boolean>(false);
+
+  const handleSetExperience = (exp: IEduExperience) => {
+    setExperience(exp);
+    setcompUpdated(true);
+  }
 
   const handleSave = () => {
     setIsEditing(false);
@@ -32,7 +38,7 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
   };
 
   useEffect(() => {
-      if (isEditing) {
+      if (isEditing || compUpdated) {
           handleSave();
       }
   }, [editModeEnabled]);
@@ -44,7 +50,7 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
   const expProps: ICommonExperienceProps = {
     styles: styles,
     isEditing: isEditing,
-    setter: setExperience,
+    setter: handleSetExperience,
     keyDown: () => {},
     exp: experience,
     forExport: forExport,

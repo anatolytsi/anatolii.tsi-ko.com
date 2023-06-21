@@ -21,6 +21,12 @@ interface IProjectProps {
 export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IProjectProps) {
   const [experience, setExperience] = useState<IProject>(project);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [compUpdated, setcompUpdated] = useState<boolean>(false);
+
+  const handleSetExperience = (exp: IExperience) => {
+    setExperience(exp);
+    setcompUpdated(true);
+  }
 
   const handleSave = () => {
     setIsEditing(false);
@@ -28,7 +34,7 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
   };
 
   useEffect(() => {
-      if (isEditing) {
+      if (isEditing || compUpdated) {
           handleSave();
       }
   }, [editModeEnabled]);
@@ -40,7 +46,7 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
   const expProps: ICommonExperienceProps = {
     styles: styles,
     isEditing: isEditing,
-    setter: setExperience,
+    setter: handleSetExperience,
     keyDown: () => {},
     exp: experience,
     forExport: forExport,

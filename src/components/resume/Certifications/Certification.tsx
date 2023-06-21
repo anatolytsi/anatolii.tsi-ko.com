@@ -25,6 +25,12 @@ interface ICertificationProps {
 export function Certification({ certification, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: ICertificationProps) {
   const [experience, setExperience] = useState(certification);
   const [isEditing, setIsEditing] = useState(false);
+  const [compUpdated, setcompUpdated] = useState<boolean>(false);
+
+  const handleSetExperience = (exp: ICertification) => {
+    setExperience(exp);
+    setcompUpdated(true);
+  }
 
   const handleSave = () => {
     setIsEditing(false);
@@ -32,7 +38,7 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
   };
 
   useEffect(() => {
-      if (isEditing) {
+      if (isEditing || compUpdated) {
           handleSave();
       }
   }, [editModeEnabled]);
@@ -44,7 +50,7 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
   const expProps: ICommonExperienceProps = {
     styles: styles,
     isEditing: isEditing,
-    setter: setExperience,
+    setter: handleSetExperience,
     keyDown: () => {},
     exp: experience,
     forExport: forExport,
