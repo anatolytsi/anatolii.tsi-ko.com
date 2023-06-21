@@ -82,6 +82,7 @@
               }
 
               @at-root .singlePage#{&} {
+                display: block;
                 justify-content: unset;
                 align-items: unset;
               }
