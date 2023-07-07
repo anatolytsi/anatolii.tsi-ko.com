@@ -63,6 +63,7 @@ export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IP
                     className={styles.avatar}
                     src={personalInfo?.photoSrc}
                     alt="Avatar"
+                    draggable="false"
                 />
             :<></>}
         </PhotoUpload>
