@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
-import { event as gaEvent } from "nextjs-google-analytics";
 
 interface DescriptionClampProps {
     children: any
@@ -57,7 +56,6 @@ export const DescriptionClamp = ({ children,
     }
 
     const toggleClamp = () => {
-        gaEvent('click', {category: 'resume', label: 'clampToggled'});
         if (clamped) {
             setAllElementsNormal();
         } else {

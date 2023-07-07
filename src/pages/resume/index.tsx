@@ -56,7 +56,6 @@ const RestButton = () => {
   }, [isOpen]);
 
   const importJson = (event: any) => {
-    gaEvent('click', {category: 'resume', label: 'importJson'});
     const file = event.target?.files?.[0];
     if (file) {
       axios.post('/api/resume', file, {
@@ -70,7 +69,6 @@ const RestButton = () => {
   }
 
   const exportJson = () => {
-    gaEvent('click', {category: 'resume', label: 'exportJson'});
     axios.get('/api/resume', {responseType: 'blob'})
       .then((response) => {
         // create file link in browser's memory
