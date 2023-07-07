@@ -314,7 +314,7 @@ export default function Resume( props: IResumeProps ) {
   return (
     <>
     <Head>
-      <title>Resume | Anatolii Tsirkunenko</title>
+      <title>Resume{props.forExport ? ' Export' : ''} | Anatolii Tsirkunenko</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="author" content="Anatolii Tsirkunenko"/>
       <meta name="description" content="Software Developer with Embedded and Web experience"/>
