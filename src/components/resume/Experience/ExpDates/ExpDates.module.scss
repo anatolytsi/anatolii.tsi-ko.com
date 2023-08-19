@@ -22,11 +22,6 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         flex-direction: row;
     }
 
-    @at-root .singlePage#{&} {
-        flex-direction: column-reverse;
-        align-items: center;
-    }
-
     .time {
         display: inline-block;
         margin: 0;

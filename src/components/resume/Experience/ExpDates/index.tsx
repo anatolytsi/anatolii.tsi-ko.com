@@ -30,23 +30,55 @@ export const ExpDates = ({ isEditing,
                            styles,
                            setter,
                            exp,
-                           forExport=false }: ICommonExperienceProps) => {
-    const getTimePeriod = (startDate: any, endDate: any) => {
-        let dateDifMs = endDate - startDate;
-        let passedDate = new Date(dateDifMs);
+                           forExport=false,
+                           shortVersion=false }: ICommonExperienceProps) => {
+    const getYearsAndMonths = (passedDate: Date) => {
         let years = Math.abs(passedDate.getUTCFullYear() - 1970);
         let months = passedDate.getUTCMonth();
+        return [years, months];
+    }
+
+    const getTimePeriod = (startDate: any, endDate: any) => {
+        let passedDate = new Date(endDate - startDate);
+        let [years, months] = getYearsAndMonths(passedDate);
         let output = '';
+        let yearsStr = shortVersion ? 'y' : ` year${years === 1 ? '' : 's'}`;
+        let monthsStr = shortVersion ? 'm' : ` month${months === 1 ? '' : 's'}`;
         if (years) {
-            output = `${years} year${years === 1 ? '' : 's'}`;
-            output += months ? ` and ${months} month${months === 1 ? '' : 's'}` : '';
+            output = `${years}${yearsStr}`;
+            output += months ? `${shortVersion ? '' : ' and'} ${months}${monthsStr}` : '';
         } else {
-            output = months ? `${months} month${months === 1 ? '' : 's'}` : '';
+            output = months ? `${months}${monthsStr}` : '';
         }
 
         if (!years && !months) {
             let days = passedDate.getUTCDate();
-            output = days ? `${days} day${days === 1 ? '' : 's'}` : '';
+            let daysStr = shortVersion ? 'd' : ` day${days === 1 ? '' : 's'}`;
+            output = days ? `${days}${daysStr}` : '';
+        }
+
+        return output;
+    }
+
+    const round = (value: number, precision: number) => {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
+    const getShortTimePeriod = (startDate: any, endDate: any) => {
+        let passedDate = new Date(endDate - startDate);
+        let [years, months] = getYearsAndMonths(passedDate);
+        let output = '';
+        years = round((years + (months / 12)), 1);
+        if (years >= 1) {
+            output = `${years}y`;
+        } else {
+            output = months ? `${months}m` : '';
+        }
+
+        if (!years && !months) {
+            let days = passedDate.getUTCDate();
+            output = days ? `${days}d` : '';
         }
 
         return output;
