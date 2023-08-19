@@ -399,6 +399,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     
     const exportPDF = context.query.pdf === 'true';
     const singlePage = context.query.singlePage === 'true';
+    const phoneAllow = context.query.phone === 'true';
     const isServer = !!context.req;
 
     if (!collectionNames.length) {
@@ -415,8 +416,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
       await db.collection('hobbies').insertMany(require('@/fixtures/hobbies.json'));
     }
 
-    const personalInfo = await db.collection('personalInfo').findOne();
-    const skills = await db.collection('skills').findOne();
+    let personalInfo = JSON.parse(JSON.stringify(await db.collection('personalInfo').findOne()));
+    const skills = JSON.parse(JSON.stringify(await db.collection('skills').findOne()));
     
     const resumeSectionsCur = db.collection('resumeSections').find({});
     const jobExperienceCur = db.collection('jobExperience').find({});
@@ -438,26 +439,31 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let publications;
     let hobbies;
 
+    if (!isAdmin && !phoneAllow)
+    {
+      personalInfo['phone'] = '';
+    }
+
     if (exportPDF || !isAdmin) {
-      resumeSections = await resumeSectionsCur.filter({ isVisible: true }).toArray()
-      jobExperience = await jobExperienceCur.filter({ isVisible: true }).toArray()
-      education = await educationCur.filter({ isVisible: true }).toArray()
-      internships = await internshipsCur.filter({ isVisible: true }).toArray()
-      languages = await languagesCur.filter({ isVisible: true }).toArray()
-      certifications = await certificationsCur.filter({ isVisible: true }).toArray()
-      projects = await projectsCur.filter({ isVisible: true }).toArray()
-      publications = await publicationsCur.filter({ isVisible: true }).toArray()
-      hobbies = await hobbiesCur.filter({ isVisible: true }).toArray()
+      resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.filter({ isVisible: true }).toArray()))
+      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true }).toArray()))
+      education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true }).toArray()))
+      internships = JSON.parse(JSON.stringify(await internshipsCur.filter({ isVisible: true }).toArray()))
+      languages = JSON.parse(JSON.stringify(await languagesCur.filter({ isVisible: true }).toArray()))
+      certifications = JSON.parse(JSON.stringify(await certificationsCur.filter({ isVisible: true }).toArray()))
+      projects = JSON.parse(JSON.stringify(await projectsCur.filter({ isVisible: true }).toArray()))
+      publications = JSON.parse(JSON.stringify(await publicationsCur.filter({ isVisible: true }).toArray()))
+      hobbies = JSON.parse(JSON.stringify(await hobbiesCur.filter({ isVisible: true }).toArray()))
     } else {
-      resumeSections = await resumeSectionsCur.toArray()
-      jobExperience = await jobExperienceCur.toArray()
-      education = await educationCur.toArray()
-      internships = await internshipsCur.toArray()
-      languages = await languagesCur.toArray()
-      certifications = await certificationsCur.toArray()
-      projects = await projectsCur.toArray()
-      publications = await publicationsCur.toArray()
-      hobbies = await hobbiesCur.toArray()
+      resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.toArray()))
+      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.toArray()))
+      education = JSON.parse(JSON.stringify(await educationCur.toArray()))
+      internships = JSON.parse(JSON.stringify(await internshipsCur.toArray()))
+      languages = JSON.parse(JSON.stringify(await languagesCur.toArray()))
+      certifications = JSON.parse(JSON.stringify(await certificationsCur.toArray()))
+      projects = JSON.parse(JSON.stringify(await projectsCur.toArray()))
+      publications = JSON.parse(JSON.stringify(await publicationsCur.toArray()))
+      hobbies = JSON.parse(JSON.stringify(await hobbiesCur.toArray()))
     }
 
     // if (singlePage) {
@@ -468,17 +474,17 @@ export const getServerSideProps = async (context: NextPageContext) => {
       shortVersion: singlePage,
       forExport: false,
       isAdmin,
-      resumeSections: JSON.parse(JSON.stringify(resumeSections)),
-      personalInfo: JSON.parse(JSON.stringify(personalInfo)),
-      jobExperience: JSON.parse(JSON.stringify(jobExperience)),
-      education: JSON.parse(JSON.stringify(education)),
-      internships: JSON.parse(JSON.stringify(internships)),
-      skills: JSON.parse(JSON.stringify(skills)),
-      languages: JSON.parse(JSON.stringify(languages)),
-      certifications: JSON.parse(JSON.stringify(certifications)),
-      projects: JSON.parse(JSON.stringify(projects)),
-      publications:  JSON.parse(JSON.stringify(publications)),
-      hobbies: JSON.parse(JSON.stringify(hobbies))
+      resumeSections,
+      personalInfo,
+      jobExperience,
+      education,
+      internships,
+      skills,
+      languages,
+      certifications,
+      projects,
+      publications,
+      hobbies
     }
 
     if (isServer && exportPDF) {
