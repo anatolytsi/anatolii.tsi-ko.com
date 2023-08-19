@@ -72,6 +72,7 @@ export function PublicationsList({ data,
             editModeEnabled={editModeEnabled}
             isLast={index === publications.length - 1}
             forExport={forExport}
+            shortVersion={shortVersion}
         />
       ))}
 

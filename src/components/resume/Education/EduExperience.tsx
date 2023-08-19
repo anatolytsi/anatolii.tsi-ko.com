@@ -62,6 +62,19 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
     shortVersion: shortVersion
   }
 
+  const getAbbreviation = (str: string | undefined) => {
+    let output = '';
+    if (!str) return output;
+    output = str.match(/[A-Z]/g)?.join('') ?? '';
+    if (output) output = ` (${output})`;
+    return output;
+  }
+
+  if (shortVersion && expProps.exp && experience.placeLink) {
+    expProps.exp!.titleAdd = getAbbreviation(eduExperience.place);
+    expProps.exp!.titleLink = experience.placeLink;
+  }
+
   return (
     <EditableContent {...expProps}>
       <Content {...expProps}>
@@ -70,7 +83,7 @@ export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabl
             <Title {...expProps}/>
             <Dates {...expProps}/>
           </HeaderLine>
-          <Place {...expProps}/>
+          {!shortVersion ? <Place {...expProps}/> : <></>}
           <div className={editModeEnabled ? `${styles.gradesAndTopic} ${styles.editing}` : styles.gradesAndTopic}>
             <Grades {...expProps}/>
             <Topic {...expProps}/>

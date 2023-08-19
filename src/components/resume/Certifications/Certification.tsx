@@ -61,6 +61,10 @@ export function Certification({ certification, onUpdate, onDelete, editModeEnabl
     deleter: onDelete
   }
 
+  if (shortVersion && expProps.exp && experience.credentialLink) {
+    expProps.exp!.titleLink = experience.credentialLink;
+  }
+
   return (
     <EditableContent {...expProps}>
       <Content {...expProps}>

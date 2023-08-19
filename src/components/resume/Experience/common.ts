@@ -8,6 +8,8 @@ export interface IExpWebsite {
 export interface IExperience {
     _id?: number
     title: string
+    titleAdd?: string
+    titleLink?: string
     isVisible: boolean
     place?: string
     placeLink?: string

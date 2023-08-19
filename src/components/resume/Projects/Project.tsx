@@ -58,6 +58,10 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
     shortVersion: shortVersion
   }
 
+  if (shortVersion && expProps.exp && experience.websites) {
+    expProps.exp!.titleLink = experience.websites[0]?.link;
+  }
+
   return (
     <EditableContent {...expProps}>
       <Content {...expProps}>
@@ -65,7 +69,7 @@ export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, 
           <HeaderLine {...expProps}>
             <div className={editModeEnabled ? `${styles.titleAndWebsites} ${styles.editing}` : styles.titleAndWebsites}>
               <Title {...expProps}/>
-              <Websites {...expProps}/>
+              {!shortVersion ? <Websites {...expProps}/> : <></>}
             </div>
             <Dates {...expProps}/>
           </HeaderLine>
