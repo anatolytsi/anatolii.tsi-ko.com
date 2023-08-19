@@ -8,7 +8,7 @@ const EXT_RE = /(?:\.([^.]+))?$/;
 const FOOTER_TEMPLATE = `
 <div style="display: flex; justify-content: space-between; width: 297mm; font-size: 8px;">
     <div style="margin-left: 1.0cm; color: #969696;"> 
-        Anatolii Tsirkunenko | Resume
+        Anatolii Tsirkunenko | %s
     </div>
     <div style="margin-right: 1.0cm; color: #969696;"> 
         Page <span class="pageNumber"></span> of <span class="totalPages"></span>
@@ -17,11 +17,11 @@ const FOOTER_TEMPLATE = `
 const FOOTER_TEMPLATE_SINGLE = `
 <div style="display: flex; justify-content: center; width: 297mm; font-size: 8px;">
     <div style="color: #969696;"> 
-        Anatolii Tsirkunenko | Resume
+        Anatolii Tsirkunenko | %s
     </div>
 </div>`;
 
-const componentToPDFBuffer = async (component: any, singlePage=false) => {
+const componentToPDFBuffer = async (component: any, pageName='Resume', singlePage=false) => {
     let html = renderToStaticMarkup(component);
     let match;
     do {
@@ -62,7 +62,7 @@ const componentToPDFBuffer = async (component: any, singlePage=false) => {
         },
         displayHeaderFooter: true,
         headerTemplate: "<div/>",
-        footerTemplate: singlePage ? FOOTER_TEMPLATE_SINGLE : FOOTER_TEMPLATE,
+        footerTemplate: (singlePage ? FOOTER_TEMPLATE_SINGLE : FOOTER_TEMPLATE).replace('%s', pageName),
         printBackground: true
     });
     await browser.close();

@@ -494,6 +494,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
             <PDFLayout>
                 <Resume {...props}/>
             </PDFLayout>,
+            'Resume',
             singlePage
         );
 
