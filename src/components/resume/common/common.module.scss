@@ -17,7 +17,7 @@ $mainInfoColor: black;
 $addInfoColor: #666;
 $addInfoLinkColor: #666;
 
-$controlHeaderFontSize: 1.25rem;
+$controlHeaderFontSize: 1.2rem;
 
 $expHeaderFontSize: 1.15rem;
 $expAddInfoFontSize: 1.1rem;
@@ -27,7 +27,7 @@ $infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
 $infoAddFontSize: calc($infoNameFontSize / 1.85);
 $infoSumFontSize: $expDescrFontSize;
 
-$onExportFontScale: 1.25;
+$onExportFontScale: 1.2;
 
 @mixin section {
   h2 {
