@@ -35,6 +35,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
 
         @at-root .exportPdf#{&} {
             font-size: $expHeaderFontSize;
+
+            @at-root .singlePage#{&} {
+                font-size: calc($expHeaderFontSize / $onExportFontScale);
+            }
         }
     }
 }
@@ -62,6 +66,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         --date-input-width: #{$date-input-width};
         color: black;
         font-size: $expHeaderFontSize;
+
+        @at-root .singlePage#{&} {
+        font-size: calc($expHeaderFontSize / $onExportFontScale);
+        }
     }
 
     ::placeholder {
@@ -136,6 +144,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                     color: black;
                     font-size: $expHeaderFontSize;
 
+                    @at-root .singlePage#{&} {
+                        font-size: calc($expHeaderFontSize / $onExportFontScale);
+                    }
+
                     &::placeholder {
                         color: black;
                         font-size: $expHeaderFontSize;
@@ -173,6 +185,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                 @at-root .exportPdf#{&} {
                     color: black;
                     font-size: $expHeaderFontSize;
+
+                    @at-root .singlePage#{&} {
+                        font-size: calc($expHeaderFontSize / $onExportFontScale);
+                    }
                 }
             
                 @media (min-width: $desktop-size) {
