@@ -108,6 +108,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
             
         @at-root .exportPdf#{&} {
             width: $date-input-width-export;
+
+            @at-root .singlePage#{&} {
+                width: calc($date-input-width-export / $onExportFontScale);
+            }
             input {
                 width: $date-input-width-export;
 
@@ -148,6 +152,9 @@ $date-input-single-width: calc(0.6 * $date-input-width);
             
             @at-root .exportPdf#{&} {
                 width: $date-input-width-current-export;
+                @at-root .singlePage#{&} {
+                    width: calc($date-input-width-current-export / $onExportFontScale);
+                }
                 input {
                     width: $date-input-width-current-export;
                     color: black;
@@ -161,7 +168,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                     &::placeholder {
                         color: black;
                         font-size: $expHeaderFontSize;
-                        
+
                         @at-root .singlePage#{&} {
                             font-size: calc($expHeaderFontSize / $onExportFontScale);
                         }
