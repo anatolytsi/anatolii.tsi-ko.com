@@ -27,7 +27,8 @@ $infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
 $infoAddFontSize: calc($infoNameFontSize / 1.85);
 $infoSumFontSize: $expDescrFontSize;
 
-$onExportFontScale: 1.15;
+$onExportHeaderFontScale: 1.2;
+$onExportFontScale: 1.1;
 
 @mixin section {
   h2 {
@@ -50,7 +51,7 @@ $onExportFontScale: 1.15;
 
     @at-root .exportPdf#{&} {
       @at-root .singlePage#{&} {
-        font-size: calc($controlHeaderFontSize / $onExportFontScale);
+        font-size: calc($controlHeaderFontSize / $onExportHeaderFontScale);
       }
     }
 
