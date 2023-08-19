@@ -72,6 +72,12 @@ $avatarSize: 100px;
           margin-bottom: 5px;
           color: #666;
 
+          @at-root .exportPdf#{&} {
+              @at-root .singlePage#{&} {
+                margin-bottom: 0;
+              }
+          }
+
           a {
             color: $addInfoLinkColor;
             text-decoration: none;
