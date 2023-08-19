@@ -48,8 +48,10 @@ $onExportFontScale: 1.25;
     color: $controlHeaderColor;
     padding-top: 0.1rem;
 
-    @at-root .singlePage#{&} {
-      font-size: calc($controlHeaderFontSize / $onExportFontScale);
+    @at-root .exportPdf#{&} {
+      @at-root .singlePage#{&} {
+        font-size: calc($controlHeaderFontSize / $onExportFontScale);
+      }
     }
 
     &.singlePage {
