@@ -31,7 +31,12 @@ export const ExpDescription = ({ styles,
                 const link = g1.match(LINKS_PATTERN)?.[1];
                 mainSkills.push(link || g1);
             }
-            return `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
+            let output = `${matches.length ? 'Keywords: ': ''}${[...new Set(mainSkills)].join(', ')}`;
+            if (exp?.topic)
+            {
+                output = `Topic: ${exp?.topic}\n\n${output}`
+            }
+            return output;
         }
         return exp?.description;
     }
