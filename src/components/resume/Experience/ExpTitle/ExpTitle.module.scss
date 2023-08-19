@@ -10,7 +10,7 @@
   }
 
   @at-root .exportPdf#{&} {
-    font-size: calc($expHeaderFontSize / 1.5);
+    font-size: calc($expHeaderFontSize / $onExportFontScale);
   }
 
   a,

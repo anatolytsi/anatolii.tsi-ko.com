@@ -27,6 +27,8 @@ $infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
 $infoAddFontSize: calc($infoNameFontSize / 1.85);
 $infoSumFontSize: $expDescrFontSize;
 
+$onExportFontScale: 1.5;
+
 @mixin section {
   h2 {
     margin: 0;
@@ -45,6 +47,10 @@ $infoSumFontSize: $expDescrFontSize;
     font-size: $controlHeaderFontSize;
     color: $controlHeaderColor;
     padding-top: 0.1rem;
+
+    @at-root .singlePage#{&} {
+      font-size: calc($controlHeaderFontSize / $onExportFontScale);
+    }
 
     &.singlePage {
       // border-bottom: 2px solid $controlHeaderColor;
