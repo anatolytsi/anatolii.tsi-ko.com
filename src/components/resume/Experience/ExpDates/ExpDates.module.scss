@@ -73,7 +73,7 @@ $date-input-single-width: calc(0.6 * $date-input-width);
         font-size: $expHeaderFontSize;
 
         @at-root .singlePage#{&} {
-        font-size: calc($expHeaderFontSize / $onExportFontScale);
+            font-size: calc($expHeaderFontSize / $onExportFontScale);
         }
     }
 
@@ -110,6 +110,10 @@ $date-input-single-width: calc(0.6 * $date-input-width);
             width: $date-input-width-export;
             input {
                 width: $date-input-width-export;
+
+                @at-root .singlePage#{&} {
+                    width: calc($date-input-width-export / $onExportFontScale);
+                }
             }
         }
 
@@ -150,12 +154,17 @@ $date-input-single-width: calc(0.6 * $date-input-width);
                     font-size: $expHeaderFontSize;
 
                     @at-root .singlePage#{&} {
+                        width: calc($date-input-width-current-export / $onExportFontScale);
                         font-size: calc($expHeaderFontSize / $onExportFontScale);
                     }
 
                     &::placeholder {
                         color: black;
                         font-size: $expHeaderFontSize;
+                        
+                        @at-root .singlePage#{&} {
+                            font-size: calc($expHeaderFontSize / $onExportFontScale);
+                        }
                     }
                 }
             }
