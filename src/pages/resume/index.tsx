@@ -487,7 +487,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
         const buffer = await pdfHelper.componentToPDFBuffer(
             <PDFLayout>
                 <Resume {...props}/>
-            </PDFLayout>
+            </PDFLayout>,
+            singlePage
         );
 
         let prefix = singlePage ? 'SinglePage_' : '';

@@ -14,8 +14,14 @@ const FOOTER_TEMPLATE = `
         Page <span class="pageNumber"></span> of <span class="totalPages"></span>
     </div>
 </div>`;
+const FOOTER_TEMPLATE_SINGLE = `
+<div style="display: flex; justify-content: center; width: 297mm; font-size: 8px;">
+    <div style="color: #969696;"> 
+        Anatolii Tsirkunenko | Resume
+    </div>
+</div>`;
 
-const componentToPDFBuffer = async (component: any) => {
+const componentToPDFBuffer = async (component: any, singlePage=false) => {
     let html = renderToStaticMarkup(component);
     let match;
     do {
@@ -56,7 +62,7 @@ const componentToPDFBuffer = async (component: any) => {
         },
         displayHeaderFooter: true,
         headerTemplate: "<div/>",
-        footerTemplate: FOOTER_TEMPLATE,
+        footerTemplate: singlePage ? FOOTER_TEMPLATE_SINGLE : FOOTER_TEMPLATE,
         printBackground: true
     });
     await browser.close();
