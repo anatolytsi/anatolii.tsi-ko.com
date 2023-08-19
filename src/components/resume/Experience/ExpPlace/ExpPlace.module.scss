@@ -6,6 +6,12 @@
     color: $addInfoColor !important;
     font-size: $expAddInfoFontSize;
 
+    @at-root .exportPdf#{&} {
+      @at-root .singlePage#{&} {
+        font-size: calc($expAddInfoFontSize / $onExportFontScale);
+      }
+    }
+
     a,
     a:visited,
     a:hover,
