@@ -27,7 +27,7 @@ $infoNameFontSize: calc(1.5 * $controlHeaderFontSize);
 $infoAddFontSize: calc($infoNameFontSize / 1.85);
 $infoSumFontSize: $expDescrFontSize;
 
-$onExportFontScale: 1.5;
+$onExportFontScale: 1.25;
 
 @mixin section {
   h2 {
