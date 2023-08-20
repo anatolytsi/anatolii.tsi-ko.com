@@ -11,6 +11,7 @@ import { CommonSection } from "../common/Section";
 
 export interface IHobbiesListProps extends ISkillsListProps {}
 
+const COMPONENT = 'resume';
 const URL_PATH = 'hobbies';
 
 export const HobbiesSection = (props: ICommonResumeSectionProps) => {
@@ -28,11 +29,11 @@ export const HobbiesList = ({ data, editModeEnabled, sectionVisible, shortVersio
                 hobby._id === updatedHobby._id ? updatedHobby : hobby
             ), 'order', true)
         );
-        compUpdate(URL_PATH, updatedHobby, updatedHobby._id);
+        compUpdate(COMPONENT, URL_PATH, updatedHobby, updatedHobby._id);
     };
 
     const handleDeleteHobby = (hobbyId: string) => {
-        compDelete(URL_PATH, hobbyId, (_response) => {
+        compDelete(COMPONENT, URL_PATH, hobbyId, (_response) => {
             setHobbies((hobbies: IHobby[]) => 
                 hobbies.filter( el => el._id !== hobbyId )
             );
@@ -45,7 +46,7 @@ export const HobbiesList = ({ data, editModeEnabled, sectionVisible, shortVersio
         order: 0,
         isVisible: false,
       }
-      compCreate(URL_PATH, hobby, (response) => setHobbies([...hobbies, response.data]));
+      compCreate(COMPONENT, URL_PATH, hobby, (response) => setHobbies([...hobbies, response.data]));
     };
 
     return (

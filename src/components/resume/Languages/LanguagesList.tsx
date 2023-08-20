@@ -17,6 +17,7 @@ export const LanguagesSection = (props: ICommonResumeSectionProps) => {
 
 export interface ILanguagesListProps extends ISkillsListProps {}
 
+const COMPONENT = 'resume';
 const URL_PATH = 'languages';
 
 export const LanguagesList = ({ data, editModeEnabled, sectionVisible }: ILanguagesListProps) => {
@@ -29,11 +30,11 @@ export const LanguagesList = ({ data, editModeEnabled, sectionVisible }: ILangua
                 language._id === updatedLanguage._id ? updatedLanguage : language
             ), 'order', true)
         );
-        compUpdate(URL_PATH, updatedLanguage, updatedLanguage._id);
+        compUpdate(COMPONENT, URL_PATH, updatedLanguage, updatedLanguage._id);
     };
 
     const handleDeleteLanguage = (languageId: string) => {
-        compDelete(URL_PATH, languageId, (_response) => {
+        compDelete(COMPONENT, URL_PATH, languageId, (_response) => {
             setLanguages((languages: ILanguage[]) => 
                 languages.filter( el => el._id !== languageId )
             );
@@ -47,7 +48,7 @@ export const LanguagesList = ({ data, editModeEnabled, sectionVisible }: ILangua
         level: 'Level',
         isVisible: false,
       }
-      compCreate(URL_PATH, language, (response) => setLanguages([...languages, response.data]));
+      compCreate(COMPONENT, URL_PATH, language, (response) => setLanguages([...languages, response.data]));
     };
 
     return (

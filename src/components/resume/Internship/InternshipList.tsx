@@ -16,6 +16,7 @@ export const InternshipSection = (props: ICommonResumeSectionProps) => {
     );
 }
 
+const COMPONENT = 'resume';
 const URL_PATH = 'internships';
 
 export function InternshipList({ data,
@@ -30,11 +31,11 @@ export function InternshipList({ data,
         internship._id === updatedInternship._id ? updatedInternship : internship
       ), 'startDate', true)
     );
-    compUpdate(URL_PATH, updatedInternship, updatedInternship._id);
+    compUpdate(COMPONENT, URL_PATH, updatedInternship, updatedInternship._id);
   };
 
   const handleDeleteInternship = (internshipId: number) => {
-    compDelete(URL_PATH, internshipId, (_response) => {
+    compDelete(COMPONENT, URL_PATH, internshipId, (_response) => {
       setInternships((internships: IInternship[]) => 
         internships.filter( el => el._id !== internshipId )
       );
@@ -52,7 +53,7 @@ export function InternshipList({ data,
       startDate: new Date().getTime(),
       endDate: new Date().getTime()
     }
-    compCreate(URL_PATH, internship, (response) => setInternships([...internships, response.data]));
+    compCreate(COMPONENT, URL_PATH, internship, (response) => setInternships([...internships, response.data]));
   };
 
   const expListProps: IExpListProps = {

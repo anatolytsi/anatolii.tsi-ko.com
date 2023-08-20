@@ -16,6 +16,7 @@ export const PublicationsSection = (props: ICommonResumeSectionProps) => {
     );
 }
 
+const COMPONENT = 'resume';
 const URL_PATH = 'publications';
 
 export function PublicationsList({ data,
@@ -31,11 +32,11 @@ export function PublicationsList({ data,
         publication._id === updatedPublication._id ? updatedPublication : publication
       ), 'date', true)
     );
-    compUpdate(URL_PATH, updatedPublication, updatedPublication._id);
+    compUpdate(COMPONENT, URL_PATH, updatedPublication, updatedPublication._id);
   };
 
   const handleDeletePublication = (publicationId: number) => {
-    compDelete(URL_PATH, publicationId, (_response) => {
+    compDelete(COMPONENT, URL_PATH, publicationId, (_response) => {
       setPublications((publications: IPublication[]) => 
         publications.filter( el => el._id !== publicationId )
       );
@@ -50,7 +51,7 @@ export function PublicationsList({ data,
       date: new Date().getTime(),
       isVisible: false,
     }
-    compCreate(URL_PATH, publication, (response) => setPublications([...publications, response.data]));
+    compCreate(COMPONENT, URL_PATH, publication, (response) => setPublications([...publications, response.data]));
   };
 
   const expListProps: IExpListProps = {

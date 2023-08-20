@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 
 
-export const compCreate = (urlPath: string, data: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+export const compCreate = (component: string, urlPath: string, data: any, callback = (response: AxiosResponse<any, any>) => {}) => {
     axios({
-        url: `/api/resume/${urlPath}`,
+        url: `/api/${component}/${urlPath}`,
         method: "post",
         data: data,
         headers: {
@@ -16,9 +16,9 @@ export const compCreate = (urlPath: string, data: any, callback = (response: Axi
     });
 }
 
-export const compGet = (urlPath: string, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+export const compGet = (component: string, urlPath: string, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
     axios({
-        url: `/api/resume/${urlPath}/${compId}`,
+        url: `/api/${component}/${urlPath}/${compId}`,
         method: "get",
         headers: {
             "Content-type": "application/json",
@@ -30,9 +30,9 @@ export const compGet = (urlPath: string, compId: any, callback = (response: Axio
     });
 }
 
-export const compUpdate = (urlPath: string, data: any, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+export const compUpdate = (component: string, urlPath: string, data: any, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
     axios({
-        url: `/api/resume/${urlPath}/${compId}`,
+        url: `/api/${component}/${urlPath}/${compId}`,
         method: "post",
         data: data,
         headers: {
@@ -41,9 +41,9 @@ export const compUpdate = (urlPath: string, data: any, compId: any, callback = (
     }).then(callback);
 }
 
-export const compDelete = (urlPath: string, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+export const compDelete = (component: string, urlPath: string, compId: any, callback = (response: AxiosResponse<any, any>) => {}) => {
     axios({
-        url: `/api/resume/${urlPath}/${compId}`,
+        url: `/api/${component}/${urlPath}/${compId}`,
         method: "delete",
         headers: {
             "Content-type": "application/json",
@@ -56,8 +56,8 @@ export const compDelete = (urlPath: string, compId: any, callback = (response: A
 }
 
 
-export const uploadFile = (urlPath: string, data: any, callback = (response: AxiosResponse<any, any>) => {}) => {
-    axios.post(`/api/resume/${urlPath}`, data, {
+export const uploadFile = (component: string, urlPath: string, data: any, callback = (response: AxiosResponse<any, any>) => {}) => {
+    axios.post(`/api/${component}/${urlPath}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

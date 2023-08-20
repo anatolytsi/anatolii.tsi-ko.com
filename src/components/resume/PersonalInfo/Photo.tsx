@@ -20,6 +20,8 @@ const PhotoUpload = ({children, isEditing, uploadPhoto}: any) => {
     }
 }
 
+const COMPONENT = 'resume';
+
 export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IPersonalInfoCommonProps) => {
     const [file, setFile] = useState(null);
     const [photoExist, setPhotoExist] = useState(false);
@@ -41,7 +43,7 @@ export const Photo = ({ personalInfo, styles, setter, forExport, isEditing }: IP
       }
       const body = new FormData();
       body.append('media', file);
-      uploadFile('file', body, (response) => setter({...personalInfo, photoSrc: response.data.data.url}));
+      uploadFile(COMPONENT, 'file', body, (response) => setter({...personalInfo, photoSrc: response.data.data.url}));
     }, [file]);
 
     const handlePhotoUpload = (event: any) => {

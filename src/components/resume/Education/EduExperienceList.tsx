@@ -11,6 +11,7 @@ import { compCreate, compDelete, compUpdate } from '../common/api-helpers';
 import { CommonSection } from '../common/Section';
 import { sortByEndDate } from '../Experience/common';
 
+const COMPONENT = 'resume';
 const URL_PATH = 'education';
 
 export const EducationSection = (props: ICommonResumeSectionProps) => {
@@ -33,11 +34,11 @@ export function EduExperienceList({ data,
         experience._id === updatedExperience._id ? updatedExperience : experience
       ))
     );
-    compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
+    compUpdate(COMPONENT, URL_PATH, updatedExperience, updatedExperience._id);
   };
 
   const handleDeleteEduExperience = (experienceId: number) => {
-    compDelete(URL_PATH, experienceId, (_response) => {
+    compDelete(COMPONENT, URL_PATH, experienceId, (_response) => {
       setEduExperiences((experiences: IEduExperience[]) => 
         experiences.filter( el => el._id !== experienceId )
       );
@@ -55,7 +56,7 @@ export function EduExperienceList({ data,
       startDate: new Date().getTime(),
       endDate: new Date().getTime()
     }
-    compCreate(URL_PATH, experience, (response) => setEduExperiences([...eduExperiences, response.data]));
+    compCreate(COMPONENT, URL_PATH, experience, (response) => setEduExperiences([...eduExperiences, response.data]));
   };
 
   const expListProps: IExpListProps = {

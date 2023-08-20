@@ -15,6 +15,7 @@ export const CertificationsSection = (props: ICommonResumeSectionProps) => {
     );
 }
 
+const COMPONENT = 'resume';
 const URL_PATH = 'certifications';
 
 export function CertificationList({ data,
@@ -30,11 +31,11 @@ export function CertificationList({ data,
         certification._id === updatedCertification._id ? updatedCertification : certification
       ), 'date', true)
     );
-    compUpdate(URL_PATH, updatedCertification, updatedCertification._id);
+    compUpdate(COMPONENT, URL_PATH, updatedCertification, updatedCertification._id);
   };
 
   const handleDeleteCertification = (certificationId: number) => {
-    compDelete(URL_PATH, certificationId, (_response) => {
+    compDelete(COMPONENT, URL_PATH, certificationId, (_response) => {
       setCertifications((certifications: ICertification[]) => 
         certifications.filter( el => el._id !== certificationId )
       );
@@ -51,7 +52,7 @@ export function CertificationList({ data,
       date: new Date().getTime(),
       isVisible: false,
     }
-    compCreate(URL_PATH, certification, (response) => setCertifications([...certifications, response.data]));
+    compCreate(COMPONENT, URL_PATH, certification, (response) => setCertifications([...certifications, response.data]));
   };
 
   const expListProps: IExpListProps = {

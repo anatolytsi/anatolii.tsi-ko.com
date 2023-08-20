@@ -17,6 +17,7 @@ export const JobExperienceSection = (props: ICommonResumeSectionProps) => {
     );
 }
 
+const COMPONENT = 'resume';
 const URL_PATH = 'jobExperience';
 
 export function JobExperienceList({ data,
@@ -32,11 +33,11 @@ export function JobExperienceList({ data,
           experience._id === updatedExperience._id ? updatedExperience : experience
         ))
     );
-    compUpdate(URL_PATH, updatedExperience, updatedExperience._id);
+    compUpdate(COMPONENT, URL_PATH, updatedExperience, updatedExperience._id);
   };
 
   const handleDeleteJobExperience = (experienceId: number) => {
-    compDelete(URL_PATH, experienceId, (_response) => {
+    compDelete(COMPONENT, URL_PATH, experienceId, (_response) => {
       setJobExperiences((experiences: IJobExperience[]) => 
         experiences.filter( el => el._id !== experienceId )
       );
@@ -54,7 +55,7 @@ export function JobExperienceList({ data,
       startDate: new Date().getTime(),
       endDate: new Date().getTime()
     }
-    compCreate(URL_PATH, experience, (response) => setJobExperiences([...jobExperiences, response.data]));
+    compCreate(COMPONENT, URL_PATH, experience, (response) => setJobExperiences([...jobExperiences, response.data]));
   };
 
   const expListProps: IExpListProps = {
