@@ -1,0 +1,65 @@
+@import 'src/styles/common/variables';
+@import 'src/styles/common/_portfolio.variables.scss';
+@import 'src/components/resume/Experience/Experience.module.scss';
+
+.portfolioExperience {
+    margin-left: $head-font-size;
+    margin-right: $head-font-size;
+    .experienceHead {
+        .experienceData {
+            @include baseExperience;
+            margin: 0;
+            margin-top: $head-font-size;
+            // width: 50rem;
+        }
+    }
+    .experienceContent {
+        margin-top: calc($head-font-size / 2);
+        padding-bottom: $head-font-size;
+        border-bottom: 2px solid black;
+
+        &.last {
+            border: 0;
+        }
+
+        .controls {
+            .panel {
+                .editButton {
+                    @include editButton(1rem);
+                    margin: 0;
+                    margin-right: 0.3rem;
+                }
+
+                .photosButton {
+                    text-decoration: none;
+                    color: cornflowerblue;
+                    margin-right: 0.3rem;
+
+                    &:hover {
+                        color: blue;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .photoGallery {
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                margin: 0;
+
+                @media (min-width: $desktop-size) {
+                    margin-left: 4rem;
+                    margin-right: 4rem;
+                }
+
+                .galleryPic {
+                    height: 10rem;
+                    width: 10rem;
+                    object-fit: cover;
+                    margin: 1rem;
+                }
+            }
+        }
+    }
+}

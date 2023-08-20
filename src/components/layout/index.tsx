@@ -9,6 +9,7 @@ import Link from "next/link";
 const MENU_LIST = [
   // { text: "Home", href: "/" },
   { text: "Resume", href: "/resume" },
+  { text: "Portfolio", href: "/portfolio" },
 ];
 
 const Navbar = () => {
