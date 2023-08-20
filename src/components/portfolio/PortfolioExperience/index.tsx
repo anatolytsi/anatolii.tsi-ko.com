@@ -131,7 +131,7 @@ export const PortfolioExperience = (props: IPortfolioExperienceProps) => {
                         <div className={styles.panel}>
                             <EditButton {...expProps} editModeEnabled={editModeEnabled} experience={{...portfolioExp.experience, description: portfolioExp.description}} 
                                         isEditing={isEditing} handleSave={handleSave} handleEdit={() => setIsEditing(true)}/>
-                            <a className={styles.photosButton} href="#" onClick={() => setGalleryOpen(!galleryOpen)}>
+                            <a className={styles.photosButton} onClick={() => setGalleryOpen(!galleryOpen)}>
                                 Gallery
                             </a>
                             <input type="file" onChange={handlePhotoUpload} id="photoUpload" accept="image/*" style={{display: "none"}}/>
