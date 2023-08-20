@@ -30,7 +30,7 @@ export function PersonalInfo({ data, editModeEnabled, forExport=false, singlePag
 
   const handleSave = () => {
     setIsEditing(false);
-    compUpdate('personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
+    compUpdate('resume', 'personalInfo', personalInfo, personalInfo._id, (response) => setPersonalInfo(personalInfo));
   };
 
   useEffect(() => {
