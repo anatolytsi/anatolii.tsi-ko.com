@@ -115,13 +115,11 @@ export const PortfolioExperience = (props: IPortfolioExperienceProps) => {
                 <div className={styles.experienceData}>
                     <Header {...expProps} exp={portfolioExp.experience}>
                         <HeaderLine {...expProps} exp={portfolioExp.experience}>
-                            <div>
-                                <Title {...expProps} exp={portfolioExp.experience}/>
-                                <Place {...expProps} exp={portfolioExp.experience} shortVersion={true}/>
-                                <Topic {...expProps} exp={portfolioExp.experience}/>
-                            </div>
+                            <Title {...expProps} exp={portfolioExp.experience}/>
                             <Dates {...expProps} exp={portfolioExp.experience}/>
                         </HeaderLine>
+                        <Place {...expProps} exp={portfolioExp.experience} shortVersion={true}/>
+                        <Topic {...expProps} exp={portfolioExp.experience}/>
                     </Header>
                 </div>
             </div>
