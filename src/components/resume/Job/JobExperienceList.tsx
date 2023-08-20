@@ -70,7 +70,7 @@ export function JobExperienceList({ data,
       {jobExperiences.map((experience: IJobExperience, index: number) => (
         <JobExperience
           key={experience._id}
-          jobExperience={experience}
+          experience={experience}
           onUpdate={handleUpdateJobExperience}
           onDelete={handleDeleteJobExperience}
           editModeEnabled={editModeEnabled}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, WorkType, handleExpKeyDown } from '../Experience';
 import styles from './Job.module.scss';
-import { ICommonExperienceProps, IExperience } from '../Experience/common';
+import { ICommonExperienceProps, IExperience, IExperienceProps } from '../Experience/common';
 
 export interface IJobExperience extends IExperience {
   place: string
@@ -11,8 +11,8 @@ export interface IJobExperience extends IExperience {
   topic?: string
 }
 
-interface IJobExperienceProps {
-  jobExperience: IJobExperience
+interface IJobExperienceProps extends IExperienceProps {
+  experience: IJobExperience
   onUpdate: any
   onDelete: any
   editModeEnabled: boolean
@@ -21,7 +21,7 @@ interface IJobExperienceProps {
   shortVersion?: boolean
 }
 
-export function JobExperience({ jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IJobExperienceProps) {
+export function JobExperience({ experience: jobExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IJobExperienceProps) {
   const [experience, setExperience] = useState<IJobExperience>(jobExperience);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [compUpdated, setcompUpdated] = useState<boolean>(false);

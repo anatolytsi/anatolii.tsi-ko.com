@@ -70,7 +70,7 @@ export function EduExperienceList({ data,
       {eduExperiences.map((experience: IEduExperience, index: number) => (
         <EduExperience
             key={experience._id}
-            eduExperience={experience}
+            experience={experience}
             onUpdate={handleUpdateEduExperience}
             onDelete={handleDeleteEduExperience}
             editModeEnabled={editModeEnabled}

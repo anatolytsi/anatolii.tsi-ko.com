@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Title, Website, Websites, handleExpKeyDown } from '../Experience';
 import styles from './Project.module.scss';
-import { ICommonExperienceProps, IExpWebsite, IExperience } from '../Experience/common';
+import { ICommonExperienceProps, IExpWebsite, IExperience, IExperienceProps } from '../Experience/common';
 
 export interface IProject extends IExperience {
   websites?: IExpWebsite[]
 }
 
-interface IProjectProps {
-    project: IProject
+interface IProjectProps extends IExperienceProps {
+    experience: IProject
     onUpdate: any
     onDelete: any
     editModeEnabled: boolean
@@ -18,7 +18,7 @@ interface IProjectProps {
     shortVersion?: boolean
 }
 
-export function Project({ project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IProjectProps) {
+export function Project({ experience: project, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IProjectProps) {
   const [experience, setExperience] = useState<IProject>(project);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [compUpdated, setcompUpdated] = useState<boolean>(false);

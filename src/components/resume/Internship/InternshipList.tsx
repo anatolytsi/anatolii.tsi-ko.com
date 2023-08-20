@@ -65,7 +65,7 @@ export function InternshipList({ data,
       {internships.map((internship: IInternship, index: number) => (
         <Internship
             key={internship._id}
-            internship={internship}
+            experience={internship}
             onUpdate={handleUpdateInternship}
             onDelete={handleDeleteInternship}
             editModeEnabled={editModeEnabled}

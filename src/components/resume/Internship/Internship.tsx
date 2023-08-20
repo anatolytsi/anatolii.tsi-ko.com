@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Internship.module.scss';
-import { ICommonExperienceProps, IExperience } from '../Experience/common';
+import { ICommonExperienceProps, IExperience, IExperienceProps } from '../Experience/common';
 
 export interface IInternship extends IExperience {
     place: string
@@ -11,8 +11,8 @@ export interface IInternship extends IExperience {
     topic?: string
 }
 
-interface IInternshipProps {
-    internship: IInternship
+interface IInternshipProps extends IExperienceProps {
+    experience: IInternship
     onUpdate: any
     onDelete: any
     editModeEnabled: boolean
@@ -20,7 +20,7 @@ interface IInternshipProps {
     forExport: boolean
 }
 
-export function Internship({ internship, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IInternshipProps) {
+export function Internship({ experience: internship, onUpdate, onDelete, editModeEnabled, isLast, forExport=false }: IInternshipProps) {
   const [experience, setExperience] = useState(internship);
   const [isEditing, setIsEditing] = useState(false);
 

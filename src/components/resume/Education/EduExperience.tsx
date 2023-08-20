@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Content, Dates, Description, EditableContent, Grades, Header, HeaderLine, Place, Title, Topic, handleExpKeyDown } from '../Experience';
 import styles from './Education.module.scss';
-import { ICommonExperienceProps, IExperience } from '../Experience/common';
+import { ICommonExperienceProps, IExperience, IExperienceProps } from '../Experience/common';
 
 export interface IEduExperience extends IExperience {
     place: string
@@ -12,8 +12,8 @@ export interface IEduExperience extends IExperience {
     topic?: string
 }
 
-interface IEduExperienceProps {
-    eduExperience: IEduExperience
+interface IEduExperienceProps extends IExperienceProps {
+    experience: IEduExperience
     onUpdate: any
     onDelete: any
     editModeEnabled: boolean
@@ -22,7 +22,7 @@ interface IEduExperienceProps {
     shortVersion?: boolean
 }
 
-export function EduExperience({ eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IEduExperienceProps) {
+export function EduExperience({ experience: eduExperience, onUpdate, onDelete, editModeEnabled, isLast, forExport=false, shortVersion=false }: IEduExperienceProps) {
   const [experience, setExperience] = useState(eduExperience);
   const [isEditing, setIsEditing] = useState(false);
   const [compUpdated, setcompUpdated] = useState<boolean>(false);

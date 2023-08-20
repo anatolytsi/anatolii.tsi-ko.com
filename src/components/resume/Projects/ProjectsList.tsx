@@ -70,7 +70,7 @@ export function ProjectsList({ data,
       {projects.map((experience: IProject, index: number) => (
         <Project
           key={experience._id}
-          project={experience}
+          experience={experience}
           onUpdate={handleUpdateProject}
           onDelete={handleDeleteProject}
           editModeEnabled={editModeEnabled}

@@ -30,6 +30,15 @@ export interface IExperience {
     workType?: string
 }
 
+export interface IExperienceProps {
+  experience: IExperience
+  onUpdate: any
+  onDelete: any
+  editModeEnabled: boolean
+  isLast: boolean
+  forExport: boolean
+}
+
 export interface IExperienceListProps extends IResumeSectionComponent {}
 
 export interface ICommonExperienceProps {
