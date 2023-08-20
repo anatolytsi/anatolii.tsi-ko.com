@@ -58,7 +58,23 @@ handler.post(async (req: IDbApiRequest, res: NextApiResponse) => {
     if (session?.user?.role === 'admin') {
         try {
             let resume = JSON.parse(body);
-            await req.db.dropDatabase();
+
+            if (!resume) {
+                res.status(400).end();
+                return;
+            }
+            await req.db.collection('personalInfo').drop();
+            await req.db.collection('skills').drop();
+            await req.db.collection('resumeSections').drop();
+            await req.db.collection('jobExperience').drop();
+            await req.db.collection('education').drop();
+            await req.db.collection('internships').drop();
+            await req.db.collection('languages').drop();
+            await req.db.collection('certifications').drop();
+            await req.db.collection('projects').drop();
+            await req.db.collection('publications').drop();
+            await req.db.collection('hobbies').drop();
+
             let db = req.dbClient.db(process.env.MONGODB_DB);
             for (const property in resume) {
                 if (Array.isArray(resume[property])) {
