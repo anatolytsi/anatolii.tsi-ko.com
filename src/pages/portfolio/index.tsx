@@ -300,7 +300,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         });
 
         let props = {
-            forExport: exportPDF,
+            forExport: false,
             isAdmin,
             portfolioExps,
             photosList

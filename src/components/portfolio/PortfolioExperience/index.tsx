@@ -110,7 +110,7 @@ export const PortfolioExperience = (props: IPortfolioExperienceProps) => {
     };
 
     return (
-        <div className={styles.portfolioExperience} key={key}>
+        <div className={`${styles.portfolioExperience} ${forExport ? styles.exportPdf : ''}`} key={key}>
             <div className={styles.experienceHead}>
                 <div className={styles.experienceData}>
                     <Header {...expProps} exp={portfolioExp.experience}>
