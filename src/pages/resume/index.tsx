@@ -239,7 +239,7 @@ export default function Resume( props: IResumeProps ) {
         }
       }))
     if (section?._id) {
-      compUpdate('resumeSections', section, section._id);
+      compUpdate('resume', 'resumeSections', section, section._id);
     }
   };
 
