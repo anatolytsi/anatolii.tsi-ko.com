@@ -220,14 +220,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
             await db.collection('projects').insertMany(require('@/fixtures/projects.json'));
         }
     
-        const jobExperienceCurCursor = db.collection('jobExperience');
-        const jobExperiencePastCursor = db.collection('jobExperience');
-        const educationCurCursor = db.collection('education');
-        const educationPastCursor = db.collection('education');
-        const internshipsCurCursor = db.collection('internships');
-        const internshipsPastCursor = db.collection('internships');
-        const projectsCurCursor = db.collection('projects');
-        const projectsPastCursor = db.collection('projects');
+        const jobExperienceCursor = db.collection('jobExperience');
+        const educationCursor = db.collection('education');
+        const internshipsCursor = db.collection('internships');
+        const projectsCursor = db.collection('projects');
     
         let jobExperiences = [];
         let education = [];
@@ -236,23 +232,23 @@ export const getServerSideProps = async (context: NextPageContext) => {
         let photosList: any[] = [];
 
         if (exportPDF || !isAdmin) {
-            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCurCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                              ...JSON.parse(JSON.stringify(await jobExperiencePastCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            education = [...JSON.parse(JSON.stringify(await educationCurCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                         ...JSON.parse(JSON.stringify(await educationPastCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            internships = [...JSON.parse(JSON.stringify(await internshipsCurCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                           ...JSON.parse(JSON.stringify(await internshipsPastCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            projects = [...JSON.parse(JSON.stringify(await projectsCurCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await projectsPastCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                              ...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            education = [...JSON.parse(JSON.stringify(await educationCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                         ...JSON.parse(JSON.stringify(await educationCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            internships = [...JSON.parse(JSON.stringify(await internshipsCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                           ...JSON.parse(JSON.stringify(await internshipsCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            projects = [...JSON.parse(JSON.stringify(await projectsCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                        ...JSON.parse(JSON.stringify(await projectsCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
         } else {
-            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCurCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                              ...JSON.parse(JSON.stringify(await jobExperiencePastCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            education = [...JSON.parse(JSON.stringify(await educationCurCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await educationPastCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            internships = [...JSON.parse(JSON.stringify(await internshipsCurCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                            ...JSON.parse(JSON.stringify(await internshipsPastCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            projects = [...JSON.parse(JSON.stringify(await projectsCurCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await projectsPastCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                              ...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            education = [...JSON.parse(JSON.stringify(await educationCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                        ...JSON.parse(JSON.stringify(await educationCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            internships = [...JSON.parse(JSON.stringify(await internshipsCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                            ...JSON.parse(JSON.stringify(await internshipsCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
+            projects = [...JSON.parse(JSON.stringify(await projectsCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
+                        ...JSON.parse(JSON.stringify(await projectsCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
             photosList = await getImages(IMAGES_URL);
         }
 
