@@ -264,7 +264,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
                         description: ''
                     }
                     let result = await db.collection('expPortfolios').insertOne(expPortfolio);
-                    expPortfolio._id = result.insertedId;
+                    expPortfolio._id = result.insertedId.toString();
                 }
                 if (isAdmin || expPortfolio.description)
                 {
