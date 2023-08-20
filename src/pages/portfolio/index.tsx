@@ -11,7 +11,7 @@ import axios from "axios";
 
 import styles from './portfolio.module.scss';
 import { IPortfolioExperience, PortfolioExperience } from "@/components/portfolio/PortfolioExperience";
-import { IMAGES_URL, getFiles, getImages } from "../api/portfolio/file";
+import { getImages, IMAGES_URL } from "../api/portfolio/file";
 import pdfHelper from "@/lib/pdfHelper";
 import PDFLayout from "@/components/resume/PdfLayout";
 
