@@ -3,7 +3,7 @@ import { ExpAdd as AddNew } from './ExpAdd';
 import { ExpContent as Content } from './ExpContent';
 import { ExpDate as Date, ExpDates as Dates } from './ExpDates';
 import { ExpDescription as Description } from './ExpDescription';
-import { ExpEditableContent as EditableContent } from './ExpEditableContent';
+import { ExperienceEditButton as EditButton, ExpEditableContent as EditableContent } from './ExpEditableContent';
 import { ExpGrades as Grades } from './ExpGrades';
 import { ExpHeader as Header } from './ExpHeader';
 import { ExpHeaderLine as HeaderLine } from './ExpHeaderLine';
@@ -31,6 +31,7 @@ export {
     Date,
     Dates,
     Description,
+    EditButton,
     EditableContent,
     Grades,
     Header,

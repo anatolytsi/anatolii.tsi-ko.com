@@ -5,24 +5,48 @@ import { ICommonExperienceProps, IExperience } from '../common';
 
 
 interface ExperienceEditButtonProps {
-    editModeEnabled: boolean
+    editModeEnabled?: boolean
     isEditing: boolean
     styles: any
     experience: IExperience
-    setExperience: any
+    setExperience?: any
     handleSave: any
     handleEdit: any
-    onDelete: any
+    onDelete?: any
 }
 
-export const ExperienceControlButtons = ({ editModeEnabled,
-                                           isEditing,
-                                           styles,
-                                           experience,
-                                           setExperience,
-                                           handleSave,
-                                           handleEdit,
-                                           onDelete }: ExperienceEditButtonProps) => {
+export const ExperienceEditButton = ({ editModeEnabled,
+                                       isEditing,
+                                       styles,
+                                       handleSave,
+                                       handleEdit }: ExperienceEditButtonProps) => {
+                                        
+    if (editModeEnabled) {
+        return (
+            <button 
+                type="button" 
+                onClick={isEditing ? handleSave : handleEdit}
+                className={isEditing ? `${styles.editButton} ${styles.isEditing}` : styles.editButton}
+            >
+                {isEditing ? (
+                    <FontAwesomeIcon icon={faSave} />
+                ) : (
+                    <FontAwesomeIcon icon={faEdit} />
+                )}
+            </button>
+        )
+    } else {
+        return <></>
+    }
+}
+
+export const ExperienceControlButtons = ( props: ExperienceEditButtonProps) => {
+    const { editModeEnabled,
+            isEditing,
+            styles,
+            experience,
+            setExperience,
+            onDelete } = props;
     if (editModeEnabled) {
         return (
           <>
@@ -46,17 +70,7 @@ export const ExperienceControlButtons = ({ editModeEnabled,
                         }
                     </button>
                 )}
-                    <button 
-                        type="button" 
-                        onClick={isEditing ? handleSave : handleEdit}
-                        className={isEditing ? `${styles.editButton} ${styles.isEditing}` : styles.editButton}
-                    >
-                        {isEditing ? (
-                            <FontAwesomeIcon icon={faSave} />
-                        ) : (
-                            <FontAwesomeIcon icon={faEdit} />
-                        )}
-                    </button>
+                    <ExperienceEditButton {...props} />
                     {isEditing ? (
                         ''
                     ) : (

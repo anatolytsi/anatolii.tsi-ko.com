@@ -3,6 +3,32 @@
 $control-buttons-margin-right: calc(#{$padding-experience} / 2);
 $control-buttons-width: calc(#{$padding-experience} / 2);
 
+@mixin editButton($height) {
+  background-color: transparent;
+  color: #4caf50;
+  border: 0;
+  margin: 0.3rem $control-buttons-margin-right 0.3rem 0;
+  // margin-right: $control-buttons-margin-right;
+  height: calc(#{$height} / 4);
+  width: $control-buttons-width;
+  transition: 0.3s;
+  padding: 0;
+
+  &:hover {
+    color: #3e8e41;
+  }
+
+  &.isEditing {
+  background-color: transparent;
+  margin-top: 1rem;
+  color: red;
+
+  &:hover {
+    color: orange;
+  }
+  }
+}
+
 @mixin editExperience($height) {
     display: -webkit-flex;
     flex-direction: row;
@@ -36,29 +62,7 @@ $control-buttons-width: calc(#{$padding-experience} / 2);
       }
   
       .editButton {
-          background-color: transparent;
-          color: #4caf50;
-          border: 0;
-          margin: 0.3rem $control-buttons-margin-right 0.3rem 0;
-          // margin-right: $control-buttons-margin-right;
-          height: calc(#{$height} / 4);
-          width: $control-buttons-width;
-          transition: 0.3s;
-          padding: 0;
-    
-          &:hover {
-            color: #3e8e41;
-          }
-    
-        &.isEditing {
-          background-color: transparent;
-          margin-top: 1rem;
-          color: red;
-      
-          &:hover {
-            color: orange;
-          }
-        }
+        @include editButton($height);
       }
   
       .deleteButton {
