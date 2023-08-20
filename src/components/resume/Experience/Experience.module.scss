@@ -17,3 +17,49 @@
 @import 'src/components/resume/Experience/ExpWorkType/ExpWorkType.module.scss';
 
 @import 'src/components/resume/Experience/common.module.scss';
+
+@mixin baseExperience {
+    @include experience;
+
+    .header {
+        @include expHeader;
+
+        .headerLine {
+            @include expHeaderLine;
+
+            .title {
+                @include expTitle;
+            }
+            
+            .datesWithTime {
+                @include expDatesWithTime;
+                
+                .dates {
+                    @include expDates;
+                }
+            }
+        }
+
+        .place {
+            @include expPlace;
+        }
+
+        .placeLink {
+            @include expPlaceLink;
+        }
+        
+        .placeLocation {
+            @include expPlaceLocation;
+        }
+
+        .topic {
+            @include expTopic;
+        }
+    }
+
+    .description {
+        @include expDescription;
+    }
+
+    @include experienceHidden;
+}
