@@ -3,10 +3,17 @@ import middleware, { IDbApiRequest } from '@/middleware/resume-database';
 import { NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { Db } from 'mongodb';
 
 const handler = nextConnect();
 
 handler.use(middleware);
+
+const dropCollection = async (db: Db, collection: string) => {
+    if ((await db.listCollections().toArray()).map(c => c.name).includes(collection)) {
+        await db.collection(collection).drop();
+    }
+}
 
 handler.get(async (req: IDbApiRequest, res: NextApiResponse) => {
     const session = await getServerSession(req, res, authOptions);
@@ -63,17 +70,18 @@ handler.post(async (req: IDbApiRequest, res: NextApiResponse) => {
                 res.status(400).end();
                 return;
             }
-            await req.db.collection('personalInfo').drop();
-            await req.db.collection('skills').drop();
-            await req.db.collection('resumeSections').drop();
-            await req.db.collection('jobExperience').drop();
-            await req.db.collection('education').drop();
-            await req.db.collection('internships').drop();
-            await req.db.collection('languages').drop();
-            await req.db.collection('certifications').drop();
-            await req.db.collection('projects').drop();
-            await req.db.collection('publications').drop();
-            await req.db.collection('hobbies').drop();
+            await dropCollection(req.db, 'personalInfo');
+            await dropCollection(req.db, 'skills');
+            await dropCollection(req.db, 'resumeSections');
+            await dropCollection(req.db, 'jobExperience');
+            await dropCollection(req.db, 'education');
+            await dropCollection(req.db, 'internships');
+            await dropCollection(req.db, 'languages');
+            await dropCollection(req.db, 'certifications');
+            await dropCollection(req.db, 'projects');
+            await dropCollection(req.db, 'publications');
+            await dropCollection(req.db, 'hobbies');
+            await dropCollection(req.db, 'expPortfolios');
 
             let db = req.dbClient.db(process.env.MONGODB_DB);
             for (const property in resume) {
