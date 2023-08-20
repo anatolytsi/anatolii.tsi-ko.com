@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getSession } from "next-auth/react";
 import clientPromise from "@/lib/mongodb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV, faPencil, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV, faFilePdf, faPencil, faSave } from "@fortawesome/free-solid-svg-icons";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import axios from "axios";
 
@@ -99,6 +99,25 @@ const RestButton = () => {
   );
 }
 
+const PdfDownloadButtonSingle = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <a
+      href="/portfolio?pdf=true"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className={`${styles.downloadButton}`}>
+        <span className={styles.downloadTooltipText}>
+          Download PDF
+        </span>
+          <FontAwesomeIcon icon={faFilePdf} size='xl' />
+      </div>
+    </a>
+  );
+}
+
 export default function Portfolio( props: IPortfolioProps ) {
     const [editModeEnabled, setEditModeEnabled] = useState(false);
     const [portfolioExps, setPortfolioExps] = useState(props.portfolioExps);
@@ -175,7 +194,7 @@ export default function Portfolio( props: IPortfolioProps ) {
             <></>
             ) : (
             <>
-                {/* <PdfDownloadButtonSingle/> */}
+                <PdfDownloadButtonSingle/>
                 {renderAdminButtons()}
             </>
             )}
