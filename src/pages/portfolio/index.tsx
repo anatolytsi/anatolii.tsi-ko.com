@@ -250,26 +250,24 @@ export const getServerSideProps = async (context: NextPageContext) => {
         let projects = [];
         let photosList: any[] = [];
 
+        let filterCurrent: any = { endDate: 0 };
+        let filterPast: any = { endDate: { $gt: 0 } };
+        let sortCurrent: any = { startDate: -1 };
+        let sortPast: any = { endDate: -1 };
+
         if (exportPDF || !isAdmin) {
-            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                              ...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            education = [...JSON.parse(JSON.stringify(await educationCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                         ...JSON.parse(JSON.stringify(await educationCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            internships = [...JSON.parse(JSON.stringify(await internshipsCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                           ...JSON.parse(JSON.stringify(await internshipsCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            projects = [...JSON.parse(JSON.stringify(await projectsCursor.find({ isVisible: true, endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await projectsCursor.find({ isVisible: true, endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-        } else {
-            jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                              ...JSON.parse(JSON.stringify(await jobExperienceCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            education = [...JSON.parse(JSON.stringify(await educationCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await educationCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            internships = [...JSON.parse(JSON.stringify(await internshipsCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                            ...JSON.parse(JSON.stringify(await internshipsCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            projects = [...JSON.parse(JSON.stringify(await projectsCursor.find({ endDate: 0 }).sort({ startDate: -1 }).toArray())), 
-                        ...JSON.parse(JSON.stringify(await projectsCursor.find({ endDate: { $gt: 0 } }).sort({ endDate: -1 }).toArray()))];
-            photosList = await getImages(IMAGES_URL);
+          filterCurrent.isVisible = true;
+          filterPast.isVisible = true;
         }
+
+        jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find(filterCurrent).sort(sortCurrent).toArray())), 
+                          ...JSON.parse(JSON.stringify(await jobExperienceCursor.find(filterPast).sort(sortPast).toArray()))];
+        education = [...JSON.parse(JSON.stringify(await educationCursor.find(filterCurrent).sort(sortCurrent).toArray())), 
+                     ...JSON.parse(JSON.stringify(await educationCursor.find(filterPast).sort(sortPast).toArray()))];
+        internships = [...JSON.parse(JSON.stringify(await internshipsCursor.find(filterCurrent).sort(sortCurrent).toArray())), 
+                       ...JSON.parse(JSON.stringify(await internshipsCursor.find(filterPast).sort(sortPast).toArray()))];
+        projects = [...JSON.parse(JSON.stringify(await projectsCursor.find(filterCurrent).sort(sortCurrent).toArray())), 
+                    ...JSON.parse(JSON.stringify(await projectsCursor.find(filterPast).sort(sortPast).toArray()))];
 
         let portfolioExps: any[] = [];
         let experiences = [...jobExperiences, ...education, ...internships, ...projects];
