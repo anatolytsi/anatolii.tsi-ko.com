@@ -25,7 +25,7 @@ export const SkillsList = ({ data, editModeEnabled, sectionVisible, shortVersion
 
     const handleSave = () => {
         setIsEditing(false);
-        compUpdate('skills', skills, skills._id, () => setSkills(skills));
+        compUpdate('resume', 'skills', skills, skills._id, () => setSkills(skills));
     };
 
     useEffect(() => {
