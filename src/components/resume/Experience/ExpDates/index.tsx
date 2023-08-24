@@ -40,6 +40,7 @@ export const ExpDates = ({ isEditing,
 
     const getTimePeriod = (startDate: any, endDate: any) => {
         let passedDate = new Date(endDate - startDate);
+        if (passedDate.getTime() <= 0) return 'n/a';
         let [years, months] = getYearsAndMonths(passedDate);
         let output = '';
         let yearsStr = shortVersion ? 'y' : ` year${years === 1 ? '' : 's'}`;
