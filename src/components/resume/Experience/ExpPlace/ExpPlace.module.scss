@@ -76,5 +76,9 @@
 
     @at-root .exportPdf#{&} {
         @include expPlaceInline;
+        
+        @at-root .singlePage#{&} {
+          font-size: calc($expAddInfoFontSize / $onExportFontScale);
+        }
     }
 }
