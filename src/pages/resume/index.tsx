@@ -34,8 +34,8 @@ interface IResumeSection {
   order: number
 }
 
-
-const DATE_STRING = new Date().toISOString().slice(0, 10).replaceAll('-', '');
+const TODAY = new Date();
+const DATE_STRING = TODAY.toISOString().slice(0, 10).replaceAll('-', '');
 
 const RestButton = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -446,12 +446,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
     if (exportPDF || !isAdmin) {
       resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.filter({ isVisible: true }).toArray()))
-      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true }).toArray()))
-      education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true }).toArray()))
-      internships = JSON.parse(JSON.stringify(await internshipsCur.filter({ isVisible: true }).toArray()))
+      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
+      education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
+      internships = JSON.parse(JSON.stringify(await internshipsCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
       languages = JSON.parse(JSON.stringify(await languagesCur.filter({ isVisible: true }).toArray()))
       certifications = JSON.parse(JSON.stringify(await certificationsCur.filter({ isVisible: true }).toArray()))
-      projects = JSON.parse(JSON.stringify(await projectsCur.filter({ isVisible: true }).toArray()))
+      projects = JSON.parse(JSON.stringify(await projectsCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
       publications = JSON.parse(JSON.stringify(await publicationsCur.filter({ isVisible: true }).toArray()))
       hobbies = JSON.parse(JSON.stringify(await hobbiesCur.filter({ isVisible: true }).toArray()))
     } else {
