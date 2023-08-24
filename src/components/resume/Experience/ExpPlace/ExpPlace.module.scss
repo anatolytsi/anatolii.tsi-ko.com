@@ -53,32 +53,29 @@
     }
 }
 
+@mixin expPlaceInline {
+    flex-direction: row;
+
+    .place::after {
+        content: "\00a0(";
+    }
+    .placeLocation::after {
+        content: ")";
+    }
+}
+
 @mixin expPlaceAndLocation {
     display: flex;
     flex-direction: column;
 
     @media (min-width: $desktop-size) {
         &{
-            flex-direction: row;
-
-            .place::after {
-                content: "\00a0(";
-            }
-            .placeLocation::after {
-                content: ")";
-            }
+            @include expPlaceInline;
         }
     }
 
     @at-root .exportPdf#{&} {
-        flex-direction: row;
-
-        .place::after {
-            content: "\00a0(";
-        }
-        .placeLocation::after {
-            content: ")";
-        }
+        @include expPlaceInline;
     }
 
     @at-root .singlePage#{&} {
