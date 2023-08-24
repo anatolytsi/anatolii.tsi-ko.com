@@ -75,11 +75,9 @@ export const ExpPlace = ({ styles,
                         <h4>{exp?.place}</h4>
                     )}
                 </div>
-                {shortVersion ? <></> :
-                    <div id='placeLocation' className={styles.placeLocation}>
-                        {exp?.placeLocation}
-                    </div>
-                }
+                <div id='placeLocation' className={styles.placeLocation}>
+                    {exp?.placeLocation}
+                </div>
             </div>
         );
     }

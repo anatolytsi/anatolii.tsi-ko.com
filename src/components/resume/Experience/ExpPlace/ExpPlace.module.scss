@@ -77,13 +77,4 @@
     @at-root .exportPdf#{&} {
         @include expPlaceInline;
     }
-
-    @at-root .singlePage#{&} {
-        .place::after {
-            content: none;
-        }
-        .placeLocation::after {
-            content: none;
-        }
-    }
 }
