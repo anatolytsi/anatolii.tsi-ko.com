@@ -51,6 +51,12 @@
     & span {
         @include expBlockEdit;
     }
+
+    @at-root .exportPdf#{&} {
+        @at-root .singlePage#{&} {
+          font-size: calc($expAddInfoFontSize / $onExportFontScale);
+        }
+    }
 }
 
 @mixin expPlaceInline {
