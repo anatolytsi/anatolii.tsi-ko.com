@@ -6,12 +6,14 @@ interface NavItemProps {
   text: string
   href: string
   active: boolean
+  closeNav: () => {}
 }
 
-const NavItem = ({ text, href, active }: NavItemProps) => {
+const NavItem = ({ text, href, active, closeNav }: NavItemProps) => {
   return (
     <Link 
       href={href} 
+      onClick={closeNav}
       className={`${styles.item} ${active ? styles.active : ''}`}
     >
       {text}

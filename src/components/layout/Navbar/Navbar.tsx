@@ -79,7 +79,7 @@ const Navbar = () => {
         </div>
         <div className={`${navActive ? styles.active : ""} ${styles.list}`} ref={ref}>
           {MENU_LIST.map((menu, idx) => (
-            <NavItem active={menu.href === router.pathname} {...menu} key={idx}/>
+            <NavItem active={menu.href === router.pathname} {...menu} key={idx} closeNav={() => setNavActive(false)}/>
           ))}
           {renderAuthButtons()}
         </div>
