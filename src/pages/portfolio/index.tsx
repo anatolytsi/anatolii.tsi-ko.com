@@ -258,6 +258,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
         if (exportPDF || !isAdmin) {
           filterCurrent.isVisible = true;
           filterPast.isVisible = true;
+        } else {
+          photosList = await getImages(IMAGES_URL);
         }
 
         jobExperiences = [...JSON.parse(JSON.stringify(await jobExperienceCursor.find(filterCurrent).sort(sortCurrent).toArray())), 
