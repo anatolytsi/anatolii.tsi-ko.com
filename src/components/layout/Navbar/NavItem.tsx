@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import styles from './layout.module.scss';
+import styles from './Navbar.module.scss';
 
 interface NavItemProps {
   text: string

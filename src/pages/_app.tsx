@@ -1,7 +1,7 @@
 import '@/styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react';
-import Navbar from '@/components/layout'
+import { Navbar } from '@/components/layout'
 import Script from 'next/script';
 
 export default function App({ 
