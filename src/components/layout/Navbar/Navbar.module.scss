@@ -1,5 +1,13 @@
 @import 'src/styles/common/variables';
 
+@mixin fancyBluryBackground {
+    background-color: none;
+    backdrop-filter: var(--globalnav-backdrop-filter);
+    --globalnav-backdrop-filter: saturate(180%) blur(10px);
+    --globalnav-background: rgba(251, 251, 253, .8);
+    background: var(--globalnav-background);
+}
+
 .header {
     position: sticky;
     z-index: 30;
@@ -7,12 +15,11 @@
     .nav {
         display: flex;
         padding: 0 $page-padding;
-        // justify-content: space-between;
         justify-content: flex-end;
         align-items: center;
-        background-color: white;
         box-shadow: 0 0.125rem 0.25rem 0 rgb(0 0 0 / 11%);
-        // border-bottom: 1px solid black;
+
+        @include fancyBluryBackground;
 
         .bar {
             display: flex;
@@ -41,8 +48,8 @@
             padding: 24px 16px;
             transition: all 0.2s;
             min-height: calc(100vh - 60px);
-            background-color: white;
             box-shadow: -0.125rem 0 0 0 rgb(0 0 0 / 11%);
+            @include fancyBluryBackground;
 
             &.active {
                 right: 0;
