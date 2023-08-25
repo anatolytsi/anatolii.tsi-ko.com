@@ -6,7 +6,7 @@ interface NavItemProps {
   text: string
   href: string
   active: boolean
-  closeNav: () => {}
+  closeNav: () => void
 }
 
 const NavItem = ({ text, href, active, closeNav }: NavItemProps) => {
