@@ -100,16 +100,3 @@ export async function getStaticProps() {
     revalidate: 600,
   }
 }
-
-// export async function getServerSideProps(context: NextPageContext) {
-//   // return {
-//   //   redirect: {
-//   //     destination: '/resume',
-//   //     permanent: true,
-//   //   },
-//   // };
- 
-//   return {
-//     props: {},
-//   };
-// }
