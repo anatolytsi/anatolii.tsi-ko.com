@@ -89,7 +89,7 @@ const Navbar = () => {
       <nav className={`${styles.nav} ${transparent ? styles.transparent : ''}`}>
         <div
           onClick={() => setNavActive(prevNavActive => !prevNavActive)}
-          className={`${navActive ? styles.active : ""} ${styles.bar}`}
+          className={styles.bar}
         >
           <div></div>
           <div></div>
