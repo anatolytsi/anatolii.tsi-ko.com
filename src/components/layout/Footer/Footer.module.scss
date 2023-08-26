@@ -22,36 +22,39 @@ $link-icon-size: 50px;
         text-decoration: none;
     }
 
-    .links {
-        margin: 0.3rem 0;
+    .container {
+        height: $footer-heigth;
+        .links {
+            margin: 0.3rem 0;
 
-        .divider {
-            font-size: large;
-        }
-        
-        .link {
-            margin: 0;
-            padding: 0.5rem 0;
-            display: inline-block;
-
-            svg {
-                width: $link-icon-size;
+            .divider {
+                font-size: large;
             }
             
-            &::before{
-                content: '';
-                position: absolute;
-                width: 0%;
-                transform: scaleX(0);
-                height: 2px;
-                background-color: black;
-                margin-top: 1.75rem;
-                transition: transform 150ms ease-in-out;
-            }
+            .link {
+                margin: 0;
+                padding: 0.5rem 0;
+                display: inline-block;
 
-            &:hover:before{
-                width: $link-icon-size;
-                transform: scaleX(1);
+                svg {
+                    width: $link-icon-size;
+                }
+                
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 0%;
+                    transform: scaleX(0);
+                    height: 2px;
+                    background-color: black;
+                    margin-top: 1.75rem;
+                    transition: transform 150ms ease-in-out;
+                }
+
+                &:hover:before{
+                    width: $link-icon-size;
+                    transform: scaleX(1);
+                }
             }
         }
     }

@@ -47,7 +47,7 @@
             right: -288px;
             padding: 24px 16px;
             transition: all 0.2s;
-            min-height: calc(100vh - 60px);
+            height: $nav-list-heigth;
             box-shadow: -0.125rem 0 0 0 rgb(0 0 0 / 11%);
             @include fancyBluryBackground;
 

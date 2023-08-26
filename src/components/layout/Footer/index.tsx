@@ -7,7 +7,7 @@ import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 export const Footer = () => {
     return (
         <footer className={styles.footer}>
-            <div>
+            <div className={styles.container}>
                 <div className={styles.links}>
                     <a className={styles.link} href='https://github.com/anatolytsi/' target='_blank'>
                         <FontAwesomeIcon icon={faGithub} size='lg' />
