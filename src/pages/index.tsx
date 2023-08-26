@@ -47,13 +47,13 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
               Carefully crafted resume that represents my experiences in a user-friendly fashion.
             </p>
             <p className={styles.description}>
-              Check 'em out!
+              Check &apos;em out!
             </p>
           </div>
           <div className={styles.docCards}>
             <div className={styles.docCard}>
               <Link href='/resume'>
-                <img src={resumePreviewUrl} className={styles.docImg} />
+                <Image src={resumePreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100}/>
               </Link>
               <p className={styles.docName}>
                 <Link href='/resume' className={styles.inlineLink}>Click</Link> to view my CV online 
@@ -62,7 +62,7 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
             </div>
             <div className={styles.docCard}>
               <Link href='/portfolio'>
-                <img src={portfolioPreviewUrl} className={styles.docImg} />
+                <Image src={portfolioPreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/portfolio' className={styles.inlineLink}>Click</Link> to view my Portfolio online 
