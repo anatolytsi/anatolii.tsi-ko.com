@@ -516,7 +516,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }
 
     if (isServer && exportPreview) {
-      await createPagePreview(<Resume {...props}/>, 
+      await createPagePreview(<PDFLayout><Resume {...props}/></PDFLayout>, 
                               API_URL,
                               IMAGES_URL,
                               'Resume');
