@@ -27,6 +27,7 @@ import axios from 'axios';
 import Router from 'next/router';
 import { compUpdate } from '@/components/resume/common/api-helpers';
 import { API_URL, IMAGES_URL } from '@/pages/api/resume/file';
+import { createPagePreview } from '@/lib/pagePreviewCreator';
 
 interface IResumeSection {
   _id?: string
@@ -391,7 +392,6 @@ export default function Resume( props: IResumeProps ) {
 
 export const getServerSideProps = async (context: NextPageContext) => {
   try {
-    console.log(context)
     const session = await getSession(context);
     const isAdmin = session?.user?.role === 'admin';
     const client = await clientPromise;
@@ -400,6 +400,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const collectionNames = collections.map(c => c.name);
     
     const exportPDF = context.query.pdf === 'true';
+    const exportPreview = context.query.preview === 'true';
     const singlePage = context.query.singlePage === 'true';
     const phoneAllow = context.query.phone === 'true';
     const isServer = !!context.req;
@@ -512,6 +513,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
   
         // output the pdf buffer. once res.end is triggered, it won't trigger the render method
         context.res!.end(buffer);
+    }
+
+    if (isServer && exportPreview) {
+      await createPagePreview(<Resume {...props}/>, 'Resume');
     }
   
     return {props};

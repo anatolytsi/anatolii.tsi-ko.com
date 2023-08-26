@@ -14,6 +14,7 @@ import { IPortfolioExperience, PortfolioExperience } from "@/components/portfoli
 import { API_URL, getImages, IMAGES_URL } from "../api/portfolio/file";
 import pdfHelper from "@/lib/pdfHelper";
 import PDFLayout from "@/components/resume/PdfLayout";
+import { createPagePreview } from "@/lib/pagePreviewCreator";
 
 interface IPortfolioProps {
     forExport: boolean
@@ -229,6 +230,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         const collectionNames = collections.map(c => c.name);
 
         const exportPDF = context.query.pdf === 'true';
+        const exportPreview = context.query.preview === 'true';
         const isServer = !!context.req;
 
 
@@ -328,6 +330,11 @@ export const getServerSideProps = async (context: NextPageContext) => {
             // output the pdf buffer. once res.end is triggered, it won't trigger the render method
             context.res!.end(buffer);
         }
+
+        if (isServer && exportPreview) {
+          await createPagePreview(<Portfolio {...props}/>, 'Portfolio');
+        }
+
         return {props};
     } catch (e) {
         console.error(e);
