@@ -22,6 +22,10 @@
             border: 0;
         }
 
+        .description {
+            @include expDescription;
+        }
+
         .controls {
             .panel {
                 .editButton {

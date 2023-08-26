@@ -1,6 +1,10 @@
 @import 'src/components/resume/common/common.module.scss';
 @import 'src/styles/common/variables';
 
+@mixin expDescriptionInner {
+  
+}
+
 @mixin expDescription {
     line-height: $description-line-height;
     margin-bottom: $margin-experience;
@@ -74,5 +78,26 @@
     a {
       text-decoration: none;
       color: $addInfoLinkColor;
+    }
+
+    h4 {
+      font-size: $controlHeaderFontSize;
+      margin-bottom: 0.5rem;
+    }
+
+    .container {
+      display: flex;
+
+      img {
+        pointer-events: 'none';
+      }
+
+      .left {
+        margin: auto 0.15rem auto 0;
+      }
+
+      .right {
+        margin: auto 0 auto 0.15rem;
+      }
     }
 }

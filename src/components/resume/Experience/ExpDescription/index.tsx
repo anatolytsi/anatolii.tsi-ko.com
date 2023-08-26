@@ -14,6 +14,20 @@ const SimpleMDEEditor = dynamic(
 const MAIN_POINTS_PATTERN = /(\*\*[^\*]+\*\*)/g;
 const LINKS_PATTERN = /\[([^\[]+)\]/;
 
+const createMarkDownElement = (styles: any, type: any, props: any, children: any) => {
+    let style = {};
+    if ('style' in props) {
+        style = props.style;
+    }
+    if (type === 'img') {
+        props.draggable = false;
+    }
+    if ('class' in props) {
+        props.className = styles[props.class];
+    }
+    return React.createElement(type, props, children);
+}
+
 export const ExpDescription = ({ styles,
                                  isEditing,
                                  keyDown=() => {},
@@ -60,11 +74,9 @@ export const ExpDescription = ({ styles,
                     }
                 />
             :
-                // <DescriptionClamp styles={styles} showClamp={!(forExport || shortVersion)}>
-                    <Markdown>
-                        {`${getDescription()}`}
-                    </Markdown>
-                // </DescriptionClamp>
+                <Markdown options={{ createElement(type, props, children) { return createMarkDownElement(styles, type, props, children) }, }}>
+                    {`${getDescription()}`}
+                </Markdown>
             }
         </div>
     );
