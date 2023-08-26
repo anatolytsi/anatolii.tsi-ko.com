@@ -405,6 +405,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const phoneAllow = context.query.phone === 'true';
     const isServer = !!context.req;
 
+    const exportAny = exportPDF || exportPreview;
+
     if (!collectionNames.length) {
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
       await db.collection('skills').insertOne(require('@/fixtures/skills.json'));
@@ -442,12 +444,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
     let publications;
     let hobbies;
 
-    if (!isAdmin && !phoneAllow)
+    if ((!isAdmin && !phoneAllow) || exportPreview)
     {
       personalInfo['phone'] = '';
     }
 
-    if (exportPDF || !isAdmin) {
+    if (exportAny || !isAdmin) {
       resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.filter({ isVisible: true }).toArray()))
       jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
       education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))

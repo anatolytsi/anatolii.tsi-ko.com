@@ -233,6 +233,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
         const exportPreview = context.query.preview === 'true';
         const isServer = !!context.req;
 
+        const exportAny = exportPDF || exportPreview;
+
 
         if (!collectionNames.length) {
             await db.collection('jobExperience').insertMany(require('@/fixtures/jobExperience.json'));
@@ -257,7 +259,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         let sortCurrent: any = { startDate: -1 };
         let sortPast: any = { endDate: -1 };
 
-        if (exportPDF || !isAdmin) {
+        if (exportAny || !isAdmin) {
           filterCurrent.isVisible = true;
           filterPast.isVisible = true;
         } else {
