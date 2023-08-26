@@ -41,7 +41,7 @@ $title-font-size-small: calc(5 * 1vh);
     margin: auto;
     text-align: center;
 
-    @media (min-width: $desktop-size) {
+    @media (min-width: $tablet-size) {
       margin: 0;
       text-align: unset;
       padding-top: 40vh;
@@ -54,7 +54,7 @@ $title-font-size-small: calc(5 * 1vh);
       font-weight: normal;
       font-size: $title-font-size-small;
 
-      @media (min-width: $desktop-size) {
+      @media (min-width: $tablet-size) {
         font-size: $title-font-size;
         margin: 0;
       }
@@ -65,7 +65,7 @@ $title-font-size-small: calc(5 * 1vh);
       font-weight: normal;
       font-size: calc($title-font-size-small / 2);
 
-      @media (min-width: $desktop-size) {
+      @media (min-width: $tablet-size) {
         font-size: calc($title-font-size / 3);
         margin: 0;
       }
