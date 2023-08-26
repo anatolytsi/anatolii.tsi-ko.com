@@ -8,6 +8,7 @@ import { DEFAULT_PREVIEW_URL as DEFAULT_RESUME_PREVIEW_URL, getServerSideProps a
 import { DEFAULT_PREVIEW_URL as DEFAULT_PORTFOLIO_PREVIEW_URL, getServerSideProps as getPortfolioServerSideProps } from './portfolio'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Link from 'next/link'
+import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -77,6 +78,14 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
 }
 
 export async function getStaticProps() {
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    return {
+      props: {
+        resumePreviewUrl: DEFAULT_RESUME_PREVIEW_URL,
+        portfolioPreviewUrl: DEFAULT_PORTFOLIO_PREVIEW_URL,
+      }
+    }
+  }
   let tempPreviewUrl = '';
   let context: NextPageContext | any = {
     query: {preview: 'true'},
@@ -99,15 +108,5 @@ export async function getStaticProps() {
       portfolioPreviewUrl
     },
     revalidate: 600,
-  }
-}
-
-
-export async function getStaticPaths() {
-  return {
-    props: {
-      resumePreviewUrl: DEFAULT_RESUME_PREVIEW_URL,
-      portfolioPreviewUrl: DEFAULT_PORTFOLIO_PREVIEW_URL,
-    }
   }
 }
