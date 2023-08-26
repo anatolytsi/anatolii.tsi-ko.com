@@ -1,11 +1,12 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import puppeteer, { Page } from 'puppeteer';
+import puppeteer, { Page, Viewport } from 'puppeteer';
 import { getImageFromName } from '@/pages/api/resume/file/[...slug]';
 
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
 
-export const preparePage = async (component: any, imageUrl: string, imagesPath: string, callback: (page: Page) => Promise<void>) => {
+export const preparePage = async (component: any, imageUrl: string, imagesPath: string, callback: (page: Page) => Promise<void>,
+                                  viewport: Viewport = {width: 0, height: 0}) => {
     let html = renderToStaticMarkup(component);
     let match;
     do {
@@ -34,6 +35,9 @@ export const preparePage = async (component: any, imageUrl: string, imagesPath: 
 
     const page = await browser.newPage();
     await page.emulateMediaType('screen');
+    if (viewport.width && viewport.height) {
+        await page.setViewport(viewport);
+    }
     await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
 
     await callback(page);

@@ -14,7 +14,7 @@ export const createPagePreview = async (component: any, imageUrl: string, imageP
         await page.screenshot({ path: absolutePath });
     }
 
-    await preparePage(component, imageUrl, imagePath, callback);
+    await preparePage(component, imageUrl, imagePath, callback, {width: 1920, height: 4000});
 
     return apiPath;
 }
