@@ -58,7 +58,7 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
               </Link>
               <p className={styles.docName}>
                 <Link href='/resume' className={styles.inlineLink}>Click</Link> to view my CV online 
-                or <Link href='/resume?pdf=true' className={styles.inlineLink}>download</Link> the pdf directly
+                or <Link href='/resume?pdf=true' target="_blank" className={styles.inlineLink}>download</Link> the pdf directly
               </p>
             </div>
             <div className={styles.docCard}>
@@ -67,7 +67,7 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
               </Link>
               <p className={styles.docName}>
                 <Link href='/portfolio' className={styles.inlineLink}>Click</Link> to view my Portfolio online 
-                or <Link href='/portfolio?pdf=true' className={styles.inlineLink}>download</Link> the pdf directly
+                or <Link href='/portfolio?pdf=true' target="_blank" className={styles.inlineLink}>download</Link> the pdf directly
               </p>
             </div>
           </div>
