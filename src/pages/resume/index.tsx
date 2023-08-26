@@ -314,7 +314,7 @@ export default function Resume( props: IResumeProps ) {
   }
 
   return (
-    <>
+    <main>
     <Head>
       <title>Resume{props.forExport ? ' Export' : ''} | Anatolii Tsirkunenko</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -386,7 +386,7 @@ export default function Resume( props: IResumeProps ) {
         </>
       }
     </div>
-    </>
+    </main>
   );
 }
 
@@ -523,9 +523,9 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
       let previewUrl = '/api/pagePreviews/Resume.jpg';
       try {
         previewUrl = await createPagePreview(<PDFLayout><Resume {...props}/></PDFLayout>, 
-                              API_URL,
-                              IMAGES_URL,
-                              'Resume');
+                                             API_URL,
+                                             IMAGES_URL,
+                                             'Resume');
       } catch (e) {
         console.log(e);
       }
