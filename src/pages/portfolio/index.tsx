@@ -332,6 +332,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
         }
 
         if (isServer && exportPreview) {
+          props.forExport = true;
+          props.isAdmin = false;
           await createPagePreview(<PDFLayout><Portfolio {...props}/></PDFLayout>, 
                                   API_URL,
                                   IMAGES_URL,
