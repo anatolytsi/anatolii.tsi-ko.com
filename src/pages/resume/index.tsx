@@ -39,6 +39,8 @@ interface IResumeSection {
 const TODAY = new Date();
 const DATE_STRING = TODAY.toISOString().slice(0, 10).replaceAll('-', '');
 
+export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Resume.jpg';
+
 const RestButton = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -520,7 +522,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     if (isServer && exportPreview) {
       props.forExport = true;
       props.isAdmin = false;
-      let previewUrl = '/api/pagePreviews/Resume.jpg';
+      let previewUrl = DEFAULT_PREVIEW_URL;
       try {
         previewUrl = await createPagePreview(<PDFLayout><Resume {...props}/></PDFLayout>, 
                                              API_URL,

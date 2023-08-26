@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.scss'
 import { NextPageContext } from 'next'
 import clientPromise from '@/lib/mongodb'
-import { getServerSideProps as getResumeServerSideProps } from './resume'
-import { getServerSideProps as getPortfolioServerSideProps } from './portfolio'
+import { DEFAULT_PREVIEW_URL as DEFAULT_RESUME_PREVIEW_URL, getServerSideProps as getResumeServerSideProps } from './resume'
+import { DEFAULT_PREVIEW_URL as DEFAULT_PORTFOLIO_PREVIEW_URL, getServerSideProps as getPortfolioServerSideProps } from './portfolio'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Link from 'next/link'
 
@@ -98,5 +98,15 @@ export async function getStaticProps() {
       portfolioPreviewUrl
     },
     revalidate: 600,
+  }
+}
+
+
+export async function getStaticPaths() {
+  return {
+    props: {
+      resumePreviewUrl: DEFAULT_RESUME_PREVIEW_URL,
+      portfolioPreviewUrl: DEFAULT_PORTFOLIO_PREVIEW_URL,
+    }
   }
 }

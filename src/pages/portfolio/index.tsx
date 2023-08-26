@@ -26,6 +26,8 @@ interface IPortfolioProps {
 const TODAY = new Date();
 const DATE_STRING = new Date().toISOString().slice(0, 10).replaceAll('-', '');
 
+export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Portfolio.jpg';
+
 const RestButton = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -338,7 +340,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
         if (isServer && exportPreview) {
           props.forExport = true;
           props.isAdmin = false;
-          let previewUrl = '/api/pagePreviews/Portfolio.jpg';
+          let previewUrl = DEFAULT_PREVIEW_URL;
           try {
             previewUrl = await createPagePreview(<PDFLayout><Portfolio {...props}/></PDFLayout>, 
                                                  API_URL,
