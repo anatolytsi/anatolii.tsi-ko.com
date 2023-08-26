@@ -10,10 +10,8 @@ export const createPagePreview = async (component: any, pageName: string) => {
 
     const callback = async (page: Page) => {
         let absolutePath = getImagePath(`${pageName}.${DEFAULT_EXTENSION}`, IMAGES_URL).replace('..', '.');
-        console.log(absolutePath)
         apiPath = convertToApiPath(absolutePath);
-        console.log(apiPath)
-        await page.screenshot({ path: `${IMAGES_URL}/${pageName}.${DEFAULT_EXTENSION}` });
+        await page.screenshot({ path: absolutePath });
     }
 
     await preparePage(component, API_URL, IMAGES_URL, callback);
