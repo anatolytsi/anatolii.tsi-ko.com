@@ -221,7 +221,7 @@ export default function Portfolio( props: IPortfolioProps ) {
     );
 }
 
-export const getServerSideProps = async (context: NextPageContext) => {
+export const getServerSideProps = async (context: NextPageContext, server: boolean = false) => {
     try {
         const session = await getSession(context);
         const isAdmin = session?.user?.role === 'admin';
@@ -232,7 +232,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
         const exportPDF = context.query.pdf === 'true';
         const exportPreview = context.query.preview === 'true';
-        const isServer = !!context.req;
+        const isServer = !!context.req || server;
 
         const exportAny = exportPDF || exportPreview;
 
@@ -338,10 +338,18 @@ export const getServerSideProps = async (context: NextPageContext) => {
         if (isServer && exportPreview) {
           props.forExport = true;
           props.isAdmin = false;
-          await createPagePreview(<PDFLayout><Portfolio {...props}/></PDFLayout>, 
-                                  API_URL,
-                                  IMAGES_URL,
-                                  'Portfolio');
+          let previewUrl = '/api/pagePreviews/Portfolio.jpg';
+          try {
+            previewUrl = await createPagePreview(<PDFLayout><Portfolio {...props}/></PDFLayout>, 
+                                                 API_URL,
+                                                 IMAGES_URL,
+                                                 'Portfolio');
+          } catch (e) {
+            console.log(e);
+          }
+
+          context.res!.setHeader('Content-Type', 'text/plain');
+          context.res!.end(previewUrl)
         }
 
         return {props};

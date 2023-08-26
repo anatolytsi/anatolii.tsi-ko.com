@@ -390,7 +390,7 @@ export default function Resume( props: IResumeProps ) {
   );
 }
 
-export const getServerSideProps = async (context: NextPageContext) => {
+export const getServerSideProps = async (context: NextPageContext, server: boolean = false) => {
   try {
     const session = await getSession(context);
     const isAdmin = session?.user?.role === 'admin';
@@ -403,7 +403,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     const exportPreview = context.query.preview === 'true';
     const singlePage = context.query.singlePage === 'true';
     const phoneAllow = context.query.phone === 'true';
-    const isServer = !!context.req;
+    const isServer = !!context.req || server;
 
     const exportAny = exportPDF || exportPreview;
 
@@ -520,10 +520,18 @@ export const getServerSideProps = async (context: NextPageContext) => {
     if (isServer && exportPreview) {
       props.forExport = true;
       props.isAdmin = false;
-      await createPagePreview(<PDFLayout><Resume {...props}/></PDFLayout>, 
+      let previewUrl = '/api/pagePreviews/Resume.jpg';
+      try {
+        previewUrl = await createPagePreview(<PDFLayout><Resume {...props}/></PDFLayout>, 
                               API_URL,
                               IMAGES_URL,
                               'Resume');
+      } catch (e) {
+        console.log(e);
+      }
+
+      context.res!.setHeader('Content-Type', 'text/plain');
+      context.res!.end(previewUrl)
     }
   
     return {props};
