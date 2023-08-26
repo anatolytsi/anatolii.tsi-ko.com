@@ -19,6 +19,15 @@ const Navbar = () => {
   const showLogin = useRef(false);
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
+  const [transparent, setTransparent] = useState(true);
+
+  const changeNavbarTransparent = () => {
+      if (window.scrollY >= 95) {
+          setTransparent(false);
+      } else {
+          setTransparent(true);
+      }
+  };
   
   useEffect(() => {
     if (clickCounter > 5) {
@@ -34,9 +43,19 @@ const Navbar = () => {
     }
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
+    
+    if (window.screen.width >= 1280) {
+      window.addEventListener('scroll', changeNavbarTransparent);
+    } else {
+      setTransparent(false);
+    }
+
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
+      if (window.screen.width >= 1280) {
+        window.removeEventListener('scroll', changeNavbarTransparent);
+      }
     };
   }, [navActive]);
 
@@ -68,7 +87,7 @@ const Navbar = () => {
 
   return (
     <header className={styles.header} onClick={() => {setClickCounter(clickCounter + 1)}}>
-      <nav className={styles.nav}>
+      <nav className={`${styles.nav} ${transparent ? styles.transparent : ''}`}>
         <div
           onClick={() => setNavActive(!navActive)}
           className={styles.bar}

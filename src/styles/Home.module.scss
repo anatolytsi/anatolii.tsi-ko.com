@@ -28,7 +28,8 @@ $title-font-size-small: calc(5 * 1vh);
   @include gradientBackround;
 
   @media (min-width: $desktop-size) {
-    height: calc(100vh - calc(2 * $nav-list-heigth));
+    margin-top: calc(-2.9 * $nav-list-heigth);
+    height: 100vh;
   }
 
   .textPart {
