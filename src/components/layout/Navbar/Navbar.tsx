@@ -43,22 +43,20 @@ const Navbar = () => {
     }
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener('scroll', changeNavbarTransparent);
     
-    // if (window.screen.width >= 1280) {
-    //   window.addEventListener('scroll', changeNavbarTransparent);
-    // } else {
-    //   setTransparent(false);
-    // }
-
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
-      if (window.screen.width >= 1280) {
-        window.removeEventListener('scroll', changeNavbarTransparent);
-      }
     };
   }, [navActive]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeNavbarTransparent);
+
+    return () => {
+      window.removeEventListener('scroll', changeNavbarTransparent);
+    };
+  });
 
   const renderAuthButtons = () => {
     if (session) {
@@ -90,8 +88,8 @@ const Navbar = () => {
     <header className={styles.header} onClick={() => {setClickCounter(clickCounter + 1)}}>
       <nav className={`${styles.nav} ${transparent ? styles.transparent : ''}`}>
         <div
-          onClick={() => setNavActive(!navActive)}
-          className={styles.bar}
+          onClick={() => setNavActive(prevNavActive => !prevNavActive)}
+          className={`${navActive ? styles.active : ""} ${styles.bar}`}
         >
           <div></div>
           <div></div>
