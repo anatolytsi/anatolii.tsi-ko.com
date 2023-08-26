@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.scss'
 import { NextPageContext } from 'next'
@@ -52,7 +53,7 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
           <div className={styles.docCards}>
             <div className={styles.docCard}>
               <Link href='/resume'>
-                <img src={resumePreviewUrl} className={styles.docImg} alt='resume' />
+                <Image src={resumePreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100}/>
               </Link>
               <p className={styles.docName}>
                 <Link href='/resume' className={styles.inlineLink}>Click</Link> to view my CV online 
@@ -61,7 +62,7 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
             </div>
             <div className={styles.docCard}>
               <Link href='/portfolio'>
-                <img src={portfolioPreviewUrl} className={styles.docImg} alt='portfolio' />
+                <Image src={portfolioPreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/portfolio' className={styles.inlineLink}>Click</Link> to view my Portfolio online 
