@@ -97,7 +97,7 @@ export async function getStaticProps() {
       resumePreviewUrl,
       portfolioPreviewUrl
     },
-    revalidate: 10,
+    revalidate: 600,
   }
 }
 
