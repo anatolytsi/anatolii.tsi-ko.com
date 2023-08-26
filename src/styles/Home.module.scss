@@ -21,6 +21,7 @@
 }
 
 $title-font-size: calc(12 * 1vh);
+$title-font-size-mid: calc(8 * 1vh);
 $title-font-size-small: calc(5 * 1vh);
 
 .welcomeSection {
@@ -55,6 +56,11 @@ $title-font-size-small: calc(5 * 1vh);
       font-size: $title-font-size-small;
 
       @media (min-width: $tablet-size) {
+        font-size: $title-font-size-mid;
+        margin: 0;
+      }
+
+      @media (min-width: $desktop-size) {
         font-size: $title-font-size;
         margin: 0;
       }
@@ -64,6 +70,11 @@ $title-font-size-small: calc(5 * 1vh);
       margin: auto;
       font-weight: normal;
       font-size: calc($title-font-size-small / 2);
+
+      @media (min-width: $tablet-size) {
+        font-size: calc($title-font-size-mid / 2);
+        margin: 0;
+      }
 
       @media (min-width: $tablet-size) {
         font-size: calc($title-font-size / 3);
