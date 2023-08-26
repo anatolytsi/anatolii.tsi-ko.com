@@ -43,12 +43,13 @@ const Navbar = () => {
     }
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener('scroll', changeNavbarTransparent);
     
-    if (window.screen.width >= 1280) {
-      window.addEventListener('scroll', changeNavbarTransparent);
-    } else {
-      setTransparent(false);
-    }
+    // if (window.screen.width >= 1280) {
+    //   window.addEventListener('scroll', changeNavbarTransparent);
+    // } else {
+    //   setTransparent(false);
+    // }
 
     return () => {
       // Unbind the event listener on clean up

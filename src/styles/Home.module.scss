@@ -24,17 +24,23 @@ $title-font-size: calc(12 * 1vh);
 $title-font-size-small: calc(5 * 1vh);
 
 .welcomeSection {
-  min-height: 10vh;
+  // min-height: 10vh;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  margin-top: calc(-2.25 * $nav-list-heigth);
   @include gradientBackround;
 
   @media (min-width: $desktop-size) {
+    display: unset;
+    align-items: unset;
     margin-top: calc(-2.9 * $nav-list-heigth);
     height: 100vh;
   }
 
   .textPart {
     padding: 10vh 1rem;
-    margin: 0 auto;
+    margin: auto;
     text-align: center;
 
     @media (min-width: $desktop-size) {
@@ -74,7 +80,7 @@ $title-font-size-small: calc(5 * 1vh);
   max-width: 80vw;
   text-align: center;
   
-  @media (min-width: $desktop-size) {
+  @media (min-width: $tablet-size) {
     max-width: 50vw;
   }
 
@@ -95,7 +101,7 @@ $title-font-size-small: calc(5 * 1vh);
     align-items: center;
     margin-top: 2rem;
 
-    @media (min-width: $desktop-size) {
+    @media (min-width: $tablet-size) {
       max-width: 50vw;
       flex-direction: unset;
       justify-content: space-around;
