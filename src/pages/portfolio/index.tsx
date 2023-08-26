@@ -332,7 +332,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
         }
 
         if (isServer && exportPreview) {
-          await createPagePreview(<Portfolio {...props}/>, 'Portfolio');
+          await createPagePreview(<Portfolio {...props}/>, 
+                                  API_URL,
+                                  IMAGES_URL,
+                                  'Portfolio');
         }
 
         return {props};
