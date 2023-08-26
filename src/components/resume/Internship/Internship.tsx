@@ -59,9 +59,9 @@ export function Internship({ experience: internship, onUpdate, onDelete, editMod
         <Header {...expProps}>
           <HeaderLine {...expProps}>
             <Title {...expProps}/>
+            <Place {...expProps}/>
             <Dates {...expProps}/>
           </HeaderLine>
-          <Place {...expProps}/>
           <Topic {...expProps}/>
         </Header>
         <Description {...expProps}/>

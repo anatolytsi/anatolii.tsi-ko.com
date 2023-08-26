@@ -40,6 +40,10 @@
           .title {
             @include expTitle;
           }
+
+          .place {
+            @include expPlace;
+          }
           
           .datesWithTime {
             @include expDatesWithTime;
@@ -48,10 +52,6 @@
               @include expDates;
             }
           }
-        }
-
-        .place {
-          @include expPlace;
         }
 
         .placeLink {

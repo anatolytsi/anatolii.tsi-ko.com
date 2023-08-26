@@ -72,10 +72,10 @@ export function JobExperience({ experience: jobExperience, onUpdate, onDelete, e
                 <WorkType {...expProps}/>
               </div>
               <Place {...expProps}/>
-              <Topic {...expProps}/>
             </div>
             <Dates {...expProps}/>
           </HeaderLine>
+          <Topic {...expProps}/>
         </Header>
         <Description {...expProps} shortVersion={shortVersion && !!(experience.topic?.length)}/>
       </Content>
