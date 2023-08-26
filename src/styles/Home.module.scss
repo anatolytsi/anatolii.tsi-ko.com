@@ -72,6 +72,10 @@ $title-font-size-small: calc(5 * 1vh);
   margin: 3rem auto;
   max-width: 80vw;
   text-align: center;
+  
+  @media (min-width: $desktop-size) {
+    max-width: 50vw;
+  }
 
   .descriptionSection {
 
