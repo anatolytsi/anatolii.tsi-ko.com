@@ -7,7 +7,7 @@ import styles from './Navbar.module.scss';
 import Link from "next/link";
 
 const MENU_LIST = [
-  // { text: "Home", href: "/" },
+  { text: "Home", href: "/" },
   { text: "Resume", href: "/resume" },
   { text: "Portfolio", href: "/portfolio" },
 ];

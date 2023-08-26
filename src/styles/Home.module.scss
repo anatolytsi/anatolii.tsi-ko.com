@@ -1,0 +1,141 @@
+@import 'src/styles/common/variables';
+
+
+@mixin gradientBackround {
+  background: linear-gradient(-45deg, #e0a9993a, #ec90b349, #78b9d149, #80ddc742);
+  background-size: 400% 400%;
+  animation: gradient 50s ease infinite;
+  // height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+$title-font-size: calc(12 * 1vh);
+$title-font-size-small: calc(5 * 1vh);
+
+.welcomeSection {
+  min-height: 10vh;
+  @include gradientBackround;
+
+  @media (min-width: $desktop-size) {
+    height: calc(100vh - calc(2 * $nav-list-heigth));
+  }
+
+  .textPart {
+    padding: 10vh 1rem;
+    margin: 0 auto;
+    text-align: center;
+
+    @media (min-width: $desktop-size) {
+      margin: 0;
+      text-align: unset;
+      padding-top: 40vh;
+      padding-left: 10vw;
+      width: 50vw;
+    }
+
+    .title {
+      margin: auto;
+      font-weight: normal;
+      font-size: $title-font-size-small;
+
+      @media (min-width: $desktop-size) {
+        font-size: $title-font-size;
+        margin: 0;
+      }
+    }
+
+    .caption {
+      margin: auto;
+      font-weight: normal;
+      font-size: calc($title-font-size-small / 2);
+
+      @media (min-width: $desktop-size) {
+        font-size: calc($title-font-size / 3);
+        margin: 0;
+      }
+    }
+  }
+}
+
+.docSection {
+  margin: 3rem auto;
+  max-width: 80vw;
+  text-align: center;
+
+  .descriptionSection {
+
+    .title {
+      margin-bottom: 0.3rem;
+    }
+
+    .description {
+      margin: 0;
+    }
+  }
+
+  .docCards {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    @media (min-width: $desktop-size) {
+      max-width: 50vw;
+      flex-direction: unset;
+      justify-content: space-around;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .docCard {
+      display: inline-block;
+      width: 200px;
+
+      .docImg {
+        padding: 2px;
+        width: 200px;
+        --g: 4px;     /* the gap */
+        --b: 2px;    /* border thickness*/
+        --c: white; /* the color */
+        border: 1px solid #e1e1e4;
+        
+        
+        padding: calc(var(--g) + var(--b));
+        --_c: #0000 0 25%, var(--c) 0 50%;
+        --_g1: repeating-linear-gradient(90deg ,var(--_c)) repeat-x;
+        --_g2: repeating-linear-gradient(180deg,var(--_c)) repeat-y;
+        background:
+          var(--_g1) var(--_p, 25%) 0   ,var(--_g2) 0    var(--_p,125%),
+          var(--_g1) var(--_p,125%) 100%,var(--_g2) 100% var(--_p, 25%);
+        background-size: 200% var(--b),var(--b) 200%;
+        cursor: pointer;
+        filter: grayscale(25%);
+        transition: .7s;
+
+        &:hover {
+          --_p: 75%;
+          --b: 2px;    /* border thickness*/
+          --c: black; /* the color */
+          filter: grayscale(0%);
+        }
+      }
+
+      .docName {
+
+        .inlineLink {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
