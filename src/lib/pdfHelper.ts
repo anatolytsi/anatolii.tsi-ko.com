@@ -1,10 +1,6 @@
-import { renderToStaticMarkup } from 'react-dom/server';
-import puppeteer from 'puppeteer';
-import { getImageFromName } from '@/pages/api/resume/file/[...slug]';
-import { API_URL } from '@/pages/api/resume/file';
+import { Page } from 'puppeteer';
+import { preparePage } from './puppeteerHelper';
 
-const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
-const EXT_RE = /(?:\.([^.]+))?$/;
 const FOOTER_TEMPLATE = `
 <div style="display: flex; justify-content: space-between; width: 297mm; font-size: 8px;">
     <div style="margin-left: 1.0cm; color: #969696;"> 
@@ -21,51 +17,27 @@ const FOOTER_TEMPLATE_SINGLE = `
     </div>
 </div>`;
 
-const componentToPDFBuffer = async (component: any, pageName='Resume', singlePage=false) => {
-    let html = renderToStaticMarkup(component);
-    let match;
-    do {
-        match = IMG_RE.exec(html);
-        if (match) {
-            let url = match[2];
-            const imageName = url.replace(`${API_URL}/`, '');
-            const imageBuffer = getImageFromName(imageName);
-            let extension = 'jpeg';
-            if (imageName.includes('.')) {
-                let m = EXT_RE.exec(imageName);
-                extension = m ? m[1] : 'jpeg';
-            }
-            const imageForPdf = `data:image/${extension};charset=utf-8;base64,${imageBuffer.toString('base64')}`;
-            html = html.replace(match[2], imageForPdf);
-        }
-    } while (match);
-    const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/chromium-browser',
-        ignoreHTTPSErrors :true,
-        headless: 'new',
-        args: [
-            '--no-sandbox'
-        ]
-    });
+const componentToPDFBuffer = async (component: any, imageUrl: string, imagePath: string, pageName='Resume', singlePage=false) => {
+    let pdf: any;
+    const callback = async (page: Page) => {
+        pdf = await page.pdf({
+            format: 'A4',
+            scale: 0.65,
+            margin: {
+                top: '1.2cm',
+                bottom: '1.0cm',
+                left: '1.0cm',
+                right: '1.0cm',
+            },
+            displayHeaderFooter: true,
+            headerTemplate: "<div/>",
+            footerTemplate: (singlePage ? FOOTER_TEMPLATE_SINGLE : FOOTER_TEMPLATE).replace('%s', pageName),
+            printBackground: true
+        });
+    }
 
-    const page = await browser.newPage();
-    await page.emulateMediaType('screen');
-    await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
-    const pdf = await page.pdf({
-        format: 'A4',
-        scale: 0.65,
-        margin: {
-            top: '1.2cm',
-            bottom: '1.0cm',
-            left: '1.0cm',
-            right: '1.0cm',
-        },
-        displayHeaderFooter: true,
-        headerTemplate: "<div/>",
-        footerTemplate: (singlePage ? FOOTER_TEMPLATE_SINGLE : FOOTER_TEMPLATE).replace('%s', pageName),
-        printBackground: true
-    });
-    await browser.close();
+    await preparePage(component, imageUrl, imagePath, callback);
+
     return pdf;
 }
 

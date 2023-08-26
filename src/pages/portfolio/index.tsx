@@ -11,7 +11,7 @@ import axios from "axios";
 
 import styles from './portfolio.module.scss';
 import { IPortfolioExperience, PortfolioExperience } from "@/components/portfolio/PortfolioExperience";
-import { getImages, IMAGES_URL } from "../api/portfolio/file";
+import { API_URL, getImages, IMAGES_URL } from "../api/portfolio/file";
 import pdfHelper from "@/lib/pdfHelper";
 import PDFLayout from "@/components/resume/PdfLayout";
 
@@ -313,6 +313,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
                 <PDFLayout>
                     <Portfolio {...props}/>
                 </PDFLayout>,
+                API_URL,
+                IMAGES_URL,
                 'Portfolio'
             );
     

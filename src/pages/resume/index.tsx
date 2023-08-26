@@ -26,6 +26,7 @@ import pdfHelper from '@/lib/pdfHelper';
 import axios from 'axios';
 import Router from 'next/router';
 import { compUpdate } from '@/components/resume/common/api-helpers';
+import { API_URL, IMAGES_URL } from '@/pages/api/resume/file';
 
 interface IResumeSection {
   _id?: string
@@ -390,6 +391,7 @@ export default function Resume( props: IResumeProps ) {
 
 export const getServerSideProps = async (context: NextPageContext) => {
   try {
+    console.log(context)
     const session = await getSession(context);
     const isAdmin = session?.user?.role === 'admin';
     const client = await clientPromise;
@@ -494,6 +496,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
             <PDFLayout>
                 <Resume {...props}/>
             </PDFLayout>,
+            API_URL,
+            IMAGES_URL,
             'Resume',
             singlePage
         );

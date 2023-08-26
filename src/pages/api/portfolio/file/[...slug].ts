@@ -1,24 +1,12 @@
 import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
-import { convertToAbsolutePath } from "@/lib/parse-form";
 import { isArray } from "lodash";
 import { IMAGES_URL } from ".";
-
-export const getImagePath = (imageName: string) => {
-  return convertToAbsolutePath(`${IMAGES_URL}/${imageName}`);
-}
-
-export const getImageFromName = (imageName: string) => {
-  try {
-    return fs.readFileSync(getImagePath(imageName).replace('..', '.'));
-  } catch (e) {
-    return '';
-  }
-}
+import { getImageFromName } from "../../resume/file/[...slug]";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const imagePath = isArray(req.query.slug) ? req.query.slug.join('/') : req.query.slug!;
-  const imageBuffer = getImageFromName(imagePath);
+  const imageBuffer = getImageFromName(imagePath, IMAGES_URL);
   if (imageBuffer) {
     // res.setHeader("Content-Type", "image");
     res.setHeader("Content-Type", ["text/plain", "charset=x-user-defined"]);
