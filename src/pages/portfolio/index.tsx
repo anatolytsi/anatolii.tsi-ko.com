@@ -23,6 +23,7 @@ interface IPortfolioProps {
     photosList: string[]
 }
 
+const TODAY = new Date();
 const DATE_STRING = new Date().toISOString().slice(0, 10).replaceAll('-', '');
 
 const RestButton = () => {
@@ -260,6 +261,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         let sortPast: any = { endDate: -1 };
 
         if (exportAny || !isAdmin) {
+          filterCurrent.startDate = { $lt: TODAY.getTime() };
           filterCurrent.isVisible = true;
           filterPast.isVisible = true;
         } else {
