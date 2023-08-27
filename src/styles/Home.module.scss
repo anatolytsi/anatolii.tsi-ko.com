@@ -1,4 +1,5 @@
 @import 'src/styles/common/variables';
+@import 'src/styles/common/effects';
 
 
 @mixin gradientBackround {
@@ -54,6 +55,7 @@ $title-font-size-small: calc(10 * 1vw);
       margin: auto;
       font-weight: normal;
       font-size: $title-font-size-small;
+      @include animation('slide-up 1s ease-in');
 
       @media (min-width: $tablet-size) {
         font-size: $title-font-size-mid;
@@ -70,6 +72,7 @@ $title-font-size-small: calc(10 * 1vw);
       margin: auto;
       font-weight: normal;
       font-size: calc($title-font-size-small / 2);
+      @include animation('slide-up 2s ease-in');
 
       @media (min-width: $tablet-size) {
         font-size: calc($title-font-size-mid / 2);
