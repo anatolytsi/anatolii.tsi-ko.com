@@ -293,7 +293,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
                     let result = await db.collection('expPortfolios').insertOne(expPortfolio);
                     expPortfolio._id = result.insertedId.toString();
                 }
-                if (isAdmin || expPortfolio.description)
+                if ((isAdmin && !exportAny) || expPortfolio.description)
                 {
                     portfolioExps.push({
                         _id: expPortfolio._id,
