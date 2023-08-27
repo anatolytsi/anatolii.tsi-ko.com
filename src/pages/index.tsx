@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.scss'
 import { NextPageContext } from 'next'
@@ -57,8 +56,8 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
           <div className={styles.docCards}>
             <div className={styles.docCard}>
               <Link href='/resume'>
-                <Image src={resumePreviewUrl} className={`${clickedResume ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283} quality={100} 
-                       onClick={() => {setClickedResume(true)}} />
+                <img src={resumePreviewUrl} className={`${clickedResume ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283}
+                     onClick={() => {setClickedResume(true)}} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/resume' className={styles.inlineLink}>Click</Link> to view my CV online 
@@ -67,8 +66,8 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
             </div>
             <div className={styles.docCard}>
               <Link href='/portfolio'>
-                <Image src={portfolioPreviewUrl} className={`${clickedPortfolio ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283} quality={100} 
-                       onClick={() => {setClickedPortfolio(true)}} />
+                <img src={portfolioPreviewUrl} className={`${clickedPortfolio ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283} 
+                     onClick={() => {setClickedPortfolio(true)}} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/portfolio' className={styles.inlineLink}>Click</Link> to view my Portfolio online 
