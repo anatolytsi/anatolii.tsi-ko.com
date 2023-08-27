@@ -9,6 +9,7 @@ import { DEFAULT_PREVIEW_URL as DEFAULT_PORTFOLIO_PREVIEW_URL, getServerSideProp
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Link from 'next/link'
 import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants'
+import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,8 @@ interface IHomeProps {
 }
 
 export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps) {
+  const [clickedResume, setClickedResume] = useState(false);
+  const [clickedPortfolio, setClickedPortfolio] = useState(false);
   return (
     <>
       <Head>
@@ -54,7 +57,8 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
           <div className={styles.docCards}>
             <div className={styles.docCard}>
               <Link href='/resume'>
-                <Image src={resumePreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100}/>
+                <Image src={resumePreviewUrl} className={`${clickedResume ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283} quality={100} 
+                       onClick={() => {setClickedResume(true)}} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/resume' className={styles.inlineLink}>Click</Link> to view my CV online 
@@ -63,7 +67,8 @@ export default function Home({resumePreviewUrl, portfolioPreviewUrl}: IHomeProps
             </div>
             <div className={styles.docCard}>
               <Link href='/portfolio'>
-                <Image src={portfolioPreviewUrl} className={styles.docImg} alt='resume' width={200} height={283} quality={100} />
+                <Image src={portfolioPreviewUrl} className={`${clickedPortfolio ? styles.clicked : ''} ${styles.docImg}`} alt='resume' width={200} height={283} quality={100} 
+                       onClick={() => {setClickedPortfolio(true)}} />
               </Link>
               <p className={styles.docName}>
                 <Link href='/portfolio' className={styles.inlineLink}>Click</Link> to view my Portfolio online 

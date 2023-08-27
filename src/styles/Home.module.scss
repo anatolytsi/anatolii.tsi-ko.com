@@ -143,6 +143,11 @@ $title-font-size-small: calc(10 * 1vw);
         filter: grayscale(25%);
         transition: .7s;
 
+        &.clicked {
+          --c: black; /* the color */
+          --_c: #0000 0 0%, var(--c) 0 50%;
+        }
+
         &:hover {
           --_p: 75%;
           --b: 2px;    /* border thickness*/
