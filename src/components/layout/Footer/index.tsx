@@ -2,7 +2,7 @@ import styles from './Footer.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedinIn, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 export const Footer = () => {
     return (
@@ -15,6 +15,10 @@ export const Footer = () => {
                     <span className={styles.divider}>/</span>
                     <a className={styles.link} href='https://linkedin.com/in/anatolytsi/' target='_blank'>
                         <FontAwesomeIcon icon={faLinkedinIn} size='lg' />
+                    </a>
+                    <span className={styles.divider}>/</span>
+                    <a className={styles.link} href='tg://resolve?domain=snip1337' target='_blank'>
+                        <FontAwesomeIcon icon={faTelegram} size='lg' />
                     </a>
                     <span className={styles.divider}>/</span>
                     <a className={styles.link} href='mailto:anatolii@tsi-ko.com' target='_blank'>
