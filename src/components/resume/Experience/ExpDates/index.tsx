@@ -6,6 +6,7 @@ import { DatePicker } from '../../common/DatePicker';
 
 const DATE_FORMAT = "MMM yyyy";
 const DATES_FORMAT = "dd.MM.yyyy";
+const DATE_TODAY = new Date();
 
 export const ExpDate = ({ isEditing,
                           styles,
@@ -36,6 +37,10 @@ export const ExpDates = ({ isEditing,
         let years = Math.abs(passedDate.getUTCFullYear() - 1970);
         let months = passedDate.getUTCMonth();
         return [years, months];
+    }
+
+    const isCurrentDate = (date: any) => {
+        return !date || (!isEditing && date >= DATE_TODAY);
     }
 
     const getTimePeriod = (startDate: any, endDate: any) => {
@@ -106,12 +111,12 @@ export const ExpDates = ({ isEditing,
     
     let startDateClass = forExport ? `${styles.datePicker} ${styles.export}` : styles.datePicker;
     let endDateClass = forExport ? `${styles.datePicker} ${styles.export}` : styles.datePicker;
-    endDateClass = exp?.endDate ? endDateClass : `${endDateClass} ${styles.current}`
+    endDateClass = isCurrentDate(exp?.endDate) ? `${endDateClass} ${styles.current}` : endDateClass;
 
     return (
         <div className={styles.datesWithTime}>
             <p className={styles.time}>
-                {getTimePeriod(exp?.startDate, exp?.endDate ? exp?.endDate : (new Date()).getTime())}
+                {getTimePeriod(exp?.startDate, isCurrentDate(exp?.endDate) ? DATE_TODAY.getTime() : exp?.endDate)}
             </p>
             <div className={styles.dates}>
                 <DatePicker
@@ -125,7 +130,7 @@ export const ExpDates = ({ isEditing,
                 <span className={styles.datesDash}>—</span>
                 <DatePicker
                     wrapperClassName={endDateClass}
-                    selected={exp?.endDate ? new Date(exp.endDate) : null}
+                    selected={!exp?.endDate || isCurrentDate(exp?.endDate) ? null : new Date(exp.endDate)}
                     className={isEditing ? styles.editingEndDate : ''}
                     readOnly={!isEditing}
                     onChange={(date: Date) => updateDate('endDate', date)}
