@@ -36,6 +36,14 @@ export const ExpDates = ({ isEditing,
     const getYearsAndMonths = (passedDate: Date) => {
         let years = Math.abs(passedDate.getUTCFullYear() - 1970);
         let months = passedDate.getUTCMonth();
+        let days = passedDate.getUTCDate();
+        if (days > 15) {
+            months++;
+            if (months >= 12) {
+                years++;
+                months = 0;
+            }
+        }
         return [years, months];
     }
 
