@@ -404,7 +404,8 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     const exportPDF = context.query.pdf === 'true';
     const exportPreview = context.query.preview === 'true';
     const singlePage = context.query.singlePage === 'true';
-    const phoneAllow = context.query.phone === 'true';
+    // const phoneAllow = context.query.phone === 'true';
+    const phoneAllow = false;
     const isServer = !!context.req || server;
 
     const exportAny = exportPDF || exportPreview;
