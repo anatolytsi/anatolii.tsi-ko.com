@@ -320,6 +320,7 @@ export default function Resume( props: IResumeProps ) {
       <meta name="author" content="Anatolii Tsirkunenko"/>
       <meta name="description" content="Software Developer with Embedded and Web experience"/>
       <meta name="keywords" content="software, developer, embedded, web, bms, c, python, can, iso26262, react, rtos, django"/>
+      <meta name="google-site-verification" content="Bg2kkqcxN64RJ2TRKNBikJO7p4K0vYgD5jgG_HI2JPk" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
     {props.forExport ? (
