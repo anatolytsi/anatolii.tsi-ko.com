@@ -23,9 +23,6 @@ interface IPortfolioProps {
     photosList: string[]
 }
 
-const TODAY = new Date();
-const DATE_STRING = new Date().toISOString().slice(0, 10).replaceAll('-', '');
-
 export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Portfolio.jpg';
 
 const RestButton = () => {
@@ -68,7 +65,7 @@ const RestButton = () => {
         // create "a" HTML element with href to file & click
         const link = document.createElement('a');
         link.href = href;
-        link.setAttribute('download', `${DATE_STRING}_portfolioData.json`); //or any other extension
+        link.setAttribute('download', `${(new Date()).toISOString().slice(0, 10).replaceAll('-', '')}_portfolioData.json`); //or any other extension
         document.body.appendChild(link);
         link.click();
     
@@ -263,7 +260,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
         let sortPast: any = { endDate: -1 };
 
         if (exportAny || !isAdmin) {
-          filterCurrent.startDate = { $lt: TODAY.getTime() };
+          filterCurrent.startDate = { $lt: (new Date()).getTime() };
           filterCurrent.isVisible = true;
           filterPast.isVisible = true;
         } else {
@@ -328,7 +325,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     
             // with this header, your browser will prompt you to download the file
             // without this header, your browse will open the pdf directly
-            context.res!.setHeader('Content-disposition', `attachment; filename="${DATE_STRING}_Tsirkunenko_Portfolio.pdf"`);
+            context.res!.setHeader('Content-disposition', `attachment; filename="${(new Date()).toISOString().slice(0, 10).replaceAll('-', '')}_Tsirkunenko_Portfolio.pdf"`);
             
             // set content type
             context.res!.setHeader('Content-Type', 'application/pdf');

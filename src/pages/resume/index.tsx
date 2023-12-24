@@ -36,9 +36,6 @@ interface IResumeSection {
   order: number
 }
 
-const TODAY = new Date();
-const DATE_STRING = TODAY.toISOString().slice(0, 10).replaceAll('-', '');
-
 export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Resume.jpg';
 
 const RestButton = () => {
@@ -81,7 +78,7 @@ const RestButton = () => {
         // create "a" HTML element with href to file & click
         const link = document.createElement('a');
         link.href = href;
-        link.setAttribute('download', `${DATE_STRING}_resumeData.json`); //or any other extension
+        link.setAttribute('download', `${(new Date()).toISOString().slice(0, 10).replaceAll('-', '')}_resumeData.json`); //or any other extension
         document.body.appendChild(link);
         link.click();
     
@@ -454,12 +451,12 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
 
     if (exportAny || !isAdmin) {
       resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.filter({ isVisible: true }).toArray()))
-      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
-      education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
-      internships = JSON.parse(JSON.stringify(await internshipsCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
+      jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
+      education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
+      internships = JSON.parse(JSON.stringify(await internshipsCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
       languages = JSON.parse(JSON.stringify(await languagesCur.filter({ isVisible: true }).toArray()))
       certifications = JSON.parse(JSON.stringify(await certificationsCur.filter({ isVisible: true }).toArray()))
-      projects = JSON.parse(JSON.stringify(await projectsCur.filter({ isVisible: true, startDate: { $lt: TODAY.getTime() } }).toArray()))
+      projects = JSON.parse(JSON.stringify(await projectsCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
       publications = JSON.parse(JSON.stringify(await publicationsCur.filter({ isVisible: true }).toArray()))
       hobbies = JSON.parse(JSON.stringify(await hobbiesCur.filter({ isVisible: true }).toArray()))
     } else {
@@ -511,7 +508,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
         let prefix = singlePage ? 'SinglePage_' : '';
         // with this header, your browser will prompt you to download the file
         // without this header, your browse will open the pdf directly
-        context.res!.setHeader('Content-disposition', `attachment; filename="${DATE_STRING}_${prefix}Tsirkunenko_CV.pdf"`);
+        context.res!.setHeader('Content-disposition', `attachment; filename="${(new Date()).toISOString().slice(0, 10).replaceAll('-', '')}_${prefix}Tsirkunenko_CV.pdf"`);
         
         // set content type
         context.res!.setHeader('Content-Type', 'application/pdf');
