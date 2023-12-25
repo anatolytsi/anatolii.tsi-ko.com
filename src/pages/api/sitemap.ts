@@ -15,25 +15,25 @@ export default function handler(
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
       <url>
         <loc>https://anatolii.tsi-ko.com/</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
       </url>
       <url>
         <loc>https://anatolii.tsi-ko.com/resume</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1</priority>
       </url>
       <url>
         <loc>https://anatolii.tsi-ko.com/resume?pdf=true</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
       </url>
       <url>
         <loc>https://anatolii.tsi-ko.com/portfolio</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
       </url>
