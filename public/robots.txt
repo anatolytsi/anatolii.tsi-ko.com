@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /account/*
+Disallow: /api/*
+Disallow: /resume?pdf=true&*
+Allow: /
+
+Sitemap: https://anatolii.tsi-ko.com/sitemap.xml
