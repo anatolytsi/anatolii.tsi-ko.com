@@ -22,7 +22,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - ./data:/data/db
+      - ./data:/data
     ports:
       - "27015:27017"
     networks:
