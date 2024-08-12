@@ -39,7 +39,19 @@ interface IResumeSection {
 
 export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Resume.jpg';
 
-const myFont = localFont({ src: '../../styles/fonts/tw_cen_mt.ttf' });
+const myFont = localFont({ src: [
+  {
+    path: '../../styles/fonts/tw_cen_mt.ttf',
+    weight: '400',
+    style: 'normal'
+  },
+  {
+    path: '../../styles/fonts/tw_cen_mt_bold.ttf',
+    weight: '700',
+    style: 'normal'
+  }
+  // TODO: add italic/bold italic
+] });
 
 const RestButton = () => {
   const ref = useRef<HTMLDivElement>(null);
