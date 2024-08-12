@@ -25,6 +25,7 @@ import PDFLayout from '@/components/resume/PdfLayout';
 import pdfHelper from '@/lib/pdfHelper';
 import axios from 'axios';
 import Router from 'next/router';
+import localFont from 'next/font/local';
 import { compUpdate } from '@/components/resume/common/api-helpers';
 import { API_URL, IMAGES_URL } from '@/pages/api/resume/file';
 import { createPagePreview } from '@/lib/pagePreviewCreator';
@@ -37,6 +38,8 @@ interface IResumeSection {
 }
 
 export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Resume.jpg';
+
+const myFont = localFont({ src: '../../styles/fonts/tw_cen_mt.ttf' });
 
 const RestButton = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -331,7 +334,7 @@ export default function Resume( props: IResumeProps ) {
         {renderAdminButtons()}
       </>
     )}
-    <div className={`${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
+    <div className={`${myFont.className} ${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
       {props.shortVersion ? 
         <div className={styles.onePage}>
           <PersonalInfo
