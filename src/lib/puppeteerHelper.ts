@@ -4,6 +4,7 @@ import { getImageFromName } from '@/pages/api/resume/file/[...slug]';
 
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
+const delay = (time: number) => new Promise(res => setTimeout(res, time));
 
 export const preparePage = async (component: any, imageUrl: string, imagesPath: string, callback: (page: Page) => Promise<void>,
                                   viewport: Viewport = {width: 0, height: 0}) => {
@@ -27,11 +28,14 @@ export const preparePage = async (component: any, imageUrl: string, imagesPath: 
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
         ignoreHTTPSErrors :true,
-        headless: 'new',
+        headless: true,
         args: [
             '--no-sandbox'
-        ]
+        ],
+        timeout: 0
     });
+    
+    await delay(10000);
 
     const page = await browser.newPage();
     await page.emulateMediaType('screen');
