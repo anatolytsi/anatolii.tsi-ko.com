@@ -346,7 +346,7 @@ export default function Resume( props: IResumeProps ) {
         {renderAdminButtons()}
       </>
     )}
-    <div className={`${myFont.className} ${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
+    <div className={`${props.forExport ? myFont.className : ''} ${styles.resume} ${props.forExport ? styles.forExport : ''}`} id={styles.root}>
       {props.shortVersion ? 
         <div className={styles.onePage}>
           <PersonalInfo
