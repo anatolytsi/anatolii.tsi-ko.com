@@ -407,6 +407,7 @@ export default function Resume( props: IResumeProps ) {
 
 export const getServerSideProps = async (context: NextPageContext, server: boolean = false) => {
   try {
+    console.log('Gettings resume');
     const session = await getSession(context);
     const isAdmin = session?.user?.role === 'admin';
     const client = await clientPromise;
@@ -424,6 +425,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     const exportAny = exportPDF || exportPreview;
 
     if (!collectionNames.length) {
+      console.log('Nothing in database, restoring from fixtures');
       await db.collection('personalInfo').insertOne(require('@/fixtures/personalInfo.json'));
       await db.collection('skills').insertOne(require('@/fixtures/skills.json'));
       await db.collection('resumeSections').insertMany(require('@/fixtures/resumeSections.json'));
@@ -466,6 +468,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     }
 
     if (exportAny || !isAdmin) {
+      console.log('Preparing data to show');
       resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.filter({ isVisible: true }).toArray()))
       jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
       education = JSON.parse(JSON.stringify(await educationCur.filter({ isVisible: true, startDate: { $lt: (new Date()).getTime() } }).toArray()))
@@ -476,6 +479,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
       publications = JSON.parse(JSON.stringify(await publicationsCur.filter({ isVisible: true }).toArray()))
       hobbies = JSON.parse(JSON.stringify(await hobbiesCur.filter({ isVisible: true }).toArray()))
     } else {
+      console.log('Preparing data to show admin');
       resumeSections = JSON.parse(JSON.stringify(await resumeSectionsCur.toArray()))
       jobExperience = JSON.parse(JSON.stringify(await jobExperienceCur.toArray()))
       education = JSON.parse(JSON.stringify(await educationCur.toArray()))
@@ -509,6 +513,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     }
 
     if (isServer && exportPDF) {
+        console.log('Preparing to export resume');
         props.forExport = true;
         props.isAdmin = false;
         const buffer = await pdfHelper.componentToPDFBuffer(
@@ -534,6 +539,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
     }
 
     if (isServer && exportPreview) {
+      console.log('Preparing to export preview');
       props.forExport = true;
       props.isAdmin = false;
       let previewUrl = DEFAULT_PREVIEW_URL;
@@ -554,6 +560,7 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
   } catch (e) {
     console.error(e);
   }
+  console.log('Due to error, no data was prepared');
   return {
     props: {
       shortVersion: false,
