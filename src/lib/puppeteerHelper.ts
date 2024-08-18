@@ -6,8 +6,8 @@ import { getImageFromName } from '@/pages/api/resume/file/[...slug]';
 const IMG_RE = /<img(.|\n)*src="([^"]*)/g;
 const EXT_RE = /(?:\.([^.]+))?$/;
 
-const PATH_FONT_1 = `${process.env.ROOT_DIR || process.cwd()}/src/styles/fonts/tw_cen_mt.ttf`;
-const PATH_FONT_2 = `${process.env.ROOT_DIR || process.cwd()}/src/styles/fonts/tw_cen_mt_bold.ttf`;
+const PATH_FONT_1 = `${process.env.ROOT_DIR || process.cwd()}/public/fonts/tw_cen_mt.ttf`;
+const PATH_FONT_2 = `${process.env.ROOT_DIR || process.cwd()}/public/fonts/tw_cen_mt_bold.ttf`;
 const HEAD_END_HTML = '</head>';
 const CUSTOM_FONT_CLASS_NAME = 'customFont';
 const SRC_TO_REPLACE_STR = 'sourceToReplace';
