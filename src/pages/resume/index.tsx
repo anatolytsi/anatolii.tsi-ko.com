@@ -41,12 +41,12 @@ export const DEFAULT_PREVIEW_URL = '/api/pagePreviews/Resume.jpg';
 
 const myFont = localFont({ src: [
   {
-    path: `${process.env.ROOT_DIR || process.cwd()}/public/fonts/tw_cen_mt.ttf`,
+    path: `@/public/fonts/tw_cen_mt.ttf`,
     weight: '400',
     style: 'normal'
   },
   {
-    path: `${process.env.ROOT_DIR || process.cwd()}/public/fonts/tw_cen_mt_bold.ttf`,
+    path: `@/public/fonts/tw_cen_mt_bold.ttf`,
     weight: '700',
     style: 'normal'
   }
