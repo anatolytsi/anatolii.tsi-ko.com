@@ -35,6 +35,8 @@ const addCustomFont = (html: string): string => {
         url(data:application/font-woff;charset=utf-8;base64,${font2.toString('base64')})`)
     html = html.replace(HEAD_END_HTML, `${fontStyle}\n${HEAD_END_HTML}`);
 
+    console.log(`fontStyle: ${fontStyle}`);
+
     return html;
 }
 
