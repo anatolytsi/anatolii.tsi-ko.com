@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:18-alpine3.17 AS base
 
 # Install puppeteer
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
