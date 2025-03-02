@@ -567,16 +567,16 @@ export const getServerSideProps = async (context: NextPageContext, server: boole
       forExport: false,
       isAdmin: false,
       resumeSections: require('@/fixtures/resumeSections.json'),
-      personalInfo: {},
-      jobExperience: [],
-      education: [],
-      internships: [],
-      skills: {},
-      languages: [],
-      certifications: [],
-      projects: [],
-      publications: [],
-      hobbies: []
+      personalInfo: require('@/fixtures/personalInfo.json'),
+      jobExperience: require('@/fixtures/jobExperience.json'),
+      education: require('@/fixtures/education.json'),
+      internships: require('@/fixtures/internships.json'),
+      skills: require('@/fixtures/skills.json'),
+      languages: require('@/fixtures/languages.json'),
+      certifications: require('@/fixtures/certifications.json'),
+      projects: require('@/fixtures/projects.json'),
+      publications: require('@/fixtures/publications.json'),
+      hobbies: require('@/fixtures/hobbies.json')
     }
   };
 }
